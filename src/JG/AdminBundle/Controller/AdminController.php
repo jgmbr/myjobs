@@ -4,10 +4,10 @@ namespace JG\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class DefaultController extends Controller
+class AdminController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('JGAdminBundle:Default:index.html.twig');
+        return $this->render('JGAdminBundle:Admin:index.html.twig');
     }
 }

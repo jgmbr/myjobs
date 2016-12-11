@@ -1,8 +1,8 @@
 # To get started with security, check out the documentation:
 # http://symfony.com/doc/current/security.html
 security:
-    encoders:
-        JG\UserBundle\Security\User\WSUser: bcrypt
+    #encoders:
+        #JG\UserBundle\Security\User\WSUser: bcrypt
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
@@ -10,8 +10,8 @@ security:
 
     # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-        webservice:
-            id: app.ws_user_provider
+        in_memory:
+            memory: ~
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs

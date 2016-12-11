@@ -9,8 +9,5 @@
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
 parameters:
-    ws_user_provider.class: JG\UserBundle\Security\User\WSUserProvider
 
 services:
-    app.ws_user_provider:
-        class: "%ws_user_provider.class%"
