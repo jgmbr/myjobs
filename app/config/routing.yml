@@ -1,19 +1,35 @@
-jg_front:
-    resource: "@JGFrontBundle/Resources/config/routing.yml"
-    prefix:   /
+#jg_front:
+    #resource: "@JGFrontBundle/Resources/config/routing.yml"
+    #prefix:   /
 
-jg_admin:
-    resource: "@JGAdminBundle/Resources/config/routing.yml"
-    prefix:   /admin
+#jg_admin:
+    #resource: "@JGAdminBundle/Resources/config/routing.yml"
+    #prefix:   /admin
 
-jg_user:
-    resource: "@JGUserBundle/Resources/config/routing.yml"
-    prefix:   /
+#jg_user:
+    #resource: "@JGUserBundle/Resources/config/routing.yml"
+    #prefix:   /
 
-jg_core:
-    resource: "@JGCoreBundle/Resources/config/routing.yml"
-    prefix:   /
+#jg_core:
+    #resource: "@JGCoreBundle/Resources/config/routing.yml"
+    #prefix:   /
 
 #app:
     #resource: "@AppBundle/Controller/"
     #type:     annotation
+
+jg_front:
+    resource: "@JGFrontBundle/Controller/"
+    type:     annotation
+
+jg_admin:
+    resource: "@JGAdminBundle/Controller/"
+    type:     annotation
+
+jg_user:
+    resource: "@JGUserBundle/Controller/"
+    type:     annotation
+
+jg_core:
+    resource: "@JGCoreBundle/Controller/"
+    type:     annotation

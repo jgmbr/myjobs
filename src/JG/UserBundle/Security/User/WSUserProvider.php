@@ -7,6 +7,7 @@
  */
 
 // src/JG/UserBundle/Security/User/WSUserProvider.php
+
 namespace JG\UserBundle\Security\User;
 
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -19,38 +20,29 @@ class WSUserProvider implements UserProviderInterface
     protected $user;
 
     public function __contsruct (UserInterface $user) {
-        $this->user = $user;
-    }
 
+        $this->user = $user;
+
+    }
     public function loadUserByUsername($username)
     {
         /*// make a call to your webservice here
         $userData = $this->get('app.ws_user_provider');
         // pretend it returns an array on success, false if there is no user
-
         if ($userData) {
-
             $password = '123456';
-
             $salt = '';
-
             $roles = array('ROLE_USER');
-
             // ...
-
             return new WSUser($username, $password, $salt, $roles);
         }*/
-
         $user = User::find(array('username'=>$username));
-
         if (empty($user)) {
             throw new UsernameNotFoundException(
                 sprintf('Username "%s" does not exist.', $username)
             );
         }
-
         $this->user = $user;
-
         return $user;
     }
 
@@ -61,7 +53,6 @@ class WSUserProvider implements UserProviderInterface
                 sprintf('Instances of "%s" are not supported.', get_class($user))
             );
         }
-
         return $this->loadUserByUsername($user->getUsername());
     }
 
