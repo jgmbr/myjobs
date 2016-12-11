@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Index</title>
-</head>
-<body>
+{% extends "JGFrontBundle::layout.html.twig" %}
+
+{% block body %}
     <p>Hello World! from JGFrontBundle index</p>
     <a href="{{ path('login_page') }}">Login</a>
     <a href="{{ path('register_page') }}">Register</a>
-</body>
-</html>
+{% endblock %}
