@@ -1,3 +1,19 @@
+jg_front:
+    resource: "@JGFrontBundle/Resources/config/routing.yml"
+    prefix:   /
+
+jg_admin:
+    resource: "@JGAdminBundle/Resources/config/routing.yml"
+    prefix:   /
+
+jg_user:
+    resource: "@JGUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+jg_core:
+    resource: "@JGCoreBundle/Resources/config/routing.yml"
+    prefix:   /
+
 app:
-    resource: "@AppBundle/Controller/"
+    resource: "@JGCoreBundle/Controller/"
     type:     annotation
