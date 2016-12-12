@@ -22,7 +22,6 @@ class AccountController extends Controller
 
         var_dump($user);
 
-
         return $this->render('JGAdminBundle:Account:index.html.twig');
     }
 }

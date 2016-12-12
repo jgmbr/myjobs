@@ -28,12 +28,13 @@ class LoginListener implements AuthenticationSuccessHandlerInterface
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
         $url = 'home_page';
-        if($this->security->isGranted('ROLE_USER')) {
+
+        if (false === $this->security->isGranted('ROLE_ADMIN')) {
             $url = 'account_home_page';
-        }
-        elseif($this->security->isGranted('ROLE_ADMIN')) {
+        } else {
             $url = 'admin_home_page';
         }
+
         $response = new RedirectResponse($this->router->generate($url));
 
         return $response;

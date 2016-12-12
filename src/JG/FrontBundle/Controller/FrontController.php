@@ -15,12 +15,12 @@ class FrontController extends Controller
     public function indexAction()
     {
         $user = $this->getUser();
-  
+
         if ($user) {
-            if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-                var_dump('IS ADMIN');
+            if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+                var_dump('USER');
             } else {
-                var_dump('NOT ADMIN');
+                var_dump('ADMIN');
             }
         }
 
