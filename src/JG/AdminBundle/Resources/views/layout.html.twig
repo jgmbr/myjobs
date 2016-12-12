@@ -12,17 +12,8 @@
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
             <p> Connecté en tant que {{ app.user.username }}
             -
-            {% if is_granted("ROLE_ADMIN") %}
-                <a href="{{ path('admin_home_page') }}">Espace d'adminstration</a>
-            {% else %}
-                <a href="{{ path('account_home_page') }}">Mon compte</a>
-            {% endif %}
-            -
             <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
             </p>
-        {% else %}
-            <p><a href="{{ path('fos_user_security_login') }}">Connexion</a></p>
-            <p><a href="{{ path('fos_user_registration_register') }}">Inscription</a></p>
         {% endif %}
         {% block body %}
         {% endblock %}

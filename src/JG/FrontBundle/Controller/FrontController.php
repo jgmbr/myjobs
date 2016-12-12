@@ -14,6 +14,16 @@ class FrontController extends Controller
      */
     public function indexAction()
     {
+        $user = $this->getUser();
+  
+        if ($user) {
+            if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+                var_dump('IS ADMIN');
+            } else {
+                var_dump('NOT ADMIN');
+            }
+        }
+
         return $this->render('JGFrontBundle:Front:index.html.twig');
     }
 

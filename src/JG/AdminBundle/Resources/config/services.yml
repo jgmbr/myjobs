@@ -1,4 +1,8 @@
-services:
+#services:
 #    jg_admin.example:
 #        class: JG\AdminBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+services:
+    login_success_handler:
+        class: JG\UserBundle\EventListener\LoginListener
+        arguments:  ['@router',"@security.authorization_checker"]

@@ -75,15 +75,5 @@ fos_user:
     firewall_name: main
     user_class: JG\UserBundle\Entity\User
     registration:
-        confirmation:
-            from_email:
-                address:        registration@myjobs.com
-                sender_name:    MyJobs Registration
-    from_email:
-        address:        noreply@myjobs.com
-        sender_name:    MyJobs
-    resetting:
-        email:
-            from_email:
-                address:        resetting@myjobs.com
-                sender_name:    MyJobs Resetting
+        form:
+            type: JG\UserBundle\Form\RegistrationType
