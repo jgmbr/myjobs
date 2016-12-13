@@ -20,8 +20,8 @@ class AccountController extends Controller
     {
         $user = $this->getUser();
 
-        var_dump($user);
-
-        return $this->render('JGAdminBundle:Account:index.html.twig');
+        return $this->render('JGAdminBundle:Account:index.html.twig',array(
+            'user' => $user
+        ));
     }
 }

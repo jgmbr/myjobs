@@ -21,8 +21,8 @@
             <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
             </p>
         {% else %}
-            <p><a href="{{ path('fos_user_security_login') }}">Connexion</a></p>
-            <p><a href="{{ path('fos_user_registration_register') }}">Inscription</a></p>
+            <a style="text-decoration:none; border:2px solid #FF6347; padding:20px; display:inline-block;" href="{{ path('fos_user_security_login') }}">Connexion</a>
+            <a style="text-decoration:none; border:2px solid #FF6347; padding:20px; display:inline-block;" href="{{ path('fos_user_registration_register') }}">Inscription</a>
         {% endif %}
         {% block body %}
         {% endblock %}

@@ -1,5 +1,23 @@
 {% extends "JGAdminBundle::layout.html.twig" %}
 
+{% block header %}
+    Mon Compte
+{% endblock %}
+
+{% block menu %}
+    <ul>
+        <li> <a href="{{ path('home_page') }}"> Retour vers le site </a> </li>
+        <li> <a href="{{ path('account_home_page') }}"> Accueil </a> </li>
+        <li> <a href="#"> Mes Candidatures </a> </li>
+        <li> <a href="#"> Mes Entreprises </a> </li>
+        <li> <a href="#"> Mes Entretiens </a> </li>
+        <li> <a href="#"> Mes Ressources (option) </a> </li>
+        <li> <a href="#"> Mes Statistiques </a> </li>
+        <li> <a href="#"> Mes Alertes (option) </a> </li>
+        <li> <a href="#"> Mon Profil </a> </li>
+        <li> <a href="#"> Mes Préférences (option) </a> </li>
+    </ul>
+{% endblock %}
+
 {% block body %}
-    Hello World! from JGAdminBundle Account index
 {% endblock %}

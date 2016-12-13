@@ -14,8 +14,8 @@ class AdminController extends Controller
     {
         $user = $this->getUser();
 
-        var_dump($user);
-
-        return $this->render('JGAdminBundle:Admin:index.html.twig');
+        return $this->render('JGAdminBundle:Admin:index.html.twig',array(
+            'user' => $user
+        ));
     }
 }

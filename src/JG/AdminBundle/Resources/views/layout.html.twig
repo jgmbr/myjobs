@@ -9,14 +9,21 @@
         {% endblock %}
     </head>
     <body>
+        <div id="connect" style="text-align:right;">
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
             <p> Connecté en tant que {{ app.user.username }}
             -
             <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
             </p>
         {% endif %}
-        {% block body %}
-        {% endblock %}
+        </div>
+        <div id="header" style="padding:20px; background:#FF6347; color:#FFFFFF; text-align:center; text-transform:uppercase;">
+            {% block header %}{% endblock %}
+        </div>
+        <div id="content">
+            <div id="sidebar" style="float:left; margin:0 50px 0 0;">{% block menu %}{% endblock %}</div>
+            <div id="inner">{% block body %}{% endblock %}</div>
+        </div>
         {% block javascripts %}
         {% endblock %}
     </body>

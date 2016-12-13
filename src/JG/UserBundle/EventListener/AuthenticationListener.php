@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
 
-class LoginListener implements AuthenticationSuccessHandlerInterface
+class AuthenticationListener implements AuthenticationSuccessHandlerInterface
 {
     protected $router, $security;
 
