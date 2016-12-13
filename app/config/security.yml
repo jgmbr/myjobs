@@ -25,7 +25,7 @@ security:
                 provider:             fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
                 use_referer:          false
-                success_handler:      login_success_handler
+                success_handler:      authentication_success_handler
 
             # activate different ways to authenticate
 
@@ -43,3 +43,4 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/account/, role: ROLE_USER }
