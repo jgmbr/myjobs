@@ -30,6 +30,11 @@ class User extends BaseUser
      */
     protected $lastname;
 
+    /**
+     * @ORM\OneToMany(targetEntity="JG\CoreBundle\Entity\Application", mappedBy="user", cascade={"persist"})
+     */
+    private $applications;
+
     public function __construct()
     {
         parent::__construct();
@@ -81,5 +86,39 @@ class User extends BaseUser
     public function getLastname()
     {
         return $this->lastname;
+    }
+
+    /**
+     * Add application
+     *
+     * @param \JG\CoreBundle\Entity\Application $application
+     *
+     * @return User
+     */
+    public function addApplication(\JG\CoreBundle\Entity\Application $application)
+    {
+        $this->applications[] = $application;
+
+        return $this;
+    }
+
+    /**
+     * Remove application
+     *
+     * @param \JG\CoreBundle\Entity\Application $application
+     */
+    public function removeApplication(\JG\CoreBundle\Entity\Application $application)
+    {
+        $this->applications->removeElement($application);
+    }
+
+    /**
+     * Get applications
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getApplications()
+    {
+        return $this->applications;
     }
 }
