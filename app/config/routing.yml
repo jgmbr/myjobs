@@ -3,7 +3,11 @@ jg_front:
     type:     annotation
 
 jg_admin:
-    resource: "@JGAdminBundle/Controller/"
+    resource: "@JGAdminBundle/Controller/Admin/"
+    type:     annotation
+
+jg_account:
+    resource: "@JGAdminBundle/Controller/Account/"
     type:     annotation
 
 jg_user:

@@ -6,7 +6,7 @@
  * Time: 21:02
  */
 
-namespace JG\AdminBundle\Controller;
+namespace JG\AdminBundle\Controller\Account;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

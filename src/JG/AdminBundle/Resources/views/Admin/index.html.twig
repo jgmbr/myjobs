@@ -8,10 +8,10 @@
     <ul>
         <li> <a href="{{ path('home_page') }}"> Retour vers le site </a> </li>
         <li> <a href="{{ path('admin_home_page') }}"> Accueil </a> </li>
-        <li> <a href="#"> Membres </a> </li>
-        <li> <a href="#"> Contrats </a> </li>
-        <li> <a href="#"> Status </a> </li>
-        <li> <a href="#"> Profil </a> </li>
+        <li> <a href="{{ path('admin_users_list_page') }}"> Membres </a> </li>
+        <li> <a href="{{ path('admin_contracts_list_page') }}"> Contrats </a> </li>
+        <li> <a href="{{ path('admin_status_list_page') }}"> Status </a> </li>
+        <li> <a href="{{ path('fos_user_profile_show') }}"> Profil </a> </li>
     </ul>
 {% endblock %}
 
