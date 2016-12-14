@@ -5,10 +5,10 @@ namespace JG\AdminBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class AdminContractsController extends Controller
+class AdminContractController extends Controller
 {
     /**
-     * @Route("/admin/contracts/list", name="admin_contracts_list_page")
+     * @Route("/admin/contract/list", name="admin_contract_list_page")
      */
     public function listContractsAction()
     {
