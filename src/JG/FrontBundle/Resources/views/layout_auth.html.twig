@@ -10,6 +10,7 @@
         {% endblock %}
     </head>
     <body>
+        <p>LAYOUT AUTHENTICATION</p>
 
         <div id="header">
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
@@ -17,11 +18,11 @@
                     <a href="{{ path('fos_user_security_logout') }}">
                         {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
                     </a>
-                {% if is_granted("ROLE_ADMIN") %}
-                    <a href="{{ path('admin_home_page') }}">Espace d'adminstration</a>
-                {% else %}
-                    <a href="{{ path('account_home_page') }}">Mon compte</a>
-                {% endif %}
+                    {% if is_granted("ROLE_ADMIN") %}
+                        <a href="{{ path('admin_home_page') }}">Espace d'adminstration</a>
+                    {% else %}
+                        <a href="{{ path('account_home_page') }}">Mon compte</a>
+                    {% endif %}
                 </p>
             {% else %}
                 <p>

@@ -16,13 +16,13 @@ class FrontController extends Controller
     {
         $user = $this->getUser();
 
-        if ($user) {
-            if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-                var_dump('USER');
-            } else {
-                var_dump('ADMIN');
-            }
-        }
+//        if ($user) {
+//            if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+//                var_dump('USER');
+//            } else {
+//                var_dump('ADMIN');
+//            }
+//        }
 
         return $this->render('JGFrontBundle:Front:index.html.twig');
     }
