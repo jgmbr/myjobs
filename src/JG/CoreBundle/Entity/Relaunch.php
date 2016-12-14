@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="app_relaunch")
  * @ORM\Entity(repositoryClass="JG\CoreBundle\Repository\RelaunchRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Relaunch
 {
@@ -59,7 +60,7 @@ class Relaunch
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updated_at", type="datetime")
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
 
@@ -244,5 +245,25 @@ class Relaunch
     public function getApplication()
     {
         return $this->application;
+    }
+
+    /**
+     * Triggered on insert
+
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->createdAt = new \DateTime("now");
+    }
+
+    /**
+     * Triggered on update
+
+     * @ORM\PreUpdate
+     */
+    public function onPreUpdate()
+    {
+        $this->updatedAt = new \DateTime("now");
     }
 }

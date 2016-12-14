@@ -1,3 +1,0 @@
-#jg_front_homepage:
-    #path:     /
-    #defaults: { _controller: JGFrontBundle:Default:index }

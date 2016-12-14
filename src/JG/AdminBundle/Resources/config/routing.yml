@@ -1,3 +1,0 @@
-#jg_admin_homepage:
-    #path:     /
-    #defaults: { _controller: JGAdminBundle:Default:index }

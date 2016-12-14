@@ -21,8 +21,8 @@
             {% block header %}{% endblock %}
         </div>
         <div id="content">
-            <div id="sidebar" style="float:left; margin:0 50px 0 0;">{% block menu %}{% endblock %}</div>
-            <div id="inner">{% block body %}{% endblock %}</div>
+            <div id="sidebar" style="width:20%; float:left;">{% block menu %}{% endblock %}</div>
+            <div id="inner" style="width:70%; float:left;">{% block body %}{% endblock %}</div>
         </div>
         {% block javascripts %}
         {% endblock %}

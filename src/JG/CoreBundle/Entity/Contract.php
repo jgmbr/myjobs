@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="app_contract")
  * @ORM\Entity(repositoryClass="JG\CoreBundle\Repository\ContractRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Contract
 {
@@ -45,7 +46,7 @@ class Contract
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updated_at", type="datetime")
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
 
@@ -154,5 +155,25 @@ class Contract
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Triggered on insert
+
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->createdAt = new \DateTime("now");
+    }
+
+    /**
+     * Triggered on update
+
+     * @ORM\PreUpdate
+     */
+    public function onPreUpdate()
+    {
+        $this->updatedAt = new \DateTime("now");
     }
 }

@@ -1,3 +1,0 @@
-#jg_core_homepage:
-    #path:     /
-    #defaults: { _controller: JGCoreBundle:Default:index }
