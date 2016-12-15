@@ -6,8 +6,6 @@
  * Time: 11:12
  */
 
-// src/JG/UserBundle/Form/RegistrationType.php
-
 namespace JG\UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;

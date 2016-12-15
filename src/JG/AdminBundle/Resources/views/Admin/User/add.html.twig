@@ -1,7 +1,7 @@
 {% extends "JGAdminBundle::layout.html.twig" %}
 
 {% block header %}
-    MyJobs - Administration - Status
+    MyJobs - Administration - Membres
 {% endblock %}
 
 {% block menu %}
@@ -9,12 +9,10 @@
 {% endblock %}
 
 {% block body %}
-    <h1> Administration › Status </h1>
+    <h1> Administration › Membres › Ajouter un membre</h1>
 
-    {% if status is defined and status|length > 0 %}
-
-    {% else %}
-        <p> Pas de statuts. </p>
-    {% endif %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
 
 {% endblock %}

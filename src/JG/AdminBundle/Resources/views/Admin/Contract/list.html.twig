@@ -10,4 +10,11 @@
 
 {% block body %}
     <h1> Administration › Contrats </h1>
+
+    {% if contracts is defined and contracts|length > 0 %}
+
+    {% else %}
+        <p> Pas de contrats. </p>
+    {% endif %}
+
 {% endblock %}
