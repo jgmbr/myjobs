@@ -19,8 +19,12 @@ profile:
     show:
         username: 'Nom d''utilisateur'
         email: 'Adresse e-mail'
+        lastname: 'Nom'
+        firstname: 'Prénom'
     edit:
         submit: 'Mettre à jour'
+        lastname: 'Nom'
+        firstname: 'Prénom'
     flash:
         updated: 'Le profil a été mis à jour.'
 change_password:
