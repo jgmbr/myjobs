@@ -2,6 +2,7 @@
 
 namespace JG\CoreBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -68,6 +69,12 @@ class Relaunch
      * @ORM\ManyToOne(targetEntity="JG\CoreBundle\Entity\Application", inversedBy="relaunches", cascade={"persist"})
      */
     private $application;
+
+
+    public function __construct()
+    {
+        $this->createdAt    = new \Datetime();
+    }
 
     /**
      * Get id

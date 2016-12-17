@@ -2,6 +2,7 @@
 
 namespace JG\CoreBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -86,6 +87,16 @@ class Application
      * @ORM\ManyToOne(targetEntity="JG\UserBundle\Entity\User", inversedBy="applications", cascade={"persist"})
      */
     private $user;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->createdAt    = new \Datetime();
+        $this->appointments = new ArrayCollection();
+        $this->relaunches   = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -215,14 +226,6 @@ class Application
     public function getUpdatedAt()
     {
         return $this->updatedAt;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->appointments = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->relaunches = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

@@ -19,7 +19,7 @@ class AdminUserController extends Controller
 
         $administrators = $this->getDoctrine()->getRepository('JGUserBundle:User')->findAllAdmin();
 
-        return $this->render('JGAdminBundle:Admin:User/list.html.twig',array(
+        return $this->render('JGAdminBundle:Admin:user/list.html.twig',array(
             'users' => $users,
             'administrators' => $administrators
         ));
@@ -30,6 +30,8 @@ class AdminUserController extends Controller
      */
     public function addUserAction(Request $request)
     {
+        $entityManager = $this->getDoctrine()->getManager();
+
         $userManager = $this->get('fos_user.user_manager');
 
         $user = new User();
@@ -52,7 +54,7 @@ class AdminUserController extends Controller
 //            return $this->redirectToRoute('admin_user_list_page');
 //        }
 
-        return $this->render('JGAdminBundle:Admin:User/add.html.twig',array(
+        return $this->render('JGAdminBundle:Admin:user/add.html.twig',array(
             'form' => $form->createView(),
         ));
     }

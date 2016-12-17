@@ -1,0 +1,52 @@
+{% extends "JGAdminBundle::layout.html.twig" %}
+
+{% block header %}
+    MyJobs - Administration - Status
+{% endblock %}
+
+{% block menu %}
+    {% include 'JGAdminBundle:Admin:menu.html.twig' %}
+{% endblock %}
+
+{% block body %}
+    <h1>Administration › Contrats › Liste</h1>
+
+    <ul>
+        <li>
+            <a href="{{ path('contract_new') }}">Créer un nouveau contrat</a>
+        </li>
+    </ul>
+
+    <br />
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Couleur</th>
+                <th>Code couleur</th>
+                <th>Date de création</th>
+                <th>Date de création</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for contract in contracts %}
+            <tr>
+                <td><a href="{{ path('contract_show', { 'id': contract.id }) }}">{{ contract.id }}</a></td>
+                <td>{{ contract.name }}</td>
+                <td> <span style="background:{{ contract.color }}; width:20px; height:20px; display:block;">&nbsp;</span> </td>
+                <td>{{ contract.color }}</td>
+                <td>{% if contract.createdAt %}{{ contract.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if contract.updatedAt %}{{ contract.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <a href="{{ path('contract_show', { 'id': contract.id }) }}">Voir</a>
+                    <a href="{{ path('contract_edit', { 'id': contract.id }) }}">Modifier</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "JGAdminBundle::layout.html.twig" %}
+
+{% block header %}
+    MyJobs - Administration - Status
+{% endblock %}
+
+{% block menu %}
+    {% include 'JGAdminBundle:Admin:menu.html.twig' %}
+{% endblock %}
+
+{% block body %}
+    <h1>Administration › Contrats › Fiche</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Identifiant</th>
+                <td>{{ contract.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ contract.name }}</td>
+            </tr>
+            <tr>
+                <th>Couleur</th>
+                <td> <span style="background:{{ contract.color }}; width:20px; height:20px; display:block;">&nbsp;</span> </td>
+            </tr>
+            <tr>
+                <th>Code couleur</th>
+                <td>{{ contract.color }}</td>
+            </tr>
+            <tr>
+                <th>Date de création</th>
+                <td>{% if contract.createdAt %}{{ contract.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Date de modification</th>
+                <td>{% if contract.updatedAt %}{{ contract.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('contract_index') }}">Retour à la liste des contrats</a>
+        </li>
+        <li>
+            <a href="{{ path('contract_edit', { 'id': contract.id }) }}">Modifier</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Supprimer">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

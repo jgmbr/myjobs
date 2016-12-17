@@ -1,0 +1,24 @@
+{% extends "JGAdminBundle::layout.html.twig" %}
+
+{% block header %}
+    MyJobs - Administration - Status
+{% endblock %}
+
+{% block menu %}
+    {% include 'JGAdminBundle:Admin:menu.html.twig' %}
+{% endblock %}
+
+{% block body %}
+    <h1>Administration › Status › Ajout</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Créer" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('status_index') }}">Retour à la liste des statuts</a>
+        </li>
+    </ul>
+{% endblock %}
