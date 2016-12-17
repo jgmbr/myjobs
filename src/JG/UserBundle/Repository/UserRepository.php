@@ -29,4 +29,22 @@ class UserRepository extends EntityRepository
                 ->setParameter('role', '%"ROLE_ADMIN"%' )
                 ->getResult();
     }
+
+    public function findCountUsers()
+    {
+        return
+            $this->_em
+                ->createQuery('SELECT count(u) FROM JGUserBundle:User u WHERE NOT u.roles LIKE :role')
+                ->setParameter('role', '%"ROLE_ADMIN"%' )
+                ->getSingleScalarResult();
+    }
+
+    public function findCountAdmin()
+    {
+        return
+            $this->_em
+                ->createQuery('SELECT count(u) FROM JGUserBundle:User u WHERE u.roles LIKE :role')
+                ->setParameter('role', '%"ROLE_ADMIN"%' )
+                ->getSingleScalarResult();
+    }
 }

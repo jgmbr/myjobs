@@ -10,4 +10,11 @@ namespace JG\CoreBundle\Repository;
  */
 class StatusRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findCount()
+    {
+        return
+            $this->_em
+                ->createQuery('SELECT count(s) FROM JGCoreBundle:Status s')
+                ->getSingleScalarResult();
+    }
 }

@@ -10,4 +10,11 @@ namespace JG\CoreBundle\Repository;
  */
 class ContractRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findCount()
+    {
+        return
+            $this->_em
+                ->createQuery('SELECT count(c) FROM JGCoreBundle:Contract c')
+                ->getSingleScalarResult();
+    }
 }

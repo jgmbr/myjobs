@@ -12,10 +12,18 @@ class AdminController extends Controller
      */
     public function indexAction()
     {
-        $user = $this->getUser();
+        $user               = $this->getUser();
+        $nbUsers            = $this->getDoctrine()->getRepository('JGUserBundle:User')->findCountUsers();
+        $nbAdministrators   = $this->getDoctrine()->getRepository('JGUserBundle:User')->findCountAdmin();
+        $nbContrats         = $this->getDoctrine()->getRepository('JGCoreBundle:Contract')->findCount();
+        $nbStatus           = $this->getDoctrine()->getRepository('JGCoreBundle:Status')->findCount();
 
         return $this->render('JGAdminBundle:Admin:index.html.twig',array(
-            'user' => $user
+            'user'              => $user,
+            'nbUsers'           => $nbUsers,
+            'nbAdministrators'  => $nbAdministrators,
+            'nbContracts'       => $nbContrats,
+            'nbStatus'          => $nbStatus
         ));
     }
 }
