@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class AccountController extends Controller
 {
     /**
-     * @Route("/account/index", name="account_home_page")
+     * @Route("/index", name="account_home_page")
      */
     public function indexAction()
     {

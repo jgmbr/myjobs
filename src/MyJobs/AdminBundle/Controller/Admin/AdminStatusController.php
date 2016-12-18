@@ -18,7 +18,7 @@ class AdminStatusController extends Controller
     /**
      * Lists all status entities.
      *
-     * @Route("/admin/status", name="status_index")
+     * @Route("/", name="status_index")
      * @Method("GET")
      */
     public function indexAction()
@@ -35,7 +35,7 @@ class AdminStatusController extends Controller
     /**
      * Creates a new status entity.
      *
-     * @Route("/admin/status/new", name="status_new")
+     * @Route("/new", name="status_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -61,7 +61,7 @@ class AdminStatusController extends Controller
     /**
      * Finds and displays a status entity.
      *
-     * @Route("/admin/status/{id}", name="status_show")
+     * @Route("/{id}", name="status_show")
      * @Method("GET")
      */
     public function showAction(Status $status)
@@ -77,7 +77,7 @@ class AdminStatusController extends Controller
     /**
      * Displays a form to edit an existing status entity.
      *
-     * @Route("/admin/status/{id}/edit", name="status_edit")
+     * @Route("/{id}/edit", name="status_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Status $status)
@@ -102,7 +102,7 @@ class AdminStatusController extends Controller
     /**
      * Deletes a status entity.
      *
-     * @Route("/admin/status/{id}", name="status_delete")
+     * @Route("/{id}", name="status_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Status $status)

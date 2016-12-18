@@ -17,7 +17,7 @@ class AdminContractController extends Controller
     /**
      * Lists all contract entities.
      *
-     * @Route("/admin/contract", name="contract_index")
+     * @Route("/", name="contract_index")
      * @Method("GET")
      */
     public function indexAction()
@@ -34,7 +34,7 @@ class AdminContractController extends Controller
     /**
      * Creates a new contract entity.
      *
-     * @Route("/admin/contract/new", name="contract_new")
+     * @Route("/new", name="contract_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -60,7 +60,7 @@ class AdminContractController extends Controller
     /**
      * Finds and displays a contract entity.
      *
-     * @Route("/admin/contract/{id}", name="contract_show")
+     * @Route("/{id}", name="contract_show")
      * @Method("GET")
      */
     public function showAction(Contract $contract)
@@ -76,7 +76,7 @@ class AdminContractController extends Controller
     /**
      * Displays a form to edit an existing contract entity.
      *
-     * @Route("/admin/contract/{id}/edit", name="contract_edit")
+     * @Route("/{id}/edit", name="contract_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Contract $contract)
@@ -101,7 +101,7 @@ class AdminContractController extends Controller
     /**
      * Deletes a contract entity.
      *
-     * @Route("/admin/contract/{id}", name="contract_delete")
+     * @Route("/{id}", name="contract_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Contract $contract)

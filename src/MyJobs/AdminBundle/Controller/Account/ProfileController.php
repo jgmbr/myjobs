@@ -7,7 +7,7 @@
  * Time: 22:04
  */
 
-namespace MyJobs\UserBundle\Controller;
+namespace MyJobs\AdminBundle\Controller\Account;
 
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\FormEvent;
@@ -29,7 +29,7 @@ use FOS\UserBundle\Controller\RegistrationController as BaseController;
 class ProfileController extends BaseController
 {
     /**
-     * @Route("/admin/profil", name="user_profil")
+     * @Route("/profil", name="account_profil")
      */
     public function showAction()
     {
@@ -39,13 +39,13 @@ class ProfileController extends BaseController
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
-        return $this->render('MyJobsAdminBundle:Admin:user/show.html.twig', array(
+        return $this->render('MyJobsAdminBundle:Account:user/show.html.twig', array(
             'user' => $user,
         ));
     }
 
     /**
-     * @Route("/admin/profil/edit", name="user_profil_edit")
+     * @Route("/profil/edit", name="account_profil_edit")
      */
     public function editAction(Request $request)
     {
@@ -83,7 +83,7 @@ class ProfileController extends BaseController
             $userManager->updateUser($user);
 
             if (null === $response = $event->getResponse()) {
-                $url = $this->generateUrl('user_profil');
+                $url = $this->generateUrl('account_profil');
                 $response = new RedirectResponse($url);
             }
 
@@ -92,7 +92,7 @@ class ProfileController extends BaseController
             return $response;
         }
 
-        return $this->render('MyJobsAdminBundle:Admin:user/edit.html.twig', array(
+        return $this->render('MyJobsAdminBundle:Account:user/edit.html.twig', array(
             'form' => $form->createView(),
         ));
     }

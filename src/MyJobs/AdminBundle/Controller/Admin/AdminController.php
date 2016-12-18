@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class AdminController extends Controller
 {
     /**
-     * @Route("/admin/index", name="admin_home_page")
+     * @Route("/index", name="admin_home_page")
      */
     public function indexAction()
     {

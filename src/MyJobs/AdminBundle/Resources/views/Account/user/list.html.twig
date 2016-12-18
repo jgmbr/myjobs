@@ -1,0 +1,68 @@
+{% extends "MyJobsAdminBundle::layout.html.twig" %}
+
+{% block header %}
+    MyJobs - Mon Compte - Membres
+{% endblock %}
+
+{% block menu %}
+    {% include 'MyJobsAdminBundle:Account:menu.html.twig' %}
+{% endblock %}
+
+{% block body %}
+    <h1> Mon Compte › Membres </h1>
+
+    <p> <a href="{{ path('admin_user_add') }}"> Ajouter un membre </a> </p>
+
+    {% if administrators is defined and administrators|length > 0 %}
+        <h2> ADMINISTRATEURS </h2>
+        <table id="table_administrators" style="text-align:left;" cellspacing="10">
+            <thead>
+            <th> ID </th>
+            <th> NOM </th>
+            <th> PRENOM </th>
+            <th> EMAIL </th>
+            <th> ACTIF </th>
+            </thead>
+            <tbody>
+            {% for admin in administrators %}
+                <tr>
+                    <td> {{ admin.id }} </td>
+                    <td> {{ admin.lastname }} </td>
+                    <td> {{ admin.firstname }} </td>
+                    <td> {{ admin.email }} </td>
+                    <td> {% if admin.enabled %}Oui{% else %}Non{% endif %} </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p> Pas d'administrateurs </p>
+    {% endif %}
+    {% if users is defined and users|length > 0 %}
+        <h2> UTILISATEURS </h2>
+        <table id="table_users" style="text-align:left;" cellspacing="10">
+            <thead>
+                <th> ID </th>
+                <th> NOM </th>
+                <th> PRENOM </th>
+                <th> EMAIL </th>
+                <th> ACTIF </th>
+                <th> CANDIDATURES </th>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td> {{ user.id }} </td>
+                    <td> {{ user.lastname }} </td>
+                    <td> {{ user.firstname }} </td>
+                    <td> {{ user.email }} </td>
+                    <td> {% if user.enabled %}Oui{% else %}Non{% endif %} </td>
+                    <td> {{ user.applications|length }} </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p> Pas d'utilisateurs </p>
+    {% endif %}
+{% endblock %}

@@ -5,10 +5,12 @@ myjobs_front:
 myjobs_admin:
     resource: "@MyJobsAdminBundle/Controller/Admin/"
     type:     annotation
+    prefix:   /admin
 
 myjobs_account:
     resource: "@MyJobsAdminBundle/Controller/Account/"
     type:     annotation
+    prefix:   /account
 
 myjobs_user:
     resource: "@MyJobsUserBundle/Controller/"

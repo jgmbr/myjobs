@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 class AdminUserController extends Controller
 {
     /**
-     * @Route("/admin/user/list", name="admin_user_list_page")
+     * @Route("/user/list", name="admin_user_list_page")
      */
     public function listUsersAction()
     {
@@ -26,7 +26,7 @@ class AdminUserController extends Controller
     }
 
     /**
-     * @Route("/admin/user/add/", name="admin_user_add")
+     * @Route("/user/add/", name="admin_user_add")
      */
     public function addUserAction(Request $request)
     {
