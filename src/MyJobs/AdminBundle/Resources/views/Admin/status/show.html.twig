@@ -1,0 +1,60 @@
+{% extends "MyJobsAdminBundle::layout.html.twig" %}
+
+{% block header %}
+    MyJobs - Administration - Status
+{% endblock %}
+
+{% block menu %}
+    {% include 'MyJobsAdminBundle:Admin:menu.html.twig' %}
+{% endblock %}
+
+{% block body %}
+    <h1>Administration › Status › Fiche</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Identifiant</th>
+                <td>{{ status.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ status.name }}</td>
+            </tr>
+            <tr>
+                <th>Code icône</th>
+                <td>{{ status.icon }}</td>
+            </tr>
+            <tr>
+                <th>Couleur</th>
+                <td> <span style="background:{{ status.color }}; width:20px; height:20px; display:block;">&nbsp;</span> </td>
+            </tr>
+            <tr>
+                <th>Code couleur</th>
+                <td>{{ status.color }}</td>
+            </tr>
+            <tr>
+                <th>Date de création</th>
+                <td>{% if status.createdAt %}{{ status.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Date de modification</th>
+                <td>{% if status.updatedAt %}{{ status.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('status_index') }}">Retour à la liste des status</a>
+        </li>
+        <li>
+            <a href="{{ path('status_edit', { 'id': status.id }) }}">Modifier</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

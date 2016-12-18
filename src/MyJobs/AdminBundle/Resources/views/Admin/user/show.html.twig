@@ -1,0 +1,23 @@
+{% extends "MyJobsAdminBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block header %}
+    MyJobs - Administration - Profil
+{% endblock %}
+
+{% block menu %}
+    {% include 'MyJobsAdminBundle:Admin:menu.html.twig' %}
+{% endblock %}
+
+{% block body %}
+<h1> Administration › Profil </h1>
+
+<div class="fos_user_user_show">
+    <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
+    <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+    <p>{{ 'profile.show.lastname'|trans }}: {{ user.lastname }}</p>
+    <p>{{ 'profile.show.firstname'|trans }}: {{ user.firstname }}</p>
+    <p><a href="{{ path('user_profil_edit') }}">Modifier</a> </p>
+</div>
+{% endblock %}

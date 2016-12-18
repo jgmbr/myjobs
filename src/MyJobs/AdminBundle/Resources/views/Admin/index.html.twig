@@ -1,0 +1,22 @@
+{% extends "MyJobsAdminBundle::layout.html.twig" %}
+
+{% block header %}
+    MyJobs - Administration
+{% endblock %}
+
+{% block menu %}
+    {% include 'MyJobsAdminBundle:Admin:menu.html.twig' %}
+{% endblock %}
+
+{% block body %}
+    <h1> Administration › Tableau de bord </h1>
+
+    <p> Nb Utilisateurs : {{ nbUsers }} </p>
+
+    <p> Nb administrateurs : {{ nbAdministrators }} </p>
+
+    <p> Nb contrats : {{ nbContracts }} </p>
+
+    <p> Nb status : {{ nbStatus }} </p>
+
+{% endblock %}

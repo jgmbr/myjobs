@@ -1,0 +1,24 @@
+{% extends "MyJobsAdminBundle::layout.html.twig" %}
+
+{% block header %}
+    MyJobs - Administration - Status
+{% endblock %}
+
+{% block menu %}
+    {% include 'MyJobsAdminBundle:Admin:menu.html.twig' %}
+{% endblock %}
+
+{% block body %}
+    <h1>Administration › Contrats › Ajouter</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Créer" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('contract_index') }}">Retour à la liste des contrats</a>
+        </li>
+    </ul>
+{% endblock %}

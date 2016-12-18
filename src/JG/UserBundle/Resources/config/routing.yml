@@ -1,3 +1,0 @@
-jg_user_homepage:
-    path:     /
-    defaults: { _controller: JGUserBundle:Default:index }

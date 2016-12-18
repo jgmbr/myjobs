@@ -1,21 +1,21 @@
-jg_front:
-    resource: "@JGFrontBundle/Controller/"
+myjobs_front:
+    resource: "@MyJobsFrontBundle/Controller/"
     type:     annotation
 
-jg_admin:
-    resource: "@JGAdminBundle/Controller/Admin/"
+myjobs_admin:
+    resource: "@MyJobsAdminBundle/Controller/Admin/"
     type:     annotation
 
-jg_account:
-    resource: "@JGAdminBundle/Controller/Account/"
+myjobs_account:
+    resource: "@MyJobsAdminBundle/Controller/Account/"
     type:     annotation
 
-jg_user:
-    resource: "@JGUserBundle/Controller/"
+myjobs_user:
+    resource: "@MyJobsUserBundle/Controller/"
     type:     annotation
 
-jg_core:
-    resource: "@JGCoreBundle/Controller/"
+myjobs_core:
+    resource: "@MyJobsCoreBundle/Controller/"
     type:     annotation
 
 fos_user:
