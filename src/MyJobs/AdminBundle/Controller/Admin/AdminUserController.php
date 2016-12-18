@@ -43,10 +43,8 @@ class AdminUserController extends Controller
 //            $newUser = $userManager->createUser();
 //            $newUser->setUsername($request->request->get('username'));
 //            $newUser->setEmail($request->request->get('email'));
-//            $newUser->setUsername($request->request->get('username'));
-//            $newUser->setEmail($request->request->get('email'));
 //            $newUser->setPlainPassword($request->request->get('password'));
-//            $newUser->setEnabled((bool) $request->request->get('active'));
+//            $newUser->setEnabled(true);
 //            $newUser->addRole($request->request->get('role'));
 //            $userManager->updateUser($newUser);
 //
