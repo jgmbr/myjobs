@@ -1,0 +1,29 @@
+{% extends "MyJobsAdminBundle::layout.html.twig" %}
+
+{% block header %}
+    MyJobs - Mon Compte - Mes entreprises
+{% endblock %}
+
+{% block menu %}
+    {% include 'MyJobsAdminBundle:Account:menu.html.twig' %}
+{% endblock %}
+
+{% block body %}
+    <h1>Mon Compte › Mes entreprises › Edition</h1>
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input type="submit" value="Modifier" />
+    {{ form_end(edit_form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('company_index') }}">Retour à la liste des entreprises</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Supprimer">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
