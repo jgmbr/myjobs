@@ -3,6 +3,7 @@
 namespace MyJobs\UserBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use MyJobs\UserBundle\Entity\User;
 
 class UserRepository extends EntityRepository
 {

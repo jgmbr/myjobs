@@ -24,13 +24,6 @@ class Relaunch
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
-     */
-    private $name;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_at", type="date")
@@ -40,7 +33,7 @@ class Relaunch
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="hour_at", type="time")
+     * @ORM\Column(name="hour_at", type="time", nullable=true)
      */
     private $hourAt;
 
@@ -84,30 +77,6 @@ class Relaunch
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Relaunch
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 
     /**
