@@ -113,6 +113,11 @@ class Company
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="MyJobs\UserBundle\Entity\User", inversedBy="companies", cascade={"persist"})
+     */
+    private $user;
+
     public function __construct()
     {
         $this->createdAt    = new \Datetime();
@@ -438,6 +443,30 @@ class Company
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \MyJobs\UserBundle\Entity\User $user
+     *
+     * @return Company
+     */
+    public function setUser(\MyJobs\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \MyJobs\UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 
     /**

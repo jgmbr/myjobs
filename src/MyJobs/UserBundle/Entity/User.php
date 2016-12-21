@@ -34,6 +34,11 @@ class User extends BaseUser
      */
     private $applications;
 
+    /**
+     * @ORM\OneToMany(targetEntity="MyJobs\CoreBundle\Entity\Company", mappedBy="user", cascade={"persist"})
+     */
+    private $companies;
+
     public function __construct()
     {
         parent::__construct();
@@ -119,5 +124,39 @@ class User extends BaseUser
     public function getApplications()
     {
         return $this->applications;
+    }
+
+    /**
+     * Add company
+     *
+     * @param \MyJobs\CoreBundle\Entity\Company $company
+     *
+     * @return User
+     */
+    public function addCompany(\MyJobs\CoreBundle\Entity\Company $company)
+    {
+        $this->companies[] = $company;
+
+        return $this;
+    }
+
+    /**
+     * Remove company
+     *
+     * @param \MyJobs\CoreBundle\Entity\Company $company
+     */
+    public function removeCompany(\MyJobs\CoreBundle\Entity\Company $company)
+    {
+        $this->companies->removeElement($company);
+    }
+
+    /**
+     * Get companies
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCompanies()
+    {
+        return $this->companies;
     }
 }
