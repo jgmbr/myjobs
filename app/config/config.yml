@@ -74,6 +74,3 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
     firewall_name: main
     user_class: MyJobs\UserBundle\Entity\User
-    registration:
-        form:
-            type: MyJobs\UserBundle\Form\RegistrationType
