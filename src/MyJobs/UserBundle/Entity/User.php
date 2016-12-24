@@ -39,6 +39,18 @@ class User extends BaseUser
      */
     private $companies;
 
+    private $role;
+
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    public function setRole($role)
+    {
+        $this->addRole($role);
+    }
+
     public function __construct()
     {
         parent::__construct();

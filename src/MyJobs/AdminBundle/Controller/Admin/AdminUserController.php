@@ -38,13 +38,21 @@ class AdminUserController extends Controller
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
 
-            $newUser = $userManager->createUser();
+            $em = $this->getDoctrine()->getManager();
+            $user->setEnabled(true);
+            /*if ($form->get('role')->getData() == 'ROLE_ADMIN') {
+                $user->setSuperAdmin(true);
+            }*/
+            $em->persist($user);
+            $em->flush($user);
+
+            /*$newUser = $userManager->createUser();
             $newUser->setUsername($form->get('username')->getData());
             $newUser->setEmail($form->get('email')->getData());
             $newUser->setPlainPassword($form->get('plainPassword')->getData());
             $newUser->setEnabled(true);
-            $newUser->addRole($form->get('roles')->getData());
-            $userManager->updateUser($newUser);
+            $newUser->setRole($form->get('role')->getData());
+            $userManager->updateUser($newUser);*/
 
             $request->getSession()->getFlashBag()->add('success', 'Message envoyé avec succès !');
             return $this->redirectToRoute('admin_user_list_page');

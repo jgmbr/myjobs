@@ -38,10 +38,10 @@ class UserType extends AbstractType
                 'second_options' => array('label' => 'form.password_confirmation'),
                 'invalid_message' => 'fos_user.password.mismatch',
             ))
-            ->add('roles', ChoiceType::class, [
-                    'choices' => ['Administrateur' => 'ROLE_ADMIN', 'Utilisateur' => 'ROLE_USER'],
-                    'expanded' => true,
-                    'multiple' => true,
+            ->add('role', ChoiceType::class, [
+                    'choices' => ['Utilisateur' => 'ROLE_USER', 'Administrateur' => 'ROLE_ADMIN'],
+                    'expanded' => false,
+                    'multiple' => false,
                 ]
             )
             ->add('save', SubmitType::class, ['label' => 'Ajouter'])
