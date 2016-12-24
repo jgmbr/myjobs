@@ -42,6 +42,8 @@ class User extends BaseUser
 
     private $role;
 
+    private $superAdmin;
+
     public function getRole()
     {
         return $this->role;

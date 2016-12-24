@@ -40,9 +40,9 @@ class AdminUserController extends Controller
 
             $em = $this->getDoctrine()->getManager();
             $user->setEnabled(true);
-            if ($form->get('role')->getData() == 'ROLE_ADMIN') {
-                $user->setSuperAdmin(true);
-            }
+//            if ($form->get('role')->getData() == 'ROLE_ADMIN') {
+//                $user->setSuperAdmin(true);
+//            }
             $em->persist($user);
             $em->flush($user);
 

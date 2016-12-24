@@ -44,6 +44,12 @@ class UserType extends AbstractType
                     'multiple' => false,
                 ]
             )
+            ->add('superAdmin', ChoiceType::class, [
+                    'choices' => ['Oui' => true, 'Non' => false],
+                    'expanded' => false,
+                    'multiple' => false,
+                ]
+            )
             ->add('save', SubmitType::class, ['label' => 'Ajouter'])
         ;
     }
