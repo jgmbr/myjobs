@@ -12,11 +12,14 @@ class UserRepository extends EntityRepository
      */
     public function findAllUsers()
     {
-        return
-            $this->_em
-                ->createQuery('SELECT u FROM MyJobsUserBundle:User u WHERE NOT u.roles LIKE :role')
-                ->setParameter('role', '%"ROLE_ADMIN"%' )
-                ->getResult();
+        $qb = $this->createQueryBuilder('u');
+
+        return $qb
+            ->where($qb->expr()->notLike('u.roles', ':role'))
+            ->setParameter('role', '%"ROLE_ADMIN"%')
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
     /**
@@ -24,28 +27,39 @@ class UserRepository extends EntityRepository
      */
     public function findAllAdmin()
     {
-        return
-            $this->_em
-                ->createQuery('SELECT u FROM MyJobsUserBundle:User u WHERE u.roles LIKE :role')
-                ->setParameter('role', '%"ROLE_ADMIN"%' )
-                ->getResult();
+        $qb = $this->createQueryBuilder('u');
+
+        return $qb
+            ->where($qb->expr()->like('u.roles', ':role'))
+            ->setParameter('role', '%"ROLE_ADMIN"%')
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
     public function findCountUsers()
     {
-        return
-            $this->_em
-                ->createQuery('SELECT count(u) FROM MyJobsUserBundle:User u WHERE NOT u.roles LIKE :role')
-                ->setParameter('role', '%"ROLE_ADMIN"%' )
-                ->getSingleScalarResult();
+        $qb = $this->createQueryBuilder('u');
+
+        return $qb
+            ->select('COUNT(u)')
+            ->where($qb->expr()->notLike('u.roles', ':role'))
+            ->setParameter('role', '%"ROLE_ADMIN"%')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
     }
 
     public function findCountAdmin()
     {
-        return
-            $this->_em
-                ->createQuery('SELECT count(u) FROM MyJobsUserBundle:User u WHERE u.roles LIKE :role')
-                ->setParameter('role', '%"ROLE_ADMIN"%' )
-                ->getSingleScalarResult();
+        $qb = $this->createQueryBuilder('u');
+
+        return $qb
+            ->select('COUNT(u)')
+            ->where($qb->expr()->like('u.roles', ':role'))
+            ->setParameter('role', '%"ROLE_ADMIN"%')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
     }
 }

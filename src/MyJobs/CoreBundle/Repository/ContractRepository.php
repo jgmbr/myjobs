@@ -12,9 +12,10 @@ class ContractRepository extends \Doctrine\ORM\EntityRepository
 {
     public function findCount()
     {
-        return
-            $this->_em
-                ->createQuery('SELECT count(c) FROM MyJobsCoreBundle:Contract c')
-                ->getSingleScalarResult();
+        return $this
+            ->createQueryBuilder('c')
+            ->select('COUNT(c)')
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 }

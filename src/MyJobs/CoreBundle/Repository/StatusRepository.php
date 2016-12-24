@@ -12,9 +12,10 @@ class StatusRepository extends \Doctrine\ORM\EntityRepository
 {
     public function findCount()
     {
-        return
-            $this->_em
-                ->createQuery('SELECT count(s) FROM MyJobsCoreBundle:Status s')
-                ->getSingleScalarResult();
+        return $this
+            ->createQueryBuilder('s')
+            ->select('COUNT(s)')
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 }
