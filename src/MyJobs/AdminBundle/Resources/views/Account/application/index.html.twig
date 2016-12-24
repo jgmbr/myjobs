@@ -1,0 +1,50 @@
+{% extends "MyJobsAdminBundle::layout.html.twig" %}
+
+{% block header %}
+    MyJobs - Mon Compte - Mes candidatures
+{% endblock %}
+
+{% block menu %}
+    {% include 'MyJobsAdminBundle:Account:menu.html.twig' %}
+{% endblock %}
+
+{% block body %}
+    <h1>Mon Compte › Mes candidatures › Liste</h1>
+
+    <ul>
+        <li>
+            <a href="{{ path('application_new') }}">Créer une nouvelle candidature</a>
+        </li>
+    </ul>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Url de l'annonce</th>
+                <th>Commentaire</th>
+                <th>Date de création</th>
+                <th>Date de modification</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for application in applications %}
+            <tr>
+                <td><a href="{{ path('application_show', { 'id': application.id }) }}">{{ application.id }}</a></td>
+                <td>{{ application.name }}</td>
+                <td>{{ application.url }}</td>
+                <td>{{ application.comment }}</td>
+                <td>{% if application.createdAt %}{{ application.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if application.updatedAt %}{{ application.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <a href="{{ path('application_show', { 'id': application.id }) }}">Voir</a>
+                    <a href="{{ path('application_edit', { 'id': application.id }) }}">Modifier</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "MyJobsAdminBundle::layout.html.twig" %}
+
+{% block header %}
+    MyJobs - Mon Compte - Mes candidatures
+{% endblock %}
+
+{% block menu %}
+    {% include 'MyJobsAdminBundle:Account:menu.html.twig' %}
+{% endblock %}
+
+{% block body %}
+    <h1>Mon Compte › Mes candidatures › Ajout</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Créer" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('application_index') }}">Retour à la liste des candidatures</a>
+        </li>
+    </ul>
+{% endblock %}
