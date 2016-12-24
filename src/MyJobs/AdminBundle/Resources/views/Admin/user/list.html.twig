@@ -17,10 +17,12 @@
         <h2> ADMINISTRATEURS </h2>
         <table id="table_administrators" style="text-align:left;" cellspacing="10">
             <thead>
-            <th> ID </th>
-            <th> EMAIL </th>
-            <th> ACTIF </th>
-            <th> SUPER ADMIN </th>
+            <th> Id </th>
+            <th> Email </th>
+            <th> Actif </th>
+            <th> Super admin </th>
+            <th> Date de création </th>
+            <th> Date de modification </th>
             </thead>
             <tbody>
             {% for admin in administrators %}
@@ -29,6 +31,8 @@
                     <td> {{ admin.email }} </td>
                     <td> {% if admin.enabled %}Oui{% else %}Non{% endif %} </td>
                     <td> {% if admin.superAdmin %}Oui{% else %}Non{% endif %} </td>
+                    <td> {{ admin.createdAt|date('d/m/Y à H:i') }} </td>
+                    <td> {{ admin.updatedAt|date('d/m/Y à H:i') }} </td>
                 </tr>
             {% endfor %}
             </tbody>
@@ -40,10 +44,12 @@
         <h2> UTILISATEURS </h2>
         <table id="table_users" style="text-align:left;" cellspacing="10">
             <thead>
-                <th> ID </th>
-                <th> EMAIL </th>
-                <th> ACTIF </th>
-                <th> CANDIDATURES </th>
+                <th> Id </th>
+                <th> Email </th>
+                <th> Actif </th>
+                <th> Nb Candidatures </th>
+                <th> Date de création </th>
+                <th> Date de modification </th>
             </thead>
             <tbody>
             {% for user in users %}
@@ -52,6 +58,8 @@
                     <td> {{ user.email }} </td>
                     <td> {% if user.enabled %}Oui{% else %}Non{% endif %} </td>
                     <td> {{ user.applications|length }} </td>
+                    <td> {{ user.createdAt|date('d/m/Y à H:i') }} </td>
+                    <td> {{ user.updatedAt|date('d/m/Y à H:i') }} </td>
                 </tr>
             {% endfor %}
             </tbody>

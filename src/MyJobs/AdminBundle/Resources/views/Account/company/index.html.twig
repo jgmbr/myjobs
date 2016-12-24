@@ -41,8 +41,8 @@
                     <td>{{ company.phone }}</td>
                     <td>{{ company.website }}</td>
                     <td>{{ company.contact }}</td>
-                    <td>{% if company.createdAt %}{{ company.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                    <td>{% if company.updatedAt %}{{ company.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{% if company.createdAt %}{{ company.createdAt|date('d/m/Y à H:i') }}{% endif %}</td>
+                    <td>{% if company.updatedAt %}{{ company.updatedAt|date('d/m/Y à H:i') }}{% endif %}</td>
                     <td>
                         <a href="{{ path('company_show', { 'id': company.id }) }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
                         <a href="{{ path('company_edit', { 'id': company.id }) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>

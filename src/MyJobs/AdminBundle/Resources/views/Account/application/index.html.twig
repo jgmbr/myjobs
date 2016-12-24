@@ -39,8 +39,8 @@
                 <td> {{ application.contract.name }} </td>
                 <td> {{ application.status.name }} </td>
                 <td> {{ application.company.name }} </td>
-                <td>{% if application.createdAt %}{{ application.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if application.updatedAt %}{{ application.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if application.createdAt %}{{ application.createdAt|date('d/m/Y à H:i') }}{% endif %}</td>
+                <td>{% if application.updatedAt %}{{ application.updatedAt|date('d/m/Y à H:i') }}{% endif %}</td>
                 <td>
                     <a href="{{ path('application_show', { 'id': application.id }) }}">Voir</a>
                     <a href="{{ path('application_edit', { 'id': application.id }) }}">Modifier</a>
