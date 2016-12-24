@@ -43,9 +43,12 @@ class AccountCompanyController extends Controller
         $form = $this->createForm('MyJobs\CoreBundle\Form\CompanyType', $company);
         $form->handleRequest($request);
 
+        $user = $this->getUser();
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $company->setUser($this->getUser());
+            $company->setUser($user);
+            $user->addCompany($company);
             $em->persist($company);
             $em->flush($company);
 

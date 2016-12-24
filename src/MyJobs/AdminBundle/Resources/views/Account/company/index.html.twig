@@ -43,14 +43,8 @@
                 <td>{% if company.createdAt %}{{ company.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if company.updatedAt %}{{ company.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('company_show', { 'id': company.id }) }}">Voir</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('company_edit', { 'id': company.id }) }}">Modifier</a>
-                        </li>
-                    </ul>
+                    <a href="{{ path('company_show', { 'id': company.id }) }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                    <a href="{{ path('company_edit', { 'id': company.id }) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                 </td>
             </tr>
         {% endfor %}
