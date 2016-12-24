@@ -20,6 +20,7 @@
             <th> ID </th>
             <th> EMAIL </th>
             <th> ACTIF </th>
+            <th> SUPER ADMIN </th>
             </thead>
             <tbody>
             {% for admin in administrators %}
@@ -27,6 +28,7 @@
                     <td> {{ admin.id }} </td>
                     <td> {{ admin.email }} </td>
                     <td> {% if admin.enabled %}Oui{% else %}Non{% endif %} </td>
+                    <td> {% if admin.superAdmin %}Oui{% else %}Non{% endif %} </td>
                 </tr>
             {% endfor %}
             </tbody>
