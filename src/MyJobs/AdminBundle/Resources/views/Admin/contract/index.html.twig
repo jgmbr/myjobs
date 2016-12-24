@@ -17,36 +17,38 @@
         </li>
     </ul>
 
-    <br />
-
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Couleur</th>
-                <th>Code couleur</th>
-                <th>Date de création</th>
-                <th>Date de modification</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for contract in contracts %}
-            <tr>
-                <td><a href="{{ path('contract_show', { 'id': contract.id }) }}">{{ contract.id }}</a></td>
-                <td>{{ contract.name }}</td>
-                <td> <span style="background:{{ contract.color }}; width:20px; height:20px; display:block;">&nbsp;</span> </td>
-                <td>{{ contract.color }}</td>
-                <td>{% if contract.createdAt %}{{ contract.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if contract.updatedAt %}{{ contract.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>
-                    <a href="{{ path('contract_show', { 'id': contract.id }) }}">Voir</a>
-                    <a href="{{ path('contract_edit', { 'id': contract.id }) }}">Modifier</a>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    {% if contracts is defined and contracts|length > 0 %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Couleur</th>
+                    <th>Code couleur</th>
+                    <th>Date de création</th>
+                    <th>Date de modification</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for contract in contracts %}
+                <tr>
+                    <td><a href="{{ path('contract_show', { 'id': contract.id }) }}">{{ contract.id }}</a></td>
+                    <td>{{ contract.name }}</td>
+                    <td> <span style="background:{{ contract.color }}; width:20px; height:20px; display:block;">&nbsp;</span> </td>
+                    <td>{{ contract.color }}</td>
+                    <td>{% if contract.createdAt %}{{ contract.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{% if contract.updatedAt %}{{ contract.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>
+                        <a href="{{ path('contract_show', { 'id': contract.id }) }}">Voir</a>
+                        <a href="{{ path('contract_edit', { 'id': contract.id }) }}">Modifier</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p> Pas de contrats. </p>
+    {% endif %}
 
 {% endblock %}

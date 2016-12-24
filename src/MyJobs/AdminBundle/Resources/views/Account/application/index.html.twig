@@ -17,13 +17,15 @@
         </li>
     </ul>
 
+    {% if applications is defined and applications|length > 0 %}
     <table>
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Nom</th>
-                <th>Url de l'annonce</th>
-                <th>Commentaire</th>
+                <th>Contrat</th>
+                <th>Statut</th>
+                <th>Entreprise</th>
                 <th>Date de création</th>
                 <th>Date de modification</th>
                 <th>Actions</th>
@@ -33,9 +35,10 @@
         {% for application in applications %}
             <tr>
                 <td><a href="{{ path('application_show', { 'id': application.id }) }}">{{ application.id }}</a></td>
-                <td>{{ application.name }}</td>
-                <td>{{ application.url }}</td>
-                <td>{{ application.comment }}</td>
+                <td> {{ application.name }} </td>
+                <td> {{ application.contract.name }} </td>
+                <td> {{ application.status.name }} </td>
+                <td> {{ application.company.name }} </td>
                 <td>{% if application.createdAt %}{{ application.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if application.updatedAt %}{{ application.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
@@ -46,5 +49,8 @@
         {% endfor %}
         </tbody>
     </table>
+    {% else %}
+        <p> Pas de candidatures. </p>
+    {% endif %}
 
 {% endblock %}

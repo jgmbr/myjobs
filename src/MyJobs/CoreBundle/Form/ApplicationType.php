@@ -19,10 +19,12 @@ class ApplicationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $user = $options['current_user'];
+
         $builder
             ->add('name', TextType::class, array('label' => 'Nom'))
-            ->add('url', TextType::class, array('label' => 'Url de l\'annonce'))
-            ->add('comment', TextareaType::class, array('label' => 'Commentaire'))
+            ->add('url', TextType::class, array('label' => 'Url de l\'annonce', 'required' => false))
+            ->add('comment', TextareaType::class, array('label' => 'Commentaire', 'required' => false))
             ->add('contract', EntityType::class, array(
                 'label' => 'Contrat',
                 'class'        => 'MyJobsCoreBundle:Contract',
@@ -40,9 +42,9 @@ class ApplicationType extends AbstractType
                 'class'        => 'MyJobsCoreBundle:Company',
                 'choice_label' => 'name',
                 'multiple'     => false,
-//                'query_builder' => function(CompanyRepository $repository) use($user) {
-//                    return $repository->findByUser($user);
-//                }
+                'query_builder' => function(CompanyRepository $repository) use($user) {
+                    return $repository->myCompaniesFromQB($user);
+                }
             ))
         ;
     }
@@ -53,7 +55,8 @@ class ApplicationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'MyJobs\CoreBundle\Entity\Application'
+            'data_class' => 'MyJobs\CoreBundle\Entity\Application',
+            'current_user' => null
         ));
     }
 

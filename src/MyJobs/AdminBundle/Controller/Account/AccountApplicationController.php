@@ -24,7 +24,7 @@ class AccountApplicationController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $applications = $em->getRepository('MyJobsCoreBundle:Application')->findAll();
+        $applications = $em->getRepository('MyJobsCoreBundle:Application')->findMyApplications($this->getUser());
 
         return $this->render('MyJobsAdminBundle:Account:application/index.html.twig', array(
             'applications' => $applications,
@@ -40,11 +40,17 @@ class AccountApplicationController extends Controller
     public function newAction(Request $request)
     {
         $application = new Application();
-        $form = $this->createForm('MyJobs\CoreBundle\Form\ApplicationType', $application);
+        $form = $this->createForm('MyJobs\CoreBundle\Form\ApplicationType', $application, array('current_user' => $this->getUser()));
         $form->handleRequest($request);
+
+        $user = $this->getUser();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            $application->setUser($user);
+            $user->addApplication($application);
+
             $em->persist($application);
             $em->flush($application);
 
@@ -82,7 +88,7 @@ class AccountApplicationController extends Controller
     public function editAction(Request $request, Application $application)
     {
         $deleteForm = $this->createDeleteForm($application);
-        $editForm = $this->createForm('MyJobs\CoreBundle\Form\ApplicationType', $application);
+        $editForm = $this->createForm('MyJobs\CoreBundle\Form\ApplicationType', $application, array('current_user' => $this->getUser()));
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

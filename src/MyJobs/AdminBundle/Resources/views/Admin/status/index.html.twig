@@ -17,38 +17,42 @@
         </li>
     </ul>
 
-    <br />
-
-    <table>
-        <thead>
-            <tr>
-                <th>Identifiant</th>
-                <th>Nom</th>
-                <th>Code icône</th>
-                <th>Couleur</th>
-                <th>Code couleur</th>
-                <th>Date de création</th>
-                <th>Date de modification</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for status in statuses %}
-            <tr>
-                <td><a href="{{ path('status_show', { 'id': status.id }) }}">{{ status.id }}</a></td>
-                <td>{{ status.name }}</td>
-                <td>{{ status.icon }}</td>
-                <td> <span style="background:{{ status.color }}; width:20px; height:20px; display:block;">&nbsp;</span> </td>
-                <td>{{ status.color }}</td>
-                <td>{% if status.createdAt %}{{ status.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if status.updatedAt %}{{ status.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>
-                    <a href="{{ path('status_show', { 'id': status.id }) }}">Voir</a>
-                    <a href="{{ path('status_edit', { 'id': status.id }) }}">Modifier</a>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    {% if statuses is defined and statuses|length > 0 %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Identifiant</th>
+                    <th>Nom</th>
+                    <th>Icône</th>
+                    <th>Code icône</th>
+                    <th>Couleur</th>
+                    <th>Code couleur</th>
+                    <th>Date de création</th>
+                    <th>Date de modification</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for status in statuses %}
+                <tr>
+                    <td><a href="{{ path('status_show', { 'id': status.id }) }}">{{ status.id }}</a></td>
+                    <td>{{ status.name }}</td>
+                    <td> <i class="fa {{ status.icon }}" aria-hidden="true"></i> </td>
+                    <td>{{ status.icon }}</td>
+                    <td> <span style="background:{{ status.color }}; width:20px; height:20px; display:block;">&nbsp;</span> </td>
+                    <td>{{ status.color }}</td>
+                    <td>{% if status.createdAt %}{{ status.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{% if status.updatedAt %}{{ status.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>
+                        <a href="{{ path('status_show', { 'id': status.id }) }}">Voir</a>
+                        <a href="{{ path('status_edit', { 'id': status.id }) }}">Modifier</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p> Pas de contrats. </p>
+    {% endif %}
 
 {% endblock %}

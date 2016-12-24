@@ -1,6 +1,7 @@
 <?php
 
 namespace MyJobs\CoreBundle\Repository;
+use MyJobs\CoreBundle\Entity\Company;
 
 /**
  * CompanyRepository
@@ -10,4 +11,26 @@ namespace MyJobs\CoreBundle\Repository;
  */
 class CompanyRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function myCompaniesFromQB($user)
+    {
+        return $this
+            ->createQueryBuilder('u')
+            ->where('u.user = :user')
+            ->setParameter('user', $user)
+        ;
+    }
+
+    /**
+     * @return Company[]
+     */
+    public function findMyCompanies($user)
+    {
+        return $this
+            ->createQueryBuilder('c')
+            ->where('c.user = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

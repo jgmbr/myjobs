@@ -24,7 +24,7 @@ class AccountCompanyController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $companies = $em->getRepository('MyJobsCoreBundle:Company')->findByUser($this->getUser());
+        $companies = $em->getRepository('MyJobsCoreBundle:Company')->findMyCompanies($this->getUser());
 
         return $this->render('MyJobsAdminBundle:Account:company/index.html.twig', array(
             'companies' => $companies,

@@ -1,6 +1,7 @@
 <?php
 
 namespace MyJobs\CoreBundle\Repository;
+use MyJobs\CoreBundle\Entity\Application;
 
 /**
  * ApplicationRepository
@@ -10,4 +11,17 @@ namespace MyJobs\CoreBundle\Repository;
  */
 class ApplicationRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @return Application[]
+     */
+    public function findMyApplications($user)
+    {
+        return $this
+            ->createQueryBuilder('a')
+            ->where('a.user = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
