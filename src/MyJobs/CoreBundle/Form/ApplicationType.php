@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\SecurityContext;
 
 class ApplicationType extends AbstractType
 {
@@ -39,6 +40,9 @@ class ApplicationType extends AbstractType
                 'class'        => 'MyJobsCoreBundle:Company',
                 'choice_label' => 'name',
                 'multiple'     => false,
+//                'query_builder' => function(CompanyRepository $repository) use($user) {
+//                    return $repository->findByUser($user);
+//                }
             ))
         ;
     }
