@@ -11,7 +11,7 @@
 {% block body %}
     <h1> Administration › Membres </h1>
 
-    <p> <a href="{{ path('admin_user_add') }}"> Ajouter un membre </a> </p>
+    <p> <a href="{{ path('user_new') }}"> Ajouter un membre </a> </p>
 
     {% if administrators is defined and administrators|length > 0 %}
         <h2> ADMINISTRATEURS </h2>
@@ -63,7 +63,14 @@
                     <td> {{ user.applications|length }} </td>
                     <td> {{ user.createdAt|date('d/m/Y à H:i') }} </td>
                     <td> {{ user.updatedAt|date('d/m/Y à H:i') }} </td>
-                    <td> <a href="{{ path('account_home_page', {'_switch_user': user.username }) }}">Se connecter en tant que </a> </td>
+                    <td>
+                        <a href="{{ path('user_edit', { 'id': user.id }) }}">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
+                        &nbsp;
+                        <a href="{{ path('account_home_page', {'_switch_user': user.username }) }}">Se connecter en tant que </a>
+
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>

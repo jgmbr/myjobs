@@ -50,7 +50,6 @@ class UserType extends AbstractType
                     'multiple' => false,
                 ]
             )
-            ->add('save', SubmitType::class, ['label' => 'Ajouter'])
         ;
     }
 

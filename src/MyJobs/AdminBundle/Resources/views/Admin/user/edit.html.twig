@@ -1,9 +1,7 @@
 {% extends "MyJobsAdminBundle::layout.html.twig" %}
 
-{% trans_default_domain 'FOSUserBundle' %}
-
 {% block header %}
-    MyJobs - Administration - Profil
+    MyJobs - Administration - Membres
 {% endblock %}
 
 {% block menu %}
@@ -11,12 +9,21 @@
 {% endblock %}
 
 {% block body %}
-<h1> Administration › Profil </h1>
+    <h1> Administration › Membres › Edition </h1>
 
-{{ form_start(form, { 'action': path('admin_profil_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
-    </div>
-{{ form_end(form) }}
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input type="submit" value="Modifier" />
+    {{ form_end(edit_form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('user_index') }}">Retour à la liste des membres</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Supprimer">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
 {% endblock %}
