@@ -23,6 +23,7 @@
             <th> Super admin </th>
             <th> Date de création </th>
             <th> Date de modification </th>
+            <th> Actions </th>
             </thead>
             <tbody>
             {% for admin in administrators %}
@@ -33,6 +34,7 @@
                     <td> {% if admin.superAdmin %}Oui{% else %}Non{% endif %} </td>
                     <td> {{ admin.createdAt|date('d/m/Y à H:i') }} </td>
                     <td> {{ admin.updatedAt|date('d/m/Y à H:i') }} </td>
+                    <td> <a href="{{ path('admin_home_page', {'_switch_user': admin.username }) }}">Se connecter en tant que </a> </td>
                 </tr>
             {% endfor %}
             </tbody>
@@ -50,6 +52,7 @@
                 <th> Nb Candidatures </th>
                 <th> Date de création </th>
                 <th> Date de modification </th>
+                <th> Actions </th>
             </thead>
             <tbody>
             {% for user in users %}
@@ -60,6 +63,7 @@
                     <td> {{ user.applications|length }} </td>
                     <td> {{ user.createdAt|date('d/m/Y à H:i') }} </td>
                     <td> {{ user.updatedAt|date('d/m/Y à H:i') }} </td>
+                    <td> <a href="{{ path('account_home_page', {'_switch_user': user.username }) }}">Se connecter en tant que </a> </td>
                 </tr>
             {% endfor %}
             </tbody>
