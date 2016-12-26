@@ -21,7 +21,10 @@ security:
 
         main:
             pattern:                  ^/
-            switch_user:              { role: ROLE_ADMIN, parameter: _want_to_be_this_user }
+            switch_user:
+                provider:             ~
+                parameter:            _switch_user
+                role:                 ROLE_ALLOWED_TO_SWITCH
             form_login:
                 provider:             fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
