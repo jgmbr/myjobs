@@ -27,8 +27,15 @@ class AdminContractController extends Controller
 
         $contracts = $em->getRepository('MyJobsCoreBundle:Contract')->findAll();
 
+        $deleteForms = array();
+
+        foreach ($contracts as $contract) {
+            $deleteForms[$contract->getId()] = $this->createDeleteForm($contract)->createView();
+        }
+
         return $this->render('MyJobsAdminBundle:Admin:contract/index.html.twig', array(
             'contracts' => $contracts,
+            'deleteForms' => $deleteForms
         ));
     }
 

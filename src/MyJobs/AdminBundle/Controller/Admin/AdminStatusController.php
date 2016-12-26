@@ -27,8 +27,15 @@ class AdminStatusController extends Controller
 
         $statuses = $em->getRepository('MyJobsCoreBundle:Status')->findAll();
 
+        $deleteForms = array();
+
+        foreach ($statuses as $status) {
+            $deleteForms[$status->getId()] = $this->createDeleteForm($status)->createView();
+        }
+
         return $this->render('MyJobsAdminBundle:Admin:status/index.html.twig', array(
             'statuses' => $statuses,
+            'deleteForms' => $deleteForms
         ));
     }
 

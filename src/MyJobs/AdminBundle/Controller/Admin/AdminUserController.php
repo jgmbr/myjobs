@@ -25,9 +25,16 @@ class AdminUserController extends Controller
 
         $administrators = $this->getDoctrine()->getRepository('MyJobsUserBundle:User')->findAllAdmin();
 
+        $deleteForms = array();
+
+        foreach ($users as $user) {
+            $deleteForms[$user->getId()] = $this->createDeleteForm($user)->createView();
+        }
+
         return $this->render('MyJobsAdminBundle:Admin:user/index.html.twig',array(
             'users' => $users,
-            'administrators' => $administrators
+            'administrators' => $administrators,
+            'deleteForms' => $deleteForms
         ));
     }
 
