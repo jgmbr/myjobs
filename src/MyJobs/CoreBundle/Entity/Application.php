@@ -45,6 +45,20 @@ class Application
     private $comment;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="business_reason", type="text", nullable=true)
+     */
+    private $businessReason;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="people_reason", type="text", nullable=true)
+     */
+    private $peopleReason;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
@@ -410,5 +424,53 @@ class Application
     public function onPreUpdate()
     {
         $this->updatedAt = new \DateTime("now");
+    }
+
+    /**
+     * Set businessReason
+     *
+     * @param string $businessReason
+     *
+     * @return Application
+     */
+    public function setBusinessReason($businessReason)
+    {
+        $this->businessReason = $businessReason;
+
+        return $this;
+    }
+
+    /**
+     * Get businessReason
+     *
+     * @return string
+     */
+    public function getBusinessReason()
+    {
+        return $this->businessReason;
+    }
+
+    /**
+     * Set peopleReason
+     *
+     * @param string $peopleReason
+     *
+     * @return Application
+     */
+    public function setPeopleReason($peopleReason)
+    {
+        $this->peopleReason = $peopleReason;
+
+        return $this;
+    }
+
+    /**
+     * Get peopleReason
+     *
+     * @return string
+     */
+    public function getPeopleReason()
+    {
+        return $this->peopleReason;
     }
 }

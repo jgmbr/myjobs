@@ -24,7 +24,6 @@ class ApplicationType extends AbstractType
         $builder
             ->add('name', TextType::class, array('label' => 'Nom'))
             ->add('url', TextType::class, array('label' => 'Url de l\'annonce', 'required' => false))
-            ->add('comment', TextareaType::class, array('label' => 'Commentaire', 'required' => false))
             ->add('contract', EntityType::class, array(
                 'label' => 'Contrat',
                 'class'        => 'MyJobsCoreBundle:Contract',
@@ -46,6 +45,9 @@ class ApplicationType extends AbstractType
                     return $repository->myCompaniesFromQB($user);
                 }
             ))
+            ->add('businessReason', TextareaType::class, array('label' => 'Motif entreprise', 'required' => false))
+            ->add('peopleReason', TextareaType::class, array('label' => 'Motif candidat', 'required' => false))
+            ->add('comment', TextareaType::class, array('label' => 'Commentaires', 'required' => false))
         ;
     }
     
