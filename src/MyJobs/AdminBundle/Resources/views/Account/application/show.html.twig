@@ -51,11 +51,11 @@
             </tr>
             <tr>
                 <th>Date de création</th>
-                <td>{% if application.createdAt %}{{ application.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if application.createdAt %}{{ application.createdAt|date('d/m/Y à H:i') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Date de modification</th>
-                <td>{% if application.updatedAt %}{{ application.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if application.updatedAt %}{{ application.updatedAt|date('d/m/Y à H:i') }}{% endif %}</td>
             </tr>
         </tbody>
     </table>

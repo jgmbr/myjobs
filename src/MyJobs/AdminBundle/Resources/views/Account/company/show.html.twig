@@ -63,11 +63,11 @@
             </tr>
             <tr>
                 <th>Date de création</th>
-                <td>{% if company.createdAt %}{{ company.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if company.createdAt %}{{ company.createdAt|date('d/m/Y à H:i') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Date de modification</th>
-                <td>{% if company.updatedAt %}{{ company.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if company.updatedAt %}{{ company.updatedAt|date('d/m/Y à H:i') }}{% endif %}</td>
             </tr>
         </tbody>
     </table>
