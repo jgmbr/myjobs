@@ -43,7 +43,6 @@ class AdminUserController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
-            //$user->setEnabled(true);
             $em->persist($user);
             $em->flush($user);
 
