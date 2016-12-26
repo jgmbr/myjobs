@@ -11,6 +11,8 @@
 {% block body %}
     <h1> Administration › Membres </h1>
 
+    {{ dump(app.user.id) }}
+
     <p> <a href="{{ path('user_new') }}"> Ajouter un membre </a> </p>
 
     {% if administrators is defined and administrators|length > 0 %}
@@ -35,12 +37,14 @@
                     <td> {{ admin.createdAt|date('d/m/Y à H:i') }} </td>
                     <td> {{ admin.updatedAt|date('d/m/Y à H:i') }} </td>
                     <td>
+                        {% if app.user.id != admin.id %}
                         <a href="{{ path('user_edit', { 'id': admin.id }) }}">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </a>
                         <a href="{{ path('admin_home_page', {'_switch_user': admin.username }) }}">
                             <i class="fa fa-sign-in" aria-hidden="true"></i>
                         </a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}
