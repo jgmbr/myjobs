@@ -6,6 +6,7 @@ use MyJobs\CoreBundle\Repository\CompanyRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,6 +23,7 @@ class ApplicationType extends AbstractType
         $user = $options['current_user'];
 
         $builder
+            ->add('dateAt', DateTimeType::class, array('label' => 'Date'))
             ->add('name', TextType::class, array('label' => 'Nom'))
             ->add('url', TextType::class, array('label' => 'Url de l\'annonce', 'required' => false))
             ->add('contract', EntityType::class, array(

@@ -18,6 +18,10 @@
                 <td>{{ application.id }}</td>
             </tr>
             <tr>
+                <th>Date</th>
+                <td>{{ application.dateAt|date('d/m/Y') }}</td>
+            </tr>
+            <tr>
                 <th>Nom</th>
                 <td>{{ application.name }}</td>
             </tr>
@@ -27,15 +31,19 @@
             </tr>
             <tr>
                 <th>Contrat</th>
-                <td>{{ application.contract.name }}</td>
+                <td>
+                    <span style="background:{{ application.contract.color }}; color:#fff; padding:3px;">
+                        {{ application.contract.name }}
+                    </span>
+                </td>
             </tr>
             <tr>
                 <th>Statut</th>
-                <td>{{ application.status.name }}</td>
+                <td><i class="fa {{ application.status.icon }}" aria-hidden="true"></i> {{ application.status.name }}</td>
             </tr>
             <tr>
                 <th>Entreprise</th>
-                <td>{{ application.company.name }}</td>
+                <td><a href="{{ path('company_show', { 'id': application.company.id }) }}"> {{ application.company.name }} </a></td>
             </tr>
             <tr>
                 <th>Commentaire</th>

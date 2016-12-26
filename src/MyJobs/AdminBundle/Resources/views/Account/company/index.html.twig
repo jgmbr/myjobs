@@ -33,9 +33,13 @@
                 <tr>
                     <td><a href="{{ path('company_show', { 'id': company.id }) }}">{{ company.id }}</a></td>
                     <td>{{ company.name }}</td>
-                    <td>{{ company.email }}</td>
+                    <td>
+                        <a href="mailto:{{ company.email }}"> {{ company.email }} </a>
+                    </td>
                     <td>{{ company.phone }}</td>
-                    <td>{{ company.website }}</td>
+                    <td>
+                        <a href="http://{{ company.website }}" target="_blank"> {{ company.website }} </a>
+                    </td>
                     <td>{{ company.contact }}</td>
                     <td>{% if company.createdAt %}{{ company.createdAt|date('d/m/Y à H:i') }}{% endif %}</td>
                     <td>{% if company.updatedAt %}{{ company.updatedAt|date('d/m/Y à H:i') }}{% endif %}</td>

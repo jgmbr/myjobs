@@ -43,7 +43,7 @@
             </tr>
             <tr>
                 <th>Email</th>
-                <td>{{ company.email }}</td>
+                <td><a href="mailto:{{ company.email }}"> {{ company.email }} </a></td>
             </tr>
             <tr>
                 <th>Téléphone</th>
@@ -51,7 +51,7 @@
             </tr>
             <tr>
                 <th>Site web</th>
-                <td>{{ company.website }}</td>
+                <td><a href="http://{{ company.website }}" target="_blank"> {{ company.website }} </a></td>
             </tr>
             <tr>
                 <th>Contact</th>

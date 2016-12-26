@@ -24,6 +24,13 @@ class Application
     private $id;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_at", type="date")
+     */
+    private $dateAt;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
@@ -134,6 +141,30 @@ class Application
         $this->name = $name;
 
         return $this;
+    }
+
+    /**
+     * Set dateAt
+     *
+     * @param \DateTime $dateAt
+     *
+     * @return Relaunch
+     */
+    public function setDateAt($dateAt)
+    {
+        $this->dateAt = $dateAt;
+
+        return $this;
+    }
+
+    /**
+     * Get dateAt
+     *
+     * @return \DateTime
+     */
+    public function getDateAt()
+    {
+        return $this->dateAt;
     }
 
     /**

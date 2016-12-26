@@ -18,10 +18,11 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Date</th>
                 <th>Nom</th>
                 <th>Contrat</th>
-                <th>Statut</th>
                 <th>Entreprise</th>
+                <th>Statut</th>
                 <th>Date de création</th>
                 <th>Date de modification</th>
                 <th>Actions</th>
@@ -31,10 +32,17 @@
         {% for application in applications %}
             <tr>
                 <td><a href="{{ path('application_show', { 'id': application.id }) }}">{{ application.id }}</a></td>
+                <td> {{ application.dateAt|date('d/m/Y') }} </td>
                 <td> {{ application.name }} </td>
-                <td> {{ application.contract.name }} </td>
-                <td> {{ application.status.name }} </td>
-                <td> {{ application.company.name }} </td>
+                <td>
+                    <span style="background:{{ application.contract.color }}; color:#fff; padding:3px;">
+                        {{ application.contract.name }}
+                    </span>
+                </td>
+                <td>
+                    <a href="{{ path('company_show', { 'id': application.company.id }) }}"> {{ application.company.name }} </a>
+                </td>
+                <td> <i class="fa {{ application.status.icon }}" aria-hidden="true"></i> {{ application.status.name }} </td>
                 <td>{% if application.createdAt %}{{ application.createdAt|date('d/m/Y à H:i') }}{% endif %}</td>
                 <td>{% if application.updatedAt %}{{ application.updatedAt|date('d/m/Y à H:i') }}{% endif %}</td>
                 <td>
