@@ -42,6 +42,14 @@
                 <td>{{ application.comment }}</td>
             </tr>
             <tr>
+                <th>Motif entreprise</th>
+                <td>{{ application.businessReason }}</td>
+            </tr>
+            <tr>
+                <th>Motif candidat</th>
+                <td>{{ application.peopleReason }}</td>
+            </tr>
+            <tr>
                 <th>Date de création</th>
                 <td>{% if application.createdAt %}{{ application.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
