@@ -34,7 +34,15 @@
                     <td> {% if admin.superAdmin %}Oui{% else %}Non{% endif %} </td>
                     <td> {{ admin.createdAt|date('d/m/Y à H:i') }} </td>
                     <td> {{ admin.updatedAt|date('d/m/Y à H:i') }} </td>
-                    <td> <a href="{{ path('admin_home_page', {'_switch_user': admin.username }) }}">Se connecter en tant que </a> </td>
+                    <td>
+                        <a href="{{ path('user_edit', { 'id': admin.id }) }}">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
+                        &nbsp;&nbsp;
+                        <a href="{{ path('admin_home_page', {'_switch_user': admin.username }) }}">
+                            <i class="fa fa-sign-in" aria-hidden="true"></i>
+                        </a>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>
@@ -67,9 +75,10 @@
                         <a href="{{ path('user_edit', { 'id': user.id }) }}">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </a>
-                        &nbsp;
-                        <a href="{{ path('account_home_page', {'_switch_user': user.username }) }}">Se connecter en tant que </a>
-
+                        &nbsp;&nbsp;
+                        <a href="{{ path('account_home_page', {'_switch_user': user.username }) }}">
+                            <i class="fa fa-sign-in" aria-hidden="true"></i>
+                        </a>
                     </td>
                 </tr>
             {% endfor %}

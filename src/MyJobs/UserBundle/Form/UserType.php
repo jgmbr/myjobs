@@ -38,13 +38,25 @@ class UserType extends AbstractType
                 'second_options' => array('label' => 'form.password_confirmation'),
                 'invalid_message' => 'fos_user.password.mismatch',
             ))
+            ->add('enabled', ChoiceType::class, [
+                    'label' => 'form.enabled',
+                    'translation_domain' => 'FOSUserBundle',
+                    'choices' => ['Oui' => true, 'Non' => false],
+                    'expanded' => false,
+                    'multiple' => false,
+                ]
+            )
             ->add('role', ChoiceType::class, [
+                    'label' => 'form.role',
+                    'translation_domain' => 'FOSUserBundle',
                     'choices' => ['Utilisateur' => 'ROLE_USER', 'Administrateur' => 'ROLE_ADMIN'],
                     'expanded' => false,
                     'multiple' => false,
                 ]
             )
             ->add('superAdmin', ChoiceType::class, [
+                    'label' => 'form.superadmin',
+                    'translation_domain' => 'FOSUserBundle',
                     'choices' => ['Oui' => true, 'Non' => false],
                     'expanded' => false,
                     'multiple' => false,

@@ -85,3 +85,6 @@ form:
     new_password_confirmation: 'Répéter le nouveau mot de passe'
     firstname: 'Prénom'
     lastname: 'Nom'
+    enabled: 'Actif'
+    role: 'Rôle'
+    superadmin: 'Super administrateur'
