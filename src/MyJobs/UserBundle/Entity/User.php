@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Table(name="fos_user")
  * @ORM\Entity(repositoryClass="MyJobs\UserBundle\Repository\UserRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class User extends BaseUser
 {
@@ -73,7 +74,7 @@ class User extends BaseUser
         parent::__construct();
         $this->createdAt    = new \Datetime();
         $this->applications = new ArrayCollection();
-        $this->companies = new ArrayCollection();
+        $this->companies    = new ArrayCollection();
     }
 
     /**
