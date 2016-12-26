@@ -40,8 +40,12 @@
                     <td>{% if contract.createdAt %}{{ contract.createdAt|date('d/m/Y à H:i') }}{% endif %}</td>
                     <td>{% if contract.updatedAt %}{{ contract.updatedAt|date('d/m/Y à H:i') }}{% endif %}</td>
                     <td>
-                        <a href="{{ path('contract_show', { 'id': contract.id }) }}">Voir</a>
-                        <a href="{{ path('contract_edit', { 'id': contract.id }) }}">Modifier</a>
+                        <a href="{{ path('contract_show', { 'id': contract.id }) }}">
+                            <i class="fa fa-eye" aria-hidden="true"></i>
+                        </a>
+                        <a href="{{ path('contract_edit', { 'id': contract.id }) }}">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
                     </td>
                 </tr>
             {% endfor %}

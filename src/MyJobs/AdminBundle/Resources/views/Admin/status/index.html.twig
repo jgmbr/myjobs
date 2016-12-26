@@ -44,8 +44,12 @@
                     <td>{% if status.createdAt %}{{ status.createdAt|date('d/m/Y à H:i') }}{% endif %}</td>
                     <td>{% if status.updatedAt %}{{ status.updatedAt|date('d/m/Y à H:i') }}{% endif %}</td>
                     <td>
-                        <a href="{{ path('status_show', { 'id': status.id }) }}">Voir</a>
-                        <a href="{{ path('status_edit', { 'id': status.id }) }}">Modifier</a>
+                        <a href="{{ path('status_show', { 'id': status.id }) }}">
+                            <i class="fa fa-eye" aria-hidden="true"></i>
+                        </a>
+                        <a href="{{ path('status_edit', { 'id': status.id }) }}">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
                     </td>
                 </tr>
             {% endfor %}

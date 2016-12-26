@@ -42,8 +42,12 @@
                 <td>{% if application.createdAt %}{{ application.createdAt|date('d/m/Y à H:i') }}{% endif %}</td>
                 <td>{% if application.updatedAt %}{{ application.updatedAt|date('d/m/Y à H:i') }}{% endif %}</td>
                 <td>
-                    <a href="{{ path('application_show', { 'id': application.id }) }}">Voir</a>
-                    <a href="{{ path('application_edit', { 'id': application.id }) }}">Modifier</a>
+                    <a href="{{ path('application_show', { 'id': application.id }) }}">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                    </a>
+                    <a href="{{ path('application_edit', { 'id': application.id }) }}">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </a>
                 </td>
             </tr>
         {% endfor %}
