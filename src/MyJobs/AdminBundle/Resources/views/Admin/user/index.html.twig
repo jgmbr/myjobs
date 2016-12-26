@@ -11,9 +11,7 @@
 {% block body %}
     <h1> Administration › Membres </h1>
 
-    {{ dump(app.user.id) }}
-
-    <p> <a href="{{ path('user_new') }}"> Ajouter un membre </a> </p>
+    <p> <a href="{{ path('user_new') }}"> <i class="fa fa-plus" aria-hidden="true"></i> Ajouter un membre </a> </p>
 
     {% if administrators is defined and administrators|length > 0 %}
         <h2> ADMINISTRATEURS </h2>

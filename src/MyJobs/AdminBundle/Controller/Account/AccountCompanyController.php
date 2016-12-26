@@ -26,8 +26,15 @@ class AccountCompanyController extends Controller
 
         $companies = $em->getRepository('MyJobsCoreBundle:Company')->findMyCompanies($this->getUser());
 
+        $deleteForms = array();
+
+        foreach ($companies as $company) {
+            $deleteForms[$company->getId()] = $this->createDeleteForm($company)->createView();
+        }
+
         return $this->render('MyJobsAdminBundle:Account:company/index.html.twig', array(
             'companies' => $companies,
+            'deleteForms' => $deleteForms
         ));
     }
 

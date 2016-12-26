@@ -11,11 +11,7 @@
 {% block body %}
     <h1>Mon Compte › Mes candidatures › Liste</h1>
 
-    <ul>
-        <li>
-            <a href="{{ path('application_new') }}">Créer une nouvelle candidature</a>
-        </li>
-    </ul>
+    <p> <a href="{{ path('application_new') }}"> <i class="fa fa-plus" aria-hidden="true"></i> Ajouter une nouvelle candidature </a> </p>
 
     {% if applications is defined and applications|length > 0 %}
     <table>
@@ -48,6 +44,13 @@
                     <a href="{{ path('application_edit', { 'id': application.id }) }}">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                     </a>
+                    <form action="{{ path('application_delete', { 'id': application.id }) }}" method="post">
+                        <input type="hidden" name="_method" value="DELETE" />
+                        {{ form_widget(deleteForms[application.id]) }}
+                        <button type="submit" class="btn btn-small">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </button>
+                    </form>
                 </td>
             </tr>
         {% endfor %}

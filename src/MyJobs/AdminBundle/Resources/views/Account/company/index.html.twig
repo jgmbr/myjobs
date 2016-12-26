@@ -11,11 +11,7 @@
 {% block body %}
     <h1>Mon Compte › Mes entreprises › Liste</h1>
 
-    <ul>
-        <li>
-            <a href="{{ path('company_new') }}">Créer une nouvelle entreprise</a>
-        </li>
-    </ul>
+    <p> <a href="{{ path('company_new') }}"> <i class="fa fa-plus" aria-hidden="true"></i> Ajouter une nouvelle entreprise </a> </p>
 
     {% if companies is defined and companies|length > 0 %}
         <table>
@@ -50,6 +46,13 @@
                         <a href="{{ path('company_edit', { 'id': company.id }) }}">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </a>
+                        <form action="{{ path('company_delete', { 'id': company.id }) }}" method="post">
+                            <input type="hidden" name="_method" value="DELETE" />
+                            {{ form_widget(deleteForms[company.id]) }}
+                            <button type="submit" class="btn btn-small">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                        </form>
                     </td>
                 </tr>
             {% endfor %}

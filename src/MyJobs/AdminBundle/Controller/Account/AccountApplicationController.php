@@ -26,8 +26,15 @@ class AccountApplicationController extends Controller
 
         $applications = $em->getRepository('MyJobsCoreBundle:Application')->findMyApplications($this->getUser());
 
+        $deleteForms = array();
+
+        foreach ($applications as $application) {
+            $deleteForms[$application->getId()] = $this->createDeleteForm($application)->createView();
+        }
+
         return $this->render('MyJobsAdminBundle:Account:application/index.html.twig', array(
             'applications' => $applications,
+            'deleteForms' => $deleteForms
         ));
     }
 

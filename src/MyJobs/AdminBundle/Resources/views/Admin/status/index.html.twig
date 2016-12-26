@@ -11,11 +11,7 @@
 {% block body %}
     <h1>Administration › Status › Liste</h1>
 
-    <ul>
-        <li>
-            <a href="{{ path('status_new') }}">Créer un nouveau statut de candidature</a>
-        </li>
-    </ul>
+    <p> <a href="{{ path('status_new') }}"> <i class="fa fa-plus" aria-hidden="true"></i> Ajouter un nouveau statut </a> </p>
 
     {% if statuses is defined and statuses|length > 0 %}
         <table>
