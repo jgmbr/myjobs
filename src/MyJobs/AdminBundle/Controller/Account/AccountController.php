@@ -20,8 +20,28 @@ class AccountController extends Controller
     {
         $user = $this->getUser();
 
+        $em = $this->getDoctrine()->getManager();
+
+        $myLastApplications = $em->getRepository('MyJobsCoreBundle:Application')->findMyLastApplications($this->getUser());
+
+        $myLastCompanies = $em->getRepository('MyJobsCoreBundle:Company')->findMyLastCompanies($this->getUser());
+
+        $myLastAppointments = null;
+
+        $nbApplications = $em->getRepository('MyJobsCoreBundle:Application')->countMyApplications($this->getUser());
+
+        $nbCompanies = $em->getRepository('MyJobsCoreBundle:Company')->countMyCompanies($this->getUser());
+
+        $nbAppointments = 0;
+
         return $this->render('MyJobsAdminBundle:Account:index.html.twig',array(
-            'user' => $user
+            'user'                  => $user,
+            'myLastApplications'    => $myLastApplications,
+            'myLastCompanies'       => $myLastCompanies,
+            'myLastAppointments'    => $myLastAppointments,
+            'nbApplications'        => $nbApplications,
+            'nbCompanies'           => $nbCompanies,
+            'nbAppointments'        => $nbAppointments
         ));
     }
 }

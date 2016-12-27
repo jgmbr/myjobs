@@ -16,4 +16,40 @@
         <li> Créer vos entretiens </li>
         <li> Consulter vos statistiques </li>
     </ol>
+    <fieldset>
+        <legend>Dernières candidatures</legend>
+        {% if myLastApplications is defined and myLastApplications|length > 0 %}
+            {% for application in myLastApplications %}
+                <p> {{ application.dateAt|date('d/m/Y') }} - {{ application.name }} - <a href="{{ path('application_show', { 'id': application.id }) }}"> <i class="fa fa-eye" aria-hidden="true"></i></a> </p>
+            {% endfor %}
+        {% else %}
+            <p> Pas de candidatures. </p>
+        {% endif %}
+    </fieldset>
+    <fieldset>
+        <legend>Dernières entreprises</legend>
+        {% if myLastCompanies is defined and myLastCompanies|length > 0 %}
+            {% for company in myLastCompanies %}
+               <p> {{ company.name }} - <a href="{{ path('company_show', { 'id': company.id }) }}"> <i class="fa fa-eye" aria-hidden="true"></i></a> </p>
+            {% endfor %}
+        {% else %}
+            <p> Pas d'entreprises. </p>
+        {% endif %}
+    </fieldset>
+    <fieldset>
+        <legend>Derniers entretiens</legend>
+        {% if myLastAppointments is defined and myLastAppointments|length > 0 %}
+            {% for appointment in myLastAppointments %}
+                &nbsp;
+            {% endfor %}
+        {% else %}
+            <p> Pas d'entretiens. </p>
+        {% endif %}
+    </fieldset>
+    <fieldset>
+        <legend>Dernières statistiques</legend>
+        <p> {{ nbApplications }} candidature(s) </p>
+        <p> {{ nbCompanies }} entreprise(s) </p>
+        <p> {{ nbAppointments }} entretien(s) </p>
+    </fieldset>
 {% endblock %}

@@ -33,4 +33,30 @@ class CompanyRepository extends \Doctrine\ORM\EntityRepository
             ->getResult()
         ;
     }
+
+    /**
+     * @return Company[]
+     */
+    public function findMyLastCompanies($user)
+    {
+        return $this
+            ->createQueryBuilder('c')
+            ->where('c.user = :user')
+            ->setParameter('user', $user)
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function countMyCompanies($user)
+    {
+        return $this
+            ->createQueryBuilder('c')
+            ->select('COUNT(c)')
+            ->where('c.user = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace MyJobs\CoreBundle\Repository;
+use MyJobs\CoreBundle\Entity\Appointment;
 
 /**
  * AppointmentRepository

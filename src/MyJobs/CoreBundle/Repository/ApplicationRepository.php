@@ -24,4 +24,30 @@ class ApplicationRepository extends \Doctrine\ORM\EntityRepository
             ->getResult()
         ;
     }
+
+    /**
+     * @return Application[]
+     */
+    public function findMyLastApplications($user)
+    {
+        return $this
+            ->createQueryBuilder('a')
+            ->where('a.user = :user')
+            ->setParameter('user', $user)
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function countMyApplications($user)
+    {
+        return $this
+            ->createQueryBuilder('a')
+            ->select('COUNT(a)')
+            ->where('a.user = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }
