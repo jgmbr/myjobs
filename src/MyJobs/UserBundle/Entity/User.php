@@ -198,7 +198,7 @@ class User extends BaseUser
      *
      * @param \DateTime $createdAt
      *
-     * @return Application
+     * @return User
      */
     public function setCreatedAt($createdAt)
     {
@@ -222,7 +222,7 @@ class User extends BaseUser
      *
      * @param \DateTime $updatedAt
      *
-     * @return Application
+     * @return User
      */
     public function setUpdatedAt($updatedAt)
     {
