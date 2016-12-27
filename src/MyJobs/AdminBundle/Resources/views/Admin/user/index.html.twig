@@ -79,13 +79,9 @@
                         <a href="{{ path('account_home_page', {'_switch_user': user.username }) }}">
                             <i class="fa fa-sign-in" aria-hidden="true"></i>
                         </a>
-                        <form action="{{ path('user_delete', { 'id': user.id }) }}" method="post">
-                            <input type="hidden" name="_method" value="DELETE" />
-                            {{ form_widget(deleteForms[user.id]) }}
-                            <button type="submit" class="btn btn-small">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </button>
-                        </form>
+                        <a href="{{ path('user_delete', { 'id': user.id }) }}">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
                     </td>
                 </tr>
             {% endfor %}

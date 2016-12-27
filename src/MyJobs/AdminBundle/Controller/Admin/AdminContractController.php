@@ -109,8 +109,7 @@ class AdminContractController extends Controller
     /**
      * Deletes a contract entity.
      *
-     * @Route("/{id}", name="contract_delete")
-     * @Method("DELETE")
+     * @Route("/{id}/delete", name="contract_delete")
      */
     public function deleteAction(Request $request, Contract $contract)
     {
@@ -121,9 +120,14 @@ class AdminContractController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($contract);
             $em->flush($contract);
+
+            return $this->redirectToRoute('contract_index');
         }
 
-        return $this->redirectToRoute('contract_index');
+        return $this->render('MyJobsAdminBundle:Admin:contract/delete.html.twig', array(
+            'contract' => $contract,
+            'delete_form'  => $form->createView(),
+        ));
     }
 
     /**

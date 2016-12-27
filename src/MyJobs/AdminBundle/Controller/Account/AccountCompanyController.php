@@ -112,8 +112,7 @@ class AccountCompanyController extends Controller
     /**
      * Deletes a company entity.
      *
-     * @Route("/{id}", name="company_delete")
-     * @Method("DELETE")
+     * @Route("/{id}/delete", name="company_delete")
      */
     public function deleteAction(Request $request, Company $company)
     {
@@ -124,9 +123,14 @@ class AccountCompanyController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($company);
             $em->flush($company);
+
+            return $this->redirectToRoute('company_index');
         }
 
-        return $this->redirectToRoute('company_index');
+        return $this->render('MyJobsAdminBundle:Account:company/delete.html.twig', array(
+            'company' => $company,
+            'delete_form'  => $form->createView(),
+        ));
     }
 
     /**

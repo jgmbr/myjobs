@@ -109,8 +109,7 @@ class AdminStatusController extends Controller
     /**
      * Deletes a status entity.
      *
-     * @Route("/{id}", name="status_delete")
-     * @Method("DELETE")
+     * @Route("/{id}/delete", name="status_delete")
      */
     public function deleteAction(Request $request, Status $status)
     {
@@ -121,9 +120,14 @@ class AdminStatusController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($status);
             $em->flush($status);
+
+            return $this->redirectToRoute('status_index');
         }
 
-        return $this->redirectToRoute('status_index');
+        return $this->render('MyJobsAdminBundle:Admin:status/delete.html.twig', array(
+            'status' => $status,
+            'delete_form'  => $form->createView(),
+        ));
     }
 
     /**

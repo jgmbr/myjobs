@@ -1,0 +1,26 @@
+{% extends "MyJobsAdminBundle::layout.html.twig" %}
+
+{% block header %}
+    MyJobs - Administration - Status
+{% endblock %}
+
+{% block menu %}
+    {% include 'MyJobsAdminBundle:Admin:menu.html.twig' %}
+{% endblock %}
+
+{% block body %}
+    <h1>Administration › Status › Supprimer</h1>
+
+    <p>
+        Etes-vous certain de vouloir supprimer le status "{{ status.name }}" ?
+    </p>
+
+    <div class="well">
+    {{ form_start(delete_form) }}
+        <a href="{{ path('status_index') }}">Retour à la liste des status</a>
+        <input type="submit" value="Oui, je confirme la suppression">
+        {{ form_rest(delete_form) }}
+    {{ form_end(delete_form) }}
+    </div>
+
+{% endblock %}

@@ -114,8 +114,7 @@ class AccountApplicationController extends Controller
     /**
      * Deletes a application entity.
      *
-     * @Route("/{id}", name="application_delete")
-     * @Method("DELETE")
+     * @Route("/{id}/delete", name="application_delete")
      */
     public function deleteAction(Request $request, Application $application)
     {
@@ -126,9 +125,14 @@ class AccountApplicationController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($application);
             $em->flush($application);
+
+            return $this->redirectToRoute('application_index');
         }
 
-        return $this->redirectToRoute('application_index');
+        return $this->render('MyJobsAdminBundle:Account:application/delete.html.twig', array(
+            'application' => $application,
+            'delete_form'  => $form->createView(),
+        ));
     }
 
     /**

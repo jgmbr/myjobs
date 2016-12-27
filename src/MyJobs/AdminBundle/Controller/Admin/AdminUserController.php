@@ -98,8 +98,7 @@ class AdminUserController extends Controller
     /**
      * Deletes a user entity.
      *
-     * @Route("/{id}", name="user_delete")
-     * @Method("DELETE")
+     * @Route("/{id}/delete", name="user_delete")
      */
     public function deleteAction(Request $request, User $user)
     {
@@ -110,9 +109,14 @@ class AdminUserController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($user);
             $em->flush($user);
+
+            return $this->redirectToRoute('user_index');
         }
 
-        return $this->redirectToRoute('user_index');
+        return $this->render('MyJobsAdminBundle:Admin:user/delete.html.twig', array(
+            'user' => $user,
+            'delete_form'  => $form->createView(),
+        ));
     }
 
     /**

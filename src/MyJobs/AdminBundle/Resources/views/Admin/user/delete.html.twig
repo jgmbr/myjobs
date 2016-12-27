@@ -1,0 +1,26 @@
+{% extends "MyJobsAdminBundle::layout.html.twig" %}
+
+{% block header %}
+    MyJobs - Administration - Membres
+{% endblock %}
+
+{% block menu %}
+    {% include 'MyJobsAdminBundle:Admin:menu.html.twig' %}
+{% endblock %}
+
+{% block body %}
+    <h1>Administration › Membres › Supprimer</h1>
+
+    <p>
+        Etes-vous certain de vouloir supprimer le membre "{{ user.email }}" ?
+    </p>
+
+    <div class="well">
+    {{ form_start(delete_form) }}
+        <a href="{{ path('user_index') }}">Retour à la liste des membres</a>
+        <input type="submit" value="Oui, je confirme la suppression">
+        {{ form_rest(delete_form) }}
+    {{ form_end(delete_form) }}
+    </div>
+
+{% endblock %}

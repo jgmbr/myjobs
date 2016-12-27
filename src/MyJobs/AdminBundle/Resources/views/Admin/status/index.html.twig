@@ -46,13 +46,9 @@
                         <a href="{{ path('status_edit', { 'id': status.id }) }}">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </a>
-                        <form action="{{ path('status_delete', { 'id': status.id }) }}" method="post">
-                            <input type="hidden" name="_method" value="DELETE" />
-                            {{ form_widget(deleteForms[status.id]) }}
-                            <button type="submit" class="btn btn-small">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </button>
-                        </form>
+                        <a href="{{ path('status_delete', { 'id': status.id }) }}">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
                     </td>
                 </tr>
             {% endfor %}

@@ -42,13 +42,9 @@
                         <a href="{{ path('contract_edit', { 'id': contract.id }) }}">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </a>
-                        <form action="{{ path('contract_delete', { 'id': contract.id }) }}" method="post">
-                            <input type="hidden" name="_method" value="DELETE" />
-                            {{ form_widget(deleteForms[contract.id]) }}
-                            <button type="submit" class="btn btn-small">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </button>
-                        </form>
+                        <a href="{{ path('contract_delete', { 'id': contract.id }) }}">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
                     </td>
                 </tr>
             {% endfor %}
