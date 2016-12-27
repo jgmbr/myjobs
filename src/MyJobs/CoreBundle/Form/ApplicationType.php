@@ -5,11 +5,14 @@ namespace MyJobs\CoreBundle\Form;
 use MyJobs\CoreBundle\Repository\CompanyRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\SecurityContext;
 
@@ -23,26 +26,29 @@ class ApplicationType extends AbstractType
         $user = $options['current_user'];
 
         $builder
-            ->add('dateAt', DateTimeType::class, array('label' => 'Date'))
+            ->add('dateAt', DateType::class, array(
+                'label'     => 'Date',
+                'widget'    => 'single_text',
+            ))
             ->add('name', TextType::class, array('label' => 'Nom'))
             ->add('url', TextType::class, array('label' => 'Url de l\'annonce', 'required' => false))
             ->add('contract', EntityType::class, array(
-                'label' => 'Contrat',
-                'class'        => 'MyJobsCoreBundle:Contract',
-                'choice_label' => 'name',
-                'multiple'     => false,
+                'label'         => 'Contrat',
+                'class'         => 'MyJobsCoreBundle:Contract',
+                'choice_label'  => 'name',
+                'multiple'      => false,
             ))
             ->add('status', EntityType::class, array(
-                'label' => 'Statut',
-                'class'        => 'MyJobsCoreBundle:Status',
-                'choice_label' => 'name',
-                'multiple'     => false,
+                'label'         => 'Statut',
+                'class'         => 'MyJobsCoreBundle:Status',
+                'choice_label'  => 'name',
+                'multiple'      => false,
             ))
             ->add('company', EntityType::class, array(
-                'label' => 'Entreprise',
-                'class'        => 'MyJobsCoreBundle:Company',
-                'choice_label' => 'name',
-                'multiple'     => false,
+                'label'         => 'Entreprise',
+                'class'         => 'MyJobsCoreBundle:Company',
+                'choice_label'  => 'name',
+                'multiple'      => false,
                 'query_builder' => function(CompanyRepository $repository) use($user) {
                     return $repository->myCompaniesFromQB($user);
                 }

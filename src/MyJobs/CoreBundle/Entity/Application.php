@@ -114,6 +114,7 @@ class Application
      */
     public function __construct()
     {
+        $this->dateAt       = new \Datetime();
         $this->createdAt    = new \Datetime();
         $this->appointments = new ArrayCollection();
         $this->relaunches   = new ArrayCollection();
