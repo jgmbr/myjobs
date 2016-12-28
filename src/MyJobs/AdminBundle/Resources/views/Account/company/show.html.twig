@@ -9,9 +9,14 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Mon Compte › Mes entreprises › Fiche</h1>
 
-    <table>
+    <ol class="breadcrumb">
+        <li> <a href="{{ path('account_home_page') }}"> Mon Compte </a> </li>
+        <li> <a href="{{ path('company_index') }}"> Mes entreprises </a> </li>
+        <li class="active"> Fiche </li>
+    </ol>
+
+    <table class="table table-responsive">
         <tbody>
             <tr>
                 <th>Id</th>

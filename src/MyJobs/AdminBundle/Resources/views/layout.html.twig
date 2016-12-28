@@ -5,29 +5,49 @@
         <meta name="robots" content="noindex">
         <meta name="viewport" content="width=device-width">
         <title>{% block title %}{% endblock %}</title>
-        <!--<link href='https://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>-->
+        <link href='https://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="{{ asset('assets/vendor/font-awesome/css/font-awesome.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+        <style>
+            .placeholders {
+                text-align: center;
+            }
+            .placeholders .placeholder .circle {
+                width: 130px;
+                height: 130px;
+                display: inline-block;
+                border-radius: 50%;
+                background: #2c3e50;
+                color: #fff;
+                font-size: 2.5em;
+                padding: 10px;
+                box-sizing: border-box;
+                margin: 0 0 20px 0;
+            }
+            .placeholders .placeholder .circle h4 {
+                margin: 0;
+                font-size: 16px;
+            }
+        </style>
         {% block stylesheets %}
         {% endblock %}
     </head>
     <body>
-        <div id="connect" style="text-align:right;">
+        <div id="connect" style="text-align:right; padding:15px;">
         {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
             <a href="{{ path('admin_home_page', {'_switch_user': '_exit'}) }}">
                 <i class="fa fa-sign-out" aria-hidden="true"></i> Quitter la connexion imitation
             </a>
         {% endif %}
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-            <p> Bonjour {{ app.user.username }} !
+             Bonjour {{ app.user.username }} !
             -
             <a href="{{ path('fos_user_security_logout') }}">
                 <i class="fa fa-sign-out" aria-hidden="true"></i> Déconnexion
             </a>
-            </p>
         {% endif %}
         </div>
-        <div id="header" style="padding:20px; background:#FF6347; color:#FFFFFF; text-align:center; text-transform:uppercase;">
+        <div id="header" style="font-size:2.5em; font-family:Cookie; padding:20px; margin:0 0 20px 0; background:#FF6347; color:#FFFFFF; text-align:center;">
             {% block header %}{% endblock %}
         </div>
         <div id="content">

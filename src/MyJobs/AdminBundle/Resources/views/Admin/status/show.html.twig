@@ -9,9 +9,14 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Administration › Status › Fiche</h1>
 
-    <table>
+    <ol class="breadcrumb">
+        <li> <a href="{{ path('admin_home_page') }}"> Administration </a> </li>
+        <li> <a href="{{ path('status_index') }}"> Status </a> </li>
+        <li class="active"> Fiche </li>
+    </ol>
+
+    <table class="table table-responsive">
         <tbody>
             <tr>
                 <th>Identifiant</th>

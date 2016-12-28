@@ -9,7 +9,12 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Administration › Contrats › Ajouter</h1>
+
+    <ol class="breadcrumb">
+        <li> <a href="{{ path('admin_home_page') }}"> Administration </a> </li>
+        <li> <a href="{{ path('contract_index') }}"> Contrats </a> </li>
+        <li class="active"> Ajouter </li>
+    </ol>
 
     <div class="well">
     {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}

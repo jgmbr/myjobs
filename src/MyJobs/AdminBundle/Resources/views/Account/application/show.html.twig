@@ -9,9 +9,13 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Mon Compte › Mes candidatures › Fiche</h1>
+    <ol class="breadcrumb">
+        <li> <a href="{{ path('account_home_page') }}"> Mon Compte </a> </li>
+        <li> <a href="{{ path('application_index') }}"> Mes candidatures </a> </li>
+        <li class="active"> Fiche </li>
+    </ol>
 
-    <table>
+    <table class="table table-responsive">
         <tbody>
             <tr>
                 <th>Id</th>

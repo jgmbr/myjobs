@@ -9,7 +9,12 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Mon Compte › Mes entreprises › Liste</h1>
+
+    <ol class="breadcrumb">
+        <li> <a href="{{ path('account_home_page') }}"> Mon Compte </a> </li>
+        <li> <a href="{{ path('company_index') }}"> Mes entreprises </a> </li>
+        <li class="active"> Liste </li>
+    </ol>
 
     <p> <a href="{{ path('company_new') }}" class="btn btn-primary"> <i class="fa fa-plus" aria-hidden="true"></i> Ajouter une nouvelle entreprise </a> </p>
 

@@ -9,7 +9,12 @@
 {% endblock %}
 
 {% block body %}
-    <h1> Administration › Membres </h1>
+
+    <ol class="breadcrumb">
+        <li> <a href="{{ path('admin_home_page') }}"> Administration </a> </li>
+        <li> <a href="{{ path('user_index') }}"> Membres </a> </li>
+        <li class="active">Liste </li>
+    </ol>
 
     <p> <a href="{{ path('user_new') }}" class="btn btn-primary"> <i class="fa fa-plus" aria-hidden="true"></i> Ajouter un membre </a> </p>
 

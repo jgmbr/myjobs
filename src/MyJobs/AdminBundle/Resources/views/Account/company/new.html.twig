@@ -9,7 +9,12 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Mon Compte › Mes entreprises › Ajout</h1>
+
+    <ol class="breadcrumb">
+        <li> <a href="{{ path('account_home_page') }}"> Mon Compte </a> </li>
+        <li> <a href="{{ path('company_index') }}"> Mes entreprises </a> </li>
+        <li class="active"> Ajouter </li>
+    </ol>
 
     <div class="well">
     {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}

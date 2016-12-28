@@ -9,7 +9,11 @@
 {% endblock %}
 
 {% block body %}
-    <h1> Administration › Tableau de bord </h1>
+
+    <ol class="breadcrumb">
+        <li> <a href="{{ path('admin_home_page') }}"> Administration </a> </li>
+        <li class="active"> Tableau de bord </li>
+    </ol>
 
     <p> Nb Utilisateurs : {{ nbUsers }} </p>
 

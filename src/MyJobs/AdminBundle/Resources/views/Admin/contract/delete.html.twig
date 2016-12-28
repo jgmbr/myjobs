@@ -9,7 +9,12 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Administration › Contrats › Supprimer</h1>
+
+    <ol class="breadcrumb">
+        <li> <a href="{{ path('admin_home_page') }}"> Administration </a> </li>
+        <li> <a href="{{ path('contract_index') }}"> Contrats </a> </li>
+        <li class="active"> Supprimer </li>
+    </ol>
 
     <p>
         Etes-vous certain de vouloir supprimer le contrat "{{ contract.name }}" ?

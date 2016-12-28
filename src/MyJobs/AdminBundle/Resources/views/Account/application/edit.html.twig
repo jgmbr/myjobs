@@ -9,7 +9,11 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Mon Compte › Mes candidatures › Edition</h1>
+    <ol class="breadcrumb">
+        <li> <a href="{{ path('account_home_page') }}"> Mon Compte </a> </li>
+        <li> <a href="{{ path('application_index') }}"> Mes candidatures </a> </li>
+        <li class="active"> Editer </li>
+    </ol>
 
     <div class="well">
     {{ form_start(edit_form, {'attr': {'class': 'form-horizontal'}}) }}
