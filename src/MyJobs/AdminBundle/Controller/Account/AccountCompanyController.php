@@ -99,7 +99,7 @@ class AccountCompanyController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('company_edit', array('id' => $company->getId()));
+            return $this->redirectToRoute('company_show', array('id' => $company->getId()));
         }
 
         return $this->render('MyJobsAdminBundle:Account:company/edit.html.twig', array(

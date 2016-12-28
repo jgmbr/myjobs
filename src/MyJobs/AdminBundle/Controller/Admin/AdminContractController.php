@@ -96,7 +96,7 @@ class AdminContractController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('contract_index', array('id' => $contract->getId()));
+            return $this->redirectToRoute('contract_show', array('id' => $contract->getId()));
         }
 
         return $this->render('MyJobsAdminBundle:Admin:contract/edit.html.twig', array(

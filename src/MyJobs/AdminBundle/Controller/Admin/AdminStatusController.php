@@ -96,7 +96,7 @@ class AdminStatusController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('status_index', array('id' => $status->getId()));
+            return $this->redirectToRoute('status_show', array('id' => $status->getId()));
         }
 
         return $this->render('MyJobsAdminBundle:Admin:status/edit.html.twig', array(
