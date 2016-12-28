@@ -18,20 +18,17 @@ class CompanyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, array('label' => 'Nom'))
-            ->add('address1', TextType::class, array('label' => 'Adresse'))
+            ->add('name', TextType::class, array('label' => 'Nom *'))
+            ->add('address1', TextType::class, array('label' => 'Adresse', 'required' => false))
             ->add('address2', TextType::class, array('label' => 'Complément d\'adresse', 'required' => false))
-            ->add('postcode', TextType::class, array('label' => 'Code postal'))
-            ->add('city', TextType::class, array('label' => 'Ville'))
-            ->add('country', CountryType::class, array('label' => 'Pays'))
-            ->add('email', EmailType::class, array('label' => 'Email'))
-            ->add('phone', TextType::class, array('label' => 'Téléphone'))
-            ->add('website', TextType::class, array('label' => 'Site web'))
-            ->add('contact', TextType::class, array('label' => 'Contact'))
+            ->add('postcode', TextType::class, array('label' => 'Code postal', 'required' => false))
+            ->add('city', TextType::class, array('label' => 'Ville', 'required' => false))
+            ->add('country', CountryType::class, array('label' => 'Pays', 'required' => false))
+            ->add('email', EmailType::class, array('label' => 'Email', 'required' => false))
+            ->add('phone', TextType::class, array('label' => 'Téléphone', 'required' => false))
+            ->add('website', TextType::class, array('label' => 'Site web', 'required' => false))
+            ->add('contact', TextType::class, array('label' => 'Contact', 'required' => false))
             ->add('comment', TextareaType::class, array('label' => 'Commentaire', 'required' => false))
-            //->add('createdAt')
-            //->add('updatedAt')
-            //->add('user')
         ;
     }
     
