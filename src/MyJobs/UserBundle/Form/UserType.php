@@ -21,6 +21,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormEvent;
 
 class UserType extends AbstractType
 {
@@ -63,6 +65,18 @@ class UserType extends AbstractType
                 ]
             )
         ;
+
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
+            $object= $event->getData();
+            $form = $event->getForm();
+            if (!$object || null === $object->getId()) {
+                return;
+            } else {
+                $form->remove('plainPassword');
+            }
+
+        });
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

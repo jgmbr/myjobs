@@ -36,10 +36,10 @@
                     <td> {{ admin.updatedAt|date('d/m/Y à H:i') }} </td>
                     <td>
                         {% if app.user.id != admin.id %}
-                        <a href="{{ path('user_edit', { 'id': admin.id }) }}">
-                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        <a href="{{ path('user_edit', { 'id': admin.id }) }}" title="Modifier les droits">
+                            <i class="fa fa-eye-slash" aria-hidden="true"></i>
                         </a>
-                        <a href="{{ path('admin_home_page', {'_switch_user': admin.username }) }}">
+                        <a href="{{ path('admin_home_page', {'_switch_user': admin.username }) }}" title="Se connecter en tant que">
                             <i class="fa fa-sign-in" aria-hidden="true"></i>
                         </a>
                         {% endif %}
@@ -73,13 +73,13 @@
                     <td> {{ user.createdAt|date('d/m/Y à H:i') }} </td>
                     <td> {{ user.updatedAt|date('d/m/Y à H:i') }} </td>
                     <td>
-                        <a href="{{ path('user_edit', { 'id': user.id }) }}">
-                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        <a href="{{ path('user_edit', { 'id': user.id }) }}" title="Modifier les droits">
+                            <i class="fa fa-eye-slash" aria-hidden="true"></i>
                         </a>
-                        <a href="{{ path('account_home_page', {'_switch_user': user.username }) }}">
+                        <a href="{{ path('account_home_page', {'_switch_user': user.username }) }}" title="Se connecter en tant que">
                             <i class="fa fa-sign-in" aria-hidden="true"></i>
                         </a>
-                        <a href="{{ path('user_delete', { 'id': user.id }) }}">
+                        <a href="{{ path('user_delete', { 'id': user.id }) }}" title="Supprimer">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </a>
                     </td>

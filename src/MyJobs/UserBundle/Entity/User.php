@@ -66,6 +66,9 @@ class User extends BaseUser
 
     public function setRole($role)
     {
+        foreach ($this->getRoles() as $currentRole)
+            $this->removeRole($currentRole);
+
         $this->addRole($role);
     }
 
