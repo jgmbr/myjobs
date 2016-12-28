@@ -44,17 +44,15 @@
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('status_index') }}">Retour à la liste des status</a>
-        </li>
-        <li>
-            <a href="{{ path('status_edit', { 'id': status.id }) }}">Modifier</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <p>
+        <a href="{{ path('status_edit', { 'id': status.id }) }}" class="btn btn-warning">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+        </a>
+        <a href="{{ path('status_delete', { 'id': status.id }) }}" class="btn btn-danger">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+        </a>
+    </p>
+
+    <p> <a href="{{ path('status_index') }}" class="btn btn-default">Retour à la liste des contrats</a> </p>
+
 {% endblock %}

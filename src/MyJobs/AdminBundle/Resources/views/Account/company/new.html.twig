@@ -14,13 +14,10 @@
     <div class="well">
     {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Créer" />
+        <input type="submit" value="Créer" class="btn btn-primary" />
     {{ form_end(form) }}
     </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('company_index') }}">Retour à la liste des entreprises</a>
-        </li>
-    </ul>
+    <p> <a href="{{ path('company_index') }}" class="btn btn-default">Retour à la liste des entreprises</a> </p>
+
 {% endblock %}

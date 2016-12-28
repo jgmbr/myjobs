@@ -11,11 +11,11 @@
 {% block body %}
     <h1> Administration › Membres </h1>
 
-    <p> <a href="{{ path('user_new') }}"> <i class="fa fa-plus" aria-hidden="true"></i> Ajouter un membre </a> </p>
+    <p> <a href="{{ path('user_new') }}" class="btn btn-primary"> <i class="fa fa-plus" aria-hidden="true"></i> Ajouter un membre </a> </p>
 
     {% if administrators is defined and administrators|length > 0 %}
         <h2> ADMINISTRATEURS </h2>
-        <table id="table_administrators" style="text-align:left;" cellspacing="10">
+        <table class="table table-striped">
             <thead>
             <th> Id </th>
             <th> Email </th>
@@ -36,11 +36,11 @@
                     <td> {{ admin.updatedAt|date('d/m/Y à H:i') }} </td>
                     <td>
                         {% if app.user.id != admin.id %}
-                        <a href="{{ path('user_edit', { 'id': admin.id }) }}" title="Modifier les droits">
-                            <i class="fa fa-eye-slash" aria-hidden="true"></i>
-                        </a>
-                        <a href="{{ path('admin_home_page', {'_switch_user': admin.username }) }}" title="Se connecter en tant que">
+                        <a href="{{ path('admin_home_page', {'_switch_user': admin.username }) }}" title="Se connecter en tant que" class="btn btn-info btn-xs">
                             <i class="fa fa-sign-in" aria-hidden="true"></i>
+                        </a>
+                        <a href="{{ path('user_edit', { 'id': admin.id }) }}" title="Modifier les droits" class="btn btn-warning btn-xs">
+                            <i class="fa fa-eye-slash" aria-hidden="true"></i>
                         </a>
                         {% endif %}
                     </td>
@@ -53,7 +53,7 @@
     {% endif %}
     {% if users is defined and users|length > 0 %}
         <h2> UTILISATEURS </h2>
-        <table id="table_users" style="text-align:left;" cellspacing="10">
+        <table class="table table-striped">
             <thead>
                 <th> Id </th>
                 <th> Email </th>
@@ -73,13 +73,13 @@
                     <td> {{ user.createdAt|date('d/m/Y à H:i') }} </td>
                     <td> {{ user.updatedAt|date('d/m/Y à H:i') }} </td>
                     <td>
-                        <a href="{{ path('user_edit', { 'id': user.id }) }}" title="Modifier les droits">
-                            <i class="fa fa-eye-slash" aria-hidden="true"></i>
-                        </a>
-                        <a href="{{ path('account_home_page', {'_switch_user': user.username }) }}" title="Se connecter en tant que">
+                        <a href="{{ path('account_home_page', {'_switch_user': user.username }) }}" title="Se connecter en tant que" class="btn btn-info btn-xs">
                             <i class="fa fa-sign-in" aria-hidden="true"></i>
                         </a>
-                        <a href="{{ path('user_delete', { 'id': user.id }) }}" title="Supprimer">
+                        <a href="{{ path('user_edit', { 'id': user.id }) }}" title="Modifier les droits" class="btn btn-warning btn-xs">
+                            <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                        </a>
+                        <a href="{{ path('user_delete', { 'id': user.id }) }}" title="Supprimer" class="btn btn-danger btn-xs">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </a>
                     </td>

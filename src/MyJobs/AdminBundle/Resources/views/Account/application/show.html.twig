@@ -68,17 +68,15 @@
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('application_index') }}">Retour à la liste des candidatures</a>
-        </li>
-        <li>
-            <a href="{{ path('application_edit', { 'id': application.id }) }}">Modifier</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Supprimer">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <p>
+        <a href="{{ path('application_edit', { 'id': application.id }) }}" class="btn btn-warning">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+        </a>
+        <a href="{{ path('application_delete', { 'id': application.id }) }}" class="btn btn-danger">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+        </a>
+    </p>
+
+    <p> <a href="{{ path('application_index') }}" class="btn btn-default">Retour à la liste des candidatures</a> </p>
+
 {% endblock %}

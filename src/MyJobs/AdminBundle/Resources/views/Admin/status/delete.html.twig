@@ -17,10 +17,11 @@
 
     <div class="well">
     {{ form_start(delete_form) }}
-        <a href="{{ path('status_index') }}">Retour à la liste des status</a>
-        <input type="submit" value="Oui, je confirme la suppression">
+        <input type="submit" value="Oui, je confirme la suppression" class="btn btn-primary" />
         {{ form_rest(delete_form) }}
     {{ form_end(delete_form) }}
     </div>
+
+    <p> <a href="{{ path('status_index') }}" class="btn btn-default">Retour à la liste des status</a> </p>
 
 {% endblock %}

@@ -14,18 +14,10 @@
     <div class="well">
     {{ form_start(edit_form, {'attr': {'class': 'form-horizontal'}}) }}
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Modifier" />
+        <input type="submit" value="Modifier" class="btn btn-primary" />
     {{ form_end(edit_form) }}
     </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('contract_index') }}">Retour à la liste des contrats</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Supprimer">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <p> <a href="{{ path('contract_index') }}" class="btn btn-default">Retour à la liste des contrats</a> </p>
+
 {% endblock %}
