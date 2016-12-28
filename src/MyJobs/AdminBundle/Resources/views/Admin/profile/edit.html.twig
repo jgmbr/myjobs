@@ -19,12 +19,14 @@
     </ol>
 
     <div class="well">
-{{ form_start(form, { 'action': path('admin_profil_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'profile.edit.submit'|trans }}" class="btn btn-primary" />
+        {{ form_start(form, { 'action': path('admin_profil_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+            {{ form_widget(form) }}
+            <div>
+                <input type="submit" value="{{ 'profile.edit.submit'|trans }}" class="btn btn-primary" />
+            </div>
+        {{ form_end(form) }}
     </div>
-{{ form_end(form) }}
-    </div>
+
+    <p> <a href="{{ path('admin_profil') }}" class="btn btn-default"> Retour à mon profil </a> </p>
 
 {% endblock %}

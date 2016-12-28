@@ -17,11 +17,23 @@
         <li class="active"> Profil </li>
     </ol>
 
-    <div class="fos_user_user_show">
-        <p> <i class="fa fa-user-circle-o fa-4x" aria-hidden="true"></i> </p>
-        <p> {{ 'profile.show.username'|trans }}: {{ user.username }} </p>
-        <p> {{ 'profile.show.email'|trans }}: {{ user.email }} </p>
-        <p> <a href="{{ path('admin_profil_edit') }}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a> </p>
-    </div>
+    <table class="table table-responsive">
+        <tbody>
+            <tr>
+                <th> Image </th>
+                <td> <i class="fa fa-user-circle-o fa-4x" aria-hidden="true"></i> </td>
+            </tr>
+            <tr>
+                <th> {{ 'profile.show.username'|trans }} </th>
+                <td> {{ user.username }} </td>
+            </tr>
+            <tr>
+                <th> {{ 'profile.show.email'|trans }} </th>
+                <td> {{ user.email }} </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p> <a href="{{ path('admin_profil_edit') }}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a> </p>
 
 {% endblock %}
