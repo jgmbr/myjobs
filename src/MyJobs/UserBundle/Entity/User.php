@@ -59,22 +59,6 @@ class User extends BaseUser
 
     private $superAdmin;
 
-    public function getRole()
-    {
-        if (!$this->roles)
-            return parent::ROLE_DEFAULT;
-        else
-            return $this->roles[0];
-    }
-
-    public function setRole($role)
-    {
-        foreach ($this->getRoles() as $currentRole)
-            $this->removeRole($currentRole);
-
-        $this->addRole($role);
-    }
-
     public function __construct()
     {
         parent::__construct();
@@ -245,6 +229,22 @@ class User extends BaseUser
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    public function getRole()
+    {
+        if (!$this->roles)
+            return parent::ROLE_DEFAULT;
+        else
+            return $this->roles[0];
+    }
+
+    public function setRole($role)
+    {
+        foreach ($this->getRoles() as $currentRole)
+            $this->removeRole($currentRole);
+
+        $this->addRole($role);
     }
 
     /**

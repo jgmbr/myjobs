@@ -47,6 +47,9 @@
                         <a href="{{ path('user_edit', { 'id': admin.id }) }}" title="Modifier les droits" class="btn btn-warning btn-xs">
                             <i class="fa fa-eye-slash" aria-hidden="true"></i>
                         </a>
+                        <a href="{{ path('user_delete', { 'id': admin.id }) }}" title="Supprimer" class="btn btn-danger btn-xs">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
                         {% endif %}
                     </td>
                 </tr>

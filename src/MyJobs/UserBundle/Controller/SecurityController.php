@@ -1,6 +1,6 @@
 <?php
 
-namespace MyJobs\FrontBundle\Controller;
+namespace MyJobs\UserBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -16,7 +16,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use FOS\UserBundle;
 
-class SecurityController extends Controller
+use FOS\UserBundle\Controller\SecurityController as BaseController;
+
+class SecurityController extends BaseController
 {
     /**
      * @Route("/login", name="fos_user_security_login")
