@@ -61,7 +61,10 @@ class User extends BaseUser
 
     public function getRole()
     {
-        return $this->role;
+        if (!$this->roles)
+            return 'ROLE_USER';
+        else
+            return $this->roles[0];
     }
 
     public function setRole($role)
