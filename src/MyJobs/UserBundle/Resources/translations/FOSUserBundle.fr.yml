@@ -88,3 +88,5 @@ form:
     enabled: 'Actif'
     role: 'Rôle'
     superadmin: 'Super administrateur'
+    file: 'Photo'
+    initfile: 'Photo initiale'

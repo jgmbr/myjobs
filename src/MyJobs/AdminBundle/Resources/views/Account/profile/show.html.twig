@@ -20,8 +20,8 @@
     <table class="table table-responsive">
         <tbody>
         <tr>
-            <th> Image </th>
-            <td> <i class="fa fa-user-circle-o fa-4x" aria-hidden="true"></i> </td>
+            <th> Photo </th>
+            <td> <img src="{{ asset('uploads/profiles/' ~ user.picture) }}" width="150" /> </td>
         </tr>
         <tr>
             <th> {{ 'profile.show.username'|trans }} </th>

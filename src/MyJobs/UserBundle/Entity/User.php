@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @ORM\Table(name="fos_user")
@@ -58,6 +59,41 @@ class User extends BaseUser
     private $role;
 
     private $superAdmin;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    public $picture;
+
+    /**
+     * @Assert\File(
+     *     maxSize = "50k",
+     *     maxSizeMessage = "Poids maximal de la photo : 50k",
+     *     mimeTypes = {"image/png"},
+     *     mimeTypesMessage = "Format de la photo incorrect : PNG autorisé",
+     *     uploadErrorMessage = "Le fichier ne peut être envoyé",
+     *     uploadFormSizeErrorMessage = "Le fichier est trop grand",
+     *     notReadableMessage = "Le fichier n'est pas lisible",
+     *     notFoundMessage = "Le fichier est introuvable"
+     * )
+     */
+    private $file;
+
+    private $temp;
+
+    /*private $initfile;
+
+    public function getInitFile()
+    {
+        return '<img src="/web/'.$this->getWebPath().'" />';
+    }
+
+    public function setInitFile($initFile)
+    {
+        $this->initfile = $initFile;
+
+        return $this;
+    }*/
 
     public function __construct()
     {
@@ -265,5 +301,111 @@ class User extends BaseUser
     public function onPreUpdate()
     {
         $this->updatedAt = new \DateTime("now");
+    }
+
+    /*
+    ******************** Profile picture upload ********************
+    */
+
+    public function getAbsolutePath()
+    {
+        return null === $this->picture
+            ? null
+            : $this->getUploadRootDir().'/'.$this->picture;
+    }
+
+    public function getWebPath()
+    {
+        return null === $this->picture
+            ? null
+            : $this->getUploadDir().'/'.$this->picture;
+    }
+
+    protected function getUploadRootDir()
+    {
+        // the absolute directory path where uploaded
+        // documents should be saved
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw up
+        // when displaying uploaded doc/image in the view.
+        return 'uploads/profiles';
+    }
+
+    /**
+     * Get file.
+     *
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * Sets file.
+     *
+     * @param UploadedFile $file
+     */
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
+        // check if we have an old image path
+        if (isset($this->picture)) {
+            // store the old name to delete after the update
+            $this->temp = $this->picture;
+            $this->picture = null;
+        } else {
+            $this->picture = 'initial';
+        }
+    }
+
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+    public function upload()
+    {
+        if (null === $this->getFile()) {
+            return;
+        }
+
+        // if there is an error when moving the file, an exception will
+        // be automatically thrown by move(). This will properly prevent
+        // the entity from being persisted to the database on error
+        $this->getFile()->move($this->getUploadRootDir(), $this->picture);
+
+        // check if we have an old image
+        if (isset($this->temp)) {
+            // delete the old image
+            unlink($this->getUploadRootDir().'/'.$this->temp);
+            // clear the temp image path
+            $this->temp = null;
+        }
+        $this->file = null;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpload()
+    {
+        if (null !== $this->getFile()) {
+            // do whatever you want to generate a unique name
+            $filename = sha1(uniqid(mt_rand(), true));
+            $this->picture = $filename.'.'.$this->getFile()->guessExtension();
+        }
+    }
+
+    public function removeUpload()
+    {
+        $file = $this->getAbsolutePath();
+        if ($file) {
+            unlink($file);
+        }
     }
 }
