@@ -3,6 +3,7 @@
 namespace MyJobs\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Company
@@ -25,6 +26,17 @@ class Company
     /**
      * @var string
      *
+     * @Assert\NotBlank(
+     *     message="Veuillez renseigner un nom d'entreprise"
+     * )
+     *
+     * @Assert\Length(
+     *     min = 2,
+     *     max = 255,
+     *     minMessage = "Le nom d'entreprise doit contenir au moins 2 caractères",
+     *     maxMessage = "Le nom d'entreprise doit contenir au maximum 255 caractères"
+     * )
+     *
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
@@ -45,6 +57,13 @@ class Company
 
     /**
      * @var string
+     *
+     * @Assert\Length(
+     *     min = 5,
+     *     max = 5,
+     *     minMessage = "Le code postal d'entreprise doit contenir au moins 5 caractères",
+     *     maxMessage = "Le code postal d'entreprise doit contenir au maximum 5 caractères"
+     * )
      *
      * @ORM\Column(name="postcode", type="string", length=5, nullable=true)
      */
@@ -67,6 +86,10 @@ class Company
     /**
      * @var string
      *
+     * @Assert\Email(
+     *     message = "L'adresse email '{{ value }}' n'est pas valide",
+     *     checkMX = true
+     * )
      * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
     private $email;
@@ -80,6 +103,10 @@ class Company
 
     /**
      * @var string
+     *
+     * @Assert\Url(
+     *     message = "L'url {{ value }} n'est pas valide"
+     * )
      *
      * @ORM\Column(name="website", type="string", length=255, nullable=true)
      */

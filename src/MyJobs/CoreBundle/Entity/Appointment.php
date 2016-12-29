@@ -4,6 +4,7 @@ namespace MyJobs\CoreBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Appointment
@@ -26,6 +27,17 @@ class Appointment
     /**
      * @var string
      *
+     * @Assert\NotBlank(
+     *     message="Veuillez renseigner un nom d'entretien"
+     * )
+     *
+     * @Assert\Length(
+     *     min = 2,
+     *     max = 255,
+     *     minMessage = "Le nom d'entretien doit contenir au moins 2 caractères",
+     *     maxMessage = "Le nom d'entretien doit contenir au maximum 255 caractères"
+     * )
+     *
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
@@ -33,12 +45,20 @@ class Appointment
     /**
      * @var \DateTime
      *
+     * @Assert\NotBlank(
+     *     message="Veuillez renseigner une date de candidature"
+     * )
+     *
      * @ORM\Column(name="date_at", type="date")
      */
     private $dateAt;
 
     /**
      * @var \DateTime
+     *
+     * @Assert\NotBlank(
+     *     message="Veuillez renseigner une heure de candidature"
+     * )
      *
      * @ORM\Column(name="hour_at", type="time")
      */

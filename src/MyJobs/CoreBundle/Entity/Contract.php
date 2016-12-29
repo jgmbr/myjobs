@@ -3,6 +3,7 @@
 namespace MyJobs\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Contract
@@ -25,12 +26,34 @@ class Contract
     /**
      * @var string
      *
+     * @Assert\NotBlank(
+     *     message="Veuillez renseigner un nom de contrat"
+     * )
+     *
+     * @Assert\Length(
+     *     min = 2,
+     *     max = 255,
+     *     minMessage = "Le nom du contrat doit contenir au moins 2 caractères",
+     *     maxMessage = "Le nom du contrat doit contenir au maximum 255 caractères"
+     * )
+     *
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
      * @var string
+     *
+     * @Assert\NotBlank(
+     *     message="Veuillez renseigner un code couleur"
+     * )
+     *
+     * @Assert\Length(
+     *     min = 7,
+     *     max = 7,
+     *     minMessage = "Le code couleur doit contenir au moins 7 caractères",
+     *     maxMessage = "Le code couleur doit contenir au maximum 7 caractères"
+     * )
      *
      * @ORM\Column(name="color", type="string", length=7)
      */

@@ -4,6 +4,7 @@ namespace MyJobs\CoreBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Application
@@ -33,12 +34,27 @@ class Application
     /**
      * @var string
      *
+     * @Assert\NotBlank(
+     *     message="Veuillez renseigner un nom de candidature"
+     * )
+     *
+     * @Assert\Length(
+     *     min = 2,
+     *     max = 255,
+     *     minMessage = "Le nom de candidature doit contenir au moins 2 caractères",
+     *     maxMessage = "Le nom de candidature doit contenir au maximum 255 caractères"
+     * )
+     *
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
      * @var string
+     *
+     * @Assert\Url(
+     *     message = "L'url {{ value }} n'est pas valide"
+     * )
      *
      * @ORM\Column(name="url", type="string", length=255, nullable=true)
      */
