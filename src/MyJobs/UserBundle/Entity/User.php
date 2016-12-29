@@ -62,7 +62,7 @@ class User extends BaseUser
     public function getRole()
     {
         if (!$this->roles)
-            return 'ROLE_USER';
+            return parent::ROLE_DEFAULT;
         else
             return $this->roles[0];
     }
