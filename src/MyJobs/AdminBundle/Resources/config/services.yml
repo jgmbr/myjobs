@@ -1,4 +1,1 @@
 services:
-#    myjobs_admin.example:
-#        class: MyJobs\AdminBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
