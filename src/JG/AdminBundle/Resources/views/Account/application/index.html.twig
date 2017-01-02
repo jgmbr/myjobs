@@ -1,7 +1,7 @@
 {% extends "JGAdminBundle::layout.html.twig" %}
 
 {% block header %}
-    MyJobs - Mon Compte - Mes candidatures
+    Mes candidatures
 {% endblock %}
 
 {% block menu %}
@@ -15,57 +15,123 @@
         <li class="active"> Liste </li>
     </ol>
 
-    <p> <a href="{{ path('application_new') }}" class="btn btn-primary"> <i class="fa fa-plus" aria-hidden="true"></i> Ajouter une nouvelle candidature </a> </p>
+    <div class="text-right">
+        <p> <a href="{{ path('application_new') }}" class="btn btn-primary"> <i class="fa fa-plus" aria-hidden="true"></i> Ajouter une nouvelle candidature </a> </p>
+    </div>
 
-    {% if applications is defined and applications|length > 0 %}
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Date</th>
-                <th>Nom</th>
-                <th>Contrat</th>
-                <th>Entreprise</th>
-                <th>Statut</th>
-                <th>Date de création</th>
-                <th>Date de modification</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for application in applications %}
-            <tr>
-                <td><a href="{{ path('application_show', { 'id': application.id }) }}">{{ application.id }}</a></td>
-                <td> {{ application.dateAt|date('d/m/Y') }} </td>
-                <td> {{ application.name }} </td>
-                <td>
-                    <span style="background:{{ application.contract.color }}; color:#fff; padding:3px;">
-                        {{ application.contract.name }}
-                    </span>
-                </td>
-                <td>
-                    <a href="{{ path('company_show', { 'id': application.company.id }) }}"> {{ application.company.name }} </a>
-                </td>
-                <td> <i class="fa {{ application.status.icon }}" aria-hidden="true"></i> {{ application.status.name }} </td>
-                <td>{% if application.createdAt %}{{ application.createdAt|date('d/m/Y à H:i') }}{% endif %}</td>
-                <td>{% if application.updatedAt %}{{ application.updatedAt|date('d/m/Y à H:i') }}{% endif %}</td>
-                <td>
-                    <a href="{{ path('application_show', { 'id': application.id }) }}" class="btn btn-info btn-xs">
-                        <i class="fa fa-eye" aria-hidden="true"></i>
-                    </a>
-                    <a href="{{ path('application_edit', { 'id': application.id }) }}" class="btn btn-warning btn-xs">
-                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                    </a>
-                    <a href="{{ path('application_delete', { 'id': application.id }) }}" class="btn btn-danger btn-xs">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                    </a>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-        <p> Pas de candidatures. </p>
-    {% endif %}
+    <div class="box">
+        <div class="box-body">
+            <div id="application_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                <div class="row">
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-6"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        {% if applications is defined and applications|length > 0 %}
+                            <table id="application" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="application_info">
+                                <thead>
+                                <tr role="row">
+                                    <th>Id</th>
+                                    <th>Date</th>
+                                    <th>Nom</th>
+                                    <th>Contrat</th>
+                                    <th>Entreprise</th>
+                                    <th>Statut</th>
+                                    <th>Date de création</th>
+                                    <th>Date de modification</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for application in applications %}
+                                    <tr role="row" class="{% if loop.index is odd %}odd{% else %}even{% endif %}">
+                                        <td><a href="{{ path('application_show', { 'id': application.id }) }}">{{ application.id }}</a></td>
+                                        <td> {{ application.dateAt|date('d/m/Y') }} </td>
+                                        <td> {{ application.name }} </td>
+                                        <td>
+                                            <span style="background:{{ application.contract.color }}; color:#fff; padding:3px;">
+                                                {{ application.contract.name }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a href="{{ path('company_show', { 'id': application.company.id }) }}"> {{ application.company.name }} </a>
+                                        </td>
+                                        <td> <i class="fa {{ application.status.icon }}" aria-hidden="true"></i> {{ application.status.name }} </td>
+                                        <td>{% if application.createdAt %}{{ application.createdAt|date('d/m/Y à H:i') }}{% endif %}</td>
+                                        <td>{% if application.updatedAt %}{{ application.updatedAt|date('d/m/Y à H:i') }}{% endif %}</td>
+                                        <td>
+                                            <a href="{{ path('application_show', { 'id': application.id }) }}" class="btn btn-info btn-xs">
+                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="{{ path('application_edit', { 'id': application.id }) }}" class="btn btn-warning btn-xs">
+                                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="{{ path('application_delete', { 'id': application.id }) }}" class="btn btn-danger btn-xs">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Date</th>
+                                    <th>Nom</th>
+                                    <th>Contrat</th>
+                                    <th>Entreprise</th>
+                                    <th>Statut</th>
+                                    <th>Date de création</th>
+                                    <th>Date de modification</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        {% else %}
+                            <p> Pas de candidatures. </p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(function () {
+            $('#application').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "language": {
+                    "processing":     "Traitement en cours...",
+                    "search":         "Rechercher&nbsp;:",
+                    "lengthMenu":    "Afficher _MENU_ &eacute;l&eacute;ments",
+                    "info":           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                    "infoEmpty":      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+                    "infoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                    "infoPostFix":    "",
+                    "loadingRecords": "Chargement en cours...",
+                    "zeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                    "emptyTable":     "Aucune donnée disponible dans le tableau",
+                    "paginate": {
+                        "first":      "Premier",
+                        "previous":   "Pr&eacute;c&eacute;dent",
+                        "next":       "Suivant",
+                        "last":       "Dernier"
+                    },
+                    "aria": {
+                        "sortAscending":  ": activer pour trier la colonne par ordre croissant",
+                        "sortDescending": ": activer pour trier la colonne par ordre décroissant"
+                    }
+                }
+            });
+        });
+    </script>
 {% endblock %}

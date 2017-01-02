@@ -1,7 +1,7 @@
 {% extends "JGAdminBundle::layout.html.twig" %}
 
 {% block header %}
-    MyJobs - Administration - Status
+    Status
 {% endblock %}
 
 {% block menu %}
@@ -16,51 +16,117 @@
         <li class="active"> Liste </li>
     </ol>
 
-    <p> <a href="{{ path('status_new') }}" class="btn btn-primary"> <i class="fa fa-plus" aria-hidden="true"></i> Ajouter un nouveau statut </a> </p>
+    <div class="text-right">
+        <p> <a href="{{ path('status_new') }}" class="btn btn-primary"> <i class="fa fa-plus" aria-hidden="true"></i> Ajouter un nouveau statut </a> </p>
+    </div>
 
-    {% if statuses is defined and statuses|length > 0 %}
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Identifiant</th>
-                    <th>Nom</th>
-                    <th>Code icône</th>
-                    <th>Icône</th>
-                    <th>Code couleur</th>
-                    <th>Couleur</th>
-                    <th>Date de création</th>
-                    <th>Date de modification</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for status in statuses %}
-                <tr>
-                    <td><a href="{{ path('status_show', { 'id': status.id }) }}">{{ status.id }}</a></td>
-                    <td>{{ status.name }}</td>
-                    <td> <i class="fa {{ status.icon }}" aria-hidden="true"></i> </td>
-                    <td>{{ status.icon }}</td>
-                    <td> <span style="background:{{ status.color }}; width:20px; height:20px; display:block;">&nbsp;</span> </td>
-                    <td>{{ status.color }}</td>
-                    <td>{% if status.createdAt %}{{ status.createdAt|date('d/m/Y à H:i') }}{% endif %}</td>
-                    <td>{% if status.updatedAt %}{{ status.updatedAt|date('d/m/Y à H:i') }}{% endif %}</td>
-                    <td>
-                        <a href="{{ path('status_show', { 'id': status.id }) }}" class="btn btn-info btn-xs">
-                            <i class="fa fa-eye" aria-hidden="true"></i>
-                        </a>
-                        <a href="{{ path('status_edit', { 'id': status.id }) }}" class="btn btn-warning btn-xs">
-                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                        </a>
-                        <a href="{{ path('status_delete', { 'id': status.id }) }}" class="btn btn-danger btn-xs">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                        </a>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <p> Pas de contrats. </p>
-    {% endif %}
+    <div class="box">
+        <div class="box-body">
+            <div id="status_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                <div class="row">
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-6"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        {% if statuses is defined and statuses|length > 0 %}
+                            <table id="status" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="status_info">
+                                <thead>
+                                <tr role="row">
+                                    <th>Id</th>
+                                    <th>Nom</th>
+                                    <th>Code icône</th>
+                                    <th>Icône</th>
+                                    <th>Code couleur</th>
+                                    <th>Couleur</th>
+                                    <th>Date de création</th>
+                                    <th>Date de modification</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    {% for status in statuses %}
+                                    <tr role="row" class="{% if loop.index is odd %}odd{% else %}even{% endif %}">
+                                        <td><a href="{{ path('status_show', { 'id': status.id }) }}">{{ status.id }}</a></td>
+                                        <td>{{ status.name }}</td>
+                                        <td> <i class="fa {{ status.icon }}" aria-hidden="true"></i> </td>
+                                        <td>{{ status.icon }}</td>
+                                        <td> <span style="background:{{ status.color }}; width:20px; height:20px; display:block;">&nbsp;</span> </td>
+                                        <td>{{ status.color }}</td>
+                                        <td>{% if status.createdAt %}{{ status.createdAt|date('d/m/Y à H:i') }}{% endif %}</td>
+                                        <td>{% if status.updatedAt %}{{ status.updatedAt|date('d/m/Y à H:i') }}{% endif %}</td>
+                                        <td>
+                                            <a href="{{ path('status_show', { 'id': status.id }) }}" class="btn btn-info btn-xs">
+                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="{{ path('status_edit', { 'id': status.id }) }}" class="btn btn-warning btn-xs">
+                                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="{{ path('status_delete', { 'id': status.id }) }}" class="btn btn-danger btn-xs">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Nom</th>
+                                    <th>Code icône</th>
+                                    <th>Icône</th>
+                                    <th>Code couleur</th>
+                                    <th>Couleur</th>
+                                    <th>Date de création</th>
+                                    <th>Date de modification</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        {% else %}
+                            <p> Pas de statuts. </p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(function () {
+            $('#status').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "language": {
+                    "processing":     "Traitement en cours...",
+                    "search":         "Rechercher&nbsp;:",
+                    "lengthMenu":    "Afficher _MENU_ &eacute;l&eacute;ments",
+                    "info":           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                    "infoEmpty":      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+                    "infoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                    "infoPostFix":    "",
+                    "loadingRecords": "Chargement en cours...",
+                    "zeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                    "emptyTable":     "Aucune donnée disponible dans le tableau",
+                    "paginate": {
+                        "first":      "Premier",
+                        "previous":   "Pr&eacute;c&eacute;dent",
+                        "next":       "Suivant",
+                        "last":       "Dernier"
+                    },
+                    "aria": {
+                        "sortAscending":  ": activer pour trier la colonne par ordre croissant",
+                        "sortDescending": ": activer pour trier la colonne par ordre décroissant"
+                    }
+                }
+            });
+        });
+    </script>
 {% endblock %}

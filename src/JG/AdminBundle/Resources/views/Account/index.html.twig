@@ -1,7 +1,7 @@
 {% extends "JGAdminBundle::layout.html.twig" %}
 
 {% block header %}
-    MyJobs - Mon Compte
+    Mon Compte
 {% endblock %}
 
 {% block menu %}
@@ -68,8 +68,8 @@
                         <table class="table table-responsive">
                             {% for company in myLastCompanies %}
                                 <tr>
-                                    <td> {{ company.name }} </td>
-                                    <td>
+                                    <td class="text-left"> {{ company.name }} </td>
+                                    <td class="text-right">
                                         <a href="{{ path('company_show', { 'id': company.id }) }}" class="btn btn-default btn-sm">
                                             Voir la fiche
                                         </a>
@@ -96,8 +96,8 @@
                         <table class="table table-responsive">
                             {% for application in myLastApplications %}
                                 <tr>
-                                    <td> {{ application.name }} </td>
-                                    <td>
+                                    <td class="text-left"> {{ application.name }} </td>
+                                    <td class="text-right">
                                         <a href="{{ path('application_show', { 'id': application.id }) }}" class="btn btn-default btn-sm">
                                             Voir la fiche
                                         </a>
@@ -124,8 +124,8 @@
                     <table class="table table-responsive">
                         {% for appointment in myLastAppointments %}
                             <tr>
-                                <td> &nbsp; </td>
-                                <td> &nbsp; </td>
+                                <td class="text-left"> &nbsp; </td>
+                                <td class="text-right"> &nbsp; </td>
                             </tr>
                         {% endfor %}
                     </table>
@@ -145,9 +145,15 @@
                 </div><!-- /.box-header -->
                 <div class="box-body">
                     <table class="table table-responsive">
-                        <tr> <td> {{ nbApplications }} candidature(s) </td> </tr>
-                        <tr> <td> {{ nbCompanies }} entreprise(s) </td> </tr>
-                        <tr> <td> {{ nbAppointments }} entretien(s) </td> </tr>
+                        <tr>
+                            <td class="text-left"> {{ nbApplications }} candidature(s) </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left"> {{ nbCompanies }} entreprise(s) </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left"> {{ nbAppointments }} entretien(s) </td>
+                        </tr>
                     </table>
                 </div><!-- /.box-body -->
             </div>

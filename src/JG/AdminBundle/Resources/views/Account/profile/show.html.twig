@@ -3,7 +3,7 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block header %}
-    MyJobs - Mon Compte - Profil
+    Profil
 {% endblock %}
 
 {% block menu %}
@@ -17,37 +17,46 @@
         <li class="active"> Profil </li>
     </ol>
 
-    <table class="table table-responsive">
-        <tbody>
-        <tr>
-            <th> Photo </th>
-            <td>
-                {% if file_exists('uploads/profiles/' ~ user.picture) %}
-                    <img src="{{ asset('uploads/profiles/' ~ user.picture) }}" class="img-circle" width="150" />
-                {% else %}
-                    <i class="fa fa-user-circle-o fa-3x" aria-hidden="true"></i>
-                {% endif %}
-            </td>
-        </tr>
-        <tr>
-            <th> {{ 'profile.show.username'|trans }} </th>
-            <td> {{ user.username }} </td>
-        </tr>
-        <tr>
-            <th> {{ 'profile.show.email'|trans }} </th>
-            <td> {{ user.email }} </td>
-        </tr>
-        <tr>
-            <th> {{ 'profile.show.lastname'|trans }} </th>
-            <td> {{ user.lastname }} </td>
-        </tr>
-        <tr>
-            <th> {{ 'profile.show.firstname'|trans }} </th>
-            <td> {{ user.firstname }} </td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="box box-default">
+        <div class="box-body box-profile">
 
-    <p> <a href="{{ path('account_profil_edit') }}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a> </p>
+            {% if file_exists('uploads/profiles/' ~ user.picture) %}
+                <img src="{{ asset('uploads/profiles/' ~ user.picture) }}" class="profile-user-img img-responsive img-circle" width="150" alt="User profile picture" />
+            {% else %}
+                <i class="fa fa-user-circle-o fa-3x" aria-hidden="true"></i>
+            {% endif %}
+
+            <p class="text-muted text-center"> &nbsp; </p>
+
+            <table class="table table-responsive">
+                <tbody>
+                <tr>
+                    <th> {{ 'profile.show.username'|trans }} </th>
+                    <td> {{ user.username }} </td>
+                </tr>
+                <tr>
+                    <th> {{ 'profile.show.email'|trans }} </th>
+                    <td> {{ user.email }} </td>
+                </tr>
+                <tr>
+                    <th> {{ 'profile.show.lastname'|trans }} </th>
+                    <td> {{ user.lastname }} </td>
+                </tr>
+                <tr>
+                    <th> {{ 'profile.show.firstname'|trans }} </th>
+                    <td> {{ user.firstname }} </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <p>
+                <a href="{{ path('account_profil_edit') }}" class="btn btn-warning pull-right">
+                    <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; Modifier
+                </a>
+            </p>
+
+        </div>
+        <!-- /.box-body -->
+    </div>
 
 {% endblock %}
