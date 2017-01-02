@@ -23,7 +23,7 @@
             <th> Photo </th>
             <td>
                 {% if file_exists('uploads/profiles/' ~ user.picture) %}
-                    <img src="{{ asset('uploads/profiles/' ~ user.picture) }}" width="150" />
+                    <img src="{{ asset('uploads/profiles/' ~ user.picture) }}" class="img-circle" width="150" />
                 {% else %}
                     <i class="fa fa-user-circle-o fa-3x" aria-hidden="true"></i>
                 {% endif %}

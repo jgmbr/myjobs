@@ -15,11 +15,51 @@
         <li class="active"> Tableau de bord </li>
     </ol>
 
-    <p> Nb Utilisateurs : {{ nbUsers }} </p>
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="small-box bg-red">
+                <div class="inner">
+                    <h3>{{ nbAdministrators }}</h3>
+                    <p>Administrateurs</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-person"></i>
+                </div>
+            </div>
+        </div><!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h3>{{ nbUsers }}</h3>
+                    <p>Utilisateurs</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-person"></i>
+                </div>
+            </div>
+        </div><!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="small-box bg-blue">
+                <div class="inner">
+                    <h3>{{ nbContracts }}</h3>
+                    <p>Contrats</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-pricetags"></i>
+                </div>
+            </div>
+        </div><!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3>{{ nbStatus }}</h3>
+                    <p>Statuts</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-ios-speedometer-outline"></i>
+                </div>
+            </div>
+        </div><!-- /.col -->
+    </div>
 
-    <p> Nb administrateurs : {{ nbAdministrators }} </p>
-
-    <p> Nb contrats : {{ nbContracts }} </p>
-
-    <p> Nb status : {{ nbStatus }} </p>
 {% endblock %}

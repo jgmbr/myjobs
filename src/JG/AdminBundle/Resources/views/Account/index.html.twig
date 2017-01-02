@@ -15,98 +15,144 @@
         <li class="active"> Tableau de bord </li>
     </ol>
 
-    <div class="row placeholders">
-        <div class="col-xs-6 col-sm-3 placeholder">
-            <div class="circle"> 1 <h4> Créer vos entreprises </h4> </div>
-        </div>
-        <div class="col-xs-6 col-sm-3 placeholder">
-            <div class="circle"> 2 <h4> Créer vos candidatures </h4> </div>
-        </div>
-        <div class="col-xs-6 col-sm-3 placeholder">
-            <div class="circle"> 3 <h4> Programmer vos entretiens </h4> </div>
-        </div>
-        <div class="col-xs-6 col-sm-3 placeholder">
-            <div class="circle"> 4 <h4> Consulter vos statistiques </h4> </div>
-        </div>
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="fa fa-building-o" aria-hidden="true"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Entreprises</span>
+                    <span class="info-box-number">Créer <br /> vos entreprises</span>
+                </div><!-- /.info-box-content -->
+            </div><!-- /.info-box -->
+        </div><!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-green"><i class="fa fa-list-alt" aria-hidden="true"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Candidatures</span>
+                    <span class="info-box-number">Créer <br /> vos candidatures</span>
+                </div><!-- /.info-box-content -->
+            </div><!-- /.info-box -->
+        </div><!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-yellow"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Entretiens</span>
+                    <span class="info-box-number">Programmer <br /> vos entretiens</span>
+                </div><!-- /.info-box-content -->
+            </div><!-- /.info-box -->
+        </div><!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-red"><i class="fa fa-bar-chart" aria-hidden="true"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Statistiques</span>
+                    <span class="info-box-number">Consulter <br /> vos statistiques</span>
+                </div><!-- /.info-box-content -->
+            </div><!-- /.info-box -->
+        </div><!-- /.col -->
     </div>
 
-    <div class="col-xs-12 col-sm-6">
-        <div class="panel panel-primary">
-            <div class="panel-heading">Dernières candidatures</div>
-            {% if myLastApplications is defined and myLastApplications|length > 0 %}
-                <table class="table table-responsive">
-                    {% for application in myLastApplications %}
-                        <tr>
-                            <td> {{ application.name }} </td>
-                            <td>
-                                <a href="{{ path('application_show', { 'id': application.id }) }}" class="btn btn-info">
-                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            {% else %}
-                <div class="panel-body">
-                    <p> Pas de candidatures. </p>
-                </div>
-            {% endif %}
-        </div>
-    </div>
+    <div class="row">
 
-    <div class="col-xs-12 col-sm-6">
-        <div class="panel panel-primary">
-            <div class="panel-heading">Dernières entreprises</div>
-            {% if myLastCompanies is defined and myLastCompanies|length > 0 %}
-                <table class="table table-responsive">
-                    {% for company in myLastCompanies %}
-                        <tr>
-                            <td> {{ company.name }} </td>
-                            <td>
-                                <a href="{{ path('company_show', { 'id': company.id }) }}" class="btn btn-info">
-                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            {% else %}
-                <div class="panel-body">
-                    <p> Pas d'entreprises. </p>
-                </div>
-            {% endif %}
-        </div>
-    </div>
+        <br />
 
-    <div class="col-xs-12 col-sm-6">
-        <div class="panel panel-primary">
-            <div class="panel-heading">Derniers entretiens</div>
-            {% if myLastAppointments is defined and myLastAppointments|length > 0 %}
-                <table class="table table-responsive">
-                    {% for appointment in myLastAppointments %}
-                        <tr>
-                            <td> &nbsp; </td>
-                            <td> &nbsp; </td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            {% else %}
-                <div class="panel-body">
-                    <p> Pas d'entretiens. </p>
-                </div>
-            {% endif %}
+        <div class="col-xs-12 col-sm-6">
+            <div class="box box-solid box-info">
+                <div class="box-header">
+                    <h3 class="box-title">Dernières entreprises</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    {% if myLastCompanies is defined and myLastCompanies|length > 0 %}
+                        <table class="table table-responsive">
+                            {% for company in myLastCompanies %}
+                                <tr>
+                                    <td> {{ company.name }} </td>
+                                    <td>
+                                        <a href="{{ path('company_show', { 'id': company.id }) }}" class="btn btn-default btn-sm">
+                                            Voir la fiche
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% else %}
+                        <div class="panel-body">
+                            <p> Pas d'entreprises. </p>
+                        </div>
+                    {% endif %}
+                </div><!-- /.box-body -->
+            </div>
         </div>
-    </div>
 
-    <div class="col-xs-12 col-sm-6">
-        <div class="panel panel-primary">
-            <div class="panel-heading">Dernières statistiques</div>
-            <table class="table table-responsive">
-                <tr> <td> {{ nbApplications }} candidature(s) </td> </tr>
-                <tr> <td> {{ nbCompanies }} entreprise(s) </td> </tr>
-                <tr> <td> {{ nbAppointments }} entretien(s) </td> </tr>
-            </table>
+        <div class="col-xs-12 col-sm-6">
+            <div class="box box-solid box-success">
+                <div class="box-header">
+                    <h3 class="box-title">Dernières candidatures</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    {% if myLastApplications is defined and myLastApplications|length > 0 %}
+                        <table class="table table-responsive">
+                            {% for application in myLastApplications %}
+                                <tr>
+                                    <td> {{ application.name }} </td>
+                                    <td>
+                                        <a href="{{ path('application_show', { 'id': application.id }) }}" class="btn btn-default btn-sm">
+                                            Voir la fiche
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% else %}
+                        <div class="panel-body">
+                            <p> Pas de candidatures. </p>
+                        </div>
+                    {% endif %}
+                </div><!-- /.box-body -->
+            </div>
         </div>
+
+        <div class="col-xs-12 col-sm-6">
+            <div class="box box-solid box-warning">
+                <div class="box-header">
+                    <h3 class="box-title">Derniers entretiens</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                {% if myLastAppointments is defined and myLastAppointments|length > 0 %}
+                    <table class="table table-responsive">
+                        {% for appointment in myLastAppointments %}
+                            <tr>
+                                <td> &nbsp; </td>
+                                <td> &nbsp; </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <div class="panel-body">
+                        <p> Pas d'entretiens. </p>
+                    </div>
+                {% endif %}
+                </div><!-- /.box-body -->
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+            <div class="box box-solid box-danger">
+                <div class="box-header">
+                    <h3 class="box-title">Dernières statistiques</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-responsive">
+                        <tr> <td> {{ nbApplications }} candidature(s) </td> </tr>
+                        <tr> <td> {{ nbCompanies }} entreprise(s) </td> </tr>
+                        <tr> <td> {{ nbAppointments }} entretien(s) </td> </tr>
+                    </table>
+                </div><!-- /.box-body -->
+            </div>
+        </div>
+
     </div>
 
 {% endblock %}

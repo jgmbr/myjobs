@@ -1,11 +1,47 @@
-<ul>
-    <li> <a href="{{ path('home_page') }}"> Retour vers le site </a> </li>
-    <li> <a href="{{ path('account_home_page') }}"> Tableau de bord </a> </li>
-    <li> <a href="{{ path('company_index') }}"> Mes Entreprises </a> </li>
-    <li> <a href="{{ path('application_index') }}"> Mes Candidatures </a> </li>
-    <li> <a href="#"> Mes Entretiens </a> </li>
-    <li> <a href="#"> Mes Statistiques </a> </li>
-    <li style="display: none;"> <a href="#"> Mes Alertes (option) </a> </li>
-    <li style="display: none;"> <a href="#"> Mes Préférences (option) </a> </li>
-    <li> <a href="{{ path('account_profil') }}"> Profil </a> </li>
+<ul class="sidebar-menu">
+    <li>
+        <a href="{{ path('home_page') }}">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i> <span> Retour vers le site </span>
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('account_home_page') }}">
+            <i class="fa fa-home" aria-hidden="true"></i> <span> Tableau de bord </span>
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('company_index') }}">
+            <i class="fa fa-building-o" aria-hidden="true"></i> <span> Mes Entreprises </span>
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('application_index') }}">
+            <i class="fa fa-list-alt" aria-hidden="true"></i> <span> Mes Candidatures </span>
+        </a>
+    </li>
+    <li>
+        <a href="#">
+            <i class="fa fa-calendar" aria-hidden="true"></i> <span> Mes Entretiens </span>
+        </a>
+    </li>
+    <li>
+        <a href="#">
+            <i class="fa fa-bar-chart" aria-hidden="true"></i> <span> Mes Statistiques </span>
+        </a>
+    </li>
+    <li>
+        <a href="#">
+            <i class="fa fa-bell-o" aria-hidden="true"></i> <span> Mes Alertes (option) </span>
+        </a>
+    </li>
+    <li>
+        <a href="#">
+            <i class="fa fa-heart" aria-hidden="true"></i> <span> Mes Préférences (option) </span>
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('account_profil') }}">
+            <i class="fa fa-user-circle-o" aria-hidden="true"></i> <span> Profil </span>
+        </a>
+    </li>
 </ul>
