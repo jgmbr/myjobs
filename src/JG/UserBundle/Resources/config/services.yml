@@ -1,0 +1,4 @@
+services:
+    authentication_success_handler:
+        class: JG\UserBundle\EventListener\AuthenticationListener
+        arguments:  ['@router',"@security.authorization_checker"]

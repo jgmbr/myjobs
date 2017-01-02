@@ -1,4 +1,0 @@
-services:
-    authentication_success_handler:
-        class: MyJobs\UserBundle\EventListener\AuthenticationListener
-        arguments:  ['@router',"@security.authorization_checker"]

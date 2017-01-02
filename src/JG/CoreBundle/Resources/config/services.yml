@@ -1,0 +1,5 @@
+services:
+    app.file.twig.extension:
+        class: JG\CoreBundle\Twig\Extension\TwigExtension
+        tags:
+            - { name: twig.extension }

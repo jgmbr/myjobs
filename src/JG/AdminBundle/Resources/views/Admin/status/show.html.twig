@@ -1,0 +1,63 @@
+{% extends "JGAdminBundle::layout.html.twig" %}
+
+{% block header %}
+    MyJobs - Administration - Status
+{% endblock %}
+
+{% block menu %}
+    {% include 'JGAdminBundle:Admin:menu.html.twig' %}
+{% endblock %}
+
+{% block body %}
+
+    <ol class="breadcrumb">
+        <li> <a href="{{ path('admin_home_page') }}"> Administration </a> </li>
+        <li> <a href="{{ path('status_index') }}"> Status </a> </li>
+        <li class="active"> Fiche </li>
+    </ol>
+
+    <table class="table table-responsive">
+        <tbody>
+            <tr>
+                <th>Identifiant</th>
+                <td>{{ status.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ status.name }}</td>
+            </tr>
+            <tr>
+                <th>Code icône</th>
+                <td>{{ status.icon }}</td>
+            </tr>
+            <tr>
+                <th>Couleur</th>
+                <td> <span style="background:{{ status.color }}; width:20px; height:20px; display:block;">&nbsp;</span> </td>
+            </tr>
+            <tr>
+                <th>Code couleur</th>
+                <td>{{ status.color }}</td>
+            </tr>
+            <tr>
+                <th>Date de création</th>
+                <td>{% if status.createdAt %}{{ status.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Date de modification</th>
+                <td>{% if status.updatedAt %}{{ status.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>
+        <a href="{{ path('status_edit', { 'id': status.id }) }}" class="btn btn-warning">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+        </a>
+        <a href="{{ path('status_delete', { 'id': status.id }) }}" class="btn btn-danger">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+        </a>
+    </p>
+
+    <p> <a href="{{ path('status_index') }}" class="btn btn-default">Retour à la liste des contrats</a> </p>
+
+{% endblock %}

@@ -73,10 +73,10 @@ swiftmailer:
 fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
     firewall_name: main
-    user_class: MyJobs\UserBundle\Entity\User
+    user_class: JG\UserBundle\Entity\User
     registration:
         form:
-            type: MyJobs\UserBundle\Form\RegistrationType
+            type: JG\UserBundle\Form\RegistrationType
     profile:
         form:
-            type: MyJobs\UserBundle\Form\ProfileType
+            type: JG\UserBundle\Form\ProfileType

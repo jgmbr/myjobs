@@ -16,11 +16,10 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-            //new AppBundle\AppBundle(),
-            new MyJobs\CoreBundle\MyJobsCoreBundle(),
-            new MyJobs\UserBundle\MyJobsUserBundle(),
-            new MyJobs\AdminBundle\MyJobsAdminBundle(),
-            new MyJobs\FrontBundle\MyJobsFrontBundle(),
+            new JG\CoreBundle\JGCoreBundle(),
+            new JG\UserBundle\JGUserBundle(),
+            new JG\AdminBundle\JGAdminBundle(),
+            new JG\FrontBundle\JGFrontBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

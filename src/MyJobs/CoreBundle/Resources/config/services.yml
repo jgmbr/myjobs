@@ -1,5 +1,0 @@
-services:
-    app.file.twig.extension:
-        class: MyJobs\CoreBundle\Twig\Extension\TwigExtension
-        tags:
-            - { name: twig.extension }

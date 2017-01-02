@@ -1,0 +1,91 @@
+{% extends "JGAdminBundle::layout.html.twig" %}
+
+{% block header %}
+    MyJobs - Mon Compte - Mes entreprises
+{% endblock %}
+
+{% block menu %}
+    {% include 'JGAdminBundle:Account:menu.html.twig' %}
+{% endblock %}
+
+{% block body %}
+
+    <ol class="breadcrumb">
+        <li> <a href="{{ path('account_home_page') }}"> Mon Compte </a> </li>
+        <li> <a href="{{ path('company_index') }}"> Mes entreprises </a> </li>
+        <li class="active"> Fiche </li>
+    </ol>
+
+    <table class="table table-responsive">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ company.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ company.name }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ company.address1 }}</td>
+            </tr>
+            <tr>
+                <th>Complément d'adresse</th>
+                <td>{{ company.address2 }}</td>
+            </tr>
+            <tr>
+                <th>Code postal</th>
+                <td>{{ company.postcode }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ company.city }}</td>
+            </tr>
+            <tr>
+                <th>Pays</th>
+                <td>{{ company.country }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td><a href="mailto:{{ company.email }}"> {{ company.email }} </a></td>
+            </tr>
+            <tr>
+                <th>Téléphone</th>
+                <td>{{ company.phone }}</td>
+            </tr>
+            <tr>
+                <th>Site web</th>
+                <td><a href="http://{{ company.website }}" target="_blank"> {{ company.website }} </a></td>
+            </tr>
+            <tr>
+                <th>Contact</th>
+                <td>{{ company.contact }}</td>
+            </tr>
+            <tr>
+                <th>Commentaire</th>
+                <td>{{ company.comment }}</td>
+            </tr>
+            <tr>
+                <th>Date de création</th>
+                <td>{% if company.createdAt %}{{ company.createdAt|date('d/m/Y à H:i') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Date de modification</th>
+                <td>{% if company.updatedAt %}{{ company.updatedAt|date('d/m/Y à H:i') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>
+        <a href="{{ path('company_edit', { 'id': company.id }) }}" class="btn btn-warning">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+        </a>
+        <a href="{{ path('company_delete', { 'id': company.id }) }}" class="btn btn-danger">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+        </a>
+    </p>
+
+    <p> <a href="{{ path('company_index') }}" class="btn btn-default">Retour à la liste des entreprises</a> </p>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "JGAdminBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block header %}
+    MyJobs - Administration - Profil
+{% endblock %}
+
+{% block menu %}
+    {% include 'JGAdminBundle:Admin:menu.html.twig' %}
+{% endblock %}
+
+{% block body %}
+
+    <ol class="breadcrumb">
+        <li> <a href="{{ path('admin_home_page') }}"> Administration </a> </li>
+        <li> <a href="{{ path('admin_profil') }}"> Profil </a> </li>
+        <li class="active"> Editer </li>
+    </ol>
+
+    <div class="well">
+        {{ form_start(form, { 'action': path('admin_profil_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+            {{ form_widget(form) }}
+            <div>
+                <input type="submit" value="{{ 'profile.edit.submit'|trans }}" class="btn btn-primary" />
+            </div>
+        {{ form_end(form) }}
+    </div>
+
+    <p> <a href="{{ path('admin_profil') }}" class="btn btn-default"> Retour à mon profil </a> </p>
+
+{% endblock %}
