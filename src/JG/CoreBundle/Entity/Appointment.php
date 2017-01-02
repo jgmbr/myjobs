@@ -90,6 +90,11 @@ class Appointment
      */
     private $application;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="JG\UserBundle\Entity\User", inversedBy="appoitments", cascade={"persist"})
+     */
+    private $user;
+
     public function __construct()
     {
         $this->createdAt    = new \Datetime();
@@ -271,6 +276,30 @@ class Appointment
     public function getApplication()
     {
         return $this->application;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \JG\UserBundle\Entity\User $user
+     *
+     * @return Appointment
+     */
+    public function setUser(\JG\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \JG\UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 
     /**

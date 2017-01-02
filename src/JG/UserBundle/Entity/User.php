@@ -56,6 +56,11 @@ class User extends BaseUser
      */
     private $companies;
 
+    /**
+     * @ORM\OneToMany(targetEntity="JG\CoreBundle\Entity\Appointment", mappedBy="user", cascade={"persist"})
+     */
+    private $appoitments;
+
     private $role;
 
     private $superAdmin;
@@ -101,6 +106,7 @@ class User extends BaseUser
         $this->createdAt    = new \Datetime();
         $this->applications = new ArrayCollection();
         $this->companies    = new ArrayCollection();
+        $this->appoitments  = new ArrayCollection();
     }
 
     /**
@@ -284,6 +290,40 @@ class User extends BaseUser
     }
 
     /**
+     * Add appoitment
+     *
+     * @param \JG\CoreBundle\Entity\Appointment $appoitment
+     *
+     * @return User
+     */
+    public function addAppoitment(\JG\CoreBundle\Entity\Appointment $appoitment)
+    {
+        $this->appoitments[] = $appoitment;
+
+        return $this;
+    }
+
+    /**
+     * Remove appoitment
+     *
+     * @param \JG\CoreBundle\Entity\Appointment $appoitment
+     */
+    public function removeAppoitment(\JG\CoreBundle\Entity\Appointment $appoitment)
+    {
+        $this->appoitments->removeElement($appoitment);
+    }
+
+    /**
+     * Get appoitments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAppoitments()
+    {
+        return $this->appoitments;
+    }
+
+    /**
      * Triggered on insert
 
      * @ORM\PrePersist
@@ -407,5 +447,29 @@ class User extends BaseUser
         if ($file) {
             unlink($file);
         }
+    }
+
+    /**
+     * Set picture
+     *
+     * @param string $picture
+     *
+     * @return User
+     */
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * Get picture
+     *
+     * @return string
+     */
+    public function getPicture()
+    {
+        return $this->picture;
     }
 }
