@@ -9,7 +9,7 @@
             <i class="fa fa-home" aria-hidden="true"></i> <span> Tableau de bord </span>
         </a>
     </li>
-    <li class="{% if app.request.attributes.get('_route') == "company_index" %}active{% endif %}">
+    <li class="{% if app.request.attributes.get('_route') == "company_index" %}active{% endif %} treeview">
         <a href="{{ path('company_index') }}">
             <i class="fa fa-building-o" aria-hidden="true"></i> <span> Mes Entreprises </span>
         </a>
@@ -31,12 +31,12 @@
     </li>
     <li class="{% if app.request.attributes.get('_route') == "alert_index" %}active{% endif %}">
         <a href="#">
-            <i class="fa fa-bell-o" aria-hidden="true"></i> <span> Mes Alertes (option) </span>
+            <i class="fa fa-bell-o" aria-hidden="true"></i> <span> Mes Alertes </span>
         </a>
     </li>
     <li class="{% if app.request.attributes.get('_route') == "preference_index" %}active{% endif %}">
         <a href="#">
-            <i class="fa fa-heart" aria-hidden="true"></i> <span> Mes Préférences (option) </span>
+            <i class="fa fa-heart" aria-hidden="true"></i> <span> Mes Préférences </span>
         </a>
     </li>
     <li class="{% if app.request.attributes.get('_route') == "account_profil" %}active{% endif %}">
