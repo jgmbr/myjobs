@@ -16,6 +16,9 @@
         <li class="active"> Fiche </li>
     </ol>
 
+<div class="box box-default">
+    <div class="box-body box-status">
+
     <table class="table table-responsive">
         <tbody>
             <tr>
@@ -25,6 +28,10 @@
             <tr>
                 <th>Nom</th>
                 <td>{{ status.name }}</td>
+            </tr>
+            <tr>
+                <th>Icône</th>
+                <td><i class="fa {{ status.icon }}" aria-hidden="true"></i></td>
             </tr>
             <tr>
                 <th>Code icône</th>
@@ -49,15 +56,23 @@
         </tbody>
     </table>
 
-    <p>
+        </div>
+    </div>
+
+
+    <div class="actions">
+        <a href="{{ path('status_index') }}" class="btn btn-primary pull-left">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i> &nbsp; Retour à la liste des statuts
+        </a>
         <a href="{{ path('status_edit', { 'id': status.id }) }}" class="btn btn-warning">
-            <i class="fa fa-pencil" aria-hidden="true"></i>
+            <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; Modifier
         </a>
         <a href="{{ path('status_delete', { 'id': status.id }) }}" class="btn btn-danger">
-            <i class="fa fa-trash" aria-hidden="true"></i>
+            <i class="fa fa-trash" aria-hidden="true"></i> &nbsp; Supprimer
         </a>
-    </p>
+    </div>
 
-    <p> <a href="{{ path('status_index') }}" class="btn btn-default">Retour à la liste des contrats</a> </p>
+
+
 
 {% endblock %}

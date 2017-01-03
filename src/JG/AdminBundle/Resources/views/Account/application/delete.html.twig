@@ -16,6 +16,9 @@
         <li class="active"> Supprimer </li>
     </ol>
 
+    <div class="box box-default">
+        <div class="box-body box-contract">
+
     <p>
         Etes-vous certain de vouloir supprimer la candidature "{{ application.name }}" ?
     </p>
@@ -27,6 +30,13 @@
     {{ form_end(delete_form) }}
     </div>
 
-    <p> <a href="{{ path('application_index') }}" class="btn btn-default">Retour à la liste des candidatures</a> </p>
+        </div>
+    </div>
+
+    <div class="actions">
+        <a href="{{ path('application_index') }}" class="btn btn-primary pull-left">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i> &nbsp; Retour à la liste des candidatures
+        </a>
+    </div>
 
 {% endblock %}

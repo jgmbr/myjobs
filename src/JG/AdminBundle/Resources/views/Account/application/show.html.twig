@@ -15,6 +15,10 @@
         <li class="active"> Fiche </li>
     </ol>
 
+
+<div class="box box-default">
+    <div class="box-body box-application">
+
     <table class="table table-responsive">
         <tbody>
             <tr>
@@ -72,15 +76,19 @@
         </tbody>
     </table>
 
-    <p>
+    </div>
+</div>
+
+    <div class="actions">
+        <a href="{{ path('application_index') }}" class="btn btn-primary pull-left">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i> &nbsp; Retour à la liste des candidatures
+        </a>
         <a href="{{ path('application_edit', { 'id': application.id }) }}" class="btn btn-warning">
-            <i class="fa fa-pencil" aria-hidden="true"></i>
+            <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; Modifier
         </a>
         <a href="{{ path('application_delete', { 'id': application.id }) }}" class="btn btn-danger">
-            <i class="fa fa-trash" aria-hidden="true"></i>
+            <i class="fa fa-trash" aria-hidden="true"></i> &nbsp; Supprimer
         </a>
-    </p>
-
-    <p> <a href="{{ path('application_index') }}" class="btn btn-default">Retour à la liste des candidatures</a> </p>
+    </div>
 
 {% endblock %}

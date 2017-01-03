@@ -16,6 +16,9 @@
         <li class="active"> Fiche </li>
     </ol>
 
+<div class="box box-default">
+    <div class="box-body box-contract">
+
     <table class="table table-responsive">
         <tbody>
             <tr>
@@ -45,15 +48,19 @@
         </tbody>
     </table>
 
-    <p>
+    </div>
+</div>
+
+    <div class="actions">
+        <a href="{{ path('contract_index') }}" class="btn btn-primary pull-left">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i> &nbsp; Retour à la liste des contrats
+        </a>
         <a href="{{ path('contract_edit', { 'id': contract.id }) }}" class="btn btn-warning">
-            <i class="fa fa-pencil" aria-hidden="true"></i>
+            <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; Modifier
         </a>
         <a href="{{ path('contract_delete', { 'id': contract.id }) }}" class="btn btn-danger">
-            <i class="fa fa-trash" aria-hidden="true"></i>
+            <i class="fa fa-trash" aria-hidden="true"></i> &nbsp; Supprimer
         </a>
-    </p>
-
-    <p> <a href="{{ path('contract_index') }}" class="btn btn-default">Retour à la liste des contrats</a> </p>
+    </div>
 
 {% endblock %}

@@ -16,17 +16,27 @@
         <li class="active"> Supprimer </li>
     </ol>
 
-    <p>
-        Etes-vous certain de vouloir supprimer le contrat "{{ contract.name }}" ?
-    </p>
+    <div class="box box-default">
+        <div class="box-body box-contract">
 
-    <div class="well">
-    {{ form_start(delete_form) }}
-        <input type="submit" value="Oui, je confirme la suppression" class="btn btn-success" />
-        {{ form_rest(delete_form) }}
-    {{ form_end(delete_form) }}
+        <p>
+            Etes-vous certain de vouloir supprimer le contrat "{{ contract.name }}" ?
+        </p>
+
+        <div class="well">
+        {{ form_start(delete_form) }}
+            <input type="submit" value="Oui, je confirme la suppression" class="btn btn-success" />
+            {{ form_rest(delete_form) }}
+        {{ form_end(delete_form) }}
+        </div>
+
+        </div>
     </div>
 
-    <p> <a href="{{ path('contract_index') }}" class="btn btn-default">Retour à la liste des contrats</a> </p>
+    <div class="actions">
+        <a href="{{ path('contract_index') }}" class="btn btn-primary pull-left">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i> &nbsp; Retour à la liste des contrats
+        </a>
+    </div>
 
 {% endblock %}
