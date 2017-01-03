@@ -55,7 +55,7 @@ class AdminContractController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($contract);
             $em->flush($contract);
-
+            $request->getSession()->getFlashBag()->add('success', 'Contrat ajouté avec succès !');
             return $this->redirectToRoute('contract_show', array('id' => $contract->getId()));
         }
 
@@ -95,7 +95,7 @@ class AdminContractController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $request->getSession()->getFlashBag()->add('success', 'Contrat modifié avec succès !');
             return $this->redirectToRoute('contract_show', array('id' => $contract->getId()));
         }
 
@@ -120,7 +120,7 @@ class AdminContractController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($contract);
             $em->flush($contract);
-
+            $request->getSession()->getFlashBag()->add('success', 'Contrat supprimé avec succès !');
             return $this->redirectToRoute('contract_index');
         }
 

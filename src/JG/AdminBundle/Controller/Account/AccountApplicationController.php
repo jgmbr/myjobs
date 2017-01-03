@@ -61,6 +61,7 @@ class AccountApplicationController extends Controller
             $em->persist($application);
             $em->flush($application);
 
+            $request->getSession()->getFlashBag()->add('success', 'Candidature ajoutée avec succès !');
             return $this->redirectToRoute('application_show', array('id' => $application->getId()));
         }
 
@@ -100,7 +101,7 @@ class AccountApplicationController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $request->getSession()->getFlashBag()->add('success', 'Candidature modifiée avec succès !');
             return $this->redirectToRoute('application_show', array('id' => $application->getId()));
         }
 
@@ -125,7 +126,7 @@ class AccountApplicationController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($application);
             $em->flush($application);
-
+            $request->getSession()->getFlashBag()->add('success', 'Candidature supprimée avec succès !');
             return $this->redirectToRoute('application_index');
         }
 

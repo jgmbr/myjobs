@@ -55,7 +55,7 @@ class AdminStatusController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($status);
             $em->flush($status);
-
+            $request->getSession()->getFlashBag()->add('success', 'Statut ajouté avec succès !');
             return $this->redirectToRoute('status_show', array('id' => $status->getId()));
         }
 
@@ -95,7 +95,7 @@ class AdminStatusController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $request->getSession()->getFlashBag()->add('success', 'Statut modifié avec succès !');
             return $this->redirectToRoute('status_show', array('id' => $status->getId()));
         }
 
@@ -120,7 +120,7 @@ class AdminStatusController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($status);
             $em->flush($status);
-
+            $request->getSession()->getFlashBag()->add('success', 'Statut supprimé avec succès !');
             return $this->redirectToRoute('status_index');
         }
 

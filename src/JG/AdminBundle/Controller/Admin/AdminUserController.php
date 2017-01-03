@@ -53,6 +53,8 @@ class AdminUserController extends Controller
             $em->persist($user);
             $em->flush($user);
 
+            $request->getSession()->getFlashBag()->add('success', 'Membre ajouté avec succès !');
+
             /*$newUser = $userManager->createUser();
             $newUser->setUsername($form->get('username')->getData());
             $newUser->setEmail($form->get('email')->getData());
@@ -84,7 +86,7 @@ class AdminUserController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $request->getSession()->getFlashBag()->add('success', 'Membre modifié avec succès !');
             return $this->redirectToRoute('user_index');
         }
 
@@ -109,7 +111,7 @@ class AdminUserController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($user);
             $em->flush($user);
-
+            $request->getSession()->getFlashBag()->add('success', 'Membre supprimé avec succès !');
             return $this->redirectToRoute('user_index');
         }
 

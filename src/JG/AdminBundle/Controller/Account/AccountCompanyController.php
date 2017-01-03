@@ -58,7 +58,7 @@ class AccountCompanyController extends Controller
             $user->addCompany($company);
             $em->persist($company);
             $em->flush($company);
-
+            $request->getSession()->getFlashBag()->add('success', 'Entreprise ajoutée avec succès !');
             return $this->redirectToRoute('company_show', array('id' => $company->getId()));
         }
 
@@ -98,7 +98,7 @@ class AccountCompanyController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $request->getSession()->getFlashBag()->add('success', 'Entreprise modifiée avec succès !');
             return $this->redirectToRoute('company_show', array('id' => $company->getId()));
         }
 
@@ -123,7 +123,7 @@ class AccountCompanyController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($company);
             $em->flush($company);
-
+            $request->getSession()->getFlashBag()->add('success', 'Entreprise supprimée avec succès !');
             return $this->redirectToRoute('company_index');
         }
 
