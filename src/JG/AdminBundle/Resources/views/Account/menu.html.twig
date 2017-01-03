@@ -20,7 +20,7 @@
         </a>
     </li>
     <li class="{% if app.request.attributes.get('_route') == "appointment_index" %}active{% endif %}">
-        <a href="#">
+        <a href="{{ path('appointment_index') }}">
             <i class="fa fa-calendar" aria-hidden="true"></i> <span> Mes Entretiens </span>
         </a>
     </li>

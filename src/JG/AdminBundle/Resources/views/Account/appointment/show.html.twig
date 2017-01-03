@@ -1,0 +1,70 @@
+{% extends "JGAdminBundle::layout.html.twig" %}
+
+{% block header %}
+    Mes entretiens
+{% endblock %}
+
+{% block menu %}
+    {% include 'JGAdminBundle:Account:menu.html.twig' %}
+{% endblock %}
+
+{% block body %}
+
+    <ol class="breadcrumb">
+        <li> <a href="{{ path('account_home_page') }}"> Mon Compte </a> </li>
+        <li> <a href="{{ path('company_index') }}"> Mes entretiens </a> </li>
+        <li class="active"> Fiche </li>
+    </ol>
+
+    <div class="box box-default">
+        <div class="box-body box-company">
+
+            <table class="table table-responsive">
+                <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ appointment.id }}</td>
+                </tr>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ appointment.name }}</td>
+                </tr>
+                <tr>
+                    <th>Date</th>
+                    <td>{% if appointment.dateAt %}{{ appointment.dateAt|date('Y-m-d') }}{% endif %}</td>
+                </tr>
+                <tr>
+                    <th>Heure</th>
+                    <td>{% if appointment.hourAt %}{{ appointment.hourAt|date('H:i:s') }}{% endif %}</td>
+                </tr>
+                <tr>
+                    <th>Commentaire</th>
+                    <td>{{ appointment.comment }}</td>
+                </tr>
+                <tr>
+                    <th>Date de création</th>
+                    <td>{% if appointment.createdAt %}{{ appointment.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                </tr>
+                <tr>
+                    <th>Date de modification</th>
+                    <td>{% if appointment.updatedAt %}{{ appointment.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="actions">
+        <a href="{{ path('appointment_index') }}" class="btn btn-primary pull-left">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i> &nbsp; Retour à la liste des entretiens
+        </a>
+        <a href="{{ path('appointment_edit', { 'id': appointment.id }) }}" class="btn btn-warning">
+            <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; Modifier
+        </a>
+        <a href="{{ path('appointment_delete', { 'id': appointment.id }) }}" class="btn btn-danger">
+            <i class="fa fa-trash" aria-hidden="true"></i> &nbsp; Supprimer
+        </a>
+    </div>
+
+{% endblock %}

@@ -12,4 +12,17 @@ use JG\CoreBundle\Entity\Appointment;
  */
 class AppointmentRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @return Appointment[]
+     */
+    public function findMyAppointments($user)
+    {
+        return $this
+            ->createQueryBuilder('a')
+            ->where('a.user = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

@@ -8,6 +8,7 @@
 
 namespace JG\AdminBundle\Controller\Account;
 
+use JG\CoreBundle\Form\SearchType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 

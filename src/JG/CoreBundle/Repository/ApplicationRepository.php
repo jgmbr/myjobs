@@ -12,6 +12,15 @@ use JG\CoreBundle\Entity\Application;
  */
 class ApplicationRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function myApplicationsFromQB($user)
+    {
+        return $this
+            ->createQueryBuilder('a')
+            ->where('a.user = :user')
+            ->setParameter('user', $user)
+        ;
+    }
+
     /**
      * @return Application[]
      */

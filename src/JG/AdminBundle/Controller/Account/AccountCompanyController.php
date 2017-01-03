@@ -5,7 +5,8 @@ namespace JG\AdminBundle\Controller\Account;
 use JG\CoreBundle\Entity\Company;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Company controller.
@@ -113,6 +114,7 @@ class AccountCompanyController extends Controller
      * Deletes a company entity.
      *
      * @Route("/{id}/delete", name="company_delete")
+     * @Method("DELETE")
      */
     public function deleteAction(Request $request, Company $company)
     {
