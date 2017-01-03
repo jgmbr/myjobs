@@ -1,13 +1,28 @@
 {% trans_default_domain 'FOSUserBundle' %}
-
-<h1> Mot de passe oublié ? </h1>
-
-<form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
-    <div>
-        <label for="username">{{ 'resetting.request.username'|trans }}</label>
-        <input type="text" id="username" name="username" required="required" />
+  
+<div class="register-box">
+    <div class="register-logo">
+        <a href="{{ path('home_page') }}"><b>MyJobs</b></a>
     </div>
-    <div>
-        <input type="submit" value="{{ 'resetting.request.submit'|trans }}" />
+
+    <div class="register-box-body">
+        <p class="login-box-msg">Mot de passe oublié ?</p>
+
+        <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+
+
+        <div class="form-group has-feedback">
+            <label for="username">{{ 'resetting.request.username'|trans }}</label>
+            <input type="text" class="form-control" id="username" name="username" required="required" />
+            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" id="submit" name="submit" value="{{ 'resetting.request.submit'|trans }}" class="btn btn-primary" />
+        </div>
+
+        </form>
+
     </div>
-</form>
+    <!-- /.form-box -->
+</div>

@@ -1,8 +1,21 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-{{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'resetting.reset.submit'|trans }}" />
+<div class="register-box">
+    <div class="register-logo">
+        <a href="{{ path('home_page') }}"><b>MyJobs</b></a>
     </div>
-{{ form_end(form) }}
+
+    <div class="register-box-body">
+        <p class="login-box-msg">Mot de passe oublié ?</p>
+
+        {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
+            {{ form_widget(form) }}
+            <input type="submit" value="{{ 'resetting.reset.submit'|trans }}" class="btn btn-primary" />
+        {{ form_end(form) }}
+
+        <br />
+        <p> <a href="{{ path('fos_user_security_login') }}" class="text-center">J'ai déjà un compte utilisateur ?</a> </p>
+
+    </div>
+    <!-- /.form-box -->
+</div>
