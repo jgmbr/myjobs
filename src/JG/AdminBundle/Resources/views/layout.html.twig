@@ -10,8 +10,6 @@
         <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/vendor/font-awesome/css/font-awesome.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/vendor/Ionicons/css/ionicons.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/vendor/fullcalendar/dist/fullcalendar.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/vendor/fullcalendar/dist/fullcalendar.print.css') }}" media="print">
         <link rel="stylesheet" href="{{ asset('assets/vendor/datatables.net-bs/css/dataTables.bootstrap.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/vendor/growl/stylesheets/jquery.growl.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/vendor/AdminLTE/dist/css/AdminLTE.min.css') }}">
@@ -300,10 +298,6 @@
         <script src="{{ asset('assets/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('assets/vendor/jquery-ui/jquery-ui.min.js') }}"></script>
         <script src="{{ asset('assets/vendor/AdminLTE/dist/js/app.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/moment/min/moment.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/fullcalendar/dist/fullcalendar.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/fullcalendar/dist/locale/fr.js') }}"></script>
-
         <script type="text/javascript">
             $(function () {
                 {% for msgSuccess in app.session.flashbag.get('success') %}
@@ -317,7 +311,6 @@
                 {% endfor %}
             });
         </script>
-
         {% block javascripts %}
         {% endblock %}
 
