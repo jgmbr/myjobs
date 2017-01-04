@@ -124,8 +124,18 @@
                     <table class="table table-responsive">
                         {% for appointment in myLastAppointments %}
                             <tr>
-                                <td class="text-left"> &nbsp; </td>
-                                <td class="text-right"> &nbsp; </td>
+                                <td class="text-left">
+                                    {{ appointment.name }} - {{ appointment.application.company.name }}
+                                    <span style="background:{{ appointment.state.color }}; color:#fff; padding:3px; margin: 0 5px;">
+                                        {{ appointment.state.name }}
+                                    </span>
+                                    le {{ appointment.dateAt|date('d/m/Y') }} à {{ appointment.hourAt|date('H:i:s') }}
+                                </td>
+                                <td class="text-right">
+                                    <a href="{{ path('appointment_show', { 'id': appointment.id }) }}" class="btn btn-default btn-sm">
+                                        Voir la fiche
+                                    </a>
+                                </td>
                             </tr>
                         {% endfor %}
                     </table>

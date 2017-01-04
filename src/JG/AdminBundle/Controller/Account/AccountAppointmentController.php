@@ -99,7 +99,7 @@ class AccountAppointmentController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
             $request->getSession()->getFlashBag()->add('success', 'Entretien modifié avec succès !');
-            return $this->redirectToRoute('appointment_edit', array('id' => $appointment->getId()));
+            return $this->redirectToRoute('appointment_show', array('id' => $appointment->getId()));
         }
 
         return $this->render('JGAdminBundle:Account:appointment/edit.html.twig', array(

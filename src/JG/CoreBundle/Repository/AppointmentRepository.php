@@ -12,6 +12,15 @@ use JG\CoreBundle\Entity\Appointment;
  */
 class AppointmentRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function myAppointmentsFromQB($user)
+    {
+        return $this
+            ->createQueryBuilder('a')
+            ->where('a.user = :user')
+            ->setParameter('user', $user)
+        ;
+    }
+
     /**
      * @return Appointment[]
      */
@@ -23,6 +32,33 @@ class AppointmentRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter('user', $user)
             ->getQuery()
             ->getResult()
+        ;
+    }
+
+    /**
+     * @return Appointment[]
+     */
+    public function findMyLastAppointments($user)
+    {
+        return $this
+            ->createQueryBuilder('a')
+            ->where('a.user = :user')
+            ->setParameter('user', $user)
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function countMyAppointments($user)
+    {
+        return $this
+            ->createQueryBuilder('a')
+            ->select('COUNT(a)')
+            ->where('a.user = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getSingleScalarResult()
         ;
     }
 }

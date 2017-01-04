@@ -27,13 +27,13 @@ class AccountController extends Controller
 
         $myLastCompanies = $em->getRepository('JGCoreBundle:Company')->findMyLastCompanies($this->getUser());
 
-        $myLastAppointments = null;
+        $myLastAppointments = $em->getRepository('JGCoreBundle:Appointment')->findMyLastAppointments($this->getUser());
 
         $nbApplications = $em->getRepository('JGCoreBundle:Application')->countMyApplications($this->getUser());
 
         $nbCompanies = $em->getRepository('JGCoreBundle:Company')->countMyCompanies($this->getUser());
 
-        $nbAppointments = 0;
+        $nbAppointments = $em->getRepository('JGCoreBundle:Appointment')->countMyAppointments($this->getUser());
 
         return $this->render('JGAdminBundle:Account:index.html.twig',array(
             'user'                  => $user,
