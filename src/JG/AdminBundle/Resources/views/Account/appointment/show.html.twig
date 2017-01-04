@@ -30,8 +30,20 @@
                     <td>{{ appointment.name }}</td>
                 </tr>
                 <tr>
+                    <th>Candidature</th>
+                    <td>{{ appointment.application.fullName }}</td>
+                </tr>
+                <tr>
+                    <th>Statut</th>
+                    <td>
+                        <span style="background:{{ appointment.state.color }}; color:#fff; padding:3px;">
+                            {{ appointment.state.name }}
+                        </span>
+                    </td>
+                </tr>
+                <tr>
                     <th>Date</th>
-                    <td>{% if appointment.dateAt %}{{ appointment.dateAt|date('Y-m-d') }}{% endif %}</td>
+                    <td>{% if appointment.dateAt %}{{ appointment.dateAt|date('d/m/Y') }}{% endif %}</td>
                 </tr>
                 <tr>
                     <th>Heure</th>

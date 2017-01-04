@@ -37,6 +37,8 @@
                                 <tr role="row">
                                     <th>Id</th>
                                     <th>Nom</th>
+                                    <th>Candidature</th>
+                                    <th>Statut</th>
                                     <th>Date</th>
                                     <th>Heure</th>
                                     <th>Commentaire</th>
@@ -50,6 +52,12 @@
                                     <tr role="row" class="{% if loop.index is odd %}odd{% else %}even{% endif %}">
                                         <td><a href="{{ path('appointment_show', { 'id': appointment.id }) }}">{{ appointment.id }}</a></td>
                                         <td>{{ appointment.name }}</td>
+                                        <td>{{ appointment.application.fullName }}</td>
+                                        <td>
+                                            <span style="background:{{ appointment.state.color }}; color:#fff; padding:3px;">
+                                                {{ appointment.state.name }}
+                                            </span>
+                                        </td>
                                         <td>{% if appointment.dateAt %}{{ appointment.dateAt|date('d/m/Y') }}{% endif %}</td>
                                         <td>{% if appointment.hourAt %}{{ appointment.hourAt|date('H:i:s') }}{% endif %}</td>
                                         <td>{{ appointment.comment }}</td>
@@ -73,6 +81,8 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Nom</th>
+                                    <th>Candidature</th>
+                                    <th>Statut</th>
                                     <th>Date</th>
                                     <th>Heure</th>
                                     <th>Commentaire</th>
@@ -93,7 +103,7 @@
 
     <div class="box box-default">
         <div class="box-body no-padding">
-    <div id="calendar"></div>
+            <div id="calendar"></div>
         </div>
     </div>
 
@@ -151,34 +161,17 @@
                 },
                 locale: 'fr',
                 events: [
-                    {
-                        title: 'All Day Event',
-                        start: new Date(y, m, 1),
-                        backgroundColor: "#f56954", //red
-                        borderColor: "#f56954" //red
-                    },
-                    {
-                        title: 'Long Event',
-                        start: new Date(y, m, d - 5),
-                        end: new Date(y, m, d - 2),
-                        backgroundColor: "#f39c12", //yellow
-                        borderColor: "#f39c12" //yellow
-                    },
-                    {
-                        title: 'Meeting',
-                        start: new Date(y, m, d, 10, 30),
-                        allDay: false,
-                        backgroundColor: "#0073b7", //Blue
-                        borderColor: "#0073b7" //Blue
-                    },
-                    {
-                        title: 'Birthday Party',
-                        start: new Date(y, m, d + 1, 19, 0),
-                        end: new Date(y, m, d + 1, 22, 30),
-                        allDay: false,
-                        backgroundColor: "#00a65a", //Success (green)
-                        borderColor: "#00a65a" //Success (green)
-                    }
+                    {% if appointments is defined and appointments|length > 0 %}
+                        {% for appointment in appointments %}
+                            {
+                                title: "{{ appointment.application.company.name|upper }}",
+                                start: "{{ appointment.dateAt|date('Y-m-d') }}",
+                                backgroundColor: "{{ appointment.state.color }}",
+                                borderColor: "{{ appointment.state.color }}",
+                                url: "{{ path('appointment_show', { 'id': appointment.id }) }}"
+                            },
+                        {% endfor %}
+                    {% endif %}
                 ]
             });
         });

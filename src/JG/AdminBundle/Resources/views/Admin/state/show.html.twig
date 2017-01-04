@@ -1,0 +1,66 @@
+{% extends "JGAdminBundle::layout.html.twig" %}
+
+{% block header %}
+    Etats d'entretien
+{% endblock %}
+
+{% block menu %}
+    {% include 'JGAdminBundle:Admin:menu.html.twig' %}
+{% endblock %}
+
+{% block body %}
+
+    <ol class="breadcrumb">
+        <li> <a href="{{ path('admin_home_page') }}"> Administration </a> </li>
+        <li> <a href="{{ path('state_index') }}"> Etats d'entretien </a> </li>
+        <li class="active"> Fiche </li>
+    </ol>
+
+    <div class="box box-default">
+        <div class="box-body box-contract">
+
+            <table class="table table-responsive">
+                <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ state.id }}</td>
+                </tr>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ state.name }}</td>
+                </tr>
+                <tr>
+                    <th>Couleur</th>
+                    <td> <span style="background:{{ state.color }}; width:20px; height:20px; display:block;">&nbsp;</span> </td>
+                </tr>
+                <tr>
+                    <th>Code couleur</th>
+                    <td>{{ state.color }}</td>
+                </tr>
+                <tr>
+                    <th>Date de création</th>
+                    <td>{% if state.createdAt %}{{ state.createdAt|date('d/m/Y H:i:s') }}{% endif %}</td>
+                </tr>
+                <tr>
+                    <th>Date de modification</th>
+                    <td>{% if state.updatedAt %}{{ state.updatedAt|date('d/m/Y H:i:s') }}{% endif %}</td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="actions">
+        <a href="{{ path('state_index') }}" class="btn btn-primary pull-left">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i> &nbsp; Retour à la liste des états d'entretien
+        </a>
+        <a href="{{ path('state_edit', { 'id': state.id }) }}" class="btn btn-warning">
+            <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; Modifier
+        </a>
+        <a href="{{ path('state_delete', { 'id': state.id }) }}" class="btn btn-danger">
+            <i class="fa fa-trash" aria-hidden="true"></i> &nbsp; Supprimer
+        </a>
+    </div>
+
+{% endblock %}

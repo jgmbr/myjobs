@@ -95,6 +95,11 @@ class Appointment
      */
     private $user;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="JG\CoreBundle\Entity\State", inversedBy="appointments", cascade={"persist"})
+     */
+    private $state;
+
     public function __construct()
     {
         $this->createdAt    = new \Datetime();
@@ -300,6 +305,30 @@ class Appointment
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set state
+     *
+     * @param \JG\CoreBundle\Entity\State $state
+     *
+     * @return Appointment
+     */
+    public function setState(\JG\CoreBundle\Entity\State $state = null)
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * Get state
+     *
+     * @return \JG\CoreBundle\Entity\State
+     */
+    public function getState()
+    {
+        return $this->state;
     }
 
     /**

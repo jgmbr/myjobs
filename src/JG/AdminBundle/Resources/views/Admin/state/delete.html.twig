@@ -1,0 +1,42 @@
+{% extends "JGAdminBundle::layout.html.twig" %}
+
+{% block header %}
+    Etats d'entretien
+{% endblock %}
+
+{% block menu %}
+    {% include 'JGAdminBundle:Admin:menu.html.twig' %}
+{% endblock %}
+
+{% block body %}
+
+    <ol class="breadcrumb">
+        <li> <a href="{{ path('admin_home_page') }}"> Administration </a> </li>
+        <li> <a href="{{ path('state_index') }}"> Etats d'entretiens </a> </li>
+        <li class="active"> Supprimer </li>
+    </ol>
+
+    <div class="box box-default">
+        <div class="box-body box-contract">
+
+        <p>
+            Etes-vous certain de vouloir supprimer l'état "{{ state.name }}" ?
+        </p>
+
+        <div class="well">
+        {{ form_start(delete_form) }}
+            <input type="submit" value="Oui, je confirme la suppression" class="btn btn-success" />
+            {{ form_rest(delete_form) }}
+        {{ form_end(delete_form) }}
+        </div>
+
+        </div>
+    </div>
+
+    <div class="actions">
+        <a href="{{ path('state_index') }}" class="btn btn-primary pull-left">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i> &nbsp; Retour à la liste des états d'entretien
+        </a>
+    </div>
+
+{% endblock %}

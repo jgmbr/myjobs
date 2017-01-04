@@ -25,13 +25,19 @@ class AppointmentType extends AbstractType
             ->add('application', EntityType::class, array(
                 'label'         => 'Candidature',
                 'class'         => 'JGCoreBundle:Application',
-                'choice_label'  => 'name',
+                'choice_label'  => 'fullname',
                 'multiple'      => false,
                 'query_builder' => function(ApplicationRepository $repository) use($user) {
                     return $repository->myApplicationsFromQB($user);
                 }
             ))
             ->add('name', TextType::class, array('label' => 'Nom'))
+            ->add('state', EntityType::class, array(
+                'label'         => 'Etat',
+                'class'         => 'JGCoreBundle:State',
+                'choice_label'  => 'name',
+                'multiple'      => false,
+            ))
             ->add('dateAt', DateType::class, array(
                 'label'     => 'Date',
                 'widget'    => 'single_text',

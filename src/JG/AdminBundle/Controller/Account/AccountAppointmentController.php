@@ -44,11 +44,18 @@ class AccountAppointmentController extends Controller
         $form = $this->createForm('JG\CoreBundle\Form\AppointmentType', $appointment, array('current_user' => $this->getUser()));
         $form->handleRequest($request);
 
+        $user = $this->getUser();
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            $appointment->setUser($user);
+            $user->addAppoitment($appointment);
+
             $em->persist($appointment);
             $em->flush($appointment);
 
+            $request->getSession()->getFlashBag()->add('success', 'Entretien ajoutée avec succès !');
             return $this->redirectToRoute('appointment_show', array('id' => $appointment->getId()));
         }
 
@@ -88,7 +95,7 @@ class AccountAppointmentController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $request->getSession()->getFlashBag()->add('success', 'Entretien modifié avec succès !');
             return $this->redirectToRoute('appointment_edit', array('id' => $appointment->getId()));
         }
 

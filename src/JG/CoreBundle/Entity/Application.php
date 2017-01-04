@@ -136,6 +136,11 @@ class Application
         $this->relaunches   = new ArrayCollection();
     }
 
+    public function getFullName()
+    {
+        return $this->getName() . ' - ' . $this->getCompany()->getName();
+    }
+
     /**
      * Get id
      *
