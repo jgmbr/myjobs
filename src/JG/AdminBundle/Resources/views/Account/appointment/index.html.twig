@@ -104,6 +104,12 @@
     <div class="box box-default">
         <div class="box-body no-padding">
             <div id="calendar"></div>
+            <div class="legends">
+                Entretien
+                {% for state in states %}
+                    <span style="padding: 5px; color: #fff; background: {{ state.color }}; margin: 0 0 0 10px;"> {{ state.name }} </span>
+                {% endfor %}
+            </div>
         </div>
     </div>
 
@@ -143,10 +149,6 @@
                 }
             });
 
-            var date = new Date();
-            var d = date.getDate(),
-                    m = date.getMonth(),
-                    y = date.getFullYear();
             $('#calendar').fullCalendar({
                 header: {
                     left: 'prev,next',

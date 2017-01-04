@@ -27,8 +27,11 @@ class AccountAppointmentController extends Controller
 
         $appointments = $em->getRepository('JGCoreBundle:Appointment')->findMyAppointments($this->getUser());
 
+        $states = $em->getRepository('JGCoreBundle:State')->findAll();
+
         return $this->render('JGAdminBundle:Account:appointment/index.html.twig', array(
-            'appointments' => $appointments,
+            'appointments'  => $appointments,
+            'states'        => $states
         ));
     }
 
