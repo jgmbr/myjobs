@@ -21,11 +21,7 @@
     <div class="box box-default">
         <div class="box-body box-profile">
 
-            {% if file_exists('uploads/profiles/' ~ user.picture) %}
-                <img src="{{ asset('uploads/profiles/' ~ user.picture) }}" class="profile-user-img img-responsive img-circle" width="150" alt="User profile picture" />
-            {% else %}
-                <i class="fa fa-user-circle-o fa-3x" aria-hidden="true"></i>
-            {% endif %}
+            <img src="{{ ('uploads/profiles/' ~ user.picture)|imagine_filter('avatar') }}" class="profile-user-img img-responsive img-circle" width="150" alt="User profile picture" />
 
             <p class="text-muted text-center"> &nbsp; </p>
 

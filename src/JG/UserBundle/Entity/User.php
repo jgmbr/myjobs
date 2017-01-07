@@ -72,10 +72,10 @@ class User extends BaseUser
 
     /**
      * @Assert\File(
-     *     maxSize = "50k",
-     *     maxSizeMessage = "Poids maximal de la photo : 50k",
-     *     mimeTypes = {"image/png"},
-     *     mimeTypesMessage = "Format de la photo incorrect : PNG autorisé",
+     *     maxSize = "3M",
+     *     maxSizeMessage = "Poids maximal de la photo : 3 mo",
+     *     mimeTypes = {"image/png","image/jpg","image/jpeg"},
+     *     mimeTypesMessage = "Format de la photo incorrect : PNG, JPG et JPEG autorisés",
      *     uploadErrorMessage = "Le fichier ne peut être envoyé",
      *     uploadFormSizeErrorMessage = "Le fichier est trop grand",
      *     notReadableMessage = "Le fichier n'est pas lisible",
@@ -85,20 +85,6 @@ class User extends BaseUser
     private $file;
 
     private $temp;
-
-    /*private $initfile;
-
-    public function getInitFile()
-    {
-        return '<img src="/web/'.$this->getWebPath().'" />';
-    }
-
-    public function setInitFile($initFile)
-    {
-        $this->initfile = $initFile;
-
-        return $this;
-    }*/
 
     public function __construct()
     {
