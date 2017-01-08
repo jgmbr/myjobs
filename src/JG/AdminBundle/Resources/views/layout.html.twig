@@ -107,7 +107,11 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="{{ path('account_profil') }}" class="btn btn-default btn-flat">Mon profil</a>
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <a href="{{ path('admin_profil') }}" class="btn btn-default btn-flat">Mon profil</a>
+                                        {% else %}
+                                            <a href="{{ path('account_profil') }}" class="btn btn-default btn-flat">Mon profil</a>
+                                        {% endif %}
                                     </div>
                                     <div class="pull-right">
                                         <a href="{{ path('fos_user_security_logout') }}" class="btn btn-default btn-flat">Déconnexion</a>
