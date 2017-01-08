@@ -11,6 +11,7 @@
 
 namespace JG\UserBundle\Form;
 
+use JG\CoreBundle\Form\Type\ImageType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -19,6 +20,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormEvent;
 
 class ProfileType extends AbstractType
 {
@@ -60,6 +63,17 @@ class ProfileType extends AbstractType
             ->add('firstname', null, array('label' => 'form.firstname', 'translation_domain' => 'FOSUserBundle'))
             ->add('file', FileType::class, array('label' => 'form.file', 'translation_domain' => 'FOSUserBundle','required' => false))
         ;
+
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
+            $object = $event->getData();
+            $form = $event->getForm();
+            if (!$object || null === $object->getId()) {
+                return;
+            } else {
+                $form->add('picture', ImageType::class, array('label' => 'Image', 'image_path' => $object->getPicture() ));
+            }
+
+        });
 
     }
 
