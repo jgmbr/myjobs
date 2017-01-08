@@ -1,7 +1,7 @@
 {% extends "JGAdminBundle::layout.html.twig" %}
 
 {% block header %}
-    Entreprises
+    Candidatures
 {% endblock %}
 
 {% block menu %}
@@ -9,29 +9,31 @@
 {% endblock %}
 
 {% block body %}
-
     <ol class="breadcrumb">
         <li> <a href="{{ path('admin_home_page') }}"> Administration </a> </li>
-        <li> <a href="{{ path('company_list') }}"> Entreprises </a> </li>
+        <li> <a href="{{ path('application_list') }}"> Candidatures </a> </li>
         <li class="active"> Liste </li>
     </ol>
 
     <div class="box">
         <div class="box-body">
-            <div id="company_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+            <div id="application_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                 <div class="row">
                     <div class="col-sm-6"></div>
                     <div class="col-sm-6"></div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        {% if companies is defined and companies|length > 0 %}
-                            <table id="company" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="company_info">
+                        {% if applications is defined and applications|length > 0 %}
+                            <table id="application" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="application_info">
                                 <thead>
                                 <tr role="row">
                                     <th>Id</th>
+                                    <th>Date</th>
                                     <th>Nom</th>
-                                    <th>Site web</th>
+                                    <th>Contrat</th>
+                                    <th>Entreprise</th>
+                                    <th>Statut</th>
                                     <th>Utilisateur</th>
                                     <th>Date de création</th>
                                     <th>Date de modification</th>
@@ -39,18 +41,25 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% for company in companies %}
+                                {% for application in applications %}
                                     <tr role="row" class="{% if loop.index is odd %}odd{% else %}even{% endif %}">
-                                        <td><a href="{{ path('company_list_show', { 'id': company.id }) }}">{{ company.id }}</a></td>
-                                        <td>{{ company.name }}</td>
+                                        <td><a href="{{ path('application_show', { 'id': application.id }) }}">{{ application.id }}</a></td>
+                                        <td> {{ application.dateAt|date('d/m/Y') }} </td>
+                                        <td> {{ application.name }} </td>
                                         <td>
-                                            <a href="http://{{ company.website }}" target="_blank"> {{ company.website }} </a>
+                                            <span style="background:{{ application.contract.color }}; color:#fff; padding:3px;">
+                                                {{ application.contract.name }}
+                                            </span>
                                         </td>
-                                        <td> {{ company.user.username }} </td>
-                                        <td>{% if company.createdAt %}{{ company.createdAt|date('d/m/Y à H:i') }}{% endif %}</td>
-                                        <td>{% if company.updatedAt %}{{ company.updatedAt|date('d/m/Y à H:i') }}{% endif %}</td>
                                         <td>
-                                            <a href="{{ path('company_list_show', { 'id': company.id }) }}" class="btn btn-info btn-xs">
+                                            <a href="{{ path('company_show', { 'id': application.company.id }) }}"> {{ application.company.name }} </a>
+                                        </td>
+                                        <td> <i class="fa {{ application.status.icon }}" aria-hidden="true"></i> {{ application.status.name }} </td>
+                                        <td> {{ application.user.username }} </td>
+                                        <td>{% if application.createdAt %}{{ application.createdAt|date('d/m/Y à H:i') }}{% endif %}</td>
+                                        <td>{% if application.updatedAt %}{{ application.updatedAt|date('d/m/Y à H:i') }}{% endif %}</td>
+                                        <td>
+                                            <a href="{{ path('application_list_show', { 'id': application.id }) }}" class="btn btn-info btn-xs">
                                                 <i class="fa fa-eye" aria-hidden="true"></i>
                                             </a>
                                         </td>
@@ -60,8 +69,11 @@
                                 <tfoot>
                                 <tr>
                                     <th>Id</th>
+                                    <th>Date</th>
                                     <th>Nom</th>
-                                    <th>Site web</th>
+                                    <th>Contrat</th>
+                                    <th>Entreprise</th>
+                                    <th>Statut</th>
                                     <th>Utilisateur</th>
                                     <th>Date de création</th>
                                     <th>Date de modification</th>
@@ -70,7 +82,7 @@
                                 </tfoot>
                             </table>
                         {% else %}
-                            <p> Pas d'entreprises. </p>
+                            <p> Pas de candidatures. </p>
                         {% endif %}
                     </div>
                 </div>
@@ -83,7 +95,7 @@
 {% block javascripts %}
     <script type="text/javascript">
         $(function () {
-            $('#company').DataTable({
+            $('#application').DataTable({
                 "paging": true,
                 "lengthChange": true,
                 "searching": true,
