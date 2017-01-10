@@ -3,6 +3,7 @@
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('assets/vendor/fullcalendar/dist/fullcalendar.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/fullcalendar/dist/fullcalendar.print.css') }}" media="print">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/qtip2/jquery.qtip.css') }}">
 {% endblock %}
 
 {% block header %}
@@ -122,6 +123,7 @@
     <script src="{{ asset('assets/vendor/moment/min/moment.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/fullcalendar/dist/fullcalendar.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/fullcalendar/dist/locale/fr.js') }}"></script>
+    <script src="{{ asset('assets/vendor/qtip2/jquery.qtip.min.js') }}"></script>
     <script type="text/javascript">
         $(function () {
             $('#appointment').DataTable({
@@ -176,11 +178,29 @@
                                 start: "{{ appointment.dateAt|date('Y-m-d') }}",
                                 backgroundColor: "{{ appointment.state.color }}",
                                 borderColor: "{{ appointment.state.color }}",
-                                url: "{{ path('appointment_show', { 'id': appointment.id }) }}"
+                                url: "{{ path('appointment_show', { 'id': appointment.id }) }}",
+                                comment: "{{ appointment.comment }}",
+                                date: "{{ appointment.dateAt|date('d/m/Y') }}",
+                                hour: "{{ appointment.hourAt|date('H:i') }}",
                             },
                         {% endfor %}
                     {% endif %}
-                ]
+                ],
+                eventRender: function(event, element) {
+                    element.qtip({
+                        content: {
+                            text: 'Date : '+ event.date + ' <br /> <br /> Heure : ' + event.hour + " <br /> <br /> " + event.comment,
+                            title: 'Information(s)'
+                        },
+                        style: {
+                            classes: 'qtip-light qtip-bootstrap'
+                        },
+                        position: {
+                            my: 'top center',
+                            at: 'bottom center'
+                        }
+                    });
+                }
             });
         });
     </script>
