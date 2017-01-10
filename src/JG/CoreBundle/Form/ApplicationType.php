@@ -53,8 +53,8 @@ class ApplicationType extends AbstractType
                     return $repository->myCompaniesFromQB($user);
                 }
             ))
-            ->add('businessReason', TextareaType::class, array('label' => 'Motif entreprise', 'required' => false))
-            ->add('peopleReason', TextareaType::class, array('label' => 'Motif candidat', 'required' => false))
+            ->add('businessReason', TextareaType::class, array('label' => 'Motif Entreprise', 'required' => false))
+            ->add('peopleReason', TextareaType::class, array('label' => 'Motif Candidat', 'required' => false))
             ->add('comment', TextareaType::class, array('label' => 'Commentaires', 'required' => false))
         ;
     }
