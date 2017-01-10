@@ -120,8 +120,11 @@ class AccountAppointmentController extends Controller
         $form = $this->createDeleteForm($appointment);
         $form->handleRequest($request);
 
+        $user = $this->getUser();
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $user->removeAppointment($appointment);
             $em->remove($appointment);
             $em->flush($appointment);
             $request->getSession()->getFlashBag()->add('success', 'Entretien supprimé avec succès !');

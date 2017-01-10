@@ -168,8 +168,11 @@ class AccountApplicationController extends Controller
         $form = $this->createDeleteForm($application);
         $form->handleRequest($request);
 
+        $user = $this->getUser();
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $user->removeApplication($application);
             $em->remove($application);
             $em->flush($application);
             $request->getSession()->getFlashBag()->add('success', 'Candidature supprimée avec succès !');

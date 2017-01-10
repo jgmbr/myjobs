@@ -121,8 +121,11 @@ class AccountCompanyController extends Controller
         $form = $this->createDeleteForm($company);
         $form->handleRequest($request);
 
+        $user = $this->getUser();
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $user->removeCompany($company);
             $em->remove($company);
             $em->flush($company);
             $request->getSession()->getFlashBag()->add('success', 'Entreprise supprimée avec succès !');
