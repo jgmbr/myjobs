@@ -59,7 +59,7 @@ class User extends BaseUser
     /**
      * @ORM\OneToMany(targetEntity="JG\CoreBundle\Entity\Appointment", mappedBy="user", cascade={"persist"})
      */
-    private $appoitments;
+    private $appointments;
 
     private $role;
 
@@ -92,7 +92,7 @@ class User extends BaseUser
         $this->createdAt    = new \Datetime();
         $this->applications = new ArrayCollection();
         $this->companies    = new ArrayCollection();
-        $this->appoitments  = new ArrayCollection();
+        $this->appointments = new ArrayCollection();
     }
 
     /**
@@ -276,37 +276,37 @@ class User extends BaseUser
     }
 
     /**
-     * Add appoitment
+     * Add appointment
      *
-     * @param \JG\CoreBundle\Entity\Appointment $appoitment
+     * @param \JG\CoreBundle\Entity\Appointment $appointment
      *
      * @return User
      */
-    public function addAppoitment(\JG\CoreBundle\Entity\Appointment $appoitment)
+    public function addAppointment(\JG\CoreBundle\Entity\Appointment $appointment)
     {
-        $this->appoitments[] = $appoitment;
+        $this->appointments[] = $appointment;
 
         return $this;
     }
 
     /**
-     * Remove appoitment
+     * Remove appointment
      *
-     * @param \JG\CoreBundle\Entity\Appointment $appoitment
+     * @param \JG\CoreBundle\Entity\Appointment $appointment
      */
-    public function removeAppoitment(\JG\CoreBundle\Entity\Appointment $appoitment)
+    public function removeAppointment(\JG\CoreBundle\Entity\Appointment $appointment)
     {
-        $this->appoitments->removeElement($appoitment);
+        $this->appointments->removeElement($appointment);
     }
 
     /**
-     * Get appoitments
+     * Get appointments
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getAppoitments()
+    public function getAppointments()
     {
-        return $this->appoitments;
+        return $this->appointments;
     }
 
     /**

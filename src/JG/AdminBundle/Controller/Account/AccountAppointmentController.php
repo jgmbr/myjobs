@@ -53,7 +53,7 @@ class AccountAppointmentController extends Controller
             $em = $this->getDoctrine()->getManager();
 
             $appointment->setUser($user);
-            $user->addAppoitment($appointment);
+            $user->addAppointment($appointment);
 
             $em->persist($appointment);
             $em->flush($appointment);

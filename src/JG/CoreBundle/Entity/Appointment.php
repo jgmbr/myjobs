@@ -91,7 +91,7 @@ class Appointment
     private $application;
 
     /**
-     * @ORM\ManyToOne(targetEntity="JG\UserBundle\Entity\User", inversedBy="appoitments", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="JG\UserBundle\Entity\User", inversedBy="appointments", cascade={"persist"})
      */
     private $user;
 
