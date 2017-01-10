@@ -15,69 +15,150 @@
         <li class="active"> Fiche </li>
     </ol>
 
-
-<div class="box box-default">
-    <div class="box-body box-application">
-
-    <table class="table table-responsive">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ application.id }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ application.dateAt|date('d/m/Y') }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ application.name }}</td>
-            </tr>
-            <tr>
-                <th>Url de l'annonce</th>
-                <td>{{ application.url }}</td>
-            </tr>
-            <tr>
-                <th>Contrat</th>
-                <td>
-                    <span style="background:{{ application.contract.color }}; color:#fff; padding:3px;">
-                        {{ application.contract.name }}
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <th>Statut</th>
-                <td><i class="fa {{ application.status.icon }}" aria-hidden="true"></i> {{ application.status.name }}</td>
-            </tr>
-            <tr>
-                <th>Entreprise</th>
-                <td><a href="{{ path('company_show', { 'id': application.company.id }) }}"> {{ application.company.name }} </a></td>
-            </tr>
-            <tr>
-                <th>Commentaire</th>
-                <td>{{ application.comment }}</td>
-            </tr>
-            <tr>
-                <th>Motif entreprise</th>
-                <td>{{ application.businessReason }}</td>
-            </tr>
-            <tr>
-                <th>Motif candidat</th>
-                <td>{{ application.peopleReason }}</td>
-            </tr>
-            <tr>
-                <th>Date de création</th>
-                <td>{% if application.createdAt %}{{ application.createdAt|date('d/m/Y à H:i') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Date de modification</th>
-                <td>{% if application.updatedAt %}{{ application.updatedAt|date('d/m/Y à H:i') }}{% endif %}</td>
-            </tr>
-        </tbody>
-    </table>
-
+    <div class="box box-default">
+        <div class="box-body box-application">
+            <table class="table table-responsive">
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ application.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date</th>
+                        <td>{{ application.dateAt|date('d/m/Y') }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nom</th>
+                        <td>{{ application.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Url de l'annonce</th>
+                        <td>{{ application.url }}</td>
+                    </tr>
+                    <tr>
+                        <th>Contrat</th>
+                        <td>
+                            <span style="background:{{ application.contract.color }}; color:#fff; padding:3px;">
+                                {{ application.contract.name }}
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Statut</th>
+                        <td><i class="fa {{ application.status.icon }}" aria-hidden="true"></i> {{ application.status.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Entreprise</th>
+                        <td><a href="{{ path('company_show', { 'id': application.company.id }) }}"> {{ application.company.name }} </a></td>
+                    </tr>
+                    <tr>
+                        <th>Commentaire</th>
+                        <td>{{ application.comment }}</td>
+                    </tr>
+                    <tr>
+                        <th>Motif entreprise</th>
+                        <td>{{ application.businessReason }}</td>
+                    </tr>
+                    <tr>
+                        <th>Motif candidat</th>
+                        <td>{{ application.peopleReason }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date de création</th>
+                        <td>{% if application.createdAt %}{{ application.createdAt|date('d/m/Y à H:i') }}{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <th>Date de modification</th>
+                        <td>{% if application.updatedAt %}{{ application.updatedAt|date('d/m/Y à H:i') }}{% endif %}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
+
+    <div class="box box-default">
+        <div class="box-header"> <i class="fa fa-calendar" aria-hidden="true"></i> <h3 class="box-title"> Entretiens </h3> </div>
+        <div class="box-body box-application">
+            <table class="table table-responsive">
+                <tbody>
+                <tr>
+                    <td>
+                        {% if application.appointments is defined and application.appointments|length > 0 %}
+                            {% for appointment in application.appointments %}
+                                <p>
+                                    {{ appointment.name }} le {{ appointment.dateAt|date('d/m/Y') }} à {{ appointment.hourAt|date('H:i') }}
+                                    <span style="background:{{ appointment.state.color }}; color:#fff; padding:3px;">
+                                        {{ appointment.state.name }}
+                                    </span>
+                                </p>
+                            {% endfor %}
+                        {% else %}
+                            <p> Pas d'entretiens. </p>
+                        {% endif %}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="box-footer">
+            <a href="{{ path('appointment_new') }}" class="btn btn-default pull-right">
+                <i class="fa fa-plus" aria-hidden="true"></i> &nbsp; Ajouter un entretien
+            </a>
+        </div>
+    </div>
+
+    <div class="box box-default">
+        <div class="box-header"> <i class="fa fa-calendar" aria-hidden="true"></i> <h3 class="box-title"> Relances </h3> </div>
+        <div class="box-body box-application">
+            <table class="table table-responsive">
+                <tbody>
+                <tr>
+                    <td>
+                        {% if application.relaunches is defined and application.relaunches|length > 0 %}
+                            {% for relaunch in application.relaunches %}
+                                <p>
+                                    Relance le {{ relaunch.dateAt|date('d/m/Y') }} à {{ relaunch.hourAt|date('H:i') }} -
+                                    Commentaire : {{ relaunch.comment }}
+                                </p>
+                            {% endfor %}
+                        {% else %}
+                            <p> Pas de relances. </p>
+                        {% endif %}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="box-footer">
+            <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#modalNewRelaunch">
+                <i class="fa fa-plus" aria-hidden="true"></i> &nbsp; Ajouter une relance
+            </button>
+            <div class="modal fade" id="modalNewRelaunch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Nouvelle relance</h4>
+                        </div>
+                        <div class="modal-body">
+                            {{ form_start(formRelaunch, {'action': path('add_relaunch', { 'id': application.id }) }) }}
+                            <div class="box-body">
+                                {{ form_widget(formRelaunch) }}
+                            </div>
+                            <div class="box-footer">
+                                <input type="submit" value="Ajouter" class="btn btn-primary" />
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                            </div>
+                            {{ form_end(formRelaunch) }}
+                        </div>
+                        <div class="modal-footer">
+                            &nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="actions">
         <a href="{{ path('application_index') }}" class="btn btn-primary pull-left">
@@ -91,4 +172,39 @@
         </a>
     </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        initAjaxForm();
+        function initAjaxForm()
+        {
+            $('body').on('submit', 'form[name=jg_corebundle_relaunch]', function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('add_relaunch', { 'id': application.id }) }}",
+                    data: $(this).serialize()
+                })
+                .done(function (data) {
+                    if (typeof data.message !== 'undefined') {
+                        if (data.message == 'Success') {
+                            $('#modalNewRelaunch').modal('hide');
+                            $.growl.notice({ message: "Relance ajoutée avec succès !" });
+                            setTimeout(function(){
+                                location.reload();
+                            }, 1500);
+                        }
+                    }
+                })
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    if (typeof jqXHR.responseJSON !== 'undefined') {
+                        $('.form_error').html(jqXHR.responseJSON.message);
+                    } else {
+                        alert(errorThrown);
+                    }
+                });
+            });
+        }
+    </script>
 {% endblock %}

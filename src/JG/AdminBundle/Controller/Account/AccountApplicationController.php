@@ -3,9 +3,12 @@
 namespace JG\AdminBundle\Controller\Account;
 
 use JG\CoreBundle\Entity\Application;
+use JG\CoreBundle\Entity\Relaunch;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Application controller.
@@ -77,14 +80,57 @@ class AccountApplicationController extends Controller
      * @Route("/{id}", name="application_show")
      * @Method("GET")
      */
-    public function showAction(Application $application)
+    public function showAction(Request $request, Application $application)
     {
         $deleteForm = $this->createDeleteForm($application);
+
+        $relaunch = new Relaunch();
+        $form = $this->createForm('JG\CoreBundle\Form\RelaunchType', $relaunch, array(
+            'current_user'  => $this->getUser()
+        ));
 
         return $this->render('JGAdminBundle:Account:application/show.html.twig', array(
             'application' => $application,
             'delete_form' => $deleteForm->createView(),
+            'formRelaunch' => $form->createView()
         ));
+    }
+
+    /**
+     * @Route("/addRelaunch/{id}", name="add_relaunch")
+     * @Method("POST")
+     */
+    public function addRelaunchAction(Request $request, Application $application)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            return new JsonResponse(array('message' => 'You can access this only using Ajax!'), 400);
+        }
+
+        $relaunch = new Relaunch();
+        $form = $this->createForm('JG\CoreBundle\Form\RelaunchType', $relaunch, array('current_user' => $this->getUser()));
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+
+            $relaunch->setApplication($application);
+            $application->addRelaunch($relaunch);
+
+            $em->persist($relaunch);
+            $em->flush($relaunch);
+
+            return new JsonResponse(array('message' => 'Success'), 200);
+        }
+
+        $response = new JsonResponse(
+            array(
+                'message'   => 'Error',
+                'form'      => $form->createView()
+            )
+        , 400);
+
+        return $response;
     }
 
     /**
