@@ -81,6 +81,28 @@ fos_user:
     profile:
         form:
             type: JG\UserBundle\Form\ProfileType
+    from_email:
+        address:        contact@justine-gambier.fr
+        sender_name:    Demo App
+    resetting:
+        email:
+            from_email:
+                address:        contact@justine-gambier.fr
+                sender_name:    Demo Resetting
+    registration:
+        confirmation:
+            enabled:            true
+            from_email:
+                address:        contact@justine-gambier.fr
+                sender_name:    Demo Registration
+    service:
+        mailer: fos_user.mailer.twig_swift
+    resetting:
+        email:
+            template:   email/password_resetting.email.twig
+    registration:
+        confirmation:
+            template:   FOSUserBundle:Registration:email.txt.twig
 
 # LiipImagineBundle Configuration
 liip_imagine:

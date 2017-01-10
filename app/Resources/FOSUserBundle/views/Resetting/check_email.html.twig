@@ -1,9 +1,26 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends "JGAdminBundle::layout_auth.html.twig" %}
 
 {% trans_default_domain 'FOSUserBundle' %}
 
+{% block type_page %}reset-page{% endblock %}
+
 {% block fos_user_content %}
-<p>
-{{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime})|nl2br }}
-</p>
+<div class="register-box">
+    <div class="register-logo">
+        <a href="{{ path('home_page') }}"><b>MyJobs</b></a>
+    </div>
+
+    <div class="register-box-body">
+        <p class="login-box-msg">Mot de passe oublié ?</p>
+
+            <p>
+                {{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime})|nl2br }}
+            </p>
+
+        <br />
+        <p> <a href="{{ path('fos_user_security_login') }}" class="text-center">J'ai déjà un compte utilisateur ?</a> </p>
+
+    </div>
+    <!-- /.form-box -->
+</div>
 {% endblock %}
