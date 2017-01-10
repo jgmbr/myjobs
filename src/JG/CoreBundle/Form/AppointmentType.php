@@ -41,10 +41,12 @@ class AppointmentType extends AbstractType
             ->add('dateAt', DateType::class, array(
                 'label'     => 'Date',
                 'widget'    => 'single_text',
+                'data'      => new \DateTime("now"),
             ))
             ->add('hourAt', TimeType::class, array(
                 'label'     => 'Heure',
                 'widget'    => 'single_text',
+                'data'      => new \DateTime("now"),
             ))
             ->add('comment', TextareaType::class, array('label' => 'Commentaire(s)', 'required' => false))
         ;

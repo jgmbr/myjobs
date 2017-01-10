@@ -17,6 +17,7 @@
     </ol>
 
 <div class="box box-default">
+    <div class="box-header"> <i class="fa fa-eye" aria-hidden="true"></i> <h3 class="box-title"> Fiche statut </h3> </div>
     <div class="box-body box-status">
 
     <table class="table table-responsive">
@@ -47,11 +48,11 @@
             </tr>
             <tr>
                 <th>Date de création</th>
-                <td>{% if status.createdAt %}{{ status.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if status.createdAt %}{{ status.createdAt|date('d/m/Y H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Date de modification</th>
-                <td>{% if status.updatedAt %}{{ status.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if status.updatedAt %}{{ status.updatedAt|date('d/m/Y H:i:s') }}{% endif %}</td>
             </tr>
         </tbody>
     </table>

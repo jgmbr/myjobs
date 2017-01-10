@@ -17,6 +17,7 @@
 
 
 <div class="box box-default">
+    <div class="box-header"> <i class="fa fa-eye" aria-hidden="true"></i> <h3 class="box-title"> Fiche candidature </h3> </div>
     <div class="box-body box-application">
 
     <table class="table table-responsive">
@@ -62,11 +63,11 @@
                 <td>{{ application.comment }}</td>
             </tr>
             <tr>
-                <th>Motif entreprise</th>
+                <th>Motif Entreprise</th>
                 <td>{{ application.businessReason }}</td>
             </tr>
             <tr>
-                <th>Motif candidat</th>
+                <th>Motif Candidat</th>
                 <td>{{ application.peopleReason }}</td>
             </tr>
             <tr>
@@ -80,6 +81,30 @@
         </tbody>
     </table>
 
+    </div>
+</div>
+
+<div class="box box-default">
+    <div class="box-header"> <i class="fa fa-calendar" aria-hidden="true"></i> <h3 class="box-title"> Relances </h3> </div>
+    <div class="box-body box-application">
+        <table class="table table-responsive">
+            <tbody>
+            <tr>
+                <td>
+                    {% if application.relaunches is defined and application.relaunches|length > 0 %}
+                        {% for relaunch in application.relaunches %}
+                            <p>
+                                Relance le {{ relaunch.dateAt|date('d/m/Y') }} à {{ relaunch.hourAt|date('H:i') }} -
+                                Commentaire : {{ relaunch.comment }}
+                            </p>
+                        {% endfor %}
+                    {% else %}
+                        <p> Pas de relances. </p>
+                    {% endif %}
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 
