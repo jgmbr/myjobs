@@ -12,13 +12,17 @@ class ImageType extends AbstractType
 {
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view->vars['image_path'] = $options['image_path'];
+        $view->vars['image_path']   = $options['image_path'];
+        $view->vars['filter']       = $options['filter'];
+        $view->vars['class']        = $options['class'];
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'image_path' => array(),
+            'image_path'    => array(),
+            'filter'        => array(),
+            'class'         => array()
         ));
     }
 

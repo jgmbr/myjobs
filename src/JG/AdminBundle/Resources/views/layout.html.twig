@@ -46,6 +46,16 @@
             .profile-user-img {
                 background: #fff;
             }
+            .boxStat {
+                width: 120px;
+                overflow: hidden;
+                text-align: center;
+                float: left;
+            }
+            .boxStat span {
+                display: block;
+                font-weight: bold;
+            }
         </style>
         {% block stylesheets %}
         {% endblock %}
@@ -82,7 +92,7 @@
                 <!-- Navbar Right Menu -->
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
-                        <!-- User Account Menu --> 
+                        <!-- User Account Menu -->
                         <li>
                             {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
                                 <a href="{{ path('admin_home_page', {'_switch_user': '_exit'}) }}">

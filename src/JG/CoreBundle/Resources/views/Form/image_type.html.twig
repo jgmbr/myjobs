@@ -1,7 +1,7 @@
 {% block image_widget %}
     {% spaceless %}
         {% if image_path %}
-            <img src="{{ ('uploads/profiles/' ~ image_path)|imagine_filter('avatar') }}" class="profile-user-img img-responsive img-circle" style="margin:0;" />
+            <img src="{{ image_path | imagine_filter(filter) }}" class="{{ class }}" style="margin:0;" />
          {% endif %}
     {% endspaceless %}
 {% endblock %}

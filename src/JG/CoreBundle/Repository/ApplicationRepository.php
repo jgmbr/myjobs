@@ -58,6 +58,35 @@ class ApplicationRepository extends \Doctrine\ORM\EntityRepository
             ->where('a.user = :user')
             ->setParameter('user', $user)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
+    }
+
+    public function countMyApplicationsWithStatus($user, $status)
+    {
+        return $this
+            ->createQueryBuilder('a')
+            ->select('COUNT(a)')
+            ->where('a.user = :user')
+            ->andWhere('a.status = :status')
+            ->setParameter('user', $user)
+            ->setParameter('status', $status)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
+    public function countMyApplicationsWithContract($user, $contract)
+    {
+        return $this
+            ->createQueryBuilder('a')
+            ->select('COUNT(a)')
+            ->where('a.user = :user')
+            ->andWhere('a.contract = :contract')
+            ->setParameter('user', $user)
+            ->setParameter('contract', $contract)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
     }
 }

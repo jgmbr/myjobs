@@ -61,4 +61,18 @@ class AppointmentRepository extends \Doctrine\ORM\EntityRepository
             ->getSingleScalarResult()
         ;
     }
+
+    public function countMyAppointmentsWithState($user, $state)
+    {
+        return $this
+            ->createQueryBuilder('a')
+            ->select('COUNT(a)')
+            ->where('a.user = :user')
+            ->andWhere('a.state = :state')
+            ->setParameter('user', $user)
+            ->setParameter('state', $state)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
 }

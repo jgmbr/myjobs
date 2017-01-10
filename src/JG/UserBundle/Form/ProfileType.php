@@ -70,13 +70,21 @@ class ProfileType extends AbstractType
             if (!$object || null === $object->getId()) {
                 return;
             } else {
-                $form->add('picture', ImageType::class, array('label' => 'Image', 'image_path' => $object->getPicture() ));
+                $form->add('picture', ImageType::class, array(
+                    'label'         => 'Image',
+                    'required'      => false,
+                    'image_path'    => $object->getWebPath(),
+                    'filter'        => 'avatar',
+                    'class'         => 'profile-user-img img-responsive img-circle'
+                ));
             }
-
         });
 
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getParent()
     {
         return 'FOS\UserBundle\Form\Type\ProfileFormType';

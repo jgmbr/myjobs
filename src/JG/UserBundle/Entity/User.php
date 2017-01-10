@@ -378,6 +378,7 @@ class User extends BaseUser
      */
     public function setFile(UploadedFile $file = null)
     {
+        $this->setUpdatedAt(new \DateTime('now'));
         $this->file = $file;
         // check if we have an old image path
         if (isset($this->picture)) {
