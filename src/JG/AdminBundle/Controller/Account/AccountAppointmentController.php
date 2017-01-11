@@ -125,34 +125,17 @@ class AccountAppointmentController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $user->removeAppointment($appointment);
+            $appointment->getApplication()->removeAppointment($appointment);
             $em->remove($appointment);
             $em->flush($appointment);
             $request->getSession()->getFlashBag()->add('success', 'Entretien supprimé avec succès !');
-            return $this->redirectToRoute('appointment_index');
+            return $this->redirectToRoute('application_show', array('id' => $appointment->getApplication()->getId()));
         }
 
         return $this->render('JGAdminBundle:Account:appointment/delete.html.twig', array(
             'appointment'   => $appointment,
             'delete_form'   => $form->createView(),
         ));
-    }
-
-    /**
-     * Deletes a appointment entity.
-     *
-     * @Route("/{id}/delete", name="appointment_delete_link")
-     */
-    public function deleteAppointmentAction(Request $request, Appointment $appointment)
-    {
-        $application = $appointment->getApplication();
-
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($appointment);
-        $em->flush($appointment);
-
-        $request->getSession()->getFlashBag()->add('success', 'Entretien supprimé avec succès !');
-
-        return $this->redirectToRoute('application_show', array('id' => $application->getId()));
     }
 
     /**

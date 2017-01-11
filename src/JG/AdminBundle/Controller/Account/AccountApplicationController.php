@@ -82,17 +82,53 @@ class AccountApplicationController extends Controller
      */
     public function showAction(Request $request, Application $application)
     {
+        // Current application delete form
+
         $deleteForm = $this->createDeleteForm($application);
 
         $relaunch = new Relaunch();
-        $form = $this->createForm('JG\CoreBundle\Form\RelaunchType', $relaunch, array(
-            'current_user'  => $this->getUser()
-        ));
+        $form = $this->createForm('JG\CoreBundle\Form\RelaunchType', $relaunch, array('current_user'  => $this->getUser()));
+
+        // Appointments delete forms
+
+        $em = $this->getDoctrine()->getManager();
+
+        $appointments = $em->getRepository('JGCoreBundle:Appointment')->findMyAppointments($this->getUser());
+
+        $deleteAppointmentForms = array();
+
+        foreach ($appointments as $appointment) {
+            $deleteAppointmentForms[$appointment->getId()] =
+                $this->createFormBuilder()
+                    ->setAction($this->generateUrl('appointment_delete', array('id' => $appointment->getId())))
+                    ->setMethod('DELETE')
+                    ->getForm()
+                    ->createView()
+            ;
+        }
+
+        // Relaunches delete forms
+
+        $relaunches = $application->getRelaunches();
+
+        $deleteRelaunchForms = array();
+
+        foreach ($relaunches as $relaunch) {
+            $deleteRelaunchForms[$relaunch->getId()] =
+                $this->createFormBuilder()
+                    ->setAction($this->generateUrl('relaunch_delete', array('id' => $relaunch->getId())))
+                    ->setMethod('DELETE')
+                    ->getForm()
+                    ->createView()
+            ;
+        }
 
         return $this->render('JGAdminBundle:Account:application/show.html.twig', array(
             'application' => $application,
             'delete_form' => $deleteForm->createView(),
-            'formRelaunch' => $form->createView()
+            'formRelaunch' => $form->createView(),
+            'deleteAppointmentForms' => $deleteAppointmentForms,
+            'deleteRelaunchForms' => $deleteRelaunchForms
         ));
     }
 
