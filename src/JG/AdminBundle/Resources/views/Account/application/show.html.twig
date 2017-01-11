@@ -86,13 +86,12 @@
                     {% for appointment in application.appointments %}
                         <tr>
                             <td class="text-left">
-                                    {{ appointment.id }}
-                                    {{ appointment.name }}
-                                    <span style="background:{{ appointment.state.color }}; color:#fff; padding:3px;">
-                                        {{ appointment.state.name }}
-                                    </span>
-                                    &nbsp;
-                                    le {{ appointment.dateAt|date('d/m/Y') }} à {{ appointment.hourAt|date('H:i') }}
+                                {{ appointment.name }}
+                                <span style="background:{{ appointment.state.color }}; color:#fff; padding:3px;">
+                                    {{ appointment.state.name }}
+                                </span>
+                                &nbsp;
+                                le {{ appointment.dateAt|date('d/m/Y') }} à {{ appointment.hourAt|date('H:i') }}
                             </td>
                             <td class="text-right">
                                 {{ form_start(deleteAppointmentForms[appointment.id], {'attr': {'class': '', 'role': 'form'}}) }}
