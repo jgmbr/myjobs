@@ -239,7 +239,7 @@
             <!-- Create the tabs -->
             <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
                 <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-                <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+                <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i style="color:#ff6347;" class="fa fa-heart" aria-hidden="true"></i></a></li>
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
@@ -287,20 +287,51 @@
                 <!-- /.tab-pane -->
                 <!-- Settings tab content -->
                 <div class="tab-pane" id="control-sidebar-settings-tab">
-                    <form method="post">
-                        <h3 class="control-sidebar-heading">General Settings</h3>
-
+                    <form name="frmPreferences" method="post">
+                        <h3 class="control-sidebar-heading"> Préférences </h3>
                         <div class="form-group">
                             <label class="control-sidebar-subheading">
-                                Report panel usage
-                                <input type="checkbox" class="pull-right" checked>
+                                Rubrique Entreprises
+                                <input type="checkbox" name="rubCompanies" class="dataPreference pull-right" checked />
                             </label>
-
-                            <p>
-                                Some information about this general settings option
-                            </p>
                         </div>
-                        <!-- /.form-group -->
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                Rubrique Candidatures
+                                <input type="checkbox" name="rubApplications" id="rubApplications" class="dataPreference pull-right" checked />
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                Rubrique Entretiens
+                                <input type="checkbox" name="rubAppointments" id="rubAppointments" class="dataPreference pull-right" checked />
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                Rubrique Statistiques
+                                <input type="checkbox" name="rubCompanies" id="rubCompanies" class="dataPreference pull-right" checked />
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                Push Alertes
+                                <input type="checkbox" name="pushAlert" id="pushAlert" class="dataPreference pull-right" checked />
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                Délai Alertes (jours)
+                                <select name="delayAlert" id="delayAlert" class="dataPreference pull-right" style="color:#000;">
+                                    {% for i in 1..10 %}
+                                        <option {% if i == 7 %}selected{% endif %}>{{ i }}</option>
+                                    {% endfor %}
+                                </select>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Sauvegarder" name="savePreferences" id="savePreferences" class="btn btn-primary" />
+                        </div>
                     </form>
                 </div>
                 <!-- /.tab-pane -->
@@ -331,6 +362,10 @@
                 {% for msgWarning in app.session.flashbag.get('warning') %}
                     $.growl.warning({ message: "{{ msgWarning }}" });
                 {% endfor %}
+                $('body').on('submit', 'form[name=frmPreferences]', function (e) {
+                    e.preventDefault();
+                    console.log('iciii');
+                });
             });
         </script>
         {% block javascripts %}

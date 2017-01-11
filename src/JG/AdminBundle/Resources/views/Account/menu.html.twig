@@ -34,11 +34,6 @@
             <i class="fa fa-bell-o" aria-hidden="true"></i> <span> Mes Alertes </span>
         </a>
     </li>
-    <li class="{% if app.request.attributes.get('_route') == "preference_index" %}active{% endif %}">
-        <a href="#">
-            <i class="fa fa-heart" aria-hidden="true"></i> <span> Mes Préférences </span>
-        </a>
-    </li>
     <li class="{% if app.request.attributes.get('_route') == "account_profil" %}active{% endif %}">
         <a href="{{ path('account_profil') }}">
             <i class="fa fa-user-circle-o" aria-hidden="true"></i> <span> Profil </span>
