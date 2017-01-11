@@ -82,24 +82,24 @@ fos_user:
         form:
             type: JG\UserBundle\Form\ProfileType
     from_email:
-        address:        contact@justine-gambier.fr
+        address:        gambier.j@gmail.com
         sender_name:    Demo App
     resetting:
         email:
             from_email:
-                address:        contact@justine-gambier.fr
+                address:        gambier.j@gmail.com
                 sender_name:    Demo Resetting
     registration:
         confirmation:
-            enabled:            true
+            enabled:            false
             from_email:
-                address:        contact@justine-gambier.fr
+                address:        gambier.j@gmail.com
                 sender_name:    Demo Registration
     service:
         mailer: fos_user.mailer.twig_swift
     resetting:
         email:
-            template:   email/password_resetting.email.twig
+            template:   FOSUserBundle:Resetting:email.txt.twig
     registration:
         confirmation:
             template:   FOSUserBundle:Registration:email.txt.twig
