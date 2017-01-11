@@ -119,8 +119,8 @@
                             {% for relaunch in application.relaunches %}
                                 <p>
                                     Relance le {{ relaunch.dateAt|date('d/m/Y') }} à {{ relaunch.hourAt|date('H:i') }} -
-                                    Commentaire : {{ relaunch.comment }}
-                                    <a href="{{ path('relaunch_delete', { 'id': relaunch.id } ) }}" class="deleteRelaunch">
+                                    Commentaire : {{ relaunch.comment }} &nbsp;
+                                    <a href="{{ path('relaunch_delete', { 'id': relaunch.id } ) }}" class="deleteRelaunch btn btn-danger btn-xs">
                                         <i class="fa fa-trash" aria-hidden="true"></i> &nbsp; Supprimer
                                     </a>
                                 </p>
