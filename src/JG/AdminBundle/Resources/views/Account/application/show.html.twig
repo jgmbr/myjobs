@@ -120,6 +120,9 @@
                                 <p>
                                     Relance le {{ relaunch.dateAt|date('d/m/Y') }} à {{ relaunch.hourAt|date('H:i') }} -
                                     Commentaire : {{ relaunch.comment }}
+                                    <a href="{{ path('relaunch_delete', { 'id': relaunch.id } ) }}" class="deleteRelaunch">
+                                        <i class="fa fa-trash" aria-hidden="true"></i> &nbsp; Supprimer
+                                    </a>
                                 </p>
                             {% endfor %}
                         {% else %}
@@ -134,30 +137,7 @@
             <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#modalNewRelaunch">
                 <i class="fa fa-plus" aria-hidden="true"></i> &nbsp; Ajouter une relance
             </button>
-            <div class="modal fade" id="modalNewRelaunch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Nouvelle relance</h4>
-                        </div>
-                        <div class="modal-body">
-                            {{ form_start(formRelaunch, {'action': path('add_relaunch', { 'id': application.id }) }) }}
-                            <div class="box-body">
-                                {{ form_widget(formRelaunch) }}
-                            </div>
-                            <div class="box-footer">
-                                <input type="submit" value="Ajouter" class="btn btn-primary" />
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                            </div>
-                            {{ form_end(formRelaunch) }}
-                        </div>
-                        <div class="modal-footer">
-                            &nbsp;
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% include 'JGAdminBundle:Account/relaunch:modal.html.twig' %}
         </div>
     </div>
 

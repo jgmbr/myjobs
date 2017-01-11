@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Relaunches list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Dateat</th>
+                <th>Hourat</th>
+                <th>Comment</th>
+                <th>Createdat</th>
+                <th>Updatedat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for relaunch in relaunches %}
+            <tr>
+                <td><a href="{{ path('relaunch_show', { 'id': relaunch.id }) }}">{{ relaunch.id }}</a></td>
+                <td>{% if relaunch.dateAt %}{{ relaunch.dateAt|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if relaunch.hourAt %}{{ relaunch.hourAt|date('H:i:s') }}{% endif %}</td>
+                <td>{{ relaunch.comment }}</td>
+                <td>{% if relaunch.createdAt %}{{ relaunch.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if relaunch.updatedAt %}{{ relaunch.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('relaunch_show', { 'id': relaunch.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('relaunch_edit', { 'id': relaunch.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('relaunch_new') }}">Create a new relaunch</a>
+        </li>
+    </ul>
+{% endblock %}
