@@ -138,6 +138,24 @@ class AccountAppointmentController extends Controller
     }
 
     /**
+     * Deletes a appointment entity.
+     *
+     * @Route("/{id}/delete", name="appointment_delete_link")
+     */
+    public function deleteAppointmentAction(Request $request, Appointment $appointment)
+    {
+        $application = $appointment->getApplication();
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($appointment);
+        $em->flush($appointment);
+
+        $request->getSession()->getFlashBag()->add('success', 'Entretien supprimé avec succès !');
+
+        return $this->redirectToRoute('application_show', array('id' => $application->getId()));
+    }
+
+    /**
      * Creates a form to delete a appointment entity.
      *
      * @param Appointment $appointment The appointment entity

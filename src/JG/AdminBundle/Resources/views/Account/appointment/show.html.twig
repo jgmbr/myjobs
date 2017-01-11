@@ -31,7 +31,11 @@
                 </tr>
                 <tr>
                     <th>Candidature</th>
-                    <td>{{ appointment.application.fullName }}</td>
+                    <td>
+                        <a href="{{ path('application_show', { 'id': appointment.application.id } ) }}">
+                            {{ appointment.application.fullName }}
+                        </a>
+                    </td>
                 </tr>
                 <tr>
                     <th>Statut</th>

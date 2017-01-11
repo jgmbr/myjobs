@@ -101,9 +101,9 @@ class AccountRelaunchController extends Controller
     /**
      * Deletes a relaunch entity.
      *
-     * @Route("/{id}/delete", name="relaunch_delete")
+     * @Route("/{id}/delete", name="relaunch_delete_link")
      */
-    public function deleteAction(Request $request, Relaunch $relaunch)
+    public function deleteRelaunchAction(Request $request, Relaunch $relaunch)
     {
         $application = $relaunch->getApplication();
 
