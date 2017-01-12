@@ -61,6 +61,11 @@ class User extends BaseUser
      */
     private $appointments;
 
+    /**
+     * @ORM\OneToMany(targetEntity="JG\CoreBundle\Entity\Preferences", mappedBy="user", cascade={"persist"})
+     */
+    private $preferences;
+
     private $role;
 
     private $superAdmin;
@@ -93,6 +98,7 @@ class User extends BaseUser
         $this->applications = new ArrayCollection();
         $this->companies    = new ArrayCollection();
         $this->appointments = new ArrayCollection();
+        $this->preferences  = new ArrayCollection();
     }
 
     /**
@@ -310,6 +316,40 @@ class User extends BaseUser
     }
 
     /**
+     * Add preference
+     *
+     * @param \JG\CoreBundle\Entity\Preferences $preference
+     *
+     * @return User
+     */
+    public function addPreference(\JG\CoreBundle\Entity\Preferences $preference)
+    {
+        $this->preferences[] = $preference;
+
+        return $this;
+    }
+
+    /**
+     * Remove preference
+     *
+     * @param \JG\CoreBundle\Entity\Preferences $preference
+     */
+    public function removePreference(\JG\CoreBundle\Entity\Preferences $preference)
+    {
+        $this->preferences->removeElement($preference);
+    }
+
+    /**
+     * Get preferences
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPreferences()
+    {
+        return $this->preferences;
+    }
+
+    /**
      * Triggered on insert
 
      * @ORM\PrePersist
@@ -379,6 +419,7 @@ class User extends BaseUser
     public function setFile(UploadedFile $file = null)
     {
         $this->setUpdatedAt(new \DateTime('now'));
+
         $this->file = $file;
         // check if we have an old image path
         if (isset($this->picture)) {

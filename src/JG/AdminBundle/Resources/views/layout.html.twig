@@ -287,52 +287,9 @@
                 <!-- /.tab-pane -->
                 <!-- Settings tab content -->
                 <div class="tab-pane" id="control-sidebar-settings-tab">
-                    <form name="frmPreferences" method="post">
-                        <h3 class="control-sidebar-heading"> Préférences </h3>
-                        <div class="form-group">
-                            <label class="control-sidebar-subheading">
-                                Rubrique Entreprises
-                                <input type="checkbox" name="rubCompanies" class="dataPreference pull-right" checked />
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-sidebar-subheading">
-                                Rubrique Candidatures
-                                <input type="checkbox" name="rubApplications" id="rubApplications" class="dataPreference pull-right" checked />
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-sidebar-subheading">
-                                Rubrique Entretiens
-                                <input type="checkbox" name="rubAppointments" id="rubAppointments" class="dataPreference pull-right" checked />
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-sidebar-subheading">
-                                Rubrique Statistiques
-                                <input type="checkbox" name="rubCompanies" id="rubCompanies" class="dataPreference pull-right" checked />
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-sidebar-subheading">
-                                Push Alertes
-                                <input type="checkbox" name="pushAlert" id="pushAlert" class="dataPreference pull-right" checked />
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-sidebar-subheading">
-                                Délai Alertes (jours)
-                                <select name="delayAlert" id="delayAlert" class="dataPreference pull-right" style="color:#000;">
-                                    {% for i in 1..10 %}
-                                        <option {% if i == 7 %}selected{% endif %}>{{ i }}</option>
-                                    {% endfor %}
-                                </select>
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Sauvegarder" name="savePreferences" id="savePreferences" class="btn btn-primary" />
-                        </div>
-                    </form>
+
+                    {% block preferences %}{% endblock %}
+
                 </div>
                 <!-- /.tab-pane -->
             </div>
@@ -362,9 +319,31 @@
                 {% for msgWarning in app.session.flashbag.get('warning') %}
                     $.growl.warning({ message: "{{ msgWarning }}" });
                 {% endfor %}
-                $('body').on('submit', 'form[name=frmPreferences]', function (e) {
+                $('body').on('submit', 'form[name=jg_corebundle_preferences]', function (e) {
                     e.preventDefault();
-                    console.log('iciii');
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path('ajax_save_preferences') }}",
+                        data: $(this).serialize()
+                    })
+                    .done(function (data) {
+                        if (typeof data.message !== 'undefined') {
+                            if (data.message == 'Success') {
+                                $.growl.notice({ message: "Préférences sauvegardées avec succès !" });
+                                $('.control-sidebar').removeClass('control-sidebar-open');
+                                setTimeout(function(){
+                                    location.reload();
+                                }, 1500);
+                            }
+                        }
+                    })
+                    .fail(function (jqXHR, textStatus, errorThrown) {
+                        if (typeof jqXHR.responseJSON !== 'undefined') {
+                            $('.form_error').html(jqXHR.responseJSON.message);
+                        } else {
+                            alert(errorThrown);
+                        }
+                    });
                 });
             });
         </script>

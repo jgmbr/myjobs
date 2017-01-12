@@ -1,0 +1,8 @@
+{{ form_start(formPreferences, {'action': path('ajax_save_preferences') }) }}
+<div class="box-body">
+    {{ form_widget(formPreferences) }}
+</div>
+<div class="form-group">
+    <input type="submit" value="Sauvegarder" name="savePreferences" id="savePreferences" class="btn btn-primary" />
+</div>
+{{ form_end(formPreferences) }}

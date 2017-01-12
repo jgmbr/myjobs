@@ -8,6 +8,7 @@
 
 namespace JG\AdminBundle\Controller\Account;
 
+use JG\CoreBundle\Entity\Preferences;
 use JG\CoreBundle\Form\SearchType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -35,6 +36,10 @@ class AccountController extends Controller
 
         $nbAppointments = $em->getRepository('JGCoreBundle:Appointment')->countMyAppointments($this->getUser());
 
+        $preferences = new Preferences();
+
+        $formPreferences = $this->createForm('JG\CoreBundle\Form\PreferencesType', $preferences, array('current_user' => $user));
+
         return $this->render('JGAdminBundle:Account:index.html.twig',array(
             'user'                  => $user,
             'myLastApplications'    => $myLastApplications,
@@ -42,7 +47,8 @@ class AccountController extends Controller
             'myLastAppointments'    => $myLastAppointments,
             'nbApplications'        => $nbApplications,
             'nbCompanies'           => $nbCompanies,
-            'nbAppointments'        => $nbAppointments
+            'nbAppointments'        => $nbAppointments,
+            'formPreferences'       => $formPreferences->createView()
         ));
     }
 }
