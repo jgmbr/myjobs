@@ -1,5 +1,9 @@
 services:
-    app.file.twig.extension:
+    twig.extension:
         class: JG\CoreBundle\Twig\Extension\TwigExtension
         tags:
             - { name: twig.extension }
+    #form.preferences.extension:
+        #class: JG\CoreBundle\Twig\Extension\PreferencesExtension
+        #tags:
+            #- { name: twig.extension }

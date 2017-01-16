@@ -6,13 +6,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Preferences
+ * Preference
  *
- * @ORM\Table(name="app_preferences")
- * @ORM\Entity(repositoryClass="JG\CoreBundle\Repository\PreferencesRepository")
+ * @ORM\Table(name="app_preference")
+ * @ORM\Entity(repositoryClass="JG\CoreBundle\Repository\PreferenceRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Preferences
+class Preference
 {
     /**
      * @var int
@@ -66,9 +66,28 @@ class Preferences
     private $delayAlerts;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
+    /**
      * @ORM\ManyToOne(targetEntity="JG\UserBundle\Entity\User", inversedBy="preferences", cascade={"persist"})
      */
     private $user;
+
+    public function __construct()
+    {
+        $this->createdAt    = new \Datetime();
+    }
 
     /**
      * Get id
@@ -85,7 +104,7 @@ class Preferences
      *
      * @param boolean $showCompanies
      *
-     * @return Preferences
+     * @return Preference
      */
     public function setShowCompanies($showCompanies)
     {
@@ -97,7 +116,7 @@ class Preferences
     /**
      * Get showCompanies
      *
-     * @return bool
+     * @return boolean
      */
     public function getShowCompanies()
     {
@@ -109,7 +128,7 @@ class Preferences
      *
      * @param boolean $showApplications
      *
-     * @return Preferences
+     * @return Preference
      */
     public function setShowApplications($showApplications)
     {
@@ -121,7 +140,7 @@ class Preferences
     /**
      * Get showApplications
      *
-     * @return bool
+     * @return boolean
      */
     public function getShowApplications()
     {
@@ -133,7 +152,7 @@ class Preferences
      *
      * @param boolean $showAppointments
      *
-     * @return Preferences
+     * @return Preference
      */
     public function setShowAppointments($showAppointments)
     {
@@ -145,7 +164,7 @@ class Preferences
     /**
      * Get showAppointments
      *
-     * @return bool
+     * @return boolean
      */
     public function getShowAppointments()
     {
@@ -157,7 +176,7 @@ class Preferences
      *
      * @param boolean $showStatistics
      *
-     * @return Preferences
+     * @return Preference
      */
     public function setShowStatistics($showStatistics)
     {
@@ -169,7 +188,7 @@ class Preferences
     /**
      * Get showStatistics
      *
-     * @return bool
+     * @return boolean
      */
     public function getShowStatistics()
     {
@@ -181,7 +200,7 @@ class Preferences
      *
      * @param boolean $pushAlerts
      *
-     * @return Preferences
+     * @return Preference
      */
     public function setPushAlerts($pushAlerts)
     {
@@ -193,7 +212,7 @@ class Preferences
     /**
      * Get pushAlerts
      *
-     * @return bool
+     * @return boolean
      */
     public function getPushAlerts()
     {
@@ -205,7 +224,7 @@ class Preferences
      *
      * @param integer $delayAlerts
      *
-     * @return Preferences
+     * @return Preference
      */
     public function setDelayAlerts($delayAlerts)
     {
@@ -217,7 +236,7 @@ class Preferences
     /**
      * Get delayAlerts
      *
-     * @return int
+     * @return integer
      */
     public function getDelayAlerts()
     {
@@ -229,7 +248,7 @@ class Preferences
      *
      * @param \JG\UserBundle\Entity\User $user
      *
-     * @return Preferences
+     * @return Preference
      */
     public function setUser(\JG\UserBundle\Entity\User $user = null)
     {
@@ -246,5 +265,73 @@ class Preferences
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Preference
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Preference
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Triggered on insert
+
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->createdAt = new \DateTime("now");
+    }
+
+    /**
+     * Triggered on update
+
+     * @ORM\PreUpdate
+     */
+    public function onPreUpdate()
+    {
+        $this->updatedAt = new \DateTime("now");
     }
 }

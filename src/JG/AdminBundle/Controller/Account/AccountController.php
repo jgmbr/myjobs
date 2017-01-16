@@ -8,10 +8,10 @@
 
 namespace JG\AdminBundle\Controller\Account;
 
-use JG\CoreBundle\Entity\Preferences;
-use JG\CoreBundle\Form\SearchType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\BrowserKit\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class AccountController extends Controller
 {
@@ -23,6 +23,13 @@ class AccountController extends Controller
         $user = $this->getUser();
 
         $em = $this->getDoctrine()->getManager();
+
+        $preference = $em->getRepository('JGCoreBundle:Preference')->findOneByUser($user);
+
+        $showMsgConfPreferences = true;
+        if ($preference) {
+            $showMsgConfPreferences = false;
+        }
 
         $myLastApplications = $em->getRepository('JGCoreBundle:Application')->findMyLastApplications($this->getUser());
 
@@ -36,19 +43,16 @@ class AccountController extends Controller
 
         $nbAppointments = $em->getRepository('JGCoreBundle:Appointment')->countMyAppointments($this->getUser());
 
-        $preferences = new Preferences();
-
-        $formPreferences = $this->createForm('JG\CoreBundle\Form\PreferencesType', $preferences, array('current_user' => $user));
-
         return $this->render('JGAdminBundle:Account:index.html.twig',array(
             'user'                  => $user,
+            'preference'            => $preference,
+            'showMsgConfPreferences'=> $showMsgConfPreferences,
             'myLastApplications'    => $myLastApplications,
             'myLastCompanies'       => $myLastCompanies,
             'myLastAppointments'    => $myLastAppointments,
             'nbApplications'        => $nbApplications,
             'nbCompanies'           => $nbCompanies,
             'nbAppointments'        => $nbAppointments,
-            'formPreferences'       => $formPreferences->createView()
         ));
     }
 }

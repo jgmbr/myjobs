@@ -1,0 +1,24 @@
+{% extends "JGAdminBundle::layout.html.twig" %}
+
+{% block header %}
+    Mes préférences
+{% endblock %}
+
+{% block menu %}
+    {% include 'JGAdminBundle:Account:menu.html.twig' %}
+{% endblock %}
+
+{% block body %}
+    <ol class="breadcrumb">
+        <li> <a href="{{ path('account_home_page') }}"> Mon Compte </a> </li>
+        <li class="active"> Mes préférences </li>
+    </ol>
+    <div class="box box-default">
+        <div class="box-body box-application">
+        {% include 'JGAdminBundle:Account:preference/form.html.twig' %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}

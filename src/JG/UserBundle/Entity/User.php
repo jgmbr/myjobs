@@ -62,7 +62,7 @@ class User extends BaseUser
     private $appointments;
 
     /**
-     * @ORM\OneToMany(targetEntity="JG\CoreBundle\Entity\Preferences", mappedBy="user", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="JG\CoreBundle\Entity\Preference", mappedBy="user", cascade={"persist"})
      */
     private $preferences;
 
@@ -315,14 +315,15 @@ class User extends BaseUser
         return $this->appointments;
     }
 
+
     /**
      * Add preference
      *
-     * @param \JG\CoreBundle\Entity\Preferences $preference
+     * @param \JG\CoreBundle\Entity\Preference $preference
      *
      * @return User
      */
-    public function addPreference(\JG\CoreBundle\Entity\Preferences $preference)
+    public function addPreference(\JG\CoreBundle\Entity\Preference $preference)
     {
         $this->preferences[] = $preference;
 
@@ -332,9 +333,9 @@ class User extends BaseUser
     /**
      * Remove preference
      *
-     * @param \JG\CoreBundle\Entity\Preferences $preference
+     * @param \JG\CoreBundle\Entity\Preference $preference
      */
-    public function removePreference(\JG\CoreBundle\Entity\Preferences $preference)
+    public function removePreference(\JG\CoreBundle\Entity\Preference $preference)
     {
         $this->preferences->removeElement($preference);
     }
