@@ -39,7 +39,9 @@ class AlertExtension extends \Twig_Extension
     {
         $user = $this->tokenStorage->getToken()->getUser();
 
-        return 1;
+        $nb = $this->doctrine->getRepository('JGCoreBundle:Alert')->countMyAlerts($user);
+
+        return $nb;
     }
 
     /**

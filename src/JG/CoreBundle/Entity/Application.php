@@ -121,6 +121,11 @@ class Application
     private $relaunches;
 
     /**
+     * @ORM\OneToMany(targetEntity="JG\CoreBundle\Entity\Alert", mappedBy="application", cascade={"persist"})
+     */
+    private $alerts;
+
+    /**
      * @ORM\ManyToOne(targetEntity="JG\UserBundle\Entity\User", inversedBy="applications", cascade={"persist"})
      */
     private $user;
@@ -525,5 +530,39 @@ class Application
     public function getPeopleReason()
     {
         return $this->peopleReason;
+    }
+
+    /**
+     * Add alert
+     *
+     * @param \JG\CoreBundle\Entity\Alert $alert
+     *
+     * @return Application
+     */
+    public function addAlert(\JG\CoreBundle\Entity\Alert $alert)
+    {
+        $this->alerts[] = $alert;
+
+        return $this;
+    }
+
+    /**
+     * Remove alert
+     *
+     * @param \JG\CoreBundle\Entity\Alert $alert
+     */
+    public function removeAlert(\JG\CoreBundle\Entity\Alert $alert)
+    {
+        $this->alerts->removeElement($alert);
+    }
+
+    /**
+     * Get alerts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAlerts()
+    {
+        return $this->alerts;
     }
 }

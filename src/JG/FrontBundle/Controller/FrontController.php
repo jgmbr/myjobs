@@ -2,6 +2,7 @@
 
 namespace JG\FrontBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,16 +15,6 @@ class FrontController extends Controller
      */
     public function indexAction()
     {
-        $user = $this->getUser();
-
-        /*if ($user) {
-            if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-                var_dump('USER');
-            } else {
-                var_dump('ADMIN');
-            }
-        }*/
-
         return $this->render('JGFrontBundle:Front:index.html.twig');
     }
 
@@ -43,4 +34,18 @@ class FrontController extends Controller
         return $this->render('JGFrontBundle:Front:mentions.html.twig');
     }
 
+    /**
+     * Notification Alert Manager
+     *
+     * @Route("/notification/alert", name="alert_notif")
+     * @Method({"GET", "POST"})
+     */
+    public function notifAction(Request $request)
+    {
+        $notificationAlert = $this->get('app.alert');
+
+        $notificationAlert->alert();
+
+        die('notification alert OK');
+    }
 }

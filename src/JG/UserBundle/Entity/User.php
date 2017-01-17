@@ -66,6 +66,11 @@ class User extends BaseUser
      */
     private $preferences;
 
+    /**
+     * @ORM\OneToMany(targetEntity="JG\CoreBundle\Entity\Alert", mappedBy="user", cascade={"persist"})
+     */
+    private $alerts;
+
     private $role;
 
     private $superAdmin;
@@ -99,6 +104,7 @@ class User extends BaseUser
         $this->companies    = new ArrayCollection();
         $this->appointments = new ArrayCollection();
         $this->preferences  = new ArrayCollection();
+        $this->alerts       = new ArrayCollection();
     }
 
     /**
@@ -348,6 +354,40 @@ class User extends BaseUser
     public function getPreferences()
     {
         return $this->preferences;
+    }
+
+    /**
+     * Add alert
+     *
+     * @param \JG\CoreBundle\Entity\Alert $alert
+     *
+     * @return User
+     */
+    public function addAlert(\JG\CoreBundle\Entity\Alert $alert)
+    {
+        $this->alerts[] = $alert;
+
+        return $this;
+    }
+
+    /**
+     * Remove alert
+     *
+     * @param \JG\CoreBundle\Entity\Alert $alert
+     */
+    public function removeAlert(\JG\CoreBundle\Entity\Alert $alert)
+    {
+        $this->alerts->removeElement($alert);
+    }
+
+    /**
+     * Get alerts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAlerts()
+    {
+        return $this->alerts;
     }
 
     /**

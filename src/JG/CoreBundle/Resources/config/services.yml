@@ -11,6 +11,6 @@ services:
     app.mailer:
         class: JG\CoreBundle\Services\Mailer\NotificationMailer
         arguments: ['@mailer','@templating']
-    app.purger:
+    app.alert:
         class: JG\CoreBundle\Services\Alert\NotificationAlert
         arguments: ['@doctrine.orm.entity_manager', '@security.token_storage']

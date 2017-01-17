@@ -3,6 +3,7 @@
 namespace JG\CoreBundle\Services\Alert;
 
 use Doctrine\ORM\EntityManagerInterface;
+use JG\CoreBundle\Entity\Alert;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class NotificationAlert
@@ -24,32 +25,64 @@ class NotificationAlert
         $this->tokenStorage   = $tokenStorage;
     }
 
-    public function alert($days)
+    public function alert()
     {
         $user = $this->tokenStorage->getToken()->getUser();
 
-        if ($days > 0) {
+        $listUsers = $this->em->getRepository('JGUserBundle:User')->findAllUsers();
 
-            $date = new \Datetime($days.' days ago');
+        foreach($listUsers as $user) {
 
-            $listApplications = $this->em->getRepository('JGCoreBundle:Application')->getApplicationsAfterDelay($date);
+            if (sizeof($user->getPreferences()) > 0) {
 
-            foreach ($listApplications as $application) {
-                $alert = new Alert();
-                $alert->setName('Relance');
-                $alert->setContent(
-                    'N\'oubliez pas de relancer la candidature '
-                    .$application->getName().' - '
-                    .$application->getCompany()->getName()
-                );
-                $alert->setDateAt(new \Datetime());
-                $alert->setUser($user);
-                $user->addAlert($alert);
-                $this->em->persist($alert);
+                foreach($user->getPreferences() as $preference) {
+
+                    $pushAlerts = $preference->getPushAlerts();
+
+                    $delayAlerts = $preference->getDelayAlerts();
+
+                    if ($pushAlerts && $delayAlerts > 0) {
+
+                        $date = new \Datetime($delayAlerts . ' days ago');
+
+                        $listApplications = $this->em->getRepository('JGCoreBundle:Application')->getApplicationsAfterDelay($user, $date);
+
+                        if (sizeof($listApplications) > 0) {
+
+                            foreach($listApplications as $application) {
+
+                                //if (!$application->getAlerts()) {
+
+                                    $alert = new Alert();
+                                    $alert->setName('Relance');
+                                    $alert->setContent("N'oubliez pas de relancer la candidature");
+                                    $alert->setDateAt(new \DateTime());
+                                    $alert->setViewed(false);
+                                    $alert->setUser($user);
+                                    $alert->setApplication($application);
+                                    $application->addAlert($alert);
+                                    //$user->addAlert($alert);
+                                    $this->em->persist($alert);
+
+                                //}
+
+                            }
+
+                            $this->em->flush();
+
+                        } else {
+
+                            var_dump('no applications');
+
+                        }
+
+                    }
+
+                }
+
             }
 
-            $this->em->flush();
-
         }
+
     }
 }
