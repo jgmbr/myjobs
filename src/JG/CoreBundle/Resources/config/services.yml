@@ -3,8 +3,8 @@ services:
         class: JG\CoreBundle\Twig\Extension\TwigExtension
         tags:
             - { name: twig.extension }
-    alert.extension:
-        class: JG\CoreBundle\Twig\Extension\AlertExtension
+    counter.extension:
+        class: JG\CoreBundle\Twig\Extension\CounterExtension
         arguments: ['@service_container', '@security.token_storage']
         tags:
             - { name: twig.extension }
