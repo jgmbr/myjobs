@@ -10,4 +10,13 @@ namespace JG\CoreBundle\Repository;
  */
 class StateRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findCount()
+    {
+        return $this
+            ->createQueryBuilder('s')
+            ->select('COUNT(s)')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
 }

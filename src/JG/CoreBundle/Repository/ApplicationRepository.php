@@ -13,6 +13,16 @@ use JG\UserBundle\Entity\User;
  */
 class ApplicationRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findCount()
+    {
+        return $this
+            ->createQueryBuilder('a')
+            ->select('COUNT(a)')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
     public function myApplicationsFromQB($user)
     {
         return $this

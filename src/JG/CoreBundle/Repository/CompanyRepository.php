@@ -12,6 +12,16 @@ use JG\CoreBundle\Entity\Company;
  */
 class CompanyRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findCount()
+    {
+        return $this
+            ->createQueryBuilder('c')
+            ->select('COUNT(c)')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
     public function myCompaniesFromQB($user)
     {
         return $this

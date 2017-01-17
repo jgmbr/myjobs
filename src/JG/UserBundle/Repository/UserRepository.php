@@ -7,6 +7,16 @@ use JG\UserBundle\Entity\User;
 
 class UserRepository extends EntityRepository
 {
+    public function findCount()
+    {
+        return $this
+            ->createQueryBuilder('u')
+            ->select('COUNT(u)')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
     /**
      * @return User[]
      */

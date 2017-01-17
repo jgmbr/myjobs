@@ -34,9 +34,17 @@ class CounterExtension extends \Twig_Extension
             'nbAlerts'          => new \Twig_Function_Method($this, 'nbAlerts'),
             'nbApplications'    => new \Twig_Function_Method($this, 'nbApplications'),
             'nbCompanies'       => new \Twig_Function_Method($this, 'nbCompanies'),
-            'nbAppointments'    => new \Twig_Function_Method($this, 'nbAppointments')
+            'nbAppointments'    => new \Twig_Function_Method($this, 'nbAppointments'),
+            'nbContracts'       => new \Twig_Function_Method($this, 'nbContracts'),
+            'nbStatus'          => new \Twig_Function_Method($this, 'nbStatus'),
+            'nbStates'          => new \Twig_Function_Method($this, 'nbStates'),
+            'nbAllCompanies'    => new \Twig_Function_Method($this, 'nbAllCompanies'),
+            'nbAllApplications' => new \Twig_Function_Method($this, 'nbAllApplications'),
+            'nbAllUsers'        => new \Twig_Function_Method($this, 'nbAllUsers'),
         );
     }
+
+    // Account
 
     public function nbAlerts()
     {
@@ -64,6 +72,51 @@ class CounterExtension extends \Twig_Extension
         $user = $this->tokenStorage->getToken()->getUser();
 
         return $this->doctrine->getRepository('JGCoreBundle:Appointment')->countMyAppointments($user);
+    }
+
+    // Admin
+
+    public function nbContracts()
+    {
+        $user = $this->tokenStorage->getToken()->getUser();
+
+        return $this->doctrine->getRepository('JGCoreBundle:Contract')->findCount();
+    }
+
+    public function nbStatus()
+    {
+        $user = $this->tokenStorage->getToken()->getUser();
+
+
+        return $this->doctrine->getRepository('JGCoreBundle:Status')->findCount();
+    }
+
+    public function nbStates()
+    {
+        $user = $this->tokenStorage->getToken()->getUser();
+
+        return $this->doctrine->getRepository('JGCoreBundle:State')->findCount();
+    }
+
+    public function nbAllCompanies()
+    {
+        $user = $this->tokenStorage->getToken()->getUser();
+
+        return $this->doctrine->getRepository('JGCoreBundle:Company')->findCount();
+    }
+
+    public function nbAllApplications()
+    {
+        $user = $this->tokenStorage->getToken()->getUser();
+
+        return $this->doctrine->getRepository('JGCoreBundle:Application')->findCount();
+    }
+
+    public function nbAllUsers()
+    {
+        $user = $this->tokenStorage->getToken()->getUser();
+
+        return $this->doctrine->getRepository('JGUserBundle:User')->findCount();
     }
 
     /**
