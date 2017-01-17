@@ -106,15 +106,6 @@ class ApplicationRepository extends \Doctrine\ORM\EntityRepository
      */
     public function getApplicationsAfterDelay(User $user, \Datetime $date)
     {
-//        var_dump($this->createQueryBuilder('a')
-//            ->where('a.dateAt <= :date')
-//            ->andWhere('a.user = :user')
-//            ->andWhere('a.relaunches IS EMPTY')
-//            ->andWhere('a.alerts IS EMPTY')
-//            ->setParameter('date', $date)
-//            ->setParameter('user', $user)
-//            ->getQuery());
-//        die('getQuery');
         return $this->createQueryBuilder('a')
             ->where('a.dateAt <= :date')
             ->andWhere('a.user = :user')
