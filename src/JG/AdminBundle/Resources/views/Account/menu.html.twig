@@ -30,8 +30,13 @@
         </a>
     </li>
     <li class="{% if app.request.attributes.get('_route') == "alert_index" %}active{% endif %}">
-        <a href="#">
+        <a href="{{ path('alert_index') }}">
             <i class="fa fa-bell-o" aria-hidden="true"></i> <span> Mes Alertes </span>
+            {% if nbAlerts()|length > 0 %}
+                <span class="pull-right-container">
+                  <small class="label pull-right bg-red"> {{ nbAlerts() }} </small>
+                </span>
+            {% endif %}
         </a>
     </li>
     <li class="{% if app.request.attributes.get('_route') == "preference_index" %}active{% endif %}">

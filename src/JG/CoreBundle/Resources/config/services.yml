@@ -3,7 +3,8 @@ services:
         class: JG\CoreBundle\Twig\Extension\TwigExtension
         tags:
             - { name: twig.extension }
-    #form.preferences.extension:
-        #class: JG\CoreBundle\Twig\Extension\PreferencesExtension
-        #tags:
-            #- { name: twig.extension }
+    alert.extension:
+        class: JG\CoreBundle\Twig\Extension\AlertExtension
+        arguments: ['@service_container', '@security.token_storage']
+        tags:
+            - { name: twig.extension }
