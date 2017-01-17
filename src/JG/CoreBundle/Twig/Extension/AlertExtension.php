@@ -7,13 +7,20 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class AlertExtension extends \Twig_Extension
 {
+    /**
+     * @var ContainerInterface
+     */
     private $doctrine;
-    private $token;
+
+    /**
+     * @var TokenStorageInterface
+     */
+    private $tokenStorage;
 
     public function __construct(ContainerInterface $container, TokenStorageInterface $tokenStorage)
     {
-        $this->doctrine = $container->get('doctrine');
-        $this->token = $tokenStorage;
+        $this->doctrine     = $container->get('doctrine');
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**
@@ -30,7 +37,7 @@ class AlertExtension extends \Twig_Extension
 
     public function nbAlerts()
     {
-        $user = $this->token->getToken()->getUser();
+        $user = $this->tokenStorage->getToken()->getUser();
 
         return 1;
     }

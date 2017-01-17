@@ -89,4 +89,18 @@ class ApplicationRepository extends \Doctrine\ORM\EntityRepository
             ->getSingleScalarResult()
         ;
     }
+
+    /**
+     * @return Application[]
+     */
+    public function getApplicationsAfterDelay(\Datetime $date)
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.dateAt <= :date')
+            ->andWhere('a.relaunches IS EMPTY')
+            ->setParameter('date', $date)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
