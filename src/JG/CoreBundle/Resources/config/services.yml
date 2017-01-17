@@ -8,3 +8,6 @@ services:
         arguments: ['@service_container', '@security.token_storage']
         tags:
             - { name: twig.extension }
+    app.mailer:
+        class: JG\CoreBundle\Services\Mailer\NotificationMailer
+        arguments: ['@mailer','@templating']
