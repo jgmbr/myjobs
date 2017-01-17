@@ -22,7 +22,7 @@ class NotificationMailer
       /* Exemple of use in a controller
 
         $serviceNotificationMailer = $this->get('app.mailer');
-      
+
         $serviceNotificationMailer->sendEmail(
             array(
                 'subject'       => 'Musée du Louvre › Confirmation de commande',
