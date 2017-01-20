@@ -85,7 +85,7 @@ class UserController extends Controller
             $em->flush($user);
 
             $request->getSession()->getFlashBag()->add('success', 'Membre ajouté avec succès !');
-  
+
             return $this->redirectToRoute('user_index');
         }
 
