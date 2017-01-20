@@ -40,7 +40,7 @@ class CompanyController extends Controller
     }
 
     /**
-     * Export companies
+     * Export companies user
      *
      * @Route("/export/companies", name="company_export")
      * @Method("GET")

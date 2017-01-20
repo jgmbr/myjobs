@@ -81,4 +81,16 @@ class CompanyRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
+
+    /**
+     * @return Company[]
+     */
+    public function exportAllCompanies()
+    {
+        return $this
+            ->createQueryBuilder('c')
+            ->getQuery()
+            ->iterate()
+        ;
+    }
 }

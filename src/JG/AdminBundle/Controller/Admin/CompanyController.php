@@ -33,6 +33,23 @@ class CompanyController extends Controller
     }
 
     /**
+     * Export companies
+     *
+     * @Route("/export/companies/all", name="company_export_all")
+     * @Method("GET")
+     */
+    public function exportAllCompaniesAction()
+    {
+        $user = $this->getUser();
+
+        $headers = array('id','name','address1','address2','postcode','city','country','email','phone','website','contact','created_at');
+
+        $exportWS = $this->get('app.export');
+
+        return $exportWS->export('JGCoreBundle:Company', 'exportAllCompanies', $headers, 'export-all-companies-'.date('YmdHis'), $user);
+    }
+
+    /**
      * Finds and displays a company entity.
      *
      * @Route("/{id}", name="company_list_show")
