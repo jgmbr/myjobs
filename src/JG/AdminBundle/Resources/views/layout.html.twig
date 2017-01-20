@@ -303,6 +303,7 @@
 
         <script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
         <script src="{{ asset('assets/vendor/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/datatables.net-responsive/js/dataTables.responsive.js') }}"></script>
         <script src="{{ asset('assets/vendor/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
         <script src="{{ asset('assets/vendor/growl/javascripts/jquery.growl.js') }}"></script>
         <script src="{{ asset('assets/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
@@ -319,32 +320,37 @@
                 {% for msgWarning in app.session.flashbag.get('warning') %}
                     $.growl.warning({ message: "{{ msgWarning }}" });
                 {% endfor %}
-                /*$('body').on('submit', 'form[name=jg_corebundle_preferences]', function (e) {
-                    e.preventDefault();
-                    $.ajax({
-                        type: "POST",
-                        url: "",
-                        data: $(this).serialize()
-                    })
-                    .done(function (data) {
-                        if (typeof data.message !== 'undefined') {
-                            if (data.message == 'Success') {
-                                $.growl.notice({ message: "Préférences sauvegardées avec succès !" });
-                                $('.control-sidebar').removeClass('control-sidebar-open');
-                                setTimeout(function(){
-                                    location.reload();
-                                }, 1500);
-                            }
+                $('.dataTable').DataTable({
+                    "responsive": true,
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false,
+                    "language": {
+                        "processing":     "Traitement en cours...",
+                        "search":         "Rechercher&nbsp;:",
+                        "lengthMenu":    "Afficher _MENU_ &eacute;l&eacute;ments",
+                        "info":           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                        "infoEmpty":      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+                        "infoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                        "infoPostFix":    "",
+                        "loadingRecords": "Chargement en cours...",
+                        "zeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                        "emptyTable":     "Aucune donnée disponible dans le tableau",
+                        "paginate": {
+                            "first":      "Premier",
+                            "previous":   "Pr&eacute;c&eacute;dent",
+                            "next":       "Suivant",
+                            "last":       "Dernier"
+                        },
+                        "aria": {
+                            "sortAscending":  ": activer pour trier la colonne par ordre croissant",
+                            "sortDescending": ": activer pour trier la colonne par ordre décroissant"
                         }
-                    })
-                    .fail(function (jqXHR, textStatus, errorThrown) {
-                        if (typeof jqXHR.responseJSON !== 'undefined') {
-                            $('.form_error').html(jqXHR.responseJSON.message);
-                        } else {
-                            alert(errorThrown);
-                        }
-                    });
-                });*/
+                    }
+                });
             });
         </script>
 
