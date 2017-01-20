@@ -45,6 +45,17 @@ class CompanyRepository extends \Doctrine\ORM\EntityRepository
         ;
     }
 
+    public function exportMyCompanies($user)
+    {
+        return $this
+            ->createQueryBuilder('c')
+            ->where('c.user = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->iterate()
+        ;
+    }
+
     /**
      * @return Company[]
      */

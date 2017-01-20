@@ -17,11 +17,14 @@ class ExportDatas
         $this->em = $em;
     }
 
-    public function export($entity, $query, $headers, $file)
+    public function export($entity, $query, $headers, $file, $user = null)
     {
         $delimiter = ";";
 
-        $iterableResult = $this->em->getRepository($entity)->$query();
+        if ($user)
+            $iterableResult = $this->em->getRepository($entity)->$query($user);
+        else
+            $iterableResult = $this->em->getRepository($entity)->$query();
 
         $handle = fopen('php://memory', 'r+');
 

@@ -40,6 +40,23 @@ class CompanyController extends Controller
     }
 
     /**
+     * Export companies
+     *
+     * @Route("/export/companies", name="company_export")
+     * @Method("GET")
+     */
+    public function exportCompaniesAction()
+    {
+        $user = $this->getUser();
+
+        $headers = array('id','name','address1','address2','postcode','city','country','email','phone','website','contact','created_at');
+
+        $exportWS = $this->get('app.export');
+
+        return $exportWS->export('JGCoreBundle:Company', 'exportMyCompanies', $headers, 'export-companies-'.date('YmdHis'), $user);
+    }
+
+    /**
      * Creates a new company entity.
      *
      * @Route("/new", name="company_new")

@@ -563,8 +563,8 @@ class User extends BaseUser
             $this->email,
             $this->emailCanonical,
             $this->enabled,
-            $this->firstname,
-            $this->lastname,
+            utf8_decode($this->firstname),
+            utf8_decode($this->lastname),
             $this->toString($this->getRoles()),
             $this->createdAt->format('d/m/Y')
         );

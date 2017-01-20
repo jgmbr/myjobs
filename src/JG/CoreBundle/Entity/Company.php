@@ -515,4 +515,22 @@ class Company
     {
         $this->updatedAt = new \DateTime("now");
     }
+
+    public function toArray()
+    {
+        return array(
+            $this->id,
+            utf8_decode($this->name),
+            utf8_decode($this->address1),
+            utf8_decode($this->address2),
+            $this->postcode,
+            utf8_decode($this->city),
+            $this->country,
+            utf8_decode($this->email),
+            $this->phone,
+            utf8_decode($this->website),
+            utf8_decode($this->contact),
+            $this->createdAt->format('d/m/Y')
+        );
+    }
 }
