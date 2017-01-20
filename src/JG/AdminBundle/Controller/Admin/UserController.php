@@ -8,13 +8,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * User controller.
  *
  * @Route("user")
  */
-class AdminUserController extends Controller
+class UserController extends Controller
 {
     /**
      * @Route("/list", name="user_index")
@@ -39,6 +40,36 @@ class AdminUserController extends Controller
     }
 
     /**
+     * Export users
+     *
+     * @Route("/export/users", name="user_export_users")
+     * @Method("GET")
+     */
+    public function exportUsersAction()
+    {
+        $headers = array('id','username','username_canonical','email','email_canonical','enabled','firstname','lastname','roles','created_at');
+
+        $exportWS = $this->get('app.export');
+
+        return $exportWS->export('JGUserBundle:User', 'exportUsers', $headers, 'export-users-'.date('YmdHis') );
+    }
+
+    /**
+     * Export administrators
+     *
+     * @Route("/export/admins", name="user_export_admins")
+     * @Method("GET")
+     */
+    public function exportAdministratorsWSAction()
+    {
+        $headers = array('id','username','username_canonical','email','email_canonical','enabled','firstname','lastname','roles','created_at');
+
+        $exportWS = $this->get('app.export');
+
+        return $exportWS->export('JGUserBundle:User', 'exportAdmins', $headers, 'export-administrators-'.date('YmdHis') );
+    }
+
+    /**
      * @Route("/new", name="user_new")
      */
     public function newAction(Request $request)
@@ -54,15 +85,7 @@ class AdminUserController extends Controller
             $em->flush($user);
 
             $request->getSession()->getFlashBag()->add('success', 'Membre ajouté avec succès !');
-
-            /*$newUser = $userManager->createUser();
-            $newUser->setUsername($form->get('username')->getData());
-            $newUser->setEmail($form->get('email')->getData());
-            $newUser->setPlainPassword($form->get('plainPassword')->getData());
-            $newUser->setEnabled(true);
-            $newUser->setRole($form->get('role')->getData());
-            $userManager->updateUser($newUser);*/
-
+  
             return $this->redirectToRoute('user_index');
         }
 

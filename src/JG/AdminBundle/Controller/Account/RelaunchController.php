@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  *
  * @Route("relaunch")
  */
-class AccountRelaunchController extends Controller
+class RelaunchController extends Controller
 {
     /**
      * Lists all relaunch entities.

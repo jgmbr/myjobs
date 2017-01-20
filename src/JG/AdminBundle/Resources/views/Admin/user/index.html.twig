@@ -25,6 +25,9 @@
     <div class="box">
         <div class="box-header">
             <h3 class="box-title">Administrateurs</h3>
+            <a href="{{ path('user_export_admins') }}" class="btn btn-info pull-right">
+                <i class="fa fa-download" aria-hidden="true"></i> &nbsp; Exporter les administrateurs
+            </a>
         </div>
         <div class="box-body">
             <div id="administrator_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
@@ -96,6 +99,9 @@
     <div class="box">
         <div class="box-header">
             <h3 class="box-title">Utilisateurs</h3>
+            <a href="{{ path('user_export_users') }}" class="btn btn-info pull-right">
+                <i class="fa fa-download" aria-hidden="true"></i> &nbsp; Exporter les utilisateurs
+            </a>
         </div>
         <div class="box-body">
             <div id="user_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">

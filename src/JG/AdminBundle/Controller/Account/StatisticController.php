@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @Route("statistic")
  */
-class AccountStatisticController extends Controller
+class StatisticController extends Controller
 {
     /**
      * Lists all statistics.

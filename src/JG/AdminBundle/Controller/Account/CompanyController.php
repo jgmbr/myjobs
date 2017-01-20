@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @Route("company")
  */
-class AccountCompanyController extends Controller
+class CompanyController extends Controller
 {
     /**
      * Lists all company entities.

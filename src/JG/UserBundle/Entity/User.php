@@ -541,4 +541,32 @@ class User extends BaseUser
     {
         return $this->picture;
     }
+
+    /* Threads datas */
+
+    public function toString($data)
+    {
+        $str = "";
+        foreach ($data as $data)
+        {
+            $str .= $data .",";
+        }
+        return trim($str, ",");
+    }
+
+    public function toArray()
+    {
+        return array(
+            $this->id,
+            $this->username,
+            $this->usernameCanonical,
+            $this->email,
+            $this->emailCanonical,
+            $this->enabled,
+            $this->firstname,
+            $this->lastname,
+            $this->toString($this->getRoles()),
+            $this->createdAt->format('d/m/Y')
+        );
+    }
 }

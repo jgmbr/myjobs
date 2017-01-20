@@ -14,3 +14,6 @@ services:
     app.alert:
         class: JG\CoreBundle\Services\Alert\NotificationAlert
         arguments: ['@doctrine.orm.entity_manager', '@security.token_storage']
+    app.export:
+        class: JG\CoreBundle\Services\Export\ExportDatas
+        arguments: ['@doctrine.orm.entity_manager']

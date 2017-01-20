@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @Route("application")
  */
-class AccountApplicationController extends Controller
+class ApplicationController extends Controller
 {
     /**
      * Lists all application entities.

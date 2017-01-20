@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @Route("appointment")
  */
-class AccountAppointmentController extends Controller
+class AppointmentController extends Controller
 {
     /**
      * Lists all appointment entities.

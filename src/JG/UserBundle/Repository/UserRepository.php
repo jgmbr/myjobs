@@ -32,6 +32,18 @@ class UserRepository extends EntityRepository
         ;
     }
 
+    public function exportUsers()
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        return $qb
+            ->where($qb->expr()->notLike('u.roles', ':role'))
+            ->setParameter('role', '%"ROLE_ADMIN"%')
+            ->getQuery()
+            ->iterate()
+        ;
+    }
+
     /**
      * @return User[]
      */
@@ -44,6 +56,18 @@ class UserRepository extends EntityRepository
             ->setParameter('role', '%"ROLE_ADMIN"%')
             ->getQuery()
             ->getResult()
+        ;
+    }
+
+    public function exportAdmins()
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        return $qb
+            ->where($qb->expr()->like('u.roles', ':role'))
+            ->setParameter('role', '%"ROLE_ADMIN"%')
+            ->getQuery()
+            ->iterate()
         ;
     }
 

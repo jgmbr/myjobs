@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @Route("status")
  */
-class AdminStatusController extends Controller
+class StatusController extends Controller
 {
     /**
      * Lists all status entities.

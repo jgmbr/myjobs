@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @Route("state")
  */
-class AdminStateController extends Controller
+class StateController extends Controller
 {
     /**
      * Lists all state entities.

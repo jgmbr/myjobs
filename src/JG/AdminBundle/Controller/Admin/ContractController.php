@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @Route("contract")
  */
-class AdminContractController extends Controller
+class ContractController extends Controller
 {
     /**
      * Lists all contract entities.
