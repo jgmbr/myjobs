@@ -23,6 +23,11 @@
         <a href="{{ path('application_new') }}" class="btn btn-success">
             <i class="fa fa-plus" aria-hidden="true"></i> &nbsp; Ajouter une nouvelle candidature
         </a>
+        {% if applications is defined and applications|length > 0 %}
+            <a href="{{ path('application_export') }}" class="btn btn-info">
+                <i class="fa fa-download" aria-hidden="true"></i> &nbsp; Exporter mes candidatures
+            </a>
+        {% endif %}
     </div>
 
     <div class="box">

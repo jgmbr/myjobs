@@ -350,4 +350,18 @@ class Appointment
     {
         $this->updatedAt = new \DateTime("now");
     }
+
+    public function toCsvArray()
+    {
+        return array(
+            $this->id,
+            utf8_decode($this->getName()),
+            utf8_decode($this->getState()->getName()),
+            utf8_decode($this->getApplication()->getCompany()->getName()),
+            $this->getDateAt()->format('d/m/Y'),
+            $this->getHourAt()->format('H:i'),
+            utf8_decode($this->getComment()),
+            $this->getCreatedAt()->format('d/m/Y')
+        );
+    }
 }

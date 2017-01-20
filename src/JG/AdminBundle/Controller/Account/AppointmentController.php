@@ -36,6 +36,23 @@ class AppointmentController extends Controller
     }
 
     /**
+     * Export appointments user
+     *
+     * @Route("/export/appointments", name="appointment_export")
+     * @Method("GET")
+     */
+    public function exportAppointmentsAction()
+    {
+        $user = $this->getUser();
+
+        $headers = array('id','name','state','company','date_at','hour_at','comment','created_at');
+
+        $exportWS = $this->get('app.export');
+
+        return $exportWS->export('JGCoreBundle:Appointment', 'exportMyAppointments', $headers, 'export-appointments-'.date('YmdHis'), $user);
+    }
+
+    /**
      * Creates a new appointment entity.
      *
      * @Route("/new", name="appointment_new")

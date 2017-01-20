@@ -47,7 +47,7 @@ class UserController extends Controller
      */
     public function exportUsersAction()
     {
-        $headers = array('id','username','username_canonical','email','email_canonical','enabled','firstname','lastname','roles','created_at');
+        $headers = array('id','username','username_canonical','email','email_canonical','firstname','lastname','roles','enabled','created_at');
 
         $exportWS = $this->get('app.export');
 
@@ -62,7 +62,7 @@ class UserController extends Controller
      */
     public function exportAdministratorsWSAction()
     {
-        $headers = array('id','username','username_canonical','email','email_canonical','enabled','firstname','lastname','roles','created_at');
+        $headers = array('id','username','username_canonical','email','email_canonical','firstname','lastname','roles','enabled','created_at');
 
         $exportWS = $this->get('app.export');
 

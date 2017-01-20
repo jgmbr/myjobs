@@ -117,4 +117,17 @@ class ApplicationRepository extends \Doctrine\ORM\EntityRepository
             ->getResult()
         ;
     }
+
+    public function exportMyApplications($user)
+    {
+        return $this
+            ->createQueryBuilder('a')
+            ->where('a.user = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->iterate()
+        ;
+    }
+
+
 }

@@ -516,21 +516,21 @@ class Company
         $this->updatedAt = new \DateTime("now");
     }
 
-    public function toArray()
+    public function toCsvArray()
     {
         return array(
             $this->id,
-            utf8_decode($this->name),
-            utf8_decode($this->address1),
-            utf8_decode($this->address2),
-            $this->postcode,
-            utf8_decode($this->city),
-            $this->country,
-            utf8_decode($this->email),
-            $this->phone,
-            utf8_decode($this->website),
-            utf8_decode($this->contact),
-            $this->createdAt->format('d/m/Y')
+            utf8_decode($this->getName()),
+            utf8_decode($this->getAddress1()),
+            utf8_decode($this->getAddress2()),
+            utf8_decode($this->getPostcode()),
+            utf8_decode($this->getCity()),
+            utf8_decode($this->getCountry()),
+            utf8_decode($this->getEmail()),
+            utf8_decode($this->getPhone()),
+            utf8_decode($this->getWebsite()),
+            utf8_decode($this->getContact()),
+            $this->getCreatedAt()->format('d/m/Y')
         );
     }
 }

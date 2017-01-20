@@ -42,6 +42,23 @@ class ApplicationController extends Controller
     }
 
     /**
+     * Export applications user
+     *
+     * @Route("/export/applications", name="application_export")
+     * @Method("GET")
+     */
+    public function exportApplicationsAction()
+    {
+        $user = $this->getUser();
+
+        $headers = array('id','date_at','name','url','contract','state','company','comment','business_reason','people_reason','created_at');
+
+        $exportWS = $this->get('app.export');
+
+        return $exportWS->export('JGCoreBundle:Application', 'exportMyApplications', $headers, 'export-applications-'.date('YmdHis'), $user);
+    }
+
+    /**
      * Creates a new application entity.
      *
      * @Route("/new", name="application_new")

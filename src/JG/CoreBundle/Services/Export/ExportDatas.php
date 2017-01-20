@@ -31,7 +31,7 @@ class ExportDatas
         fputcsv($handle, $headers, $delimiter);
 
         while (false !== ($row = $iterableResult->next())) {
-            fputcsv($handle, $row[0]->toArray(), $delimiter);
+            fputcsv($handle, $row[0]->toCsvArray(), $delimiter);
             $this->em->detach($row[0]);
         }
         rewind($handle);

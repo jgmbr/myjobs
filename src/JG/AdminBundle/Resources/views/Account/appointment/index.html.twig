@@ -26,6 +26,11 @@
         <a href="{{ path('appointment_new') }}" class="btn btn-success">
             <i class="fa fa-plus" aria-hidden="true"></i> &nbsp; Ajouter un nouvel entretien
         </a>
+        {% if appointments is defined and appointments|length > 0 %}
+            <a href="{{ path('appointment_export') }}" class="btn btn-info">
+                <i class="fa fa-download" aria-hidden="true"></i> &nbsp; Exporter mes entretiens
+            </a>
+        {% endif %}
     </div>
 
     <div class="row">

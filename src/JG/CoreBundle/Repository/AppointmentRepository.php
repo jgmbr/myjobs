@@ -75,4 +75,15 @@ class AppointmentRepository extends \Doctrine\ORM\EntityRepository
             ->getSingleScalarResult()
         ;
     }
+
+    public function exportMyAppointments($user)
+    {
+        return $this
+            ->createQueryBuilder('a')
+            ->where('a.user = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->iterate()
+        ;
+    }
 }

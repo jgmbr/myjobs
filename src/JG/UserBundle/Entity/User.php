@@ -554,19 +554,19 @@ class User extends BaseUser
         return trim($str, ",");
     }
 
-    public function toArray()
+    public function toCsvArray()
     {
         return array(
             $this->id,
-            $this->username,
-            $this->usernameCanonical,
-            $this->email,
-            $this->emailCanonical,
+            utf8_decode($this->getUsername()),
+            utf8_decode($this->getUsernameCanonical()),
+            utf8_decode($this->getEmail()),
+            utf8_decode($this->getEmailCanonical()),
+            utf8_decode($this->getFirstname()),
+            utf8_decode($this->getLastname()),
+            utf8_decode($this->toString($this->getRoles())),
             $this->enabled,
-            utf8_decode($this->firstname),
-            utf8_decode($this->lastname),
-            $this->toString($this->getRoles()),
-            $this->createdAt->format('d/m/Y')
+            $this->getCreatedAt()->format('d/m/Y')
         );
     }
 }

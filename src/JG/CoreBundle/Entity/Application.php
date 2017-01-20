@@ -565,4 +565,21 @@ class Application
     {
         return $this->alerts;
     }
+
+    public function toCsvArray()
+    {
+        return array(
+            $this->id,
+            $this->getDateAt()->format('d/m/Y'),
+            utf8_decode($this->getName()),
+            utf8_decode($this->getUrl()),
+            utf8_decode($this->getContract()->getName()),
+            utf8_decode($this->getStatus()->getName()),
+            utf8_decode($this->getCompany()->getName()),
+            utf8_decode($this->getComment()),
+            utf8_decode($this->getBusinessReason()),
+            utf8_decode($this->getPeopleReason()),
+            $this->getCreatedAt()->format('d/m/Y')
+        );
+    }
 }
