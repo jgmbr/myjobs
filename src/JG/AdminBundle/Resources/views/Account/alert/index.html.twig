@@ -47,10 +47,10 @@
                                         </td>
                                         <td>
                                             {% if alert.viewed %}
-                                                <i class="fa fa-check" aria-hidden="true"></i> Validée
+                                                <i class="fa fa-check" aria-hidden="true"></i> &nbsp; Vue
                                             {% else %}
-                                                <a href="{{ path('alert_valid', { 'id': alert.id, 'state': true }) }}" class="btn btn-success btn-sm">
-                                                    <i class="fa fa-check" aria-hidden="true"></i> Valider
+                                                <a href="{{ path('alert_valid', { 'id': alert.id, 'state': true }) }}" class="btn btn-info btn-sm">
+                                                    <i class="fa fa-eye" aria-hidden="true"></i> &nbsp; Voir
                                                 </a>
                                             {% endif %}
                                         </td>
