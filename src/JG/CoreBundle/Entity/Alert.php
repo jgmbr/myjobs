@@ -77,6 +77,11 @@ class Alert
     private $user;
 
     /**
+     * @ORM\ManyToOne(targetEntity="JG\CoreBundle\Entity\Appointment", inversedBy="alerts", cascade={"persist"})
+     */
+    private $appointment;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -284,6 +289,30 @@ class Alert
     public function getApplication()
     {
         return $this->application;
+    }
+
+    /**
+     * Set appointment
+     *
+     * @param \JG\CoreBundle\Entity\Appointment $appointment
+     *
+     * @return Alert
+     */
+    public function setAppointment(\JG\CoreBundle\Entity\Appointment $appointment = null)
+    {
+        $this->appointment = $appointment;
+
+        return $this;
+    }
+
+    /**
+     * Get appointment
+     *
+     * @return \JG\CoreBundle\Entity\Appointment
+     */
+    public function getAppointment()
+    {
+        return $this->appointment;
     }
 
     /**

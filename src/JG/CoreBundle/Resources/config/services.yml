@@ -11,8 +11,11 @@ services:
     app.mailer:
         class: JG\CoreBundle\Services\Mailer\NotificationMailer
         arguments: ['@mailer','@templating']
-    app.alert:
-        class: JG\CoreBundle\Services\Alert\NotificationAlert
+    app.alert.application:
+        class: JG\CoreBundle\Services\Alert\ApplicationAlert
+        arguments: ['@doctrine.orm.entity_manager', '@security.token_storage']
+    app.alert.appointment:
+        class: JG\CoreBundle\Services\Alert\AppointmentAlert
         arguments: ['@doctrine.orm.entity_manager', '@security.token_storage']
     app.export:
         class: JG\CoreBundle\Services\Export\ExportDatas

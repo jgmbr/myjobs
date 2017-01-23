@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use JG\CoreBundle\Entity\Alert;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class NotificationAlert
+class ApplicationAlert
 {
     /**
     * @var EntityManagerInterface
@@ -17,8 +17,7 @@ class NotificationAlert
      * @var TokenStorageInterface
      */
     private $tokenStorage;
-
-    // On injecte l'EntityManager
+ 
     public function __construct(EntityManagerInterface $em, TokenStorageInterface $tokenStorage)
     {
         $this->em             = $em;

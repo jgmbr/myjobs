@@ -100,9 +100,15 @@ class Appointment
      */
     private $state;
 
+    /**
+     * @ORM\OneToMany(targetEntity="JG\CoreBundle\Entity\Alert", mappedBy="appointment", cascade={"persist"})
+     */
+    private $alerts;
+
     public function __construct()
     {
         $this->createdAt    = new \Datetime();
+        $this->alerts       = new ArrayCollection();
     }
 
     /**
@@ -329,6 +335,40 @@ class Appointment
     public function getState()
     {
         return $this->state;
+    }
+
+    /**
+     * Add alert
+     *
+     * @param \JG\CoreBundle\Entity\Alert $alert
+     *
+     * @return Appointment
+     */
+    public function addAlert(\JG\CoreBundle\Entity\Alert $alert)
+    {
+        $this->alerts[] = $alert;
+
+        return $this;
+    }
+
+    /**
+     * Remove alert
+     *
+     * @param \JG\CoreBundle\Entity\Alert $alert
+     */
+    public function removeAlert(\JG\CoreBundle\Entity\Alert $alert)
+    {
+        $this->alerts->removeElement($alert);
+    }
+
+    /**
+     * Get alerts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAlerts()
+    {
+        return $this->alerts;
     }
 
     /**

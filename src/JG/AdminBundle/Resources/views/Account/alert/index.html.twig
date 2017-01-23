@@ -28,7 +28,7 @@
                                 <tr role="row">
                                     <th>Id</th>
                                     <th>Date</th>
-                                    <th>Nom</th>
+                                    <th>Libellé</th>
                                     <th>Commentaire</th>
                                     <th>Actions</th>
                                 </tr>
@@ -41,16 +41,22 @@
                                         <td> {{ alert.name }} </td>
                                         <td>
                                             {{ alert.content }}
-                                            <a href="{{ path('application_show',{'id': alert.application.id }) }}">{{ alert.application.name }}</a>
-                                            à
-                                            <a href="{{ path('company_show',{'id': alert.application.company.id}) }}"> {{ alert.application.company.name }} </a>
+                                            {% if alert.name == "Relance" %}
+                                                <a href="{{ path('application_show',{'id': alert.application.id }) }}">{{ alert.application.name }}</a>
+                                                à
+                                                <a href="{{ path('company_show',{'id': alert.application.company.id }) }}"> {{ alert.application.company.name }} </a>
+                                            {% elseif alert.name == "Entretien" %}
+                                                <a href="{{ path('appointment_show',{'id': alert.appointment.id }) }}">{{ alert.appointment.name }}</a>
+                                                à
+                                                <a href="{{ path('company_show',{'id': alert.appointment.application.company.id }) }}"> {{ alert.appointment.application.company.name }} </a>
+                                            {% endif %}
                                         </td>
                                         <td>
                                             {% if alert.viewed %}
-                                                <i class="fa fa-check" aria-hidden="true"></i> &nbsp; Vue
+                                                <i class="fa fa-check" aria-hidden="true"></i> &nbsp; Lue
                                             {% else %}
                                                 <a href="{{ path('alert_valid', { 'id': alert.id, 'state': true }) }}" class="btn btn-info btn-sm">
-                                                    <i class="fa fa-eye" aria-hidden="true"></i> &nbsp; Voir
+                                                    <i class="fa fa-eye" aria-hidden="true"></i> &nbsp; Lire
                                                 </a>
                                             {% endif %}
                                         </td>
@@ -61,7 +67,7 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Date</th>
-                                    <th>Nom</th>
+                                    <th>Libellé</th>
                                     <th>Commentaire</th>
                                     <th>Actions</th>
                                 </tr>
