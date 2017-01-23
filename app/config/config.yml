@@ -96,7 +96,7 @@ fos_user:
                 address:        gambier.j@gmail.com
                 sender_name:    Demo Registration
     service:
-        mailer: fos_user.mailer.twig_swift
+        mailer: app.mailer
     resetting:
         email:
             template:   FOSUserBundle:Resetting:email.txt.twig

@@ -2,41 +2,67 @@
 
 namespace JG\CoreBundle\Services\Mailer;
 
+use FOS\UserBundle\Mailer\MailerInterface;
+use FOS\UserBundle\Model\UserInterface;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Templating\EngineInterface;
 
-class NotificationMailer
+class NotificationMailer implements MailerInterface
 {
+    private $router;
+
     private $mailer;
 
     private $templating;
 
-  public function __construct(\Swift_Mailer $mailer, EngineInterface $templating)
+  public function __construct(RouterInterface $router, \Swift_Mailer $mailer, EngineInterface $templating)
   {
+    $this->router = $router;
+
     $this->mailer = $mailer;
 
     $this->templating = $templating;
   }
 
-  public function sendEmail($datas)
+  public function sendConfirmationEmailMessage(UserInterface $user)
   {
-      /* Exemple of use in a controller
+      $datas = array(
+          'subject'     => 'MyJobs › Confirmation inscription',
+          'from'        => 'contact@justine-gambier.fr',
+          'to'          => $user->getEmail(),
+          'template'    => 'JGUserBundle:Email:registration.html.twig',
+          'content'     => array(
+              'user' => $user
+          ),
+          'image'       => null,
+          'attachment'  => null
+      );
 
-        $serviceNotificationMailer = $this->get('app.mailer');
+      $this->sendEmailMessage($datas);
+  }
 
-        $serviceNotificationMailer->sendEmail(
-            array(
-                'subject'       => 'Musée du Louvre › Confirmation de commande',
-                'from'          => $this->getParameter('from_mailer'),
-                'to'            => $currentBooking->getEmail(),
-                'template'      => 'AppBundle:Ticket:sendtickets.html.twig',
-                'content'       => array('codeBooking' => $currentBooking->getCodeBooking(),'listTickets' => $listTickets,'currentBooking' => $currentBooking),
-                'image'         => '../web/img/louvre.png',
-                'attachment'    => $this->getParameter('path_pdf').$token.'-'.$currentBooking->getCodeBooking().'.pdf'
-            )
-        );
+  public function sendResettingEmailMessage(UserInterface $user)
+  {
+      $url = $this->router->generate('fos_user_resetting_reset', array('token' => $user->getConfirmationToken()), true);
 
-      */
+      $datas = array(
+          'subject'     => 'MyJobs › Réinitialisation de mot de passe',
+          'from'        => 'contact@justine-gambier.fr',
+          'to'          => $user->getEmail(),
+          'template'    => 'JGUserBundle:Email:resetting.html.twig',
+          'content'     => array(
+              'user' => $user,
+              'resettingUrl' => $url
+          ),
+          'image'       => null,
+          'attachment'  => null
+      );
 
+      $this->sendEmailMessage($datas);
+  }
+
+  public function sendEmailMessage($datas)
+  {
       if (!$datas)
           return false;
 
@@ -54,10 +80,6 @@ class NotificationMailer
       if (!empty($datas['attachment']))
         $message->attach(\Swift_Attachment::fromPath($datas['attachment']));
 
-      if ($this->mailer->send($message))
-          return true;
-      else
-          return false;
-
+      $this->mailer->send($message);
   }
 }
