@@ -17,7 +17,7 @@ class ApplicationAlert
      * @var TokenStorageInterface
      */
     private $tokenStorage;
- 
+
     public function __construct(EntityManagerInterface $em, TokenStorageInterface $tokenStorage)
     {
         $this->em             = $em;
@@ -26,8 +26,6 @@ class ApplicationAlert
 
     public function alert()
     {
-        $user = $this->tokenStorage->getToken()->getUser();
-
         $listUsers = $this->em->getRepository('JGUserBundle:User')->findAllUsers();
 
         foreach($listUsers as $user) {
