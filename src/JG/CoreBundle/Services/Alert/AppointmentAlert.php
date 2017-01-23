@@ -30,31 +30,39 @@ class AppointmentAlert
 
         foreach($listUsers as $user) {
 
-            if (sizeof($user->getAppointments()) > 0) {
+            if (sizeof($user->getPreferences()) > 0 && sizeof($user->getAppointments()) > 0) {
 
-                foreach($user->getAppointments() as $appointment) {
+                foreach ($user->getPreferences() as $preference) {
 
-                    $today = new \DateTime('now');
+                    if ($preference->getPushAlerts()) {
 
-                    if ($appointment->getDateAt()->format('d/m/Y') == $today->format('d/m/Y')) {
+                        foreach($user->getAppointments() as $appointment) {
 
-                        $alert = new Alert();
-                        $alert->setName('Entretien');
-                        $alert->setContent("N'oubliez pas votre entretien");
-                        $alert->setDateAt(new \DateTime());
-                        $alert->setViewed(false);
-                        $alert->setUser($user);
-                        $alert->setAppointment($appointment);
-                        $appointment->addAlert($alert);
-                        $this->em->persist($alert);
-                        $this->em->flush();
+                            $today = new \DateTime('now');
+
+                            if ($appointment->getDateAt()->format('d/m/Y') == $today->format('d/m/Y')) {
+
+                                $alert = new Alert();
+                                $alert->setName('Entretien');
+                                $alert->setContent("N'oubliez pas votre entretien");
+                                $alert->setDateAt(new \DateTime());
+                                $alert->setViewed(false);
+                                $alert->setUser($user);
+                                $alert->setAppointment($appointment);
+                                $appointment->addAlert($alert);
+                                $this->em->persist($alert);
+                                $this->em->flush();
+
+                            }
+
+                        }
 
                     }
 
                 }
 
             }
-
+ 
         }
 
     }
