@@ -56,6 +56,12 @@
                 display: block;
                 font-weight: bold;
             }
+            .round {
+                border-radius: 10px !important;
+            }
+            .border-none {
+                border: none;
+            }
         </style>
         {% block stylesheets %}
         {% endblock %}
@@ -126,13 +132,13 @@
                                 <li class="user-footer">
                                     <div class="pull-left">
                                         {% if is_granted('ROLE_ADMIN') %}
-                                            <a href="{{ path('admin_profil') }}" class="btn btn-default btn-flat">Mon profil</a>
+                                            <a href="{{ path('admin_profil') }}" class="btn btn-primary round border-none btn-flat"> <i class="fa fa-user" aria-hidden="true"></i> Mon profil</a>
                                         {% else %}
-                                            <a href="{{ path('account_profil') }}" class="btn btn-default btn-flat">Mon profil</a>
+                                            <a href="{{ path('account_profil') }}" class="btn btn-primary round border-none btn-flat"> <i class="fa fa-user" aria-hidden="true"></i> Mon profil</a>
                                         {% endif %}
                                     </div>
                                     <div class="pull-right">
-                                        <a href="{{ path('fos_user_security_logout') }}" class="btn btn-default btn-flat">Déconnexion</a>
+                                        <a href="{{ path('fos_user_security_logout') }}" class="btn btn-primary round border-none btn-flat"> <i class="fa fa-sign-out" aria-hidden="true"></i> Déconnexion</a>
                                     </div>
                                 </li>
                             </ul>
