@@ -48,20 +48,16 @@ class ApplicationAlert
 
                             foreach($listApplications as $application) {
 
-                                //if (!$application->getAlerts()) {
-
-                                    $alert = new Alert();
-                                    $alert->setName('Relance');
-                                    $alert->setContent("N'oubliez pas de relancer la candidature");
-                                    $alert->setDateAt(new \DateTime());
-                                    $alert->setViewed(false);
-                                    $alert->setUser($user);
-                                    $alert->setApplication($application);
-                                    $application->addAlert($alert);
-                                    //$user->addAlert($alert);
-                                    $this->em->persist($alert);
-
-                                //}
+                                $alert = new Alert();
+                                $alert->setName('Relance');
+                                $alert->setContent("N'oubliez pas de relancer la candidature");
+                                $alert->setDateAt(new \DateTime());
+                                $alert->setViewed(false);
+                                $alert->setUser($user);
+                                $alert->setApplication($application);
+                                $application->addAlert($alert);
+                                //$user->addAlert($alert);
+                                $this->em->persist($alert);
 
                             }
 

@@ -2,6 +2,7 @@
 
 namespace JG\FrontBundle\Controller;
 
+use JG\CoreBundle\Entity\Contact;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -21,9 +22,26 @@ class FrontController extends Controller
     /**
      * @Route("/contact", name="contact_page")
      */
-    public function contactAction()
+    public function contactAction(Request $request)
     {
-        return $this->render('JGFrontBundle:Front:contact.html.twig');
+        $contact = new Contact();
+        $form = $this->createForm('JG\CoreBundle\Form\ContactType', $contact);
+        $form->handleRequest($request);
+
+        $user = $this->getUser();
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($contact);
+            $em->flush($contact);
+            $request->getSession()->getFlashBag()->add('success', 'Demande de contact envoyée avec succès !');
+            return $this->redirectToRoute('home_page');
+        }
+
+        return $this->render('JGFrontBundle:Front:contact.html.twig', array(
+            'contact' => $contact,
+            'formContact' => $form->createView(),
+        ));
     }
 
     /**

@@ -16,6 +16,7 @@ class ContractRepository extends \Doctrine\ORM\EntityRepository
             ->createQueryBuilder('c')
             ->select('COUNT(c)')
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 }
