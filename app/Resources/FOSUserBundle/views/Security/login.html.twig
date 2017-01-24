@@ -1,6 +1,6 @@
 {% extends "JGAdminBundle::layout_auth.html.twig" %}
 
-{% block type_page %}login-page{% endblock %}
+{% block type_page %}auth-page login-page{% endblock %}
 
 {% block fos_user_content %}
     {{ include('FOSUserBundle:Security:login_content.html.twig') }}
