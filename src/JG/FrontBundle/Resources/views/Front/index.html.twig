@@ -1,7 +1,97 @@
 {% extends "JGFrontBundle::layout.html.twig" %}
 
+{% block type %}home{% endblock %}
+
 {% block body %}
-    <h1> Accueil </h1>
-    <p> Chocolate bar oat cake marshmallow. Caramels wafer tart brownie halvah brownie. Cake candy liquorice biscuit chocolate bar tart jelly-o jujubes. Donut sweet tootsie roll gingerbread sweet gingerbread cotton candy toffee biscuit. Chocolate cake tart cotton candy halvah soufflé dessert cookie oat cake. Bear claw bonbon bear claw. Cake dragée cookie. Dragée gingerbread macaroon marshmallow chocolate bar. Cupcake croissant pudding gummi bears biscuit. Ice cream jelly beans ice cream. Apple pie toffee icing oat cake gingerbread. Danish apple pie topping chocolate cake ice cream. </p>
-    <p> Ice cream apple pie lollipop chupa chups cake. Sweet roll cotton candy marzipan marzipan donut pudding marzipan jujubes. Cake macaroon chupa chups pudding lollipop apple pie soufflé sesame snaps. Bear claw cotton candy sweet. Chupa chups bonbon gingerbread. Bear claw liquorice apple pie dragée cotton candy. Pie biscuit dessert candy canes pie ice cream. Toffee cake oat cake. Pudding halvah cotton candy powder biscuit muffin pie oat cake. Candy canes oat cake pudding pastry dessert tart carrot cake caramels. Tootsie roll candy jujubes gummi bears sesame snaps chupa chups. Jelly-o bonbon tootsie roll lollipop ice cream candy canes macaroon. Dessert biscuit macaroon candy chocolate. Croissant biscuit lollipop donut. </p>
+
+    <header>
+        <div class="header-content">
+            <div class="header-content-inner">
+                <h1 id="homeHeading">Créer et démarrer <br /> vos candidatures</h1>
+                <hr>
+                <a href="{{ path('fos_user_security_login') }}" class="btn btn-primary btn-xl page-scroll"> Connexion &nbsp; <i class="fa fa-sign-in" aria-hidden="true"></i> </a>
+                &nbsp;
+                <a href="{{ path('fos_user_registration_register') }}" class="btn btn-primary btn-xl page-scroll"> Inscription &nbsp; <i class="fa fa-user-plus" aria-hidden="true"></i> </a>
+            </div>
+        </div>
+    </header>
+
+    <section id="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Services</h2>
+                    <hr class="primary">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-building-o text-primary sr-icons"></i>
+                        <h3>Entreprises</h3>
+                        <p class="text-muted">Créer votre carnet d'entreprises</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-list-alt text-primary sr-icons"></i>
+                        <h3>Candidatures</h3>
+                        <p class="text-muted">Créer vos candidatures</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-calendar text-primary sr-icons"></i>
+                        <h3>Entretiens</h3>
+                        <p class="text-muted">Créer votre agenda d'entretiens</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-bar-chart text-primary sr-icons"></i>
+                        <h3>Statistiques</h3>
+                        <p class="text-muted">Consulter et exporter</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="start" class="bg-primary">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">We've got what you need!</h2>
+                    <hr class="light">
+                    <p class="text-faded">Start Bootstrap has everything you need to get your new website up and running in no time! All of the templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings attached!</p>
+                    <a href="#services" class="page-scroll btn btn-default btn-xl sr-button">Get Started!</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Contact</h2>
+                    <hr class="primary">
+                    <p>Une question ? Une suggestion ? Une remarque ? Un coucou ? Ecrivez-moi !</p>
+                </div>
+                <div class="col-lg-8 col-lg-offset-2">
+                    {{ form_start(formContact, {'attr': {'class': '', 'role': 'form'}}) }}
+                    <div class="box-body">
+                        {{ form_widget(formContact) }}
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Envoyer" name="sendMessage" id="sendMessage" class="btn btn-primary" />
+                    </div>
+                    {{ form_end(formContact) }}
+                </div>
+            </div>
+        </div>
+    </section>
+
 {% endblock %}

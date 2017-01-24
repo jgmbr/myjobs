@@ -1,0 +1,49 @@
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+            </button>
+            <a class="logo navbar-brand page-scroll" href="#page-top"><span>My</span>Applications</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="page-scroll" href="#page-top"> Accueil </a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#services"> Services </a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#contact">Contact</a>
+                </li>
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <li>
+                        {% if is_granted("ROLE_ADMIN") %}
+                            <a href="{{ path('admin_home_page') }}"> Administration &nbsp; <i class="fa fa-cogs" aria-hidden="true"></i> </a>
+                        {% else %}
+                            <a href="{{ path('account_home_page') }}">  Mon compte &nbsp; <i class="fa fa-user" aria-hidden="true"></i> </a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        <a href="{{ path('fos_user_security_logout') }}">
+                            {{ 'layout.logout'|trans({}, 'FOSUserBundle') }} &nbsp; <i class="fa fa-sign-out" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a class="page-scroll" href="{{ path('fos_user_security_login') }}"> Connextion &nbsp; <i class="fa fa-sign-in" aria-hidden="true"></i> </a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="{{ path('fos_user_registration_register') }}"> Inscription &nbsp; <i class="fa fa-user-plus" aria-hidden="true"></i> </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>

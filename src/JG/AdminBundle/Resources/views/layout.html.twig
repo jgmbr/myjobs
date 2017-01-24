@@ -318,13 +318,13 @@
         <script type="text/javascript">
             $(function () {
                 {% for msgSuccess in app.session.flashbag.get('success') %}
-                    $.growl.notice({ message: "{{ msgSuccess }}" });
+                $.growl.notice({ message: "{{ msgSuccess }}", title: "Succès" });
                 {% endfor %}
                 {% for msgError in app.session.flashbag.get('error') %}
-                    $.growl.error({ message: "{{ msgError }}" });
+                $.growl.error({ message: "{{ msgError }}", title: "Erreur" });
                 {% endfor %}
                 {% for msgWarning in app.session.flashbag.get('warning') %}
-                    $.growl.warning({ message: "{{ msgWarning }}" });
+                $.growl.warning({ message: "{{ msgWarning }}", title: "Attention" });
                 {% endfor %}
                 $('.dataTable').DataTable({
                     "responsive": true,

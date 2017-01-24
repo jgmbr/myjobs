@@ -14,9 +14,24 @@ class FrontController extends Controller
     /**
      * @Route("/", name="home_page")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        return $this->render('JGFrontBundle:Front:index.html.twig');
+        $contact = new Contact();
+        $form = $this->createForm('JG\CoreBundle\Form\ContactType', $contact);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($contact);
+            $em->flush($contact);
+            $request->getSession()->getFlashBag()->add('success', 'Demande de contact envoyée avec succès !');
+            return $this->redirectToRoute('home_page');
+        }
+
+        return $this->render('JGFrontBundle:Front:index.html.twig', array(
+            'contact' => $contact,
+            'formContact' => $form->createView(),
+        ));
     }
 
     /**
@@ -27,8 +42,6 @@ class FrontController extends Controller
         $contact = new Contact();
         $form = $this->createForm('JG\CoreBundle\Form\ContactType', $contact);
         $form->handleRequest($request);
-
-        $user = $this->getUser();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -60,7 +73,7 @@ class FrontController extends Controller
      */
     public function notifAction(Request $request)
     {
-        $notificationAlert = $this->get('app.alert');
+        $notificationAlert = $this->get('app.alert.application');
 
         $notificationAlert->alert();
 

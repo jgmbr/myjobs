@@ -112,6 +112,7 @@ class ContactType extends AbstractType
                 'label' => false,
                 'attr' => array(
                     'placeholder' => 'Votre message',
+                    'rows' => 8
                 ),
                 'required' => true,
                 'constraints' => array(

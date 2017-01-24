@@ -1,17 +1,17 @@
 {% extends "JGFrontBundle::layout.html.twig" %}
 
+{% block type %}page{% endblock %}
+
 {% block body %}
-    <h1> Contact </h1>
 
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac dui sed risus imperdiet vulputate. Nunc venenatis orci vitae nisl maximus molestie. Nunc consequat dui eu tincidunt posuere. Nam ut sapien et tortor sodales hendrerit cursus gravida tellus. Duis commodo viverra quam imperdiet tincidunt. Fusce varius libero nec sem molestie, fringilla placerat elit rutrum. Vivamus rutrum varius nisl, nec commodo libero porta quis. Aliquam quis dignissim enim. Cras vel accumsan neque. Integer vitae purus sodales, pharetra ligula at, feugiat nunc. Suspendisse finibus commodo gravida. Sed pulvinar erat lectus, nec sagittis quam porttitor eu.</p>
+    <header>
+        <div class="header-content">
+            <div class="header-content-inner">
+                &nbsp;
+            </div>
+        </div>
+    </header>
 
-    {{ form_start(formContact, {'attr': {'class': '', 'role': 'form'}}) }}
-    <div class="box-body">
-        {{ form_widget(formContact) }}
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Envoyer" name="sendMessage" id="sendMessage" class="btn btn-primary" />
-    </div>
-    {{ form_end(formContact) }}
+
 
 {% endblock %}

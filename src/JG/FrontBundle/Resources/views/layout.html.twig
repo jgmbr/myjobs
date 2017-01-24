@@ -5,13 +5,25 @@
         <meta name="robots" content="noindex">
         <meta name="viewport" content="width=device-width">
         <title>{% block title %}{% endblock %}</title>
-        <!--<link href='https://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>-->
-        {% block stylesheets %}
-        {% endblock %}
+        <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/vendor/font-awesome/css/font-awesome.min.css') }}" />
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('assets/vendor/magnific-popup/dist/magnific-popup.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/vendor/growl/stylesheets/jquery.growl.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/creative.css') }}">
+        {% block stylesheets %}{% endblock %}
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
     </head>
-    <body>
+    <body id="page-top" class="{% block type %}{% endblock %}">
 
-        <div id="header">
+        <div id="header" style="display: none;">
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 <p> {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}
                     <a href="{{ path('fos_user_security_logout') }}">
@@ -32,20 +44,50 @@
             {% endif %}
         </div>
 
-        <div id="top">
-            {% block top %}
-            {% endblock %}
-        </div>
+        {% include 'JGFrontBundle:Front:Common/header.html.twig' %}
 
-        <div id="content">
-            {% block body %}
-            {% endblock %}
-        </div>
+        {% block body %}{% endblock %}
 
         {% include 'JGFrontBundle:Front:Common/footer.html.twig' %}
 
-        {% block javascripts %}
-        {% endblock %}
+        <script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/growl/javascripts/jquery.growl.js') }}"></script>
+        <script src="{{ asset('assets/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/jquery.easing/jquery.easing.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/scrollreveal/dist/scrollreveal.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/magnific-popup/dist/jquery.magnific-popup.min.js') }}"></script>
+        <script src="{{ asset('assets/js/creative.min.js') }}"></script>
+        <script>
+            $(document).ready(function(){
+
+                {% for msgSuccess in app.session.flashbag.get('success') %}
+                    $.growl.notice({ message: "{{ msgSuccess }}", title: "Succès" });
+                {% endfor %}
+                {% for msgError in app.session.flashbag.get('error') %}
+                    $.growl.error({ message: "{{ msgError }}", title: "Erreur" });
+                {% endfor %}
+                {% for msgWarning in app.session.flashbag.get('warning') %}
+                    $.growl.warning({ message: "{{ msgWarning }}", title: "Attention" });
+                {% endfor %}
+
+                $('.gotop').on('click', function (e){
+                    event.preventDefault();
+                    $('html, body').animate({
+                        scrollTop: $('html').offset().top
+                    }, 500, 'easeInOutExpo');
+                    return false;
+                });
+
+            });
+            $(window).scroll(function(){
+                posScroll = $(document).scrollTop();
+                if(posScroll >=200)
+                    $('.gotop').fadeIn(600);
+                else
+                    $('.gotop').fadeOut(600);
+            });
+        </script>
+        {% block javascripts %}{% endblock %}
 
     </body>
 </html>
