@@ -8,6 +8,10 @@
     <div class="register-box-body">
         <p class="login-box-msg">Mot de passe oublié ?</p>
 
+        {% for msg in app.session.flashbag.get('error') %}
+            <div class="callout callout-danger">{{ msg }}</div>
+        {% endfor %}
+
         <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
 
         <div class="form-group has-feedback">

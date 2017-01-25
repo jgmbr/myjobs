@@ -9,9 +9,17 @@
             <div class="header-content-inner">
                 <h1 id="homeHeading">Gérer vos candidatures <br /> lors de vos recherches d'emploi</h1>
                 <hr>
-                <a href="{{ path('fos_user_security_login') }}" class="btn btn-primary btn-xl page-scroll"> Connexion &nbsp; <i class="fa fa-sign-in" aria-hidden="true"></i> </a>
-                &nbsp;
-                <a href="{{ path('fos_user_registration_register') }}" class="btn btn-primary btn-xl page-scroll"> Inscription &nbsp; <i class="fa fa-user-plus" aria-hidden="true"></i> </a>
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    {% if is_granted("ROLE_ADMIN") %}
+                        <a href="{{ path('admin_home_page') }}" class="btn btn-primary btn-xl page-scroll"> Administration &nbsp; <i class="fa fa-cogs" aria-hidden="true"></i> </a>
+                    {% else %}
+                        <a href="{{ path('account_home_page') }}" class="btn btn-primary btn-xl page-scroll">  Mon compte &nbsp; <i class="fa fa-user" aria-hidden="true"></i> </a>
+                    {% endif %}
+                {% else %}
+                    <a href="{{ path('fos_user_security_login') }}" class="btn btn-primary btn-xl page-scroll"> Connexion &nbsp; <i class="fa fa-sign-in" aria-hidden="true"></i> </a>
+                    &nbsp;
+                    <a href="{{ path('fos_user_registration_register') }}" class="btn btn-primary btn-xl page-scroll"> Inscription &nbsp; <i class="fa fa-user-plus" aria-hidden="true"></i> </a>
+                {% endif %}
             </div>
         </div>
     </header>
