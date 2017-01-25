@@ -66,17 +66,32 @@ class FrontController extends Controller
     }
 
     /**
-     * Notification Alert Manager
+     * Notification Alert Manager Applications
      *
-     * @Route("/notification/alert", name="alert_notif")
+     * @Route("/notification/alert", name="alert_notif_applications")
      * @Method({"GET", "POST"})
      */
-    public function notifAction(Request $request)
+    public function notifApplicationsAction(Request $request)
     {
         $notificationAlert = $this->get('app.alert.application');
 
         $notificationAlert->alert();
 
-        die('notification alert OK');
+        die('notification applications alert OK');
+    }
+
+    /**
+     * Notification Alert Manager Appointments
+     *
+     * @Route("/notification/appointment", name="alert_notif_appointments")
+     * @Method({"GET", "POST"})
+     */
+    public function notifAppointmentsAction(Request $request)
+    {
+        $notificationAlert = $this->get('app.alert.appointment');
+
+        $notificationAlert->alert();
+
+        die('notification appointments alert OK');
     }
 }

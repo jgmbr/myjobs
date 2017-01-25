@@ -53,10 +53,10 @@
                                         </td>
                                         <td>
                                             {% if alert.viewed %}
-                                                <i class="fa fa-check" aria-hidden="true"></i> &nbsp; Lue
+                                                <i class="fa fa-check" aria-hidden="true"></i> &nbsp; Validée
                                             {% else %}
                                                 <a href="{{ path('alert_valid', { 'id': alert.id, 'state': true }) }}" class="btn btn-info btn-sm">
-                                                    <i class="fa fa-eye" aria-hidden="true"></i> &nbsp; Lire
+                                                    <i class="fa fa-eye" aria-hidden="true"></i> &nbsp; Valider
                                                 </a>
                                             {% endif %}
                                         </td>
