@@ -19,4 +19,15 @@ class ContactRepository extends \Doctrine\ORM\EntityRepository
             ->getSingleScalarResult()
         ;
     }
+
+    public function countUnread()
+    {
+        return $this
+            ->createQueryBuilder('c')
+            ->select('COUNT(c)')
+            ->andWhere('c.viewed = 0')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
 }

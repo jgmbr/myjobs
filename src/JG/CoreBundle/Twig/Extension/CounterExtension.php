@@ -122,7 +122,7 @@ class CounterExtension extends \Twig_Extension
 
     public function nbContacts()
     {
-        return $this->doctrine->getRepository('JGCoreBundle:Contact')->findCount();
+        return $this->doctrine->getRepository('JGCoreBundle:Contact')->countUnread();
     }
 
     /**

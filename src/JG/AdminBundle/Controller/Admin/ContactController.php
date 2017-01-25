@@ -55,7 +55,10 @@ class ContactController extends Controller
 
         $em->flush($contact);
 
-        $request->getSession()->getFlashBag()->add('success', 'Demande de contact validée avec succès !');
+        if ($state)
+            $request->getSession()->getFlashBag()->add('success', 'Demande de contact lue avec succès !');
+        else
+            $request->getSession()->getFlashBag()->add('success', 'Demande de contact non lue avec succès !');
 
         if ($state)
             return $this->redirectToRoute('contact_show', array('id' => $contact->getId()));

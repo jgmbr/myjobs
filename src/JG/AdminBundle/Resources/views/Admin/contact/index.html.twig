@@ -49,7 +49,7 @@
                                     <td>{% if contact.createdAt %}{{ contact.createdAt|date('d/m/Y à H:i') }}{% endif %}</td>
                                     <td>
                                         {% if contact.viewed %}
-                                            <i class="fa fa-check" aria-hidden="true"></i> &nbsp; Vue &nbsp;
+                                            <i class="fa fa-check" aria-hidden="true"></i> &nbsp; Lue &nbsp;
                                             <a href="{{ path('contact_valid', { 'id': contact.id, 'state': 0 }) }}" class="btn btn-warning btn-xs">
                                                 <i class="fa fa-eye-slash" aria-hidden="true"></i>
                                             </a>
@@ -60,8 +60,9 @@
                                                 <i class="fa fa-trash" aria-hidden="true"></i>
                                             </a>
                                         {% else %}
-                                            <a href="{{ path('contact_valid', { 'id': contact.id, 'state': 1 }) }}" class="btn btn-info btn-sm">
-                                                <i class="fa fa-eye" aria-hidden="true"></i> &nbsp; Lire
+                                            <i class="fa fa-times" aria-hidden="true"></i> &nbsp; Non lue &nbsp;
+                                            <a href="{{ path('contact_valid', { 'id': contact.id, 'state': 1 }) }}" class="btn btn-info btn-xs">
+                                                <i class="fa fa-eye" aria-hidden="true"></i>
                                             </a>
                                         {% endif %}
                                     </td>
