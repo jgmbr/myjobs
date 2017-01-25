@@ -10,4 +10,13 @@ namespace JG\CoreBundle\Repository;
  */
 class ContactRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findCount()
+    {
+        return $this
+            ->createQueryBuilder('c')
+            ->select('COUNT(c)')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
 }

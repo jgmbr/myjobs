@@ -39,7 +39,6 @@
         <script src="{{ asset('assets/js/creative.min.js') }}"></script>
         <script>
             $(document).ready(function(){
-
                 {% for msgSuccess in app.session.flashbag.get('success') %}
                     $.growl.notice({ message: "{{ msgSuccess }}", title: "Succès" });
                 {% endfor %}
@@ -49,7 +48,6 @@
                 {% for msgWarning in app.session.flashbag.get('warning') %}
                     $.growl.warning({ message: "{{ msgWarning }}", title: "Attention" });
                 {% endfor %}
-
                 $('.gotop').on('click', function (e){
                     event.preventDefault();
                     $('html, body').animate({
@@ -58,6 +56,12 @@
                     return false;
                 });
 
+                var nb = $('.form-group.has-error').length;
+                if (nb > 0) {
+                    $('html, body').animate({
+                        scrollTop: $('#contact').offset().top
+                    }, 500, 'easeInOutExpo');
+                }
             });
             $(window).scroll(function(){
                 posScroll = $(document).scrollTop();

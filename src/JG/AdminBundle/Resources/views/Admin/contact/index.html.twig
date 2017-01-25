@@ -1,0 +1,92 @@
+{% extends "JGAdminBundle::layout.html.twig" %}
+
+{% block header %}
+    Demandes de contact
+{% endblock %}
+
+{% block menu %}
+    {% include 'JGAdminBundle:Admin:menu.html.twig' %}
+{% endblock %}
+
+{% block body %}
+
+    <ol class="breadcrumb">
+        <li> <a href="{{ path('admin_home_page') }}"> Administration </a> </li>
+        <li> <a href="{{ path('contact_index') }}"> Demandes de contact </a> </li>
+        <li class="active"> Liste </li>
+    </ol>
+
+    <div class="box">
+        <div class="box-body">
+            <div id="contact_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                <div class="row">
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-6"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        {% if contacts is defined and contacts|length > 0 %}
+                        <table id="contact" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="contact_info">
+                            <thead>
+                            <tr role="row">
+                                <th>Id</th>
+                                <th>Prénom</th>
+                                <th>Nom</th>
+                                <th>Email</th>
+                                <th>Sujet</th>
+                                <th>Date de création</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for contact in contacts %}
+                                <tr role="row" class="{% if loop.index is odd %}odd{% else %}even{% endif %}">
+                                    <td>{{ contact.id }}</td>
+                                    <td>{{ contact.firstname }}</td>
+                                    <td>{{ contact.lastname }}</td>
+                                    <td>{{ contact.email }}</td>
+                                    <td>{{ contact.subject }}</td>
+                                    <td>{% if contact.createdAt %}{{ contact.createdAt|date('d/m/Y à H:i') }}{% endif %}</td>
+                                    <td>
+                                        {% if contact.viewed %}
+                                            <i class="fa fa-check" aria-hidden="true"></i> &nbsp; Vue &nbsp;
+                                            <a href="{{ path('contact_valid', { 'id': contact.id, 'state': 0 }) }}" class="btn btn-warning btn-xs">
+                                                <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="{{ path('contact_show', { 'id': contact.id }) }}" class="btn btn-info btn-xs">
+                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="{{ path('contact_delete', { 'id': contact.id }) }}" class="btn btn-danger btn-xs">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </a>
+                                        {% else %}
+                                            <a href="{{ path('contact_valid', { 'id': contact.id, 'state': 1 }) }}" class="btn btn-info btn-sm">
+                                                <i class="fa fa-eye" aria-hidden="true"></i> &nbsp; Lire
+                                            </a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th>Id</th>
+                                <th>Prénom</th>
+                                <th>Nom</th>
+                                <th>Email</th>
+                                <th>Sujet</th>
+                                <th>Date de création</th>
+                                <th>Actions</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                        {% else %}
+                            <p> Pas de demandes de contact. </p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

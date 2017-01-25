@@ -1,0 +1,71 @@
+{% extends "JGAdminBundle::layout.html.twig" %}
+
+{% block header %}
+    Demandes de contact
+{% endblock %}
+
+{% block menu %}
+    {% include 'JGAdminBundle:Admin:menu.html.twig' %}
+{% endblock %}
+
+{% block body %}
+
+    <ol class="breadcrumb">
+        <li> <a href="{{ path('admin_home_page') }}"> Administration </a> </li>
+        <li> <a href="{{ path('contact_index') }}"> Demandes de contact </a> </li>
+        <li class="active"> Fiche </li>
+    </ol>
+
+<div class="box box-default">
+    <div class="box-header"> <i class="fa fa-eye" aria-hidden="true"></i> <h3 class="box-title"> Fiche demande de contact </h3> </div>
+    <div class="box-body box-contract">
+
+    <table class="table table-responsive">
+        <tbody>
+            <tr>
+                <th>Identifiant</th>
+                <td>{{ contact.id }}</td>
+            </tr>
+            <tr>
+                <th>Prénom</th>
+                <td>{{ contact.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ contact.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ contact.email }}</td>
+            </tr>
+            <tr>
+                <th>Sujet</th>
+                <td>{{ contact.subject }}</td>
+            </tr>
+            <tr>
+                <th>Message</th>
+                <td>{{ contact.message|nl2br }}</td>
+            </tr>
+            <tr>
+                <th>Date de création</th>
+                <td>{% if contact.createdAt %}{{ contact.createdAt|date('d/m/Y H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    </div>
+</div>
+
+    <div class="actions">
+        <a href="{{ path('contact_index') }}" class="btn btn-primary pull-left">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i> &nbsp; Retour à la liste des demandes de contact
+        </a>
+        <a href="{{ path('contact_valid', { 'id': contact.id, 'state': 0 }) }}" class="btn btn-warning">
+            <i class="fa fa-eye-slash" aria-hidden="true"></i> &nbsp; Mettre en non lue
+        </a>
+        <a href="{{ path('contact_delete', { 'id': contact.id }) }}" class="btn btn-danger">
+            <i class="fa fa-trash" aria-hidden="true"></i> &nbsp; Supprimer
+        </a>
+    </div>
+
+{% endblock %}

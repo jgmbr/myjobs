@@ -45,6 +45,7 @@ class FrontController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $contact->setViewed(false);
             $em->persist($contact);
             $em->flush($contact);
             $request->getSession()->getFlashBag()->add('success', 'Demande de contact envoyée avec succès !');

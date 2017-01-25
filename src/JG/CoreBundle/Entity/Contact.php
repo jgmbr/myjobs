@@ -58,6 +58,12 @@ class Contact
      */
     private $message;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="viewed", type="boolean", nullable=true)
+     */
+    private $viewed;
 
     /**
      * @var \DateTime
@@ -274,5 +280,29 @@ class Contact
     public function onPreUpdate()
     {
         $this->updatedAt = new \DateTime("now");
+    }
+
+    /**
+     * Set viewed
+     *
+     * @param boolean $viewed
+     *
+     * @return Contact
+     */
+    public function setViewed($viewed)
+    {
+        $this->viewed = $viewed;
+
+        return $this;
+    }
+
+    /**
+     * Get viewed
+     *
+     * @return boolean
+     */
+    public function getViewed()
+    {
+        return $this->viewed;
     }
 }

@@ -41,6 +41,7 @@ class CounterExtension extends \Twig_Extension
             'nbAllCompanies'    => new \Twig_Function_Method($this, 'nbAllCompanies'),
             'nbAllApplications' => new \Twig_Function_Method($this, 'nbAllApplications'),
             'nbAllUsers'        => new \Twig_Function_Method($this, 'nbAllUsers'),
+            'nbContacts'        => new \Twig_Function_Method($this, 'nbContacts'),
         );
     }
 
@@ -117,6 +118,11 @@ class CounterExtension extends \Twig_Extension
         $user = $this->tokenStorage->getToken()->getUser();
 
         return $this->doctrine->getRepository('JGUserBundle:User')->findCount();
+    }
+
+    public function nbContacts()
+    {
+        return $this->doctrine->getRepository('JGCoreBundle:Contact')->findCount();
     }
 
     /**
