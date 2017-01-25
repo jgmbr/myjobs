@@ -10,7 +10,7 @@ services:
             - { name: twig.extension }
     app.mailer:
         class: JG\CoreBundle\Services\Mailer\NotificationMailer
-        arguments: ['@router', '@mailer', '@templating']
+        arguments: ['@service_container','@router', '@mailer', '@templating']
     app.alert.application:
         class: JG\CoreBundle\Services\Alert\ApplicationAlert
         arguments: ['@doctrine.orm.entity_manager', '@security.token_storage']

@@ -4,19 +4,25 @@ namespace JG\CoreBundle\Services\Mailer;
 
 use FOS\UserBundle\Mailer\MailerInterface;
 use FOS\UserBundle\Model\UserInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\Dump\Container;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Templating\EngineInterface;
 
 class NotificationMailer implements MailerInterface
 {
+    private $container;
+
     private $router;
 
     private $mailer;
 
     private $templating;
 
-  public function __construct(RouterInterface $router, \Swift_Mailer $mailer, EngineInterface $templating)
+  public function __construct(ContainerInterface $container ,RouterInterface $router, \Swift_Mailer $mailer, EngineInterface $templating)
   {
+      $this->container = $container;
+
     $this->router = $router;
 
     $this->mailer = $mailer;
@@ -27,8 +33,8 @@ class NotificationMailer implements MailerInterface
   public function sendConfirmationEmailMessage(UserInterface $user)
   {
       $datas = array(
-          'subject'     => 'MyJobs › Confirmation inscription',
-          'from'        => 'contact@justine-gambier.fr',
+          'subject'     => $this->container->getParameter('fos_user.registration.confirmation.from_email.sender_name'),
+          'from'        => $this->container->getParameter('fos_user.registration.confirmation.from_email.address'),
           'to'          => $user->getEmail(),
           'template'    => 'JGUserBundle:Email:registration.html.twig',
           'content'     => array(
@@ -43,16 +49,14 @@ class NotificationMailer implements MailerInterface
 
   public function sendResettingEmailMessage(UserInterface $user)
   {
-      $url = $this->router->generate('fos_user_resetting_reset', array('token' => $user->getConfirmationToken()), true);
-
       $datas = array(
-          'subject'     => 'MyJobs › Réinitialisation de mot de passe',
-          'from'        => 'contact@justine-gambier.fr',
+          'subject'     => $this->container->getParameter('fos_user.resetting.email.from_email.sender_name'),
+          'from'        => $this->container->getParameter('fos_user.resetting.email.from_email.address'),
           'to'          => $user->getEmail(),
           'template'    => 'JGUserBundle:Email:resetting.html.twig',
           'content'     => array(
               'user' => $user,
-              'resettingUrl' => $url
+              'resettingUrl' => $this->router->generate('fos_user_resetting_reset', array('token' => $user->getConfirmationToken()), true)
           ),
           'image'       => null,
           'attachment'  => null
