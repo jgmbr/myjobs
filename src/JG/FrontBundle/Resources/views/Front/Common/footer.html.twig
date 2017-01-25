@@ -44,10 +44,11 @@
                 </section>
             </div>
         </section>
-        <div class="row">
+        <div id="copyright" class="row">
             <div class="col-md-8">
                 <ul class="copyright">
                     <li>© Tous droits réservés. </li>
+                    <li> <a href="#" data-toggle="modal" data-target="#modalMentions"> Mentions légales </a> </li>
                 </ul>
             </div>
             <div class="col-md-4">
@@ -66,4 +67,22 @@
 
 <div class="gotop js-top">
     <i class="fa fa-chevron-up" aria-hidden="true"></i>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalMentions" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Mentions légales</h4>
+            </div>
+            <div class="modal-body">
+                {{ render(controller('JGFrontBundle:Front:mentions')) }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
 </div>
