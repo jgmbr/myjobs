@@ -95,4 +95,34 @@ class FrontController extends Controller
 
         die('notification appointments alert OK');
     }
+
+    /**
+     * Purger CSV
+     *
+     * @Route("/purger/csv", name="purger_csv")
+     * @Method({"GET", "POST"})
+     */
+    public function purgerCSVAction(Request $request)
+    {
+        $purger = $this->get('app.purger');
+
+        $purger->purgeCSV();
+
+        die('purge CSV OK');
+    }
+
+    /**
+     * Purger ZIP
+     *
+     * @Route("/purger/zip", name="purger_zip")
+     * @Method({"GET", "POST"})
+     */
+    public function purgerZIPAction(Request $request)
+    {
+        $purger = $this->get('app.purger');
+
+        $purger->purgeZIP();
+
+        die('purge ZIP OK');
+    }
 }

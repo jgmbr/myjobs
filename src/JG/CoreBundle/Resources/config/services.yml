@@ -20,3 +20,6 @@ services:
     app.export:
         class: JG\CoreBundle\Services\Export\ExportDatas
         arguments: ['@kernel','@doctrine.orm.entity_manager', '@security.token_storage']
+    app.purger:
+        class: JG\CoreBundle\Services\Purger\PurgerDatas
+        arguments: ['@kernel']
