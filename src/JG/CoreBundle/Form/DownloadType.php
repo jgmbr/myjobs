@@ -3,17 +3,14 @@
 namespace JG\CoreBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Email;
-use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
 
-class ContactType extends AbstractType
+class DownloadType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -21,110 +18,32 @@ class ContactType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstname', TextType::class, array(
-                'label' => false,
-                'attr' => array(
-                    'placeholder' => 'Votre prénom',
-                ),
+            ->add('start', DateType::class, array(
+                'label' => 'Période début *',
                 'required' => true,
-                'constraints' => array(
-                    new NotBlank(array(
-                        'message' => 'Champ obligatoire'
-                    )),
-                    new NotNull(array(
-                        'message' => 'Champ obligatoire'
-                    )),
-                    new Length(array(
-                        'min' => 3,
-                        'minMessage' => 'Nombre de caractères minimal requis {{ limit }}',
-                        'max' => 255,
-                        'maxMessage' => 'Nombre de caractères minimal requis {{ limit }}'
-                    ))
-                )
+                'data' => new \DateTime('first day of this month')
             ))
-            ->add('lastname', TextType::class, array(
-                'label' => false,
-                'attr' => array(
-                    'placeholder' => 'Votre nom',
-                ),
+            ->add('end', DateType::class, array(
+                'label' => 'Période fin *',
                 'required' => true,
-                'constraints' => array(
-                    new NotBlank(array(
-                        'message' => 'Champ obligatoire'
-                    )),
-                    new NotNull(array(
-                        'message' => 'Champ obligatoire'
-                    )),
-                    new Length(array(
-                        'min' => 3,
-                        'minMessage' => 'Nombre de caractères minimal requis {{ limit }}',
-                        'max' => 255,
-                        'maxMessage' => 'Nombre de caractères minimal requis {{ limit }}'
-                    ))
-                )
+                'data' => new \DateTime('last day of this month')
             ))
-            ->add('email', EmailType::class, array(
-                'label' => false,
-                'attr' => array(
-                    'placeholder' => 'Votre adresse email',
-                ),
+            ->add('type', ChoiceType::class, array(
+                'label' => 'Type(s) de données *',
                 'required' => true,
-                'constraints' => array(
-                    new NotBlank(array(
-                        'message' => 'Champ obligatoire'
-                    )),
-                    new NotNull(array(
-                        'message' => 'Champ obligatoire'
-                    )),
-                    new Length(array(
-                        'min' => 3,
-                        'minMessage' => 'Nombre de caractères minimal requis {{ limit }}',
-                        'max' => 255,
-                        'maxMessage' => 'Nombre de caractères minimal requis {{ limit }}'
-                    )),
-                    new Email(array(
-                        'message' => 'Format adresse email incorrect'
-                    ))
-                )
-            ))
-            ->add('subject', TextType::class, array(
-                'label' => false,
-                'attr' => array(
-                    'placeholder' => 'Sujet de votre message',
+                'multiple' => true,
+                'expanded' => true,
+                'choices' => array(
+                    'Candidatures' => 'application',
+                    'Entreprises' => 'company',
+                    'Entretiens' => 'appointment'
                 ),
-                'required' => true,
                 'constraints' => array(
-                    new NotBlank(array(
-                        'message' => 'Champ obligatoire'
-                    )),
                     new NotNull(array(
-                        'message' => 'Champ obligatoire'
+                        'message' => 'Veuillez sélectionner un type de données'
                     )),
-                    new Length(array(
-                        'min' => 10,
-                        'minMessage' => 'Nombre de caractères minimal requis {{ limit }}',
-                        'max' => 255,
-                        'maxMessage' => 'Nombre de caractères minimal requis {{ limit }}'
-                    ))
-                )
-            ))
-            ->add('message', TextareaType::class, array(
-                'label' => false,
-                'attr' => array(
-                    'placeholder' => 'Votre message',
-                    'rows' => 8
-                ),
-                'required' => true,
-                'constraints' => array(
                     new NotBlank(array(
-                        'message' => 'Champ obligatoire'
-                    )),
-                    new NotNull(array(
-                        'message' => 'Champ obligatoire'
-                    )),
-                    new Length(array(
-                        'min' => 50,
-                        'minMessage' => 'Nombre de caractères minimal requis {{ limit }}'
+                        'message' => 'Veuillez sélectionner un type de données'
                     ))
                 )
             ))
@@ -134,19 +53,9 @@ class ContactType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class' => 'JG\CoreBundle\Entity\Contact'
-        ));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
-        return 'jg_corebundle_contact';
+        return 'jg_corebundle_download';
     }
 
 

@@ -19,4 +19,4 @@ services:
         arguments: ['@doctrine.orm.entity_manager', '@security.token_storage']
     app.export:
         class: JG\CoreBundle\Services\Export\ExportDatas
-        arguments: ['@doctrine.orm.entity_manager']
+        arguments: ['@kernel','@doctrine.orm.entity_manager', '@security.token_storage']
