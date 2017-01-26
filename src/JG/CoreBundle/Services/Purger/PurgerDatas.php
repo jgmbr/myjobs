@@ -2,19 +2,19 @@
 
 namespace JG\CoreBundle\Services\Purger;
 
-use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\OptionsResolver\Exception\InvalidArgumentException;
 
 class PurgerDatas
 {
     /**
-     * @var KernelInterface
+     * @var ContainerInterface
      */
-    private $kernel;
+    private $container;
 
-    public function __construct(KernelInterface $kernel)
+    public function __construct(ContainerInterface $container)
     {
-        $this->kernel = $kernel;
+        $this->container = $container;
     }
 
     public static function deleteDir($dirPath)
@@ -51,7 +51,7 @@ class PurgerDatas
 
     public function purgeCSV()
     {
-        $sourceDir = $this->kernel->getRootDir().'/../web/download/csv/';
+        $sourceDir = $this->container->getParameter('jg_core.dir.csv');
 
         $dirs = array_diff(scandir($sourceDir), array('..', '.'));
 
@@ -64,7 +64,7 @@ class PurgerDatas
 
     public function purgeZIP()
     {
-        $zipDir = $this->kernel->getRootDir().'/../web/download/zip/';
+        $zipDir = $this->container->getParameter('jg_core.dir.zip');
 
         $files = array_diff(scandir($zipDir), array('..', '.'));
 

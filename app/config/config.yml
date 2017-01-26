@@ -128,3 +128,9 @@ liip_imagine:
             quality: 75
             filters:
                 thumbnail: { size: [45, 45], mode: outbound }
+
+# Core Configuration
+jg_core:
+    dir:
+        csv:    "%kernel.root_dir%/../web/download/csv/"
+        zip:    "%kernel.root_dir%/../web/download/zip/"

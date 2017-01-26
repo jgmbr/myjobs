@@ -2,6 +2,7 @@
 
 namespace JG\CoreBundle\DependencyInjection;
 
+use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -24,5 +25,8 @@ class JGCoreExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $container->setParameter('jg_core.dir.csv', $config['dir']['csv']);
+        $container->setParameter('jg_core.dir.zip', $config['dir']['zip']);
     }
 }

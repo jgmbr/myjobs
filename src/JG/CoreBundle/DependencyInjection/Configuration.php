@@ -24,6 +24,17 @@ class Configuration implements ConfigurationInterface
         // configure your bundle. See the documentation linked above for
         // more information on that topic.
 
+        $rootNode
+            ->children()
+                ->arrayNode('dir')
+                    ->children()
+                        ->scalarNode('csv')->end()
+                        ->scalarNode('zip')->end()
+                    ->end()
+                ->end() // twitter
+            ->end()
+        ;
+
         return $treeBuilder;
     }
 }

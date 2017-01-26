@@ -92,9 +92,9 @@ class StatisticController extends Controller
 
             $generateZip = true;
 
-            $sourceDir = $this->get('kernel')->getRootDir().'/../web/download/csv/';
+            $sourceDir = $this->getParameter('jg_core.dir.csv');
 
-            $zipDir = $this->get('kernel')->getRootDir().'/../web/download/zip/';
+            $zipDir = $this->getParameter('jg_core.dir.zip');
 
             $start = $datas['start'];
 
