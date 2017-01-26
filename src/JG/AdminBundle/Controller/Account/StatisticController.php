@@ -88,17 +88,27 @@ class StatisticController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $datas = $form->getData();
+
             $generateZip = true;
 
             $sourceDir = $this->get('kernel')->getRootDir().'/../web/download/csv/';
 
             $zipDir = $this->get('kernel')->getRootDir().'/../web/download/zip/';
 
-            $datas = $form->getData();
-
             $start = $datas['start'];
 
             $end = $datas['end'];
+
+            $all = (sizeof($datas['init']) > 0 ? true : false);
+
+            $options = null;
+            if (!$all) {
+                $options = array(
+                    'start' => $start,
+                    'end' => $end
+                );
+            }
 
             $types = $datas['type'];
 
@@ -134,7 +144,7 @@ class StatisticController extends Controller
                         break;
                 }
 
-                $exportWS->export('JGCoreBundle:'.$entity, $query, $headers, $csv, $user, false);
+                $exportWS->export('JGCoreBundle:'.$entity, $query, $options, $headers, $csv, $user, false);
 
             }
 

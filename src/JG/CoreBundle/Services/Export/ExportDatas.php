@@ -47,16 +47,19 @@ class ExportDatas
         }
     }
 
-    public function export($entity, $query, $headers, $file, $user = null, $force = true)
+    public function export($entity, $query, $options = null, $headers, $file, $user = null, $force = true)
     {
         $delimiter = ";";
 
         $extension = ".csv";
 
-        if ($user)
-            $iterableResult = $this->em->getRepository($entity)->$query($user);
-        else
+        if ($user) {
+            // for user exports
+            $iterableResult = $this->em->getRepository($entity)->$query($user, $options);
+        } else {
+            // for admin exports
             $iterableResult = $this->em->getRepository($entity)->$query();
+        }
 
         $handle = fopen('php://memory', 'r+');
 

@@ -28,6 +28,15 @@ class DownloadType extends AbstractType
                 'required' => true,
                 'data' => new \DateTime('last day of this month')
             ))
+            ->add('init', ChoiceType::class, array(
+                'label' => 'Depuis le début',
+                'required' => false,
+                'multiple' => true,
+                'expanded' => true,
+                'choices' => array(
+                    'Oui' => true,
+                ),
+            ))
             ->add('type', ChoiceType::class, array(
                 'label' => 'Type(s) de données *',
                 'required' => true,

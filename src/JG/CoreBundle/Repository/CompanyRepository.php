@@ -45,17 +45,6 @@ class CompanyRepository extends \Doctrine\ORM\EntityRepository
         ;
     }
 
-    public function exportMyCompanies($user)
-    {
-        return $this
-            ->createQueryBuilder('c')
-            ->where('c.user = :user')
-            ->setParameter('user', $user)
-            ->getQuery()
-            ->iterate()
-        ;
-    }
-
     /**
      * @return Company[]
      */
@@ -80,6 +69,30 @@ class CompanyRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter('user', $user)
             ->getQuery()
             ->getSingleScalarResult();
+    }
+
+    public function exportMyCompanies($user, $options = null)
+    {
+        $qb = $this
+            ->createQueryBuilder('c')
+            ->where('c.user = :user')
+            ->setParameter('user', $user)
+        ;
+        if ($options) {
+            $start = new \DateTime($options['start']->format("Y-m-d"));
+            $end   = new \DateTime($options['end']->format("Y-m-d"));
+            $qb = $qb
+                ->andWhere('c.createdAt >= :start')
+                ->setParameter('start', $start)
+                ->andWhere('c.createdAt <= :end')
+                ->setParameter('end', $end)
+            ;
+        }
+        $qb = $qb
+            ->getQuery()
+            ->iterate()
+        ;
+        return $qb;
     }
 
     /**

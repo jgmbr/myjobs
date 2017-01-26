@@ -118,15 +118,28 @@ class ApplicationRepository extends \Doctrine\ORM\EntityRepository
         ;
     }
 
-    public function exportMyApplications($user)
+    public function exportMyApplications($user, $options = null)
     {
-        return $this
+        $qb = $this
             ->createQueryBuilder('a')
             ->where('a.user = :user')
             ->setParameter('user', $user)
+        ;
+        if ($options) {
+            $start = new \DateTime($options['start']->format("Y-m-d"));
+            $end   = new \DateTime($options['end']->format("Y-m-d"));
+            $qb = $qb
+                ->andWhere('a.dateAt >= :start')
+                ->setParameter('start', $start)
+                ->andWhere('a.dateAt <= :end')
+                ->setParameter('end', $end)
+            ;
+        }
+        $qb = $qb
             ->getQuery()
             ->iterate()
         ;
+        return $qb;
     }
 
 
