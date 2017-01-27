@@ -2,6 +2,7 @@
 
 namespace JG\CoreBundle\Form;
 
+use JG\CoreBundle\Form\Type\StepType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -18,6 +19,11 @@ class DownloadType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('help1', StepType::class, array(
+                'label' => false,
+                'number' => 1,
+                'title' => 'Je souhaite exporter sur une période donnée'
+            ))
             ->add('start', DateType::class, array(
                 'label' => 'Période début *',
                 'required' => true,
@@ -28,14 +34,24 @@ class DownloadType extends AbstractType
                 'required' => true,
                 'data' => new \DateTime('last day of this month')
             ))
+            ->add('help2', StepType::class, array(
+                'label' => false,
+                'number' => 2,
+                'title' => 'Je souhaite exporter toutes les données'
+            ))
             ->add('init', ChoiceType::class, array(
-                'label' => 'Depuis le début',
+                'label' => false,
                 'required' => false,
                 'multiple' => true,
                 'expanded' => true,
                 'choices' => array(
                     'Oui' => true,
                 ),
+            ))
+            ->add('help3', StepType::class, array(
+                'label' => false,
+                'number' => 3,
+                'title' => 'Je souhaite exporter les données suivantes :'
             ))
             ->add('type', ChoiceType::class, array(
                 'label' => 'Type(s) de données *',

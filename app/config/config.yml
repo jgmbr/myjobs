@@ -39,6 +39,7 @@ twig:
     form_themes:
         - 'bootstrap_3_layout.html.twig'
         - 'JGCoreBundle:Form:image_type.html.twig'
+        - 'JGCoreBundle:Form:step_type.html.twig'
 
 # Doctrine Configuration
 doctrine:

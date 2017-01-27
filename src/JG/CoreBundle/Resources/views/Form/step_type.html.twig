@@ -1,0 +1,10 @@
+{% block step_widget %}
+    {% spaceless %}
+        {% if number > 0 %}
+            <div class="step">
+                <span class="step_number"> {{ number }} </span>
+                <p class="step_title"> {{ title }} </p>
+            </div>
+         {% endif %}
+    {% endspaceless %}
+{% endblock %}

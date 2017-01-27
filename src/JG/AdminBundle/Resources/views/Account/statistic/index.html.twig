@@ -93,9 +93,8 @@
     </div>
 
     <div class="col-sm-12 col-md-6">
-
         <div class="box download">
-            {{ form_start(formDownload, {'attr': {'class': '', 'role': 'form'}}) }}
+            {{ form_start(formDownload, {'attr': {'class': 'with_steps', 'role': 'form'}}) }}
             <div class="box-header">
                 <i class="fa fa-download" aria-hidden="true"></i> <h3 class="box-title"> Télécharger </h3>
             </div>
@@ -105,6 +104,7 @@
             <div class="box-footer">
                 <input type="submit" value="Télécharger" name="btnDownload" id="btnDownload" class="btn btn-primary pull-right" />
             </div>
+            {{ form_rest(formDownload) }}
             {{ form_end(formDownload) }}
         </div>
 
