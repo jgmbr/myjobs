@@ -22,6 +22,9 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
         <style>
+            .with_steps .box-body .form-group {
+                padding: 0 0 0 25px;
+            }
             .step {
                 overflow: hidden;
                 line-height: 35px;
@@ -43,6 +46,22 @@
             .step_title {
                 color: #ff6347;
                 font-weight: bold;
+            }
+            .btn-pink {
+                background-color: #ff6347;
+                border-color: #ff6347;
+                color: #fff;
+            }
+            .btn-pink:hover {
+                background-color: #e55a41;
+                border-color: #e55a41;
+                color: #fff;
+            }
+            .callout .help-block > * {
+                color: #fff;
+            }
+            .callout .help-block .glyphicon {
+                margin: 0 10px 0 0;
             }
         </style>
         {% block stylesheets %}{% endblock %}

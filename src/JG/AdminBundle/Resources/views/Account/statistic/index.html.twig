@@ -96,13 +96,73 @@
         <div class="box download">
             {{ form_start(formDownload, {'attr': {'class': 'with_steps', 'role': 'form'}}) }}
             <div class="box-header">
-                <i class="fa fa-download" aria-hidden="true"></i> <h3 class="box-title"> Télécharger </h3>
+                <i class="fa fa-download" aria-hidden="true"></i> <h3 class="box-title"> Exporter vos données au format CSV </h3>
             </div>
             <div class="box-body">
-                {{ form_widget(formDownload) }}
+
+                {% if ( formDownload.vars.errors is not empty )
+                or ( formDownload.start.vars.errors is not empty )
+                or ( formDownload.end.vars.errors is not empty )
+                or ( formDownload.type.vars.errors is not empty ) %}
+                    <div class="callout callout-danger">
+                        {{ form_errors(formDownload) }}
+                        {{ form_errors(formDownload.start) }}
+                        {{ form_errors(formDownload.end) }}
+                        {{ form_errors(formDownload.type) }}
+                    </div>
+                {% endif %}
+
+                <div class="form-group">
+                    {{ form_label(formDownload.help1) }}
+                    <div class="input-group col-sm-10">
+                        {{ form_widget(formDownload.help1) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(formDownload.start) }}
+                    <div class="input-group col-sm-10">
+                        {{ form_widget(formDownload.start) }}
+                        <span class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(formDownload.end) }}
+                    <div class="input-group col-sm-10">
+                        {{ form_widget(formDownload.end) }}
+                        <span class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(formDownload.help2) }}
+                    <div class="input-group col-sm-10">
+                        {{ form_widget(formDownload.help2) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(formDownload.init) }}
+                    <div class="input-group col-sm-10">
+                        {{ form_widget(formDownload.init) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(formDownload.help3) }}
+                    <div class="input-group col-sm-10">
+                        {{ form_widget(formDownload.help3) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(formDownload.type) }}
+                    <div class="input-group col-sm-10">
+                        {{ form_widget(formDownload.type) }}
+                    </div>
+                </div>
             </div>
             <div class="box-footer">
-                <input type="submit" value="Télécharger" name="btnDownload" id="btnDownload" class="btn btn-primary pull-right" />
+                <input type="submit" value="Télécharger le zip" name="btnDownload" id="btnDownload" class="btn btn-pink pull-right" />
             </div>
             {{ form_rest(formDownload) }}
             {{ form_end(formDownload) }}

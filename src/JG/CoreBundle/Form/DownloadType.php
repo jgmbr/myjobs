@@ -26,11 +26,13 @@ class DownloadType extends AbstractType
             ))
             ->add('start', DateType::class, array(
                 'label' => 'Période début *',
+                'widget'    => 'single_text',
                 'required' => true,
                 'data' => new \DateTime('first day of this month')
             ))
             ->add('end', DateType::class, array(
                 'label' => 'Période fin *',
+                'widget'    => 'single_text',
                 'required' => true,
                 'data' => new \DateTime('last day of this month')
             ))
