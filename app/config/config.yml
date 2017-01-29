@@ -96,7 +96,6 @@ fos_user:
             from_email:
                 address:        gambier.j@gmail.com
                 sender_name:    Demo Registration
-            template:   JGUserBundle:Registration:email.txt.twig
         form:
             type: JG\UserBundle\Form\RegistrationType
 

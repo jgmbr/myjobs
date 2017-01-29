@@ -70,13 +70,16 @@ class ProfileType extends AbstractType
             if (!$object || null === $object->getId()) {
                 return;
             } else {
-                $form->add('picture', ImageType::class, array(
-                    'label'         => 'Image',
-                    'required'      => false,
-                    'image_path'    => $object->getWebPath(),
-                    'filter'        => 'avatar',
-                    'class'         => 'profile-user-img img-responsive img-circle'
-                ));
+                // Check if has image
+                if ($object->getWebPath()) {
+                    $form->add('picture', ImageType::class, array(
+                        'label'         => 'Image',
+                        'required'      => false,
+                        'image_path'    => $object->getWebPath(),
+                        'filter'        => 'avatar',
+                        'class'         => 'profile-user-img img-responsive img-circle'
+                    ));
+                }
             }
         });
 

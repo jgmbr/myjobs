@@ -20,16 +20,18 @@
     <div class="box box-default">
         <div class="box-body box-profile">
 
-            {% if file_exists('uploads/profiles/' ~ user.picture) %}
-                <img src="{{ asset('uploads/profiles/' ~ user.picture) }}" class="profile-user-img img-responsive img-circle" width="150" alt="User profile picture" />
-            {% else %}
-                <i class="fa fa-user-circle-o fa-3x" aria-hidden="true"></i>
-            {% endif %}
-
-            <p class="text-muted text-center"> &nbsp; </p>
-
             <table class="table table-responsive">
                 <tbody>
+                <tr>
+                    <th> &nbsp; </th>
+                    <td>
+                        {% if app.user.picture is null %}
+                            <i class="fa fa-user-circle fa-5x profile-user-img-default" aria-hidden="true"></i>
+                        {% else %}
+                            <img src="{{ asset('uploads/profiles/' ~ user.picture) }}" class="profile-user-img img-responsive img-circle" width="150" alt="User profile picture" />
+                        {% endif %}
+                    </td>
+                </tr>
                 <tr>
                     <th> {{ 'profile.show.username'|trans }} </th>
                     <td> {{ user.username }} </td>
