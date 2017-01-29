@@ -76,9 +76,8 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
     firewall_name: main
     user_class: JG\UserBundle\Entity\User
-    registration:
-        form:
-            type: JG\UserBundle\Form\RegistrationType
+    service:
+        mailer: fos_user.mailer.twig_swift
     profile:
         form:
             type: JG\UserBundle\Form\ProfileType
@@ -87,6 +86,7 @@ fos_user:
         sender_name:    Demo App
     resetting:
         email:
+            template:   JGUserBundle:Resetting:email.txt.twig
             from_email:
                 address:        gambier.j@gmail.com
                 sender_name:    Demo Resetting
@@ -96,14 +96,9 @@ fos_user:
             from_email:
                 address:        gambier.j@gmail.com
                 sender_name:    Demo Registration
-    service:
-        mailer: app.mailer
-    resetting:
-        email:
-            template:   FOSUserBundle:Resetting:email.txt.twig
-    registration:
-        confirmation:
-            template:   FOSUserBundle:Registration:email.txt.twig
+            template:   JGUserBundle:Registration:email.txt.twig
+        form:
+            type: JG\UserBundle\Form\RegistrationType
 
 # LiipImagineBundle Configuration
 liip_imagine:

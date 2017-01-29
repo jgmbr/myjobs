@@ -16,23 +16,26 @@ class PreferenceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('showCompanies', CheckboxType::class, array('label' => 'Rubrique Entreprises','required' => false))
-            ->add('showApplications', CheckboxType::class, array('label' => 'Rubrique Applications','required' => false))
-            ->add('showAppointments', CheckboxType::class, array('label' => 'Rubrique Entretiens','required' => false))
-            ->add('showStatistics', CheckboxType::class, array('label' => 'Rubrique Statistiqtues','required' => false))
-            ->add('pushAlerts', CheckboxType::class, array('label' => 'Notifications Alertes','required' => false))
-            ->add('delayAlerts', ChoiceType::class, array('label' => 'Délai Alertes (jours)',
-
-                'choices' => array(
-                    '1' => '1',
-                    '2' => '2',
-                    '3' => '3',
-                    '4' => '4',
-                    '5' => '5',
-                    '6' => '6',
-                    '7' => '7',
-                )
-            ,'required' => false))
+            ->add('showCompanies', CheckboxType::class, array(
+                'label' => 'Afficher la rubrique Entreprises sur le tableau de bord',
+                'required' => false
+            ))
+            ->add('showApplications', CheckboxType::class, array(
+                'label' => 'Afficher la rubrique Candidatures sur le tableau de bord',
+                'required' => false
+            ))
+            ->add('showAppointments', CheckboxType::class, array(
+                'label' => 'Afficher la rubrique Entretiens sur le tableau de bord',
+                'required' => false
+            ))
+            ->add('showStatistics', CheckboxType::class, array(
+                'label' => 'Afficher la rubrique Statistiques sur le tableau de bord',
+                'required' => false
+            ))
+            ->add('pushAlerts', CheckboxType::class, array(
+                'label' => 'Recevoir des notifications dans la rubrique "Mes Alertes"',
+                'required' => false
+            ))
         ;
     }
     

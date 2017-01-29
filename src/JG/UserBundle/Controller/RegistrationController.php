@@ -66,11 +66,23 @@ class RegistrationController extends BaseController
 
                     $url = $this->generateUrl('fos_user_registration_confirmed');
 
-                    if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-                        $url = $this->generateUrl('admin_home_page');
-                    } else {
-                        $url = $this->generateUrl('account_home_page');
+                    /* Custom threads */
+
+                    $mailer = $this->get('app.mailer');
+
+                    $send = $mailer->sendCongratulationsInscription($user);
+
+                    $url = $this->generateUrl('home_page');
+
+                    if ($send) {
+                        if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+                            $url = $this->generateUrl('admin_home_page');
+                        } else {
+                            $url = $this->generateUrl('account_home_page');
+                        }
                     }
+
+                    /* End custom threads */
 
                     $response = new RedirectResponse($url);
                 }

@@ -26,42 +26,42 @@ class Preference
     /**
      * @var bool
      *
-     * @ORM\Column(name="showCompanies", type="boolean")
+     * @ORM\Column(name="showCompanies", type="boolean", nullable=true)
      */
     private $showCompanies;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="showApplications", type="boolean")
+     * @ORM\Column(name="showApplications", type="boolean", nullable=true)
      */
     private $showApplications;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="showAppointments", type="boolean")
+     * @ORM\Column(name="showAppointments", type="boolean", nullable=true)
      */
     private $showAppointments;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="showStatistics", type="boolean")
+     * @ORM\Column(name="showStatistics", type="boolean", nullable=true)
      */
     private $showStatistics;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="pushAlerts", type="boolean")
+     * @ORM\Column(name="pushAlerts", type="boolean", nullable=true)
      */
     private $pushAlerts;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="delayAlerts", type="integer")
+     * @ORM\Column(name="delayAlerts", type="integer", nullable=true)
      */
     private $delayAlerts;
 

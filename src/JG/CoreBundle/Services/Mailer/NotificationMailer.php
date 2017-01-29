@@ -33,10 +33,46 @@ class NotificationMailer implements MailerInterface
   public function sendConfirmationEmailMessage(UserInterface $user)
   {
       $datas = array(
-          'subject'     => $this->container->getParameter('fos_user.registration.confirmation.from_email.sender_name'),
-          'from'        => $this->container->getParameter('fos_user.registration.confirmation.from_email.address'),
+          'subject'     => 'MyApplications › Confirmation inscription',
+          'from'        => 'gambier.j@gmail.com',
           'to'          => $user->getEmail(),
-          'template'    => 'JGUserBundle:Email:registration.html.twig',
+          'template'    => 'JGUserBundle:Registration:registration.html.twig',
+          'content'     => array(
+              'user' => $user,
+              'confirmationUrl' => $this->router->generate('fos_user_resetting_reset', array('token' => $user->getConfirmationToken()), true)
+          ),
+          'image'       => null,
+          'attachment'  => null
+      );
+
+      return $this->sendEmailMessage($datas);
+  }
+
+  public function sendResettingEmailMessage(UserInterface $user)
+  {
+      $datas = array(
+          'subject'     => 'MyApplications › Réinitialisation de mot de passe',
+          'from'        => 'gambier.j@gmail.com',
+          'to'          => $user->getEmail(),
+          'template'    => 'JGUserBundle:Resetting:resetting.html.twig',
+          'content'     => array(
+              'user' => $user,
+              'confirmationUrl' => $this->router->generate('fos_user_resetting_reset', array('token' => $user->getConfirmationToken()), true)
+          ),
+          'image'       => null,
+          'attachment'  => null
+      );
+
+      return $this->sendEmailMessage($datas);
+  }
+
+  public function sendCongratulationsInscription(UserInterface $user)
+  {
+      $datas = array(
+          'subject'     => 'MyApplications › Confirmation inscription',
+          'from'        => 'gambier.j@gmail.com',
+          'to'          => $user->getEmail(),
+          'template'    => 'JGUserBundle:Congratulation:congratulation.html.twig',
           'content'     => array(
               'user' => $user
           ),
@@ -44,25 +80,7 @@ class NotificationMailer implements MailerInterface
           'attachment'  => null
       );
 
-      $this->sendEmailMessage($datas);
-  }
-
-  public function sendResettingEmailMessage(UserInterface $user)
-  {
-      $datas = array(
-          'subject'     => $this->container->getParameter('fos_user.resetting.email.from_email.sender_name'),
-          'from'        => $this->container->getParameter('fos_user.resetting.email.from_email.address'),
-          'to'          => $user->getEmail(),
-          'template'    => 'JGUserBundle:Email:resetting.html.twig',
-          'content'     => array(
-              'user' => $user,
-              'resettingUrl' => $this->router->generate('fos_user_resetting_reset', array('token' => $user->getConfirmationToken()), true)
-          ),
-          'image'       => null,
-          'attachment'  => null
-      );
-
-      $this->sendEmailMessage($datas);
+      return $this->sendEmailMessage($datas);
   }
 
   public function sendEmailMessage($datas)
@@ -74,7 +92,9 @@ class NotificationMailer implements MailerInterface
           ->setSubject($datas['subject'])
           ->setFrom($datas['from'])
           ->setTo($datas['to'])
-          ->setBody($this->templating->render($datas['template'],$datas['content']))
+          ->setBody(
+              $this->templating->render($datas['template'],$datas['content']), 'text/html'
+          )
           ->setContentType('text/html')
       ;
 
@@ -84,6 +104,9 @@ class NotificationMailer implements MailerInterface
       if (!empty($datas['attachment']))
         $message->attach(\Swift_Attachment::fromPath($datas['attachment']));
 
-      $this->mailer->send($message);
+      if ($this->mailer->send($message))
+          return true;
+      else
+          return false;
   }
 }
