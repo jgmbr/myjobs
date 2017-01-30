@@ -30,7 +30,7 @@ class NotificationMailer implements MailerInterface
     $this->templating = $templating;
   }
 
-  /*public function sendConfirmationEmailMessage(UserInterface $user)
+  public function sendConfirmationEmailMessage(UserInterface $user)
   {
       $datas = array(
           'subject'     => 'MyApplications › Confirmation inscription',
@@ -64,7 +64,7 @@ class NotificationMailer implements MailerInterface
       );
 
       return $this->sendEmailMessage($datas);
-  }*/
+  }
 
   public function sendCongratulationsInscription(UserInterface $user)
   {

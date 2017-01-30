@@ -73,7 +73,7 @@ class RegistrationController extends BaseController
                     $send = $mailer->sendCongratulationsInscription($user);
 
                     $url = $this->generateUrl('home_page');
-
+  
                     if ($send) {
                         if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
                             $url = $this->generateUrl('admin_home_page');
