@@ -96,7 +96,9 @@
                             <td class="text-right">
                                 {{ form_start(deleteAppointmentForms[appointment.id], {'attr': {'class': '', 'role': 'form'}}) }}
                                 {{ form_widget(deleteAppointmentForms[appointment.id]) }}
-                                <input type="submit" value="Supprimer" class="btn btn-danger btn-xs" />
+                                <button type="submit" class="btn btn-danger btn-xs">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
                                 {{ form_end(deleteAppointmentForms[appointment.id]) }}
                             </td>
                         </tr>
@@ -136,7 +138,9 @@
                             <td class="text-right">
                                 {{ form_start(deleteRelaunchForms[relaunch.id], {'attr': {'class': '', 'role': 'form'}}) }}
                                 {{ form_widget(deleteRelaunchForms[relaunch.id]) }}
-                                <input type="submit" value="Supprimer" class="btn btn-danger btn-xs" />
+                                <button type="submit" class="btn btn-danger btn-xs">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
                                 {{ form_end(deleteRelaunchForms[relaunch.id]) }}
                             </td>
                         </tr>
