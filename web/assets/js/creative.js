@@ -33,16 +33,25 @@
     sr.reveal('.sr-icons', {
         duration: 600,
         scale: 0.3,
-        distance: '0px'
+        distance: '0px',
+        mobile: true
     }, 200);
     sr.reveal('.sr-button', {
         duration: 1000,
-        delay: 200
+        delay: 200,
+        mobile: true
     });
     sr.reveal('.sr-contact', {
         duration: 600,
         scale: 0.3,
-        distance: '0px'
+        distance: '0px',
+        mobile: true
+    }, 300);
+    sr.reveal('.sr-img', {
+        duration: 1000,
+        origin: 'top',
+        distance: '0px',
+        mobile: true
     }, 300);
 
     // Initialize and Configure Magnific Popup Lightbox Plugin

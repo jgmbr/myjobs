@@ -53,9 +53,12 @@
                                         </td>
                                         <td>
                                             {% if alert.viewed %}
-                                                <i class="fa fa-check" aria-hidden="true"></i> &nbsp; Validée
+                                                <i class="fa fa-check" aria-hidden="true"></i> &nbsp; Validée &nbsp;
+                                                <a href="{{ path('alert_invalid', { 'id': alert.id }) }}" class="btn btn-danger btn-sm">
+                                                    <i class="fa fa-eye-slash" aria-hidden="true"></i> &nbsp; Invalider
+                                                </a>
                                             {% else %}
-                                                <a href="{{ path('alert_valid', { 'id': alert.id, 'state': true }) }}" class="btn btn-info btn-sm">
+                                                <a href="{{ path('alert_valid', { 'id': alert.id }) }}" class="btn btn-info btn-sm">
                                                     <i class="fa fa-eye" aria-hidden="true"></i> &nbsp; Valider
                                                 </a>
                                             {% endif %}

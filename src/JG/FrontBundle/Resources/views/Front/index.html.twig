@@ -40,6 +40,11 @@
                         <i class="fa fa-4x fa-building-o text-primary sr-icons"></i>
                         <h3>Entreprises</h3>
                         <p class="text-muted">Créer votre carnet d'entreprises</p>
+                        <hr />
+                        <ul class="unstyled">
+                            <li>› Visualiser vos fiches entreprises</li>
+                            <li>› Exporter vos entreprises au format csv</li>
+                        </ul>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
@@ -47,6 +52,12 @@
                         <i class="fa fa-4x fa-list-alt text-primary sr-icons"></i>
                         <h3>Candidatures</h3>
                         <p class="text-muted">Créer vos candidatures</p>
+                        <hr />
+                        <ul class="unstyled">
+                            <li>› Visualiser vos fiches candidatures</li>
+                            <li>› Consulter les statuts de vos candidatures</li>
+                            <li>› Exporter vos candidatures au format csv</li>
+                        </ul>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
@@ -54,6 +65,12 @@
                         <i class="fa fa-4x fa-calendar text-primary sr-icons"></i>
                         <h3>Entretiens</h3>
                         <p class="text-muted">Créer votre agenda d'entretiens</p>
+                        <hr />
+                        <ul class="unstyled">
+                            <li>› Visualiser votre calendrier d'entretiens programmés</li>
+                            <li>› Consulter les statuts de vos entretiens</li>
+                            <li>› Exporter vos entretiens au format csv</li>
+                        </ul>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
@@ -61,6 +78,11 @@
                         <i class="fa fa-4x fa-bar-chart text-primary sr-icons"></i>
                         <h3>Statistiques</h3>
                         <p class="text-muted">Consulter et exporter</p>
+                        <hr />
+                        <ul class="unstyled">
+                            <li>› Exporter vos données au format csv</li>
+                            <li>› Exporter vos données au format zip</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -71,10 +93,20 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">We've got what you need!</h2>
+                    <h2 class="section-heading">Tableau de bord</h2>
                     <hr class="light">
-                    <p class="text-faded">Start Bootstrap has everything you need to get your new website up and running in no time! All of the templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings attached!</p>
-                    <a href="#services" class="page-scroll btn btn-default btn-xl sr-button">Get Started!</a>
+                    <p class="text-faded">Créer et développer vos candidatures dès maintenant à partir de l'application MyApplications !</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 app">
+                    <ul class="ul-dashboard">
+
+                    </ul>
+                    <img src="{{ asset('assets/img/Dashboard-App.PNG') }}" class="img-responsive sr-img" />
+                </div>
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <a href="{{ path('fos_user_security_login') }}" class="page-scroll btn btn-default btn-xl sr-button">C'est parti !</a>
                 </div>
             </div>
         </div>
@@ -94,7 +126,7 @@
                         {{ form_widget(formContact) }}
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Envoyer" name="sendMessage" id="sendMessage" class="btn btn-primary" />
+                        <input type="submit" value="Envoyer" name="sendMessage" id="sendMessage" class="btn btn-xl btn-primary sr-button" />
                     </div>
                     {{ form_end(formContact) }}
                 </div>

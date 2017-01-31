@@ -40,3 +40,78 @@
 .border-none {
     border: none;
 }
+
+.login-box-body,
+.register-box-body {
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+
+.reset-page {
+    background: #d2d6de;
+}
+.auth-page {
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    background-position: center;
+}
+.login-page {
+    background-image: url('../../img/header.jpg') !important;
+}
+.register-page {
+    background-image: url('../../img/header.jpg') !important;
+}
+.reset-page {
+    background-image: url('../../img/header.jpg') !important;
+}
+.login-box .login-logo a,
+.register-box .register-logo a {
+    color: #ffffff;
+}
+
+.with_steps .box-body .form-group {
+    padding: 0 0 0 25px;
+}
+.step {
+    overflow: hidden;
+    line-height: 35px;
+}
+.step_number {
+    width: 40px;
+    height: 40px;
+    display: block;
+    text-align: center;
+    border: 2px solid #ff6347;
+    line-height: 35px;
+    border-radius: 50%;
+    color: #ff6347;
+    font-weight: bold;
+    font-size: 1.2em;
+    float: left;
+    margin: 0 10px 0 0;
+}
+.step_title {
+    color: #ff6347;
+    font-weight: bold;
+}
+.btn-pink {
+    background-color: #ff6347;
+    border-color: #ff6347;
+    color: #fff;
+}
+.btn-pink:hover {
+    background-color: #e55a41;
+    border-color: #e55a41;
+    color: #fff;
+}
+.callout .help-block > * {
+    color: #fff;
+}
+.callout .help-block .glyphicon {
+    margin: 0 10px 0 0;
+}
+.initAvatar {
+    color: #fff;
+}

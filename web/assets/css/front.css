@@ -79,6 +79,17 @@ ul.unstyled li {
     display: none;
 }
 
+
+.service-box ul.unstyled {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+    margin: 20px 10px;
+    color: #777;
+}
+
+
+
 /* Icon */
 
 ul.icons {
@@ -207,12 +218,11 @@ ul.icons li .icon:before {
     color: #ffffff;
     width: 35px;
     height: 35px;
-    display: block;
     background: #ee4b28;
     cursor: pointer;
     position: fixed;
-    bottom: 35px;
-    right: 35px;
+    bottom: 30px;
+    right: 30px;
     display: none;
     z-index: 9999;
     -webkit-border-radius: 50%;
@@ -237,4 +247,14 @@ ul.icons li .icon:before {
 .modal-body{
     height: 300px;
     overflow-y: auto;
+}
+
+/* APP - DASHBOARD */
+
+.app {
+    padding: 20px 20px 50px 20px;
+}
+
+.app img {
+    box-shadow: 1px 1px 20px #000;
 }

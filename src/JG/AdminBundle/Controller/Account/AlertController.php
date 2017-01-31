@@ -2,6 +2,7 @@
 
 namespace JG\AdminBundle\Controller\Account;
 
+use Doctrine\DBAL\Types\BooleanType;
 use JG\CoreBundle\Entity\Alert;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -37,14 +38,35 @@ class AlertController extends Controller
     /**
      * Moderation choice alert.
      *
-     * @Route("/moderate/{id}/state/{state}", name="alert_valid")
+     * @Route("/moderate/{id}/valid", name="alert_valid")
      * @Method("GET")
      */
-    public function validAction(Request $request, Alert $alert, $state)
+    public function validAction(Request $request, Alert $alert)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $alert->setViewed($state);
+        $alert->setViewed(true);
+
+        $em->persist($alert);
+
+        $em->flush($alert);
+
+        $request->getSession()->getFlashBag()->add('success', 'Alerte validée avec succès !');
+
+        return $this->redirectToRoute('alert_index');
+    }
+
+    /**
+     * Moderation choice alert.
+     *
+     * @Route("/moderate/{id}/invalid", name="alert_invalid")
+     * @Method("GET")
+     */
+    public function invalidAction(Request $request, Alert $alert)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $alert->setViewed(false);
 
         $em->persist($alert);
 
