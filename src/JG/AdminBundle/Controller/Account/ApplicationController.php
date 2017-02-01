@@ -55,7 +55,7 @@ class ApplicationController extends Controller
 
         $exportWS = $this->get('app.export');
 
-        return $exportWS->export('JGCoreBundle:Application', 'exportMyApplications', $headers, 'export-applications-'.date('YmdHis'), $user);
+        return $exportWS->export('JGCoreBundle:Application', 'exportMyApplications', null, $headers, 'export-applications-'.date('YmdHis'), $user);
     }
 
     /**
