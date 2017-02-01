@@ -4,7 +4,7 @@
 
 Vous ne trouvez pas d'outils approprié pour la gestion de votre carnet d'entreprises, de vos candidatures et de votre agenda d'entretiens lors de vos recherches d'emploi ?
 
-MyApplication est l'outil qu'il vous faut !
+MyApplications est l'outil qu'il vous faut !
 
 ## Fonctionnalités
 
