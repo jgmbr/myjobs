@@ -86,7 +86,7 @@ fos_user:
         sender_name:    Demo App
     resetting:
         email:
-            template:   JGUserBundle:Resetting:email.txt.twig
+            template:   '@FOSUser/Resetting/email.txt.twig'
             from_email:
                 address:        gambier.j@gmail.com
                 sender_name:    Demo Resetting
