@@ -51,7 +51,7 @@ class UserController extends Controller
 
         $exportWS = $this->get('app.export');
 
-        return $exportWS->export('JGUserBundle:User', 'exportUsers', $headers, 'export-users-'.date('YmdHis') );
+        return $exportWS->export('JGUserBundle:User', 'exportUsers', null, $headers, 'export-users-'.date('YmdHis') );
     }
 
     /**
@@ -66,7 +66,7 @@ class UserController extends Controller
 
         $exportWS = $this->get('app.export');
 
-        return $exportWS->export('JGUserBundle:User', 'exportAdmins', $headers, 'export-administrators-'.date('YmdHis') );
+        return $exportWS->export('JGUserBundle:User', 'exportAdmins', null, $headers, 'export-administrators-'.date('YmdHis') );
     }
 
     /**

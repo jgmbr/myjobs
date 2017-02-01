@@ -46,7 +46,7 @@ class CompanyController extends Controller
 
         $exportWS = $this->get('app.export');
 
-        return $exportWS->export('JGCoreBundle:Company', 'exportAllCompanies', $headers, 'export-all-companies-'.date('YmdHis'), $user);
+        return $exportWS->export('JGCoreBundle:Company', 'exportAllCompanies', null, $headers, 'export-all-companies-'.date('YmdHis'), $user);
     }
 
     /**
