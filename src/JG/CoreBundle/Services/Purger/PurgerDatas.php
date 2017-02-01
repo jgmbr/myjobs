@@ -7,14 +7,13 @@ use Symfony\Component\OptionsResolver\Exception\InvalidArgumentException;
 
 class PurgerDatas
 {
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
+    private $csvDir;
+    private $zipDir;
 
-    public function __construct(ContainerInterface $container)
+    public function __construct($csvDir, $zipDir)
     {
-        $this->container = $container;
+        $this->csvDir = $csvDir;
+        $this->zipDir = $zipDir;
     }
 
     public static function deleteDir($dirPath)
@@ -51,26 +50,22 @@ class PurgerDatas
 
     public function purgeCSV()
     {
-        $sourceDir = $this->container->getParameter('jg_core.dir.csv');
-
-        $dirs = array_diff(scandir($sourceDir), array('..', '.'));
+        $dirs = array_diff(scandir($this->csvDir), array('..', '.'));
 
         if (sizeof($dirs) > 0) {
             foreach ($dirs as $dir) {
-                $this->deleteDir($sourceDir.$dir);
+                $this->deleteDir($this->csvDir.$dir);
             }
         }
     }
 
     public function purgeZIP()
     {
-        $zipDir = $this->container->getParameter('jg_core.dir.zip');
-
-        $files = array_diff(scandir($zipDir), array('..', '.'));
+        $files = array_diff(scandir($this->zipDir), array('..', '.'));
 
         if (sizeof($files) > 0) {
             foreach ($files as $file) {
-                $this->deleteFile($zipDir . $file);
+                $this->deleteFile($this->zipDir . $file);
             }
         }
 

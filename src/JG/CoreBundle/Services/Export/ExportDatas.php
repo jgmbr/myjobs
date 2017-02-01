@@ -3,6 +3,7 @@
 namespace JG\CoreBundle\Services\Export;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -10,28 +11,17 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class ExportDatas
 {
-    /**
-    * @var EntityManagerInterface
-    */
     private $em;
-
-    /**
-     * @var KernelInterface
-     */
-    private $kernel;
-
-    /**
-     * @var TokenStorageInterface
-     */
     private $tokenStorage;
+    private $csvDir;
+    private $zipDir;
 
-    public function __construct(KernelInterface $kernel, EntityManagerInterface $em, TokenStorageInterface $tokenStorage)
+    public function __construct(EntityManagerInterface $em, TokenStorageInterface $tokenStorage, $csvDir, $zipDir)
     {
-        $this->em = $em;
-
-        $this->kernel = $kernel;
-
-        $this->tokenStorage   = $tokenStorage;
+        $this->em               = $em;
+        $this->tokenStorage     = $tokenStorage;
+        $this->csvDir           = $csvDir;
+        $this->zipDir           = $zipDir;
     }
 
     public function cleanFolder($path)
@@ -80,9 +70,7 @@ class ExportDatas
             ));
         } else {
             try {
-                $path = $this->kernel->getRootDir().'/../web/download/csv/';
-                $dir = $path.$user->getId().'/';
-                $link = $dir.$file.$extension;
+                $link = $this->csvDir.$user->getId().'/'.$file.$extension;
                 $fs = new Filesystem();
                 $fs->touch($link);
                 $fs->dumpFile($link, $content);

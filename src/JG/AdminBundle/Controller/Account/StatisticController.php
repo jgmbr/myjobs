@@ -40,45 +40,27 @@ class StatisticController extends Controller
 
         $nbApplications = $em->getRepository('JGCoreBundle:Application')->countMyApplications($user);
 
-        $inprogress = $em->getRepository('JGCoreBundle:Status')->findByName('En cours');
+        $nbApplicationsInProgress = $em->getRepository('JGCoreBundle:Application')->countMyApplicationsWithStatus($user, $em->getRepository('JGCoreBundle:Status')->findByName('En cours'));
 
-        $valided = $em->getRepository('JGCoreBundle:Status')->findByName('Validée');
+        $nbApplicationsValided = $em->getRepository('JGCoreBundle:Application')->countMyApplicationsWithStatus($user, $em->getRepository('JGCoreBundle:Status')->findByName('Validée'));
 
-        $refused = $em->getRepository('JGCoreBundle:Status')->findByName('Refusée');
+        $nbApplicationsRefused = $em->getRepository('JGCoreBundle:Application')->countMyApplicationsWithStatus($user, $em->getRepository('JGCoreBundle:Status')->findByName('Refusée'));
 
-        $nbApplicationsInProgress = $em->getRepository('JGCoreBundle:Application')->countMyApplicationsWithStatus($user, $inprogress);
+        $nbApplicationsCDI = $em->getRepository('JGCoreBundle:Application')->countMyApplicationsWithStatus($user, $em->getRepository('JGCoreBundle:Contract')->findByName('CDI'));
 
-        $nbApplicationsValided = $em->getRepository('JGCoreBundle:Application')->countMyApplicationsWithStatus($user, $valided);
+        $nbApplicationsCDD = $em->getRepository('JGCoreBundle:Application')->countMyApplicationsWithStatus($user, $em->getRepository('JGCoreBundle:Contract')->findByName('CDD'));
 
-        $nbApplicationsRefused = $em->getRepository('JGCoreBundle:Application')->countMyApplicationsWithStatus($user, $refused);
-
-        $cdi = $em->getRepository('JGCoreBundle:Contract')->findByName('CDI');
-
-        $cdd = $em->getRepository('JGCoreBundle:Contract')->findByName('CDD');
-
-        $stage = $em->getRepository('JGCoreBundle:Contract')->findByName('Stage');
-
-        $nbApplicationsCDI = $em->getRepository('JGCoreBundle:Application')->countMyApplicationsWithStatus($user, $cdi);
-
-        $nbApplicationsCDD = $em->getRepository('JGCoreBundle:Application')->countMyApplicationsWithStatus($user, $cdd);
-
-        $nbApplicationsStage = $em->getRepository('JGCoreBundle:Application')->countMyApplicationsWithStatus($user, $stage);
+        $nbApplicationsStage = $em->getRepository('JGCoreBundle:Application')->countMyApplicationsWithStatus($user, $em->getRepository('JGCoreBundle:Contract')->findByName('Stage'));
 
         // Appointments
 
         $nbAppointments = $em->getRepository('JGCoreBundle:Appointment')->countMyAppointments($user);
 
-        $confirmed = $em->getRepository('JGCoreBundle:State')->findByName('Confirmé');
+        $nbAppointmentsConfirmed = $em->getRepository('JGCoreBundle:Appointment')->countMyAppointmentsWithState($user, $em->getRepository('JGCoreBundle:State')->findByName('Confirmé'));
 
-        $wait = $em->getRepository('JGCoreBundle:State')->findByName('En attente');
+        $nbAppointmentsWait = $em->getRepository('JGCoreBundle:Appointment')->countMyAppointmentsWithState($user, $em->getRepository('JGCoreBundle:State')->findByName('En attente'));
 
-        $cancel = $em->getRepository('JGCoreBundle:State')->findByName('Annulé');
-
-        $nbAppointmentsConfirmed = $em->getRepository('JGCoreBundle:Appointment')->countMyAppointmentsWithState($user, $confirmed);
-
-        $nbAppointmentsWait = $em->getRepository('JGCoreBundle:Appointment')->countMyAppointmentsWithState($user, $wait);
-
-        $nbAppointmentsCancel = $em->getRepository('JGCoreBundle:Appointment')->countMyAppointmentsWithState($user, $cancel);
+        $nbAppointmentsCancel = $em->getRepository('JGCoreBundle:Appointment')->countMyAppointmentsWithState($user, $em->getRepository('JGCoreBundle:State')->findByName('Annulé'));
 
         // Download form
 

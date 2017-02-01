@@ -11,22 +11,14 @@ use Symfony\Component\Templating\EngineInterface;
 
 class NotificationMailer implements MailerInterface
 {
-    private $container;
-
     private $router;
-
     private $mailer;
-
     private $templating;
 
-  public function __construct(ContainerInterface $container ,RouterInterface $router, \Swift_Mailer $mailer, EngineInterface $templating)
+  public function __construct(RouterInterface $router, \Swift_Mailer $mailer, EngineInterface $templating)
   {
-      $this->container = $container;
-
     $this->router = $router;
-
     $this->mailer = $mailer;
-
     $this->templating = $templating;
   }
 

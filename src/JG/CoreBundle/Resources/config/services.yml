@@ -10,7 +10,7 @@ services:
             - { name: twig.extension }
     app.mailer:
         class: JG\CoreBundle\Services\Mailer\NotificationMailer
-        arguments: ['@service_container','@router', '@mailer', '@templating']
+        arguments: ['@router', '@mailer', '@templating']
     app.alert.application:
         class: JG\CoreBundle\Services\Alert\ApplicationAlert
         arguments: ['@doctrine.orm.entity_manager', '@security.token_storage']
@@ -19,7 +19,7 @@ services:
         arguments: ['@doctrine.orm.entity_manager', '@security.token_storage']
     app.export:
         class: JG\CoreBundle\Services\Export\ExportDatas
-        arguments: ['@kernel','@doctrine.orm.entity_manager', '@security.token_storage']
+        arguments: ['@doctrine.orm.entity_manager', '@security.token_storage', '%jg_core.dir.csv%', '%jg_core.dir.zip%']
     app.purger:
         class: JG\CoreBundle\Services\Purger\PurgerDatas
-        arguments: ['@service_container']
+        arguments: ['%jg_core.dir.csv%', '%jg_core.dir.zip%']
