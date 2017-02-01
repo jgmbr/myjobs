@@ -72,7 +72,26 @@ class AlertController extends Controller
 
         $em->flush($alert);
 
-        $request->getSession()->getFlashBag()->add('success', 'Alerte validée avec succès !');
+        $request->getSession()->getFlashBag()->add('success', 'Alerte invalidée avec succès !');
+
+        return $this->redirectToRoute('alert_index');
+    }
+
+    /**
+     * Moderation choice alert.
+     *
+     * @Route("/delete/{id}/", name="alert_delete")
+     * @Method("GET")
+     */
+    public function deleteAction(Request $request, Alert $alert)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($alert);
+
+        $em->flush();
+
+        $request->getSession()->getFlashBag()->add('success', 'Alerte supprimée avec succès !');
 
         return $this->redirectToRoute('alert_index');
     }

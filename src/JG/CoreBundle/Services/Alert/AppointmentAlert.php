@@ -41,29 +41,38 @@ class AppointmentAlert
                 $application    = $appointment->getApplication();
                 $user           = $appointment->getUser();
 
-                // Check if alert day already exists
-                $isAlert = $this->em->getRepository('JGCoreBundle:Alert')->findBy(array(
-                    'appointment' => $appointment,
-                    'user' => $user,
-                    'application' => $application,
-                    'dateAt' => new \DateTime($date)
-                ));
+                foreach ($user->getPreferences() as $preference)
+                {
+                    $pushAlert = $preference->getPushAlerts();
 
-                if (!sizeof($isAlert)) {
+                    if ($pushAlert) {
 
-                    $alert = new Alert();
-                    $alert->setName('Entretien');
-                    $alert->setContent("N'oubliez pas votre entretien d'aujourd'hui");
-                    $alert->setDateAt(new \DateTime($date));
-                    $alert->setViewed(false);
-                    $alert->setUser($user);
-                    $alert->setAppointment($appointment);
-                    $alert->setApplication($application);
-                    $appointment->addAlert($alert);
-                    $application->addAlert($alert);
-                    $this->em->persist($alert);
-                    $this->em->flush($alert);
+                        // Check if alert day already exists
+                        $isAlert = $this->em->getRepository('JGCoreBundle:Alert')->findBy(array(
+                            'appointment' => $appointment,
+                            'user' => $user,
+                            'application' => $application,
+                            'dateAt' => new \DateTime($date)
+                        ));
 
+                        if (!sizeof($isAlert)) {
+
+                            $alert = new Alert();
+                            $alert->setName('Entretien');
+                            $alert->setContent("N'oubliez pas votre entretien d'aujourd'hui");
+                            $alert->setDateAt(new \DateTime($date));
+                            $alert->setViewed(false);
+                            $alert->setUser($user);
+                            $alert->setAppointment($appointment);
+                            $alert->setApplication($application);
+                            $appointment->addAlert($alert);
+                            $application->addAlert($alert);
+                            $this->em->persist($alert);
+                            $this->em->flush($alert);
+
+                        }
+
+                    }
                 }
 
             }
