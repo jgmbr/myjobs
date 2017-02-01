@@ -3,6 +3,7 @@
 namespace JG\AdminBundle\Controller\Account;
 
 use JG\CoreBundle\Entity\Application;
+use JG\CoreBundle\Entity\EntityInterface\ExportInterface;
 use JG\CoreBundle\Entity\Relaunch;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -55,7 +56,7 @@ class ApplicationController extends Controller
 
         $exportWS = $this->get('app.export');
 
-        return $exportWS->export('JGCoreBundle:Application', 'exportMyApplications', null, $headers, 'export-applications-'.date('YmdHis'), $user);
+        return $exportWS->export(new Application(), 'exportMyApplications', null, $headers, 'export-applications-'.date('YmdHis'), $user);
     }
 
     /**

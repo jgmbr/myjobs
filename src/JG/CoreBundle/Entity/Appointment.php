@@ -4,6 +4,7 @@ namespace JG\CoreBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use JG\CoreBundle\Entity\EntityInterface\ExportInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -13,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="JG\CoreBundle\Repository\AppointmentRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Appointment
+class Appointment implements ExportInterface
 {
     /**
      * @var int

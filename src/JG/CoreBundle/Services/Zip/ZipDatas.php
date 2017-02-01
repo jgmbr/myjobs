@@ -9,6 +9,9 @@
 namespace JG\CoreBundle\Services\Zip;
 
 use Doctrine\ORM\EntityManagerInterface;
+use JG\CoreBundle\Entity\Application;
+use JG\CoreBundle\Entity\Appointment;
+use JG\CoreBundle\Entity\Company;
 use JG\CoreBundle\Services\Export\ExportDatas;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -64,26 +67,26 @@ class ZipDatas
 
             switch ($type) {
                 case 'application':
-                    $entity = 'Application';
+                    $entity = new Application();
                     $headers = array('id','date_at','name','url','contract','state','company','comment','business_reason','people_reason','created_at');
                     $query = 'exportMyApplications';
                     $csv = 'export-applications-'.$date;
                     break;
                 case 'company':
-                    $entity = 'Company';
+                    $entity = new Company();
                     $headers = array('id','name','address1','address2','postcode','city','country','email','phone','website','contact','created_at');
                     $query = 'exportMyCompanies';
                     $csv = 'export-companies-'.$date;
                     break;
                 case 'appointment':
-                    $entity = 'Appointment';
+                    $entity = new Appointment();
                     $headers = array('id','name','state','company','date_at','hour_at','comment','created_at');
                     $query = 'exportMyAppointments';
                     $csv = 'export-appointments-'.$date;
                     break;
             }
 
-            $this->exportWS->export('JGCoreBundle:'.$entity, $query, $options, $headers, $csv, $user, false);
+            $this->exportWS->export($entity, $query, $options, $headers, $csv, $user, false);
 
         }
 

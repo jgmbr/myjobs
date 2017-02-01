@@ -49,7 +49,7 @@ class AppointmentController extends Controller
 
         $exportWS = $this->get('app.export');
 
-        return $exportWS->export('JGCoreBundle:Appointment', 'exportMyAppointments', null, $headers, 'export-appointments-'.date('YmdHis'), $user);
+        return $exportWS->export(new Appointment(), 'exportMyAppointments', null, $headers, 'export-appointments-'.date('YmdHis'), $user);
     }
 
     /**

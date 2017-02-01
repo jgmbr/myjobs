@@ -3,6 +3,7 @@
 namespace JG\CoreBundle\Services\Export;
 
 use Doctrine\ORM\EntityManagerInterface;
+use JG\CoreBundle\Entity\EntityInterface\ExportInterface;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,7 +42,7 @@ class ExportDatas
         }
     }
 
-    public function export($entity, $query, $options = null, $headers, $file, $user = null, $force = true)
+    public function export(ExportInterface $entity, $query, $options = null, $headers, $file, $user = null, $force = true)
     {
         $delimiter = $this->delimiter;
 
@@ -49,10 +50,10 @@ class ExportDatas
 
         if ($user) {
             // for user exports
-            $iterableResult = $this->em->getRepository($entity)->$query($user, $options);
+            $iterableResult = $this->em->getRepository(get_class($entity))->$query($user, $options);
         } else {
             // for admin exports
-            $iterableResult = $this->em->getRepository($entity)->$query();
+            $iterableResult = $this->em->getRepository(get_class($entity))->$query();
         }
 
         $handle = fopen('php://memory', 'r+');
