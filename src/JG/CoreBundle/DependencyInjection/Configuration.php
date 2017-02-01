@@ -31,7 +31,19 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('csv')->end()
                         ->scalarNode('zip')->end()
                     ->end()
-                ->end() // twitter
+                ->end()
+                ->arrayNode('generation')
+                    ->children()
+                        ->scalarNode('zip')->end()
+                        ->scalarNode('delimiter')->end()
+                        ->arrayNode('extension')
+                            ->children()
+                                ->scalarNode('csv')->end()
+                                ->scalarNode('zip')->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 

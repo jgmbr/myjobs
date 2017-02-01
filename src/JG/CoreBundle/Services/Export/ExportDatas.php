@@ -15,13 +15,17 @@ class ExportDatas
     private $tokenStorage;
     private $csvDir;
     private $zipDir;
+    private $delimiter;
+    private $extension;
 
-    public function __construct(EntityManagerInterface $em, TokenStorageInterface $tokenStorage, $csvDir, $zipDir)
+    public function __construct(EntityManagerInterface $em, TokenStorageInterface $tokenStorage, $csvDir, $zipDir, $delimiter, $extension)
     {
         $this->em               = $em;
         $this->tokenStorage     = $tokenStorage;
         $this->csvDir           = $csvDir;
         $this->zipDir           = $zipDir;
+        $this->delimiter        = $delimiter;
+        $this->extension        = $extension;
     }
 
     public function cleanFolder($path)
@@ -39,9 +43,9 @@ class ExportDatas
 
     public function export($entity, $query, $options = null, $headers, $file, $user = null, $force = true)
     {
-        $delimiter = ";";
+        $delimiter = $this->delimiter;
 
-        $extension = ".csv";
+        $extension = $this->extension;
 
         if ($user) {
             // for user exports

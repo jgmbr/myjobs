@@ -28,5 +28,9 @@ class JGCoreExtension extends Extension
 
         $container->setParameter('jg_core.dir.csv', $config['dir']['csv']);
         $container->setParameter('jg_core.dir.zip', $config['dir']['zip']);
+        $container->setParameter('jg_core.generation.zip', $config['generation']['zip']);
+        $container->setParameter('jg_core.generation.delimiter', $config['generation']['delimiter']);
+        $container->setParameter('jg_core.generation.extension.csv', $config['generation']['extension']['csv']);
+        $container->setParameter('jg_core.generation.extension.zip', $config['generation']['extension']['zip']);
     }
 }

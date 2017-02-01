@@ -129,3 +129,9 @@ jg_core:
     dir:
         csv:    "%kernel.root_dir%/../web/download/csv/"
         zip:    "%kernel.root_dir%/../web/download/zip/"
+    generation:
+        zip:        true
+        delimiter:  ";"
+        extension:
+            csv:    ".csv"
+            zip:    ".zip"

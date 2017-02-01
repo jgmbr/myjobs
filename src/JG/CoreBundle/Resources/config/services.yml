@@ -19,7 +19,10 @@ services:
         arguments: ['@doctrine.orm.entity_manager', '@security.token_storage']
     app.export:
         class: JG\CoreBundle\Services\Export\ExportDatas
-        arguments: ['@doctrine.orm.entity_manager', '@security.token_storage', '%jg_core.dir.csv%', '%jg_core.dir.zip%']
+        arguments: ['@doctrine.orm.entity_manager', '@security.token_storage', '%jg_core.dir.csv%', '%jg_core.dir.zip%', '%jg_core.generation.delimiter%', '%jg_core.generation.extension.csv%', ]
+    app.zip:
+        class: JG\CoreBundle\Services\Zip\ZipDatas
+        arguments: ['@doctrine.orm.entity_manager', '@security.token_storage', '@app.export', '%jg_core.dir.csv%', '%jg_core.dir.zip%', '%jg_core.generation.zip%', '%jg_core.generation.extension.zip%']
     app.purger:
         class: JG\CoreBundle\Services\Purger\PurgerDatas
         arguments: ['%jg_core.dir.csv%', '%jg_core.dir.zip%']
