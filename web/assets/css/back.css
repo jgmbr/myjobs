@@ -58,13 +58,13 @@
     background-position: center;
 }
 .login-page {
-    background-image: url('../../img/header.jpg') !important;
+    background-image: url('../../assets/img/header.jpg') !important;
 }
 .register-page {
-    background-image: url('../../img/header.jpg') !important;
+    background-image: url('../../assets/img/header.jpg') !important;
 }
 .reset-page {
-    background-image: url('../../img/header.jpg') !important;
+    background-image: url('../../assets/img/header.jpg') !important;
 }
 .login-box .login-logo a,
 .register-box .register-logo a {
