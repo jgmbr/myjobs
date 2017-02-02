@@ -23,6 +23,7 @@ class ContactType extends AbstractType
         $builder
             ->add('firstname', TextType::class, array(
                 'label' => 'Prénom',
+                'translation_domain' => false,
                 'attr' => array(
                     'placeholder' => 'Votre prénom',
                 ),
@@ -44,6 +45,7 @@ class ContactType extends AbstractType
             ))
             ->add('lastname', TextType::class, array(
                 'label' => 'Nom',
+                'translation_domain' => false,
                 'attr' => array(
                     'placeholder' => 'Votre nom',
                 ),
@@ -65,6 +67,7 @@ class ContactType extends AbstractType
             ))
             ->add('email', EmailType::class, array(
                 'label' => 'Adresse email',
+                'translation_domain' => false,
                 'attr' => array(
                     'placeholder' => 'Votre adresse email',
                 ),
@@ -89,6 +92,7 @@ class ContactType extends AbstractType
             ))
             ->add('subject', TextType::class, array(
                 'label' => 'Objet',
+                'translation_domain' => false,
                 'attr' => array(
                     'placeholder' => 'Sujet de votre message',
                 ),
@@ -110,6 +114,7 @@ class ContactType extends AbstractType
             ))
             ->add('message', TextareaType::class, array(
                 'label' => 'Message',
+                'translation_domain' => false,
                 'attr' => array(
                     'placeholder' => 'Votre message',
                     'rows' => 8
