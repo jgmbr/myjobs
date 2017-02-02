@@ -18,23 +18,28 @@ class PreferenceType extends AbstractType
         $builder
             ->add('showCompanies', CheckboxType::class, array(
                 'label' => 'Afficher la rubrique Entreprises sur le tableau de bord',
-                'required' => false
+                'required'      => false,
+                'translation_domain' => false,
             ))
             ->add('showApplications', CheckboxType::class, array(
                 'label' => 'Afficher la rubrique Candidatures sur le tableau de bord',
-                'required' => false
+                'required'      => false,
+                'translation_domain' => false,
             ))
             ->add('showAppointments', CheckboxType::class, array(
                 'label' => 'Afficher la rubrique Entretiens sur le tableau de bord',
-                'required' => false
+                'required'      => false,
+                'translation_domain' => false,
             ))
             ->add('showStatistics', CheckboxType::class, array(
                 'label' => 'Afficher la rubrique Statistiques sur le tableau de bord',
-                'required' => false
+                'required'      => false,
+                'translation_domain' => false,
             ))
             ->add('pushAlerts', CheckboxType::class, array(
                 'label' => 'Recevoir des notifications dans la rubrique "Mes Alertes"',
-                'required' => false
+                'required'      => false,
+                'translation_domain' => false,
             ))
         ;
     }

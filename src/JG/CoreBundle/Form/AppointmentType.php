@@ -24,6 +24,8 @@ class AppointmentType extends AbstractType
         $builder
             ->add('application', EntityType::class, array(
                 'label'         => 'Candidature',
+                'required'      => true,
+                'translation_domain' => false,
                 'class'         => 'JGCoreBundle:Application',
                 'choice_label'  => 'fullname',
                 'multiple'      => false,
@@ -31,24 +33,38 @@ class AppointmentType extends AbstractType
                     return $repository->myApplicationsFromQB($user);
                 }
             ))
-            ->add('name', TextType::class, array('label' => 'Nom'))
+            ->add('name', TextType::class, array(
+                'label' => 'Nom',
+                'required' => true,
+                'translation_domain' => false,
+            ))
             ->add('state', EntityType::class, array(
                 'label'         => 'Etat',
+                'required'      => true,
+                'translation_domain' => false,
                 'class'         => 'JGCoreBundle:State',
                 'choice_label'  => 'name',
                 'multiple'      => false,
             ))
             ->add('dateAt', DateType::class, array(
                 'label'     => 'Date',
+                'required'  => true,
+                'translation_domain' => false,
                 'widget'    => 'single_text',
                 'data'      => new \DateTime("now"),
             ))
             ->add('hourAt', TimeType::class, array(
                 'label'     => 'Heure',
+                'required'  => true,
+                'translation_domain' => false,
                 'widget'    => 'single_text',
                 'data'      => new \DateTime("now"),
             ))
-            ->add('comment', TextareaType::class, array('label' => 'Commentaire(s)', 'required' => false))
+            ->add('comment', TextareaType::class, array(
+                'label' => 'Commentaire(s)',
+                'required' => false,
+                'translation_domain' => false,
+            ))
         ;
     }
     

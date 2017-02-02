@@ -24,16 +24,20 @@ class RelaunchType extends AbstractType
                 'label'     => 'Date',
                 'widget'    => 'single_text',
                 'data'      => new \DateTime("now"),
-                'required'  => true
+                'required'  => true,
+                'translation_domain' => false,
             ))
             ->add('hourAt', TimeType::class, array(
                 'label'     => 'Heure',
                 'widget'    => 'single_text',
                 'data'      => new \DateTime("now"),
-                'required'  => false
+                'required'  => true,
+                'translation_domain' => false,
             ))
             ->add('comment', TextareaType::class, array(
-                'label'     => 'Commentaire'
+                'label'     => 'Commentaire',
+                'required'  => false,
+                'translation_domain' => false,
             ))
         ;
     }

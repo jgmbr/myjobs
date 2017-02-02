@@ -15,6 +15,10 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Validator\Constraints\Url;
+use Symfony\Component\Validator\Constraints\UrlValidator;
 
 class ApplicationType extends AbstractType
 {
@@ -27,25 +31,54 @@ class ApplicationType extends AbstractType
 
         $builder
             ->add('dateAt', DateType::class, array(
-                'label'     => 'Date',
+                'label'     => 'Date *',
+                'required' => true,
                 'widget'    => 'single_text',
+                'translation_domain' => false,
             ))
-            ->add('name', TextType::class, array('label' => 'Nom'))
-            ->add('url', TextType::class, array('label' => 'Url de l\'annonce', 'required' => false))
+            ->add('name', TextType::class, array(
+                'label' => 'Nom *',
+                'required' => true,
+                'translation_domain' => false,
+                'constraints' => array(
+                    new NotBlank(array(
+                        'message' => 'Champ obligatoire'
+                    )),
+                    new NotNull(array(
+                        'message' => 'Champ obligatoire'
+                    ))
+                )
+            ))
+            ->add('url', TextType::class, array(
+                'label' => 'Url de l\'annonce',
+                'translation_domain' => false,
+                'required' => false,
+                'constraints' => array(
+                    new Url(array(
+                        'message' => 'Url incorrecte'
+                    ))
+                )
+            ))
             ->add('contract', EntityType::class, array(
                 'label'         => 'Contrat',
+                'required'      => true,
+                'translation_domain' => false,
                 'class'         => 'JGCoreBundle:Contract',
                 'choice_label'  => 'name',
                 'multiple'      => false,
             ))
             ->add('status', EntityType::class, array(
                 'label'         => 'Statut',
+                'required'      => true,
+                'translation_domain' => false,
                 'class'         => 'JGCoreBundle:Status',
                 'choice_label'  => 'name',
                 'multiple'      => false,
             ))
             ->add('company', EntityType::class, array(
                 'label'         => 'Entreprise',
+                'required'      => true,
+                'translation_domain' => false,
                 'class'         => 'JGCoreBundle:Company',
                 'choice_label'  => 'name',
                 'multiple'      => false,
@@ -53,9 +86,21 @@ class ApplicationType extends AbstractType
                     return $repository->myCompaniesFromQB($user);
                 }
             ))
-            ->add('businessReason', TextareaType::class, array('label' => 'Motif Entreprise', 'required' => false))
-            ->add('peopleReason', TextareaType::class, array('label' => 'Motif Candidat', 'required' => false))
-            ->add('comment', TextareaType::class, array('label' => 'Commentaires', 'required' => false))
+            ->add('businessReason', TextareaType::class, array(
+                'label' => 'Motif Entreprise',
+                'required' => false,
+                'translation_domain' => false,
+            ))
+            ->add('peopleReason', TextareaType::class, array(
+                'label' => 'Motif Candidat',
+                'required' => false,
+                'translation_domain' => false,
+            ))
+            ->add('comment', TextareaType::class, array(
+                'label' => 'Commentaires',
+                'required' => false,
+                'translation_domain' => false,
+            ))
         ;
     }
     

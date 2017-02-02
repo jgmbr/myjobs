@@ -19,8 +19,9 @@ class StatusType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, array(
-                'label' => 'Nom',
-                'required' => true,
+                'label' => 'Nom *',
+                'required'      => true,
+                'translation_domain' => false,
                 'constraints' => array(
                     new NotBlank(array(
                         'message' => 'Nom obligatoire'
@@ -31,8 +32,9 @@ class StatusType extends AbstractType
                 )
             ))
             ->add('icon', TextType::class, array(
-                'label' => 'Code icône',
-                'required' => true,
+                'label' => 'Code icône *',
+                'required'      => true,
+                'translation_domain' => false,
                 'constraints' => array(
                     new NotBlank(array(
                         'message' => 'Code icône obligatoire'
@@ -43,8 +45,9 @@ class StatusType extends AbstractType
                 )
             ))
             ->add('color', TextType::class, array(
-                'label' => 'Code couleur',
-                'required' => true,
+                'label' => 'Code couleur *',
+                'required'      => true,
+                'translation_domain' => false,
                 'constraints' => array(
                     new NotBlank(array(
                         'message' => 'Code couleur obligatoire'

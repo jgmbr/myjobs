@@ -22,22 +22,26 @@ class DownloadType extends AbstractType
             ->add('help1', StepType::class, array(
                 'label' => false,
                 'number' => 1,
-                'title' => 'Je souhaite exporter sur une période donnée'
+                'title' => 'Je souhaite exporter sur une période donnée',
+                'translation_domain' => false,
             ))
             ->add('start', DateType::class, array(
                 'label' => 'Période début *',
                 'widget'    => 'single_text',
-                'required' => true,
+                'required'      => true,
+                'translation_domain' => false,
                 'data' => new \DateTime('first day of this month')
             ))
             ->add('end', DateType::class, array(
                 'label' => 'Période fin *',
                 'widget'    => 'single_text',
-                'required' => true,
+                'required'      => true,
+                'translation_domain' => false,
                 'data' => new \DateTime('last day of this month')
             ))
             ->add('help2', StepType::class, array(
                 'label' => false,
+                'translation_domain' => false,
                 'number' => 2,
                 'title' => 'Je souhaite exporter toutes les données'
             ))
@@ -49,11 +53,13 @@ class DownloadType extends AbstractType
                 'choices' => array(
                     'Oui' => true,
                 ),
+                'translation_domain' => false,
             ))
             ->add('help3', StepType::class, array(
                 'label' => false,
                 'number' => 3,
-                'title' => 'Je souhaite exporter les données suivantes :'
+                'title' => 'Je souhaite exporter les données suivantes :',
+                'translation_domain' => false,
             ))
             ->add('type', ChoiceType::class, array(
                 'label' => 'Type(s) de données *',
@@ -72,7 +78,8 @@ class DownloadType extends AbstractType
                     new NotBlank(array(
                         'message' => 'Veuillez sélectionner un type de données'
                     ))
-                )
+                ),
+                'translation_domain' => false,
             ))
         ;
     }
