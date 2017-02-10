@@ -25,7 +25,7 @@ class NotificationMailer implements MailerInterface
   public function sendConfirmationEmailMessage(UserInterface $user)
   {
       $datas = array(
-          'subject'     => 'MyApplications › Confirmation inscription',
+          'subject'     => 'MyJobs › Confirmation inscription',
           'from'        => 'gambier.j@gmail.com',
           'to'          => $user->getEmail(),
           'template'    => 'JGUserBundle:Registration:registration.html.twig',
@@ -43,7 +43,7 @@ class NotificationMailer implements MailerInterface
   public function sendResettingEmailMessage(UserInterface $user)
   {
       $datas = array(
-          'subject'     => 'MyApplications › Réinitialisation de mot de passe',
+          'subject'     => 'MyJobs › Réinitialisation de mot de passe',
           'from'        => 'gambier.j@gmail.com',
           'to'          => $user->getEmail(),
           'template'    => 'JGUserBundle:Resetting:resetting.html.twig',
@@ -61,7 +61,7 @@ class NotificationMailer implements MailerInterface
   public function sendCongratulationsInscription(UserInterface $user)
   {
       $datas = array(
-          'subject'     => 'MyApplications › Confirmation inscription',
+          'subject'     => 'MyJobs › Confirmation inscription',
           'from'        => 'gambier.j@gmail.com',
           'to'          => $user->getEmail(),
           'template'    => 'JGUserBundle:Congratulation:congratulation.html.twig',

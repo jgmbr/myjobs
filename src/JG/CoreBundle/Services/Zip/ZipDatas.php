@@ -92,7 +92,7 @@ class ZipDatas
 
         if ($this->generateZip) {
 
-            $zipName = 'MyApplications-User-'.$user->getId().'-'.time().$this->extension;
+            $zipName = 'MyJobs-User-'.$user->getId().'-'.time().$this->extension;
 
             $zip = new \ZipArchive();
 
