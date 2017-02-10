@@ -3,6 +3,7 @@
 namespace JG\AdminBundle\Controller\Admin;
 
 use JG\CoreBundle\Entity\Contract;
+use JG\CoreBundle\Form\ContractType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -25,7 +26,7 @@ class ContractController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $contracts = $em->getRepository('JGCoreBundle:Contract')->findAll();
+        $contracts = $em->getRepository(Contract::class)->findAll();
 
         $deleteForms = array();
 
@@ -48,15 +49,20 @@ class ContractController extends Controller
     public function newAction(Request $request)
     {
         $contract = new Contract();
-        $form = $this->createForm('JG\CoreBundle\Form\ContractType', $contract);
+        $form = $this->createForm(ContractType::class, $contract);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($contract);
-            $em->flush($contract);
-            $request->getSession()->getFlashBag()->add('success', 'Contrat ajouté avec succès !');
-            return $this->redirectToRoute('contract_show', array('id' => $contract->getId()));
+
+            $response = $this->get('app.crud.create')->createEntity($contract);
+
+            if ($response) {
+                $request->getSession()->getFlashBag()->add('success', 'Contrat ajouté avec succès !');
+                return $this->redirectToRoute('contract_show', array('id' => $contract->getId()));
+            } else {
+                $request->getSession()->getFlashBag()->add('error', 'Erreurs de la création du contrat !');
+                return $this->redirectToRoute('contract_new');
+            }
         }
 
         return $this->render('JGAdminBundle:Admin:contract/new.html.twig', array(
@@ -90,7 +96,7 @@ class ContractController extends Controller
     public function editAction(Request $request, Contract $contract)
     {
         $deleteForm = $this->createDeleteForm($contract);
-        $editForm = $this->createForm('JG\CoreBundle\Form\ContractType', $contract);
+        $editForm = $this->createForm(ContractType::class, $contract);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -117,10 +123,14 @@ class ContractController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($contract);
-            $em->flush($contract);
-            $request->getSession()->getFlashBag()->add('success', 'Contrat supprimé avec succès !');
+
+            $response = $this->get('app.crud.delete')->deleteEntity($contract);
+
+            if ($response)
+                $request->getSession()->getFlashBag()->add('success', 'Contrat supprimé avec succès !');
+            else
+                $request->getSession()->getFlashBag()->add('error', 'Erreur lors de la suppression du contrat !');
+
             return $this->redirectToRoute('contract_index');
         }
 

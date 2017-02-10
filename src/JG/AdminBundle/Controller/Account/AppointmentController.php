@@ -3,6 +3,8 @@
 namespace JG\AdminBundle\Controller\Account;
 
 use JG\CoreBundle\Entity\Appointment;
+use JG\CoreBundle\Entity\State;
+use JG\CoreBundle\Form\AppointmentType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -25,9 +27,9 @@ class AppointmentController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $appointments = $em->getRepository('JGCoreBundle:Appointment')->findMyAppointments($this->getUser());
+        $appointments = $em->getRepository(Appointment::class)->findMyAppointments($this->getUser());
 
-        $states = $em->getRepository('JGCoreBundle:State')->findAll();
+        $states = $em->getRepository(State::class)->findAll();
 
         return $this->render('JGAdminBundle:Account:appointment/index.html.twig', array(
             'appointments'  => $appointments,
@@ -61,22 +63,23 @@ class AppointmentController extends Controller
     public function newAction(Request $request)
     {
         $appointment = new Appointment();
-        $form = $this->createForm('JG\CoreBundle\Form\AppointmentType', $appointment, array('current_user' => $this->getUser()));
+        $form = $this->createForm(AppointmentType::class, $appointment, array('current_user' => $this->getUser()));
         $form->handleRequest($request);
 
         $user = $this->getUser();
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
 
-            $appointment->setUser($user);
-            $user->addAppointment($appointment);
+            $response = $this->get('app.crud.create')->createAppointment($appointment, $user);
 
-            $em->persist($appointment);
-            $em->flush($appointment);
+            if ($response) {
+                $request->getSession()->getFlashBag()->add('success', 'Entretien ajouté avec succès !');
+                return $this->redirectToRoute('appointment_show', array('id' => $appointment->getId()));
+            } else {
+                $request->getSession()->getFlashBag()->add('error', 'Erreur lors de l\'ajout de l\'entretien');
+                return $this->redirectToRoute('appointment_new');
+            }
 
-            $request->getSession()->getFlashBag()->add('success', 'Entretien ajoutée avec succès !');
-            return $this->redirectToRoute('appointment_show', array('id' => $appointment->getId()));
         }
 
         return $this->render('JGAdminBundle:Account:appointment/new.html.twig', array(
@@ -110,7 +113,7 @@ class AppointmentController extends Controller
     public function editAction(Request $request, Appointment $appointment)
     {
         $deleteForm = $this->createDeleteForm($appointment);
-        $editForm = $this->createForm('JG\CoreBundle\Form\AppointmentType', $appointment, array('current_user' => $this->getUser()));
+        $editForm = $this->createForm(AppointmentType::class, $appointment, array('current_user' => $this->getUser()));
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -140,13 +143,15 @@ class AppointmentController extends Controller
         $user = $this->getUser();
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $user->removeAppointment($appointment);
-            $appointment->getApplication()->removeAppointment($appointment);
-            $em->remove($appointment);
-            $em->flush($appointment);
-            $request->getSession()->getFlashBag()->add('success', 'Entretien supprimé avec succès !');
-            return $this->redirectToRoute('application_show', array('id' => $appointment->getApplication()->getId()));
+
+            $response = $this->get('app.crud.delete')->deleteAppointment($appointment, $user);
+
+            if ($response)
+                $request->getSession()->getFlashBag()->add('success', 'Entretien supprimé avec succès !');
+            else
+                $request->getSession()->getFlashBag()->add('error', 'Erreur lors de la suppression de l\'entretien');
+
+            return $this->redirectToRoute('appointment_index');
         }
 
         return $this->render('JGAdminBundle:Account:appointment/delete.html.twig', array(

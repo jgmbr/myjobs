@@ -3,6 +3,7 @@
 namespace JG\AdminBundle\Controller\Admin;
 
 use JG\CoreBundle\Entity\State;
+use JG\CoreBundle\Form\StateType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -25,7 +26,7 @@ class StateController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $states = $em->getRepository('JGCoreBundle:State')->findAll();
+        $states = $em->getRepository(State::class)->findAll();
 
         return $this->render('JGAdminBundle:Admin:state/index.html.twig', array(
             'states' => $states,
@@ -41,15 +42,20 @@ class StateController extends Controller
     public function newAction(Request $request)
     {
         $state = new State();
-        $form = $this->createForm('JG\CoreBundle\Form\StateType', $state);
+        $form = $this->createForm(StateType::class, $state);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($state);
-            $em->flush($state);
-            $request->getSession()->getFlashBag()->add('success', 'Etat ajouté avec succès !');
-            return $this->redirectToRoute('state_show', array('id' => $state->getId()));
+
+            $response = $this->get('app.crud.create')->createEntity($state);
+
+            if ($response) {
+                $request->getSession()->getFlashBag()->add('success', 'Etat ajouté avec succès !');
+                return $this->redirectToRoute('state_show', array('id' => $state->getId()));
+            } else {
+                $request->getSession()->getFlashBag()->add('error', 'Erreur lors de la création de l\'état !');
+                return $this->redirectToRoute('state_new');
+            }
         }
 
         return $this->render('JGAdminBundle:Admin:state/new.html.twig', array(
@@ -83,7 +89,7 @@ class StateController extends Controller
     public function editAction(Request $request, State $state)
     {
         $deleteForm = $this->createDeleteForm($state);
-        $editForm = $this->createForm('JG\CoreBundle\Form\StateType', $state);
+        $editForm = $this->createForm(StateType::class, $state);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -110,10 +116,14 @@ class StateController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($state);
-            $em->flush($state);
-            $request->getSession()->getFlashBag()->add('success', 'Etat supprimé avec succès !');
+
+            $response = $this->get('app.crud.delete')->deleteEntity($state);
+
+            if ($response)
+                $request->getSession()->getFlashBag()->add('success', 'Etat supprimé avec succès !');
+            else
+                $request->getSession()->getFlashBag()->add('error', 'Erreur lors de la suppression de l\'état !');
+
             return $this->redirectToRoute('state_index');
         }
 

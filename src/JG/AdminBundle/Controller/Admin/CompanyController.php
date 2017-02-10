@@ -25,7 +25,7 @@ class CompanyController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $companies = $em->getRepository('JGCoreBundle:Company')->findAll();
+        $companies = $em->getRepository(Company::class)->findAll();
 
         return $this->render('JGAdminBundle:Admin:company/index.html.twig', array(
             'companies' => $companies,

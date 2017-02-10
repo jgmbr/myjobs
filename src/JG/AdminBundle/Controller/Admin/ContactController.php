@@ -25,7 +25,7 @@ class ContactController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $contacts = $em->getRepository('JGCoreBundle:Contact')->findAll();
+        $contacts = $em->getRepository(Contact::class)->findAll();
 
         $deleteForms = array();
 
@@ -93,10 +93,14 @@ class ContactController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($contact);
-            $em->flush($contact);
-            $request->getSession()->getFlashBag()->add('success', 'Contact supprimé avec succès !');
+
+            $response = $this->get('app.crud.delete')->deleteEntity($contact);
+
+            if ($response)
+                $request->getSession()->getFlashBag()->add('success', 'Contact supprimé avec succès !');
+            else
+                $request->getSession()->getFlashBag()->add('error', 'Erreurs lors de la suppression du contact');
+
             return $this->redirectToRoute('contact_index');
         }
 

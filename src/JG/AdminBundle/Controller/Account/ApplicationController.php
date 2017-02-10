@@ -3,8 +3,11 @@
 namespace JG\AdminBundle\Controller\Account;
 
 use JG\CoreBundle\Entity\Application;
+use JG\CoreBundle\Entity\Appointment;
 use JG\CoreBundle\Entity\EntityInterface\ExportInterface;
 use JG\CoreBundle\Entity\Relaunch;
+use JG\CoreBundle\Form\ApplicationType;
+use JG\CoreBundle\Form\RelaunchType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -28,7 +31,7 @@ class ApplicationController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $applications = $em->getRepository('JGCoreBundle:Application')->findMyApplications($this->getUser());
+        $applications = $em->getRepository(Application::class)->findMyApplications($this->getUser());
 
         $deleteForms = array();
 
@@ -68,22 +71,23 @@ class ApplicationController extends Controller
     public function newAction(Request $request)
     {
         $application = new Application();
-        $form = $this->createForm('JG\CoreBundle\Form\ApplicationType', $application, array('current_user' => $this->getUser()));
+        $form = $this->createForm(ApplicationType::class, $application, array('current_user' => $this->getUser()));
         $form->handleRequest($request);
 
         $user = $this->getUser();
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
 
-            $application->setUser($user);
-            $user->addApplication($application);
+            $response = $this->get('app.crud.create')->createApplication($application, $user);
 
-            $em->persist($application);
-            $em->flush($application);
+            if ($response) {
+                $request->getSession()->getFlashBag()->add('success', 'Candidature ajoutée avec succès !');
+                return $this->redirectToRoute('application_show', array('id' => $application->getId()));
+            } else {
+                $request->getSession()->getFlashBag()->add('error', 'Erreur lors de l\'ajout de la candidature');
+                return $this->redirectToRoute('application_new');
+            }
 
-            $request->getSession()->getFlashBag()->add('success', 'Candidature ajoutée avec succès !');
-            return $this->redirectToRoute('application_show', array('id' => $application->getId()));
         }
 
         return $this->render('JGAdminBundle:Account:application/new.html.twig', array(
@@ -105,13 +109,13 @@ class ApplicationController extends Controller
         $deleteForm = $this->createDeleteForm($application);
 
         $relaunch = new Relaunch();
-        $form = $this->createForm('JG\CoreBundle\Form\RelaunchType', $relaunch, array('current_user'  => $this->getUser()));
+        $form = $this->createForm(RelaunchType::class, $relaunch, array('current_user'  => $this->getUser()));
 
         // Appointments delete forms
 
         $em = $this->getDoctrine()->getManager();
 
-        $appointments = $em->getRepository('JGCoreBundle:Appointment')->findMyAppointments($this->getUser());
+        $appointments = $em->getRepository(Appointment::class)->findMyAppointments($this->getUser());
 
         $deleteAppointmentForms = array();
 
@@ -161,18 +165,12 @@ class ApplicationController extends Controller
         }
 
         $relaunch = new Relaunch();
-        $form = $this->createForm('JG\CoreBundle\Form\RelaunchType', $relaunch, array('current_user' => $this->getUser()));
+        $form = $this->createForm(RelaunchType::class, $relaunch, array('current_user' => $this->getUser()));
         $form->handleRequest($request);
 
         if ($form->isValid()) {
 
-            $em = $this->getDoctrine()->getManager();
-
-            $relaunch->setApplication($application);
-            $application->addRelaunch($relaunch);
-
-            $em->persist($relaunch);
-            $em->flush($relaunch);
+            $this->get('app.crud.create')->createRelaunch($application, $relaunch);
 
             return new JsonResponse(array('message' => 'Success'), 200);
         }
@@ -196,7 +194,7 @@ class ApplicationController extends Controller
     public function editAction(Request $request, Application $application)
     {
         $deleteForm = $this->createDeleteForm($application);
-        $editForm = $this->createForm('JG\CoreBundle\Form\ApplicationType', $application, array('current_user' => $this->getUser()));
+        $editForm = $this->createForm(ApplicationType::class, $application, array('current_user' => $this->getUser()));
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -225,11 +223,14 @@ class ApplicationController extends Controller
         $user = $this->getUser();
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $user->removeApplication($application);
-            $em->remove($application);
-            $em->flush($application);
-            $request->getSession()->getFlashBag()->add('success', 'Candidature supprimée avec succès !');
+
+            $response = $this->get('app.crud.delete')->deleteApplication($application, $user);
+
+            if ($response)
+                $request->getSession()->getFlashBag()->add('success', 'Candidature supprimée avec succès !');
+            else
+                $request->getSession()->getFlashBag()->add('error', 'Erreur lors de la suppression de la candidature!');
+
             return $this->redirectToRoute('application_index');
         }
 

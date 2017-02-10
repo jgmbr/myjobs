@@ -26,7 +26,7 @@ class ApplicationController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $applications = $em->getRepository('JGCoreBundle:Application')->findAll();
+        $applications = $em->getRepository(Application::class)->findAll();
 
         return $this->render('JGAdminBundle:Admin:application/index.html.twig', array(
             'applications' => $applications,

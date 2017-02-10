@@ -3,6 +3,7 @@
 namespace JG\AdminBundle\Controller\Account;
 
 use JG\CoreBundle\Entity\Company;
+use JG\CoreBundle\Form\CompanyType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -25,7 +26,7 @@ class CompanyController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $companies = $em->getRepository('JGCoreBundle:Company')->findMyCompanies($this->getUser());
+        $companies = $em->getRepository(Company::class)->findMyCompanies($this->getUser());
 
         $deleteForms = array();
 
@@ -65,19 +66,23 @@ class CompanyController extends Controller
     public function newAction(Request $request)
     {
         $company = new Company();
-        $form = $this->createForm('JG\CoreBundle\Form\CompanyType', $company);
+        $form = $this->createForm(CompanyType::class, $company);
         $form->handleRequest($request);
 
         $user = $this->getUser();
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $company->setUser($user);
-            $user->addCompany($company);
-            $em->persist($company);
-            $em->flush($company);
-            $request->getSession()->getFlashBag()->add('success', 'Entreprise ajoutée avec succès !');
-            return $this->redirectToRoute('company_show', array('id' => $company->getId()));
+
+            $response = $this->get('app.crud.create')->createCompany($company, $user);
+
+            if ($response) {
+                $request->getSession()->getFlashBag()->add('success', 'Entreprise ajoutée avec succès !');
+                return $this->redirectToRoute('company_show', array('id' => $company->getId()));
+            } else {
+                $request->getSession()->getFlashBag()->add('error', 'Erreur lors de l\'ajout de l\'entreprise !');
+                return $this->redirectToRoute('company_new');
+            }
+
         }
 
         return $this->render('JGAdminBundle:Account:company/new.html.twig', array(
@@ -111,7 +116,7 @@ class CompanyController extends Controller
     public function editAction(Request $request, Company $company)
     {
         $deleteForm = $this->createDeleteForm($company);
-        $editForm = $this->createForm('JG\CoreBundle\Form\CompanyType', $company);
+        $editForm = $this->createForm(CompanyType::class, $company);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -141,12 +146,16 @@ class CompanyController extends Controller
         $user = $this->getUser();
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $user->removeCompany($company);
-            $em->remove($company);
-            $em->flush($company);
-            $request->getSession()->getFlashBag()->add('success', 'Entreprise supprimée avec succès !');
+
+            $response = $this->get('app.crud.delete')->deleteCompany($company, $user);
+
+            if ($response)
+                $request->getSession()->getFlashBag()->add('success', 'Entreprise supprimée avec succès !');
+            else
+                $request->getSession()->getFlashBag()->add('error', 'Erreur lors de la suppression de l\'entreprise');
+
             return $this->redirectToRoute('company_index');
+
         }
 
         return $this->render('JGAdminBundle:Account:company/delete.html.twig', array(

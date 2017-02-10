@@ -3,6 +3,7 @@
 namespace JG\AdminBundle\Controller\Account;
 
 use JG\CoreBundle\Entity\Preference;
+use JG\CoreBundle\Form\PreferenceType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -27,23 +28,25 @@ class PreferenceController extends Controller
 
         $user = $this->getUser();
 
-        $preference = $em->getRepository('JGCoreBundle:Preference')->findOneByUser($user);
+        $preference = $em->getRepository(Preference::class)->findOneByUser($user);
 
         if (!$preference) {
             $preference = new Preference();
-            $form = $this->createForm('JG\CoreBundle\Form\PreferenceType', $preference);
-        } else {
-            $form = $this->createForm('JG\CoreBundle\Form\PreferenceType', $preference);
         }
+
+        $form = $this->createForm(PreferenceType::class, $preference);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $preference->setUser($user);
-            $user->addPreference($preference);
-            $em->persist($preference);
-            $em->flush($preference);
-            $request->getSession()->getFlashBag()->add('success', 'Préférences enregistrées avec succès !');
+
+            $response = $this->get('app.crud.create')->createPreference($preference, $user);
+
+            if ($response)
+                $request->getSession()->getFlashBag()->add('success', 'Préférences ajoutées avec succès !');
+            else
+                $request->getSession()->getFlashBag()->add('error', 'Erreur lors de l\'ajout des préférences !');
+
             return $this->redirectToRoute('preference_index');
         }
 

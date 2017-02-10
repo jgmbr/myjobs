@@ -28,7 +28,7 @@ class AlertController extends Controller
 
         $user = $this->getUser();
 
-        $listAlerts = $em->getRepository('JGCoreBundle:Alert')->findMyAlerts($user);
+        $listAlerts = $em->getRepository(Alert::class)->findMyAlerts($user);
 
         return $this->render('JGAdminBundle:Account:alert/index.html.twig', array(
             'alerts' => $listAlerts
@@ -43,15 +43,12 @@ class AlertController extends Controller
      */
     public function validAction(Request $request, Alert $alert)
     {
-        $em = $this->getDoctrine()->getManager();
+        $response = $this->get('app.crud.update')->moderateAlert($alert, true);
 
-        $alert->setViewed(true);
-
-        $em->persist($alert);
-
-        $em->flush($alert);
-
-        $request->getSession()->getFlashBag()->add('success', 'Alerte validée avec succès !');
+        if ($response)
+            $request->getSession()->getFlashBag()->add('success', 'Alerte validée avec succès !');
+        else
+            $request->getSession()->getFlashBag()->add('error', 'Erreur lors de la validation de l\'alerte !');
 
         return $this->redirectToRoute('alert_index');
     }
@@ -64,15 +61,12 @@ class AlertController extends Controller
      */
     public function invalidAction(Request $request, Alert $alert)
     {
-        $em = $this->getDoctrine()->getManager();
+        $response = $this->get('app.crud.update')->moderateAlert($alert, false);
 
-        $alert->setViewed(false);
-
-        $em->persist($alert);
-
-        $em->flush($alert);
-
-        $request->getSession()->getFlashBag()->add('success', 'Alerte invalidée avec succès !');
+        if ($response)
+            $request->getSession()->getFlashBag()->add('success', 'Alerte invalidée avec succès !');
+        else
+            $request->getSession()->getFlashBag()->add('error', 'Erreur lors de l\'invalidation de l\'alerte !');
 
         return $this->redirectToRoute('alert_index');
     }
@@ -85,13 +79,12 @@ class AlertController extends Controller
      */
     public function deleteAction(Request $request, Alert $alert)
     {
-        $em = $this->getDoctrine()->getManager();
+        $response = $this->get('app.crud.delete')->deleteEntity($alert);
 
-        $em->remove($alert);
-
-        $em->flush();
-
-        $request->getSession()->getFlashBag()->add('success', 'Alerte supprimée avec succès !');
+        if ($response)
+            $request->getSession()->getFlashBag()->add('success', 'Alerte supprimée avec succès !');
+        else
+            $request->getSession()->getFlashBag()->add('error', 'Erreur lors de la suppression de l\'alerte !');
 
         return $this->redirectToRoute('alert_index');
     }

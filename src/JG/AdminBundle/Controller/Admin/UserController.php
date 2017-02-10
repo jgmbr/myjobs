@@ -22,9 +22,9 @@ class UserController extends Controller
      */
     public function listUsersAction()
     {
-        $users = $this->getDoctrine()->getRepository('JGUserBundle:User')->findAllUsers();
+        $users = $this->getDoctrine()->getRepository(User::class)->findAllUsers();
 
-        $administrators = $this->getDoctrine()->getRepository('JGUserBundle:User')->findAllAdmin();
+        $administrators = $this->getDoctrine()->getRepository(User::class)->findAllAdmin();
 
         $deleteForms = array();
 
@@ -75,16 +75,17 @@ class UserController extends Controller
     public function newAction(Request $request)
     {
         $user = new User();
-        $form = $this->createForm('JG\UserBundle\Form\UserType', $user);
+        $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush($user);
+            $response = $this->get('app.crud.create')->createEntity($user);
 
-            $request->getSession()->getFlashBag()->add('success', 'Membre ajouté avec succès !');
+            if ($response)
+                $request->getSession()->getFlashBag()->add('success', 'Membre ajouté avec succès !');
+            else
+                $request->getSession()->getFlashBag()->add('success', 'Erreur lors de la création du membre !');
 
             return $this->redirectToRoute('user_index');
         }
@@ -104,7 +105,7 @@ class UserController extends Controller
     public function editAction(Request $request, User $user)
     {
         $deleteForm = $this->createDeleteForm($user);
-        $editForm = $this->createForm('JG\UserBundle\Form\UserType', $user);
+        $editForm = $this->createForm(UserType::class, $user);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -131,10 +132,14 @@ class UserController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($user);
-            $em->flush($user);
-            $request->getSession()->getFlashBag()->add('success', 'Membre supprimé avec succès !');
+
+            $response = $this->get('app.crud.delete')->deleteEntity($user);
+
+            if ($response)
+                $request->getSession()->getFlashBag()->add('success', 'Membre supprimé avec succès !');
+            else
+                $request->getSession()->getFlashBag()->add('error', 'Erreur lors de la suppression du membre !');
+
             return $this->redirectToRoute('user_index');
         }
 

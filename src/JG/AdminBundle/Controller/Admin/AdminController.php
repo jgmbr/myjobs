@@ -2,6 +2,9 @@
 
 namespace JG\AdminBundle\Controller\Admin;
 
+use JG\CoreBundle\Entity\Contract;
+use JG\CoreBundle\Entity\Status;
+use JG\UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -12,18 +15,12 @@ class AdminController extends Controller
      */
     public function indexAction()
     {
-        $user               = $this->getUser();
-        $nbUsers            = $this->getDoctrine()->getRepository('JGUserBundle:User')->findCountUsers();
-        $nbAdministrators   = $this->getDoctrine()->getRepository('JGUserBundle:User')->findCountAdmin();
-        $nbContrats         = $this->getDoctrine()->getRepository('JGCoreBundle:Contract')->findCount();
-        $nbStatus           = $this->getDoctrine()->getRepository('JGCoreBundle:Status')->findCount();
-
         return $this->render('JGAdminBundle:Admin:index.html.twig',array(
-            'user'              => $user,
-            'nbUsers'           => $nbUsers,
-            'nbAdministrators'  => $nbAdministrators,
-            'nbContracts'       => $nbContrats,
-            'nbStatus'          => $nbStatus
+            'user'              => $this->getUser(),
+            'nbUsers'           => $this->getDoctrine()->getRepository(User::class)->findCountUsers(),
+            'nbAdministrators'  => $this->getDoctrine()->getRepository(User::class)->findCountAdmin(),
+            'nbContracts'       => $this->getDoctrine()->getRepository(Contract::class)->findCount(),
+            'nbStatus'          => $this->getDoctrine()->getRepository(Status::class)->findCount()
         ));
     }
 }

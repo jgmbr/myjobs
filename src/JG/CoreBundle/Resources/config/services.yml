@@ -26,3 +26,12 @@ services:
     app.purger:
         class: JG\CoreBundle\Services\Purger\PurgerDatas
         arguments: ['%jg_core.dir.csv%', '%jg_core.dir.zip%']
+    app.crud.create:
+        class: JG\CoreBundle\Services\Crud\CreateDatas
+        arguments: ['@doctrine.orm.entity_manager']
+    app.crud.delete:
+        class: JG\CoreBundle\Services\Crud\DeleteDatas
+        arguments: ['@doctrine.orm.entity_manager']
+    app.crud.update:
+        class: JG\CoreBundle\Services\Crud\UpdateDatas
+        arguments: ['@doctrine.orm.entity_manager']

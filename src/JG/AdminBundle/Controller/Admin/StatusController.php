@@ -3,6 +3,7 @@
 namespace JG\AdminBundle\Controller\Admin;
 
 use JG\CoreBundle\Entity\Status;
+use JG\CoreBundle\Form\StatusType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -25,7 +26,7 @@ class StatusController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $statuses = $em->getRepository('JGCoreBundle:Status')->findAll();
+        $statuses = $em->getRepository(Status::class)->findAll();
 
         $deleteForms = array();
 
@@ -48,15 +49,21 @@ class StatusController extends Controller
     public function newAction(Request $request)
     {
         $status = new Status();
-        $form = $this->createForm('JG\CoreBundle\Form\StatusType', $status);
+        $form = $this->createForm(StatusType::class, $status);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($status);
-            $em->flush($status);
-            $request->getSession()->getFlashBag()->add('success', 'Statut ajouté avec succès !');
-            return $this->redirectToRoute('status_show', array('id' => $status->getId()));
+
+            $response = $this->get('app.crud.create')->createEntity($status);
+
+            if ($response) {
+                $request->getSession()->getFlashBag()->add('success', 'Statut ajouté avec succès !');
+                return $this->redirectToRoute('status_show', array('id' => $status->getId()));
+            } else {
+                $request->getSession()->getFlashBag()->add('error', 'Erreur lors de la création du statut !');
+                return $this->redirectToRoute('status_new');
+            }
+
         }
 
         return $this->render('JGAdminBundle:Admin:status/new.html.twig', array(
@@ -90,7 +97,7 @@ class StatusController extends Controller
     public function editAction(Request $request, Status $status)
     {
         $deleteForm = $this->createDeleteForm($status);
-        $editForm = $this->createForm('JG\CoreBundle\Form\StatusType', $status);
+        $editForm = $this->createForm(StatusType::class, $status);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -117,10 +124,14 @@ class StatusController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($status);
-            $em->flush($status);
-            $request->getSession()->getFlashBag()->add('success', 'Statut supprimé avec succès !');
+
+            $response = $this->get('app.crud.delete')->deleteEntity($status);
+
+            if ($response)
+                $request->getSession()->getFlashBag()->add('success', 'Statut supprimé avec succès !');
+            else
+                $request->getSession()->getFlashBag()->add('error', 'Erreur lors de la suppression de l\'état !');
+
             return $this->redirectToRoute('status_index');
         }
 
