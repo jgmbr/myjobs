@@ -4,11 +4,11 @@
 
 Vous ne trouvez pas d'outils approprié pour la gestion de votre carnet d'entreprises, de vos candidatures et de votre agenda d'entretiens lors de vos recherches d'emploi ?
 
-MyApplications est l'outil qu'il vous faut !
+MyJobs est l'outil qu'il vous faut !
 
 ## Fonctionnalités
 
-MyApplications permet :
+MyJobs permet :
 
 * La création et la gestion de votre carnet d'entreprises :
     * Créez vos contacts entreprises
