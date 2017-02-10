@@ -67,6 +67,30 @@ class FrontController extends Controller
     }
 
     /**
+     * @Route("/pageError", name="page_error")
+     */
+    public function pageErrorAction()
+    {
+        return $this->render('JGFrontBundle:Front:pageError.html.twig');
+    }
+
+    /**
+     * @Route("/page404", name="page_404")
+     */
+    public function page404Action()
+    {
+        return $this->render('JGFrontBundle:Front:page404.html.twig');
+    }
+
+    /**
+     * @Route("/page500", name="page_500")
+     */
+    public function page500Action()
+    {
+        return $this->render('JGFrontBundle:Front:page500.html.twig');
+    }
+
+    /**
      * Notification Alert Manager Applications
      *
      * @Route("/notification/alert", name="alert_notif_applications")

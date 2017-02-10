@@ -1,0 +1,18 @@
+{% extends "JGFrontBundle::layout_err.html.twig" %}
+
+{% block type_page %}error-page{% endblock %}
+
+{% block body %}
+
+    <div class="banner">
+
+        <p>
+            <i class="fa fa-exclamation-circle fa-2x" aria-hidden="true"></i>
+            Page 404 - La page que vous demandez n'existe pas ..
+        </p>
+
+        <p> <a href="{{ path('home_page') }}"> Revenir à l'accueil </a> </p>
+
+    </div>
+
+{% endblock %}
