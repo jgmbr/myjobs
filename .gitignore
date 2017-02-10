@@ -16,6 +16,10 @@
 /web/bundles/
 .idea/
 *~
+*.PNG
+*.png
+*.JPG
+*.jpg
 *_old
 *.zip
 /web/uploads/
