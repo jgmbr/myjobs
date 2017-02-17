@@ -28,3 +28,4 @@
 /web/img/*
 /web/assets/img/*
 /web/download/*
+.htaccess
