@@ -82,20 +82,20 @@ fos_user:
         form:
             type: JG\UserBundle\Form\ProfileType
     from_email:
-        address:        gambier.j@gmail.com
-        sender_name:    Demo App
+        address:        contact@justine-gambier.fr
+        sender_name:    MyJobs
     resetting:
         email:
             template:   '@FOSUser/Resetting/email.txt.twig'
             from_email:
-                address:        gambier.j@gmail.com
-                sender_name:    Demo Resetting
+                address:        contact@justine-gambier.fr
+                sender_name:    MyJobs
     registration:
         confirmation:
             enabled:            false
             from_email:
-                address:        gambier.j@gmail.com
-                sender_name:    Demo Registration
+                address:        contact@justine-gambier.fr
+                sender_name:    MyJobs
         form:
             type: JG\UserBundle\Form\RegistrationType
 

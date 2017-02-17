@@ -26,7 +26,7 @@ class NotificationMailer implements MailerInterface
   {
       $datas = array(
           'subject'     => 'MyJobs › Confirmation inscription',
-          'from'        => 'gambier.j@gmail.com',
+          'from'        => 'contact@justine-gambier.fr',
           'to'          => $user->getEmail(),
           'template'    => 'JGUserBundle:Registration:registration.html.twig',
           'content'     => array(
@@ -44,7 +44,7 @@ class NotificationMailer implements MailerInterface
   {
       $datas = array(
           'subject'     => 'MyJobs › Réinitialisation de mot de passe',
-          'from'        => 'gambier.j@gmail.com',
+          'from'        => 'contact@justine-gambier.fr',
           'to'          => $user->getEmail(),
           'template'    => 'JGUserBundle:Resetting:resetting.html.twig',
           'content'     => array(
@@ -62,7 +62,7 @@ class NotificationMailer implements MailerInterface
   {
       $datas = array(
           'subject'     => 'MyJobs › Confirmation inscription',
-          'from'        => 'gambier.j@gmail.com',
+          'from'        => 'contact@justine-gambier.fr',
           'to'          => $user->getEmail(),
           'template'    => 'JGUserBundle:Congratulation:congratulation.html.twig',
           'content'     => array(
