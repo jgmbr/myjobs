@@ -1,5 +1,10 @@
 {% extends "JGAdminBundle::layout_auth.html.twig" %}
 
+{% block title %}
+    {{ parent() }}
+    - Inscription
+{% endblock %}
+
 {% block type_page %}auth-page register-page{% endblock %}
 
 {% block fos_user_content %}

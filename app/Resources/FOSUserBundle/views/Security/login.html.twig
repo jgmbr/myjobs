@@ -1,5 +1,10 @@
 {% extends "JGAdminBundle::layout_auth.html.twig" %}
 
+{% block title %}
+    {{ parent() }}
+    - Connexion
+{% endblock %}
+
 {% block type_page %}auth-page login-page{% endblock %}
 
 {% block fos_user_content %}

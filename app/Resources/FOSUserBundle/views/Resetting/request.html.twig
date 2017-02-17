@@ -1,5 +1,10 @@
 {% extends "JGAdminBundle::layout_auth.html.twig" %}
 
+{% block title %}
+    {{ parent() }}
+    - Mot de passe oublié ?
+{% endblock %}
+
 {% block type_page %}auth-page reset-page{% endblock %}
 
 {% block fos_user_content %}
