@@ -12,6 +12,7 @@
         <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('assets/vendor/magnific-popup/dist/magnific-popup.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/vendor/growl/stylesheets/jquery.growl.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/vendor/cookieconsent/build/cookieconsent.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/creative.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/front.css') }}">
         {% block stylesheets %}{% endblock %}
@@ -36,6 +37,7 @@
         <script src="{{ asset('assets/vendor/jquery.easing/jquery.easing.min.js') }}"></script>
         <script src="{{ asset('assets/vendor/scrollreveal/dist/scrollreveal.min.js') }}"></script>
         <script src="{{ asset('assets/vendor/magnific-popup/dist/jquery.magnific-popup.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/cookieconsent/build/cookieconsent.min.js') }}"></script>
         <script src="{{ asset('assets/js/creative.js') }}"></script>
         <script src="{{ asset('assets/js/app.js') }}"></script>
         <script>
@@ -56,6 +58,32 @@
                     }, 500, 'easeInOutExpo');
                     return false;
                 });
+            });
+            window.cookieconsent.initialise({
+                container: document.getElementById("content"),
+                palette:{
+                    popup: {background: "#F05F40", text: '#ffffff', link: '#ffffff'},
+                    button: {background: "#F05F40", text: '#ffffff', border: '#ffffff'},
+                },
+                revokable: false,
+                onStatusChange: function(status) {
+                    console.log(this.hasConsented() ?
+                            'enable cookies' : 'disable cookies');
+                },
+                law: {
+                    regionalLaw: false,
+                },
+                location: true,
+                content: {
+                    header: 'Utilisation des cookies sur le site !',
+                    message: 'Ce site web utilise des cookies pour vous assurer d\'obtenir la meilleure expérience utilisateur sur notre site web',
+                    dismiss: 'J\'accepte !',
+                    allow: 'Autoriser cookies',
+                    deny: 'Je refuse',
+                    link: 'Lire la suite',
+                    href: '#modalCookies',
+                    close: '&#x274c;',
+                },
             });
         </script>
         {% block javascripts %}{% endblock %}

@@ -66,6 +66,11 @@ class FrontController extends Controller
         return $this->render('JGFrontBundle:Front:mentions.html.twig');
     }
 
+    public function cookiesAction()
+    {
+        return $this->render('JGFrontBundle:Front:cookies.html.twig');
+    }
+
     /**
      * @Route("/pageError", name="page_error")
      */
