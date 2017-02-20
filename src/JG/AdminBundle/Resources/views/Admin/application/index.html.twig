@@ -43,7 +43,7 @@
                                 <tbody>
                                 {% for application in applications %}
                                     <tr role="row" class="{% if loop.index is odd %}odd{% else %}even{% endif %}">
-                                        <td><a href="{{ path('application_show', { 'id': application.id }) }}">{{ application.id }}</a></td>
+                                        <td><a href="{{ path('application_list_show', { 'id': application.id }) }}">{{ application.id }}</a></td>
                                         <td> {{ application.dateAt|date('d/m/Y') }} </td>
                                         <td> {{ application.name }} </td>
                                         <td>
