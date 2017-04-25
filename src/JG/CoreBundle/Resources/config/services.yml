@@ -35,3 +35,27 @@ services:
     app.crud.update:
         class: JG\CoreBundle\Services\Crud\UpdateDatas
         arguments: ['@doctrine.orm.entity_manager']
+    app.voter.application:
+        class: JG\CoreBundle\Security\ApplicationVoter
+        arguments: ['@security.access.decision_manager']
+        public: false
+        tags:
+            - { name: security.voter }
+    app.voter.appointment:
+        class: JG\CoreBundle\Security\AppointmentVoter
+        arguments: ['@security.access.decision_manager']
+        public: false
+        tags:
+            - { name: security.voter }
+    app.voter.company:
+        class: JG\CoreBundle\Security\CompanyVoter
+        arguments: ['@security.access.decision_manager']
+        public: false
+        tags:
+            - { name: security.voter }
+    app.voter.relaunch:
+        class: JG\CoreBundle\Security\RelaunchVoter
+        arguments: ['@security.access.decision_manager']
+        public: false
+        tags:
+            - { name: security.voter }

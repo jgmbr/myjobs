@@ -104,6 +104,10 @@ class ApplicationController extends Controller
      */
     public function showAction(Request $request, Application $application)
     {
+        // Check security author object
+
+        $this->denyAccessUnlessGranted('show', $application);
+
         // Current application delete form
 
         $deleteForm = $this->createDeleteForm($application);
@@ -193,6 +197,10 @@ class ApplicationController extends Controller
      */
     public function editAction(Request $request, Application $application)
     {
+        // Check security author object
+
+        $this->denyAccessUnlessGranted('edit', $application);
+
         $deleteForm = $this->createDeleteForm($application);
         $editForm = $this->createForm(ApplicationType::class, $application, array('current_user' => $this->getUser()));
         $editForm->handleRequest($request);
@@ -217,6 +225,10 @@ class ApplicationController extends Controller
      */
     public function deleteAction(Request $request, Application $application)
     {
+        // Check security author object
+
+        $this->denyAccessUnlessGranted('delete', $application);
+
         $form = $this->createDeleteForm($application);
         $form->handleRequest($request);
 

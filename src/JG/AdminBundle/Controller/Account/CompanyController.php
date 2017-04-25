@@ -99,6 +99,10 @@ class CompanyController extends Controller
      */
     public function showAction(Company $company)
     {
+        // Check security author object
+
+        $this->denyAccessUnlessGranted('show', $company);
+
         $deleteForm = $this->createDeleteForm($company);
 
         return $this->render('JGAdminBundle:Account:company/show.html.twig', array(
@@ -115,6 +119,10 @@ class CompanyController extends Controller
      */
     public function editAction(Request $request, Company $company)
     {
+        // Check security author object
+
+        $this->denyAccessUnlessGranted('edit', $company);
+
         $deleteForm = $this->createDeleteForm($company);
         $editForm = $this->createForm(CompanyType::class, $company);
         $editForm->handleRequest($request);
@@ -136,10 +144,13 @@ class CompanyController extends Controller
      * Deletes a company entity.
      *
      * @Route("/{id}/delete", name="company_delete")
-     * @Method("DELETE")
      */
     public function deleteAction(Request $request, Company $company)
     {
+        // Check security author object
+
+        $this->denyAccessUnlessGranted('delete', $company);
+
         $form = $this->createDeleteForm($company);
         $form->handleRequest($request);
 

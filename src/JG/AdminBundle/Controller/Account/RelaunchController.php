@@ -18,10 +18,13 @@ class RelaunchController extends Controller
      * Deletes a relaunch entity.
      *
      * @Route("/{id}/delete", name="relaunch_delete")
-     * @Method("DELETE")
      */
     public function deleteAction(Request $request, Relaunch $relaunch)
     {
+        // Check security author object
+
+        $this->denyAccessUnlessGranted('delete', $relaunch);
+
         $form = $this->createDeleteForm($relaunch);
         $form->handleRequest($request);
 

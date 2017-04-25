@@ -96,6 +96,10 @@ class AppointmentController extends Controller
      */
     public function showAction(Appointment $appointment)
     {
+        // Check security author object
+
+        $this->denyAccessUnlessGranted('show', $appointment);
+
         $deleteForm = $this->createDeleteForm($appointment);
 
         return $this->render('JGAdminBundle:Account:appointment/show.html.twig', array(
@@ -112,6 +116,10 @@ class AppointmentController extends Controller
      */
     public function editAction(Request $request, Appointment $appointment)
     {
+        // Check security author object
+
+        $this->denyAccessUnlessGranted('edit', $appointment);
+
         $deleteForm = $this->createDeleteForm($appointment);
         $editForm = $this->createForm(AppointmentType::class, $appointment, array('current_user' => $this->getUser()));
         $editForm->handleRequest($request);
@@ -133,10 +141,13 @@ class AppointmentController extends Controller
      * Deletes a appointment entity.
      *
      * @Route("/{id}/delete", name="appointment_delete")
-     * @Method("DELETE")
      */
     public function deleteAction(Request $request, Appointment $appointment)
     {
+        // Check security author object
+
+        $this->denyAccessUnlessGranted('delete', $appointment);
+
         $form = $this->createDeleteForm($appointment);
         $form->handleRequest($request);
 
