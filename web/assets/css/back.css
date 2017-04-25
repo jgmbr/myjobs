@@ -58,13 +58,16 @@
     background-position: center;
 }
 .login-page {
-    background-image: url('../../assets/img/header.jpg') !important;
+    /*background-image: url('../../assets/img/header.jpg') !important;*/
+    background: #333;
 }
 .register-page {
-    background-image: url('../../assets/img/header.jpg') !important;
+    /*background-image: url('../../assets/img/header.jpg') !important;*/
+    background: #333;
 }
 .reset-page {
-    background-image: url('../../assets/img/header.jpg') !important;
+    /*background-image: url('../../assets/img/header.jpg') !important;*/
+    background: #333;
 }
 .login-box .login-logo a,
 .register-box .register-logo a {
@@ -114,4 +117,8 @@
 }
 .initAvatar {
     color: #fff;
+}
+.btn-primary {
+    background-color: #3c8dbc !important;
+    border-color: #367fa9 !important;
 }
